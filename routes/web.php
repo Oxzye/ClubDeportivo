@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Formas_pagoController;
+use App\Http\Controllers\PaisesController;
 use App\Http\Controllers\DiasController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,22 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Rutas de Paises
+Route::get('/paises', [PaisesController::class, 'index'])->name('paises.index');
+Route::post('/paises', [PaisesController::class, 'store'])->name('paises.store');
+Route::get('/paises/create', [PaisesController::class, 'create'])->name('paises.create');
+Route::put('/paises/{pais}', [PaisesController::class, 'update'])->name('paises.update');
+Route::delete('/paises/{pais}', [PaisesController::class, 'destroy'])->name('paises.destroy');
+Route::get('/paises/{pais}/edit', [PaisesController::class, 'edit'])->name('paises.edit');
+
+//Rutas de Formas Pago
+Route::get('/Formas_pago', [Formas_pagoController::class, 'index'])->name('Formas_pago.index');
+Route::post('/Formas_pago', [Formas_pagoController::class, 'store'])->name('Formas_pago.store');
+Route::get('/Formas_pago/create', [Formas_pagoController::class, 'create'])->name('Formas_pago.create');
+Route::put('/Formas_pago/{fdp}', [Formas_pagoController::class, 'update'])->name('Formas_pago.update');
+Route::delete('/Formas_pago/{fdp}', [Formas_pagoController::class, 'destroy'])->name('Formas_pago.destroy');
+Route::get('/Formas_pago/{fdp}/edit', [Formas_pagoController::class, 'edit'])->name('Formas_pago.edit');
 
 //Rutas de Dias
 Route::get('/dias', [DiasController::class, 'index'])->name('dias.index');
