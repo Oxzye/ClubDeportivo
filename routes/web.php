@@ -3,6 +3,8 @@
 use App\Http\Controllers\Formas_pagoController;
 use App\Http\Controllers\PaisesController;
 use App\Http\Controllers\DiasController;
+use App\Http\Controllers\CargosController;
+use App\Http\Controllers\TipoFacturaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,3 +49,21 @@ Route::get('/dias/create', [DiasController::class, 'create'])->name('dias.create
 Route::put('/dias/{dia}', [DiasController::class, 'update'])->name('dias.update');
 Route::delete('/dias/{dia}', [DiasController::class, 'destroy'])->name('dias.destroy');
 Route::get('/dias/{dia}/edit', [DiasController::class, 'edit'])->name('dias.edit');
+
+//Rutas de Cargos
+Route::get('/cargos', [CargosController::class, 'index'])->name('cargos.index');
+Route::post('/cargos', [CargosController::class, 'store'])->name('cargos.store');
+Route::get('/cargos/create', [CargosController::class, 'create'])->name('cargos.create');
+Route::put('/cargos/{cargo}', [CargosController::class, 'update'])->name('cargos.update');
+Route::delete('/cargos/{cargo}', [CargoController::class, 'destroy'])->name('cargos.destroy');
+Route::get('/cargos/{cargo}/edit', [CargosController::class, 'edit'])->name('cargos.edit');
+
+
+//Rutas de Tipo de Factura
+Route::get('/Tipo_factura', [TipoFacturaController::class, 'index'])->name('Tipo_factura.index');
+Route::post('/Tipo_factura', [TipoFacturaController::class, 'store'])->name('Tipo_factura.store');
+Route::get('/Tipo_factura/create', [TipoFacturaController::class, 'create'])->name('Tipo_factura.create');
+Route::put('/Tipo_factura/{fac}', [TipoFacturaController::class, 'update'])->name('Tipo_factura.update');
+Route::delete('/Tipo_factura/{fac}', [TipoFacturaController::class, 'destroy'])->name('Tipo_factura.destroy');
+Route::get('/Tipo_factura/{fac}/edit', [TipoFacturaController::class, 'edit'])->name('Tipo_factura.edit');
+
