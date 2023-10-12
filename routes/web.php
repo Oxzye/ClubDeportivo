@@ -55,7 +55,7 @@ Route::get('/cargos', [CargosController::class, 'index'])->name('cargos.index');
 Route::post('/cargos', [CargosController::class, 'store'])->name('cargos.store');
 Route::get('/cargos/create', [CargosController::class, 'create'])->name('cargos.create');
 Route::put('/cargos/{cargo}', [CargosController::class, 'update'])->name('cargos.update');
-Route::delete('/cargos/{cargo}', [CargoController::class, 'destroy'])->name('cargos.destroy');
+Route::delete('/cargos/{cargo}', [CargosController::class, 'destroy'])->name('cargos.destroy');
 Route::get('/cargos/{cargo}/edit', [CargosController::class, 'edit'])->name('cargos.edit');
 
 

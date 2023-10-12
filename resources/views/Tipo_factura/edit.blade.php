@@ -19,8 +19,8 @@
         @csrf @method('PUT')
         
             <div class="mb-3">
-              <label for="" class="form-label" name="Tipo_factura">Tipo de Factura:</label>
-              <input type="text" class="form-control" name="Tipo_factura" id="" aria-describedby="helpId" value="{{ $Tipo_factura->tipo_fac }}">
+              <label for="" class="form-label" name="tipo_fac">Tipo de Factura:</label>
+              <input type="text" class="form-control" name="tipo_fac" id="" aria-describedby="helpId" value="{{old('tipo_fac', $Tipo_factura->tipo_fac) }}">
             </div>
              <button type="submit" class="btn btn-primary">Guardar</button>
              <a href="{{ route('Tipo_factura.index') }}" class="btn btn-danger">Cancelar</a>

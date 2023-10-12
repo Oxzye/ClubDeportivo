@@ -37,7 +37,7 @@
                                     <td scope="row">{{ $cargo->id_cargo }}</td>
                                     <td>{{ $cargo->nombre_cargo }}</td>
                                     <td>{{ $cargo->descripcionCargo }}</td>
-                                    <td>{{ $cargo->salario_base }}</td>
+                                    <td>$ {{ $cargo->salario_base }}</td>
                                     <td>{{ $cargo->horas_de_trabajoxmes}}</td>
                                     <td>{{ $cargo->horario_de_trabajo}}</td>
 

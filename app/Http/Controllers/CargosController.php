@@ -45,10 +45,10 @@ class CargosController extends Controller
 
     public function destroy($id_cargo) {
         //busqueda
-        $cargo = Cargos::findOrFail($id_cargo);
+        $cargos = Cargos::findOrFail($id_cargo);
 
         //elminacion
-        $cargo->delete();
+        $cargos->delete();
 
         //redireccion
         return redirect()->route('cargos.index')->with('status', 'eliminado correctamente');
