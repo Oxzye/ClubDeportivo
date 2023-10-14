@@ -38,9 +38,9 @@ Route::get('/paises/{pais}/edit', [PaisesController::class, 'edit'])->name('pais
 Route::get('/Formas_pago', [Formas_pagoController::class, 'index'])->name('Formas_pago.index');
 Route::post('/Formas_pago', [Formas_pagoController::class, 'store'])->name('Formas_pago.store');
 Route::get('/Formas_pago/create', [Formas_pagoController::class, 'create'])->name('Formas_pago.create');
-Route::put('/Formas_pago/{fdp}', [Formas_pagoController::class, 'update'])->name('Formas_pago.update');
-Route::delete('/Formas_pago/{fdp}', [Formas_pagoController::class, 'destroy'])->name('Formas_pago.destroy');
-Route::get('/Formas_pago/{fdp}/edit', [Formas_pagoController::class, 'edit'])->name('Formas_pago.edit');
+Route::put('/Formas_pago/{Formas_pago}', [Formas_pagoController::class, 'update'])->name('Formas_pago.update');
+Route::delete('/Formas_pago/{Formas_pago}', [Formas_pagoController::class, 'destroy'])->name('Formas_pago.destroy');
+Route::get('/Formas_pago/{Formas_pago}/edit', [Formas_pagoController::class, 'edit'])->name('Formas_pago.edit');
 
 //Rutas de Dias
 Route::get('/dias', [DiasController::class, 'index'])->name('dias.index');
