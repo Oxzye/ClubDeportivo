@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
 
-        <h1>Crear nuevo país</h1>
+        <h1>Crear nuevo Forma de pago:</h1>
 
         @if ($errors->any())
             <ul>
@@ -15,14 +15,17 @@
             </ul>
         @endif
         
-        <form action="{{ route('paises.store') }}" method="post">
+        <form action="{{ route('Formas_pago.store') }}" method="post">
         @csrf
             <div class="mb-3">
-              <label for="" class="form-label" name="nombre_pais">Nombre país:</label>
-              <input type="text" class="form-control" name="nombre_pais" id="" aria-describedby="helpId" placeholder="">
+              <label for="" class="form-label" name="forma_pago_fdp">Nombre de forma de pago:</label>
+              <input type="text" class="form-control" name="forma_pago_fdp" id="" aria-describedby="helpId" placeholder="">
+
+              <label for="" class="form-label" name="descripcion_fdp">Descripción de forma de pago:</label>
+              <input type="text" class="form-control" name="descripcion_fdp" id="" aria-describedby="helpId" placeholder="">
             </div>
              <button type="submit" class="btn btn-primary">Guardar</button>
-             <a href="{{ route('paises.index') }}" class="btn btn-danger">Cancelar</a>
+             <a href="{{ route('Formas_pago.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
     </div>
 
