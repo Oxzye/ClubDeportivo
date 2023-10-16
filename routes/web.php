@@ -7,9 +7,10 @@ use App\Http\Controllers\DiasController;
 use App\Http\Controllers\CargosController;
 use App\Http\Controllers\TipoFacturaController;
 use App\Http\Controllers\InstalacionesController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tipodetfacturaController;
 use App\Http\Controllers\GenerosController;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
