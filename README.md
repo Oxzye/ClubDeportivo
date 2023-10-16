@@ -1,4 +1,4 @@
-<p  align="center"><a  href="https://github.com/Oxzye/ClubDeportivo"  target="_blank"><img  src="https://i.ibb.co/VTydWyF/logo3.png"  width="400"  alt="Factous Logo"></a></p>
+<p  align="center"><a  href="https://github.com/Oxzye/ClubDeportivo"  target="_blank"><img  src="https://i.ibb.co/f4CqSYc/logofondoblanco.png"  width="400"  alt="Factous Logo"></a></p>
 
   
 
