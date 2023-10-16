@@ -6,6 +6,8 @@ use App\Http\Controllers\PaisesController;
 use App\Http\Controllers\DiasController;
 use App\Http\Controllers\InstalacionesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\tipodetfacturaController;
+use App\Http\Controllers\GenerosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +23,27 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Rutas de Tipo de detalle de facturas
+Route::get('/Tipodetfactura', [tipodetfacturaController::class, 'index'])->name('tipos_detalle_factura.index');
+Route::post('/Tipodetfactura', [tipodetfacturaController::class, 'store'])->name('tipos_detalle_factura.store');
+Route::get('/Tipodetfactura/create', [tipodetfacturaController::class, 'create'])->name('tipos_detalle_factura.create');
+Route::put('/Tipodetfactura/{tdf}', [tipodetfacturaController::class, 'update'])->name('tipos_detalle_factura.update');
+Route::delete('/Tipodetfactura/{tdf}', [tipodetfacturaController::class, 'destroy'])->name('tipos_detalle_factura.destroy');
+Route::get('/Tipodetfactura/{tdf}/edit', [tipodetfacturaController::class, 'edit'])->name('tipos_detalle_factura.edit');
+
+//Rutas de Generos
+Route::get('/generos', [GenerosController::class, 'index'])->name('Generos.index');
+Route::post('/generos', [GenerosController::class, 'store'])->name('Generos.store');
+Route::get('/generos/create', [GenerosController::class, 'create'])->name('Generos.create');
+Route::put('/generos/{gen}', [GenerosController::class, 'update'])->name('Generos.update');
+Route::delete('/generos/{gen}', [GenerosController::class, 'destroy'])->name('Generos.destroy');
+Route::get('/generos/{gen}/edit', [GenerosController::class, 'edit'])->name('Generos.edit');
+
+
 
 //Rutas de Paises
 Route::get('/paises', [PaisesController::class, 'index'])->name('paises.index');
@@ -50,6 +69,8 @@ Route::put('/dias/{dia}', [DiasController::class, 'update'])->name('dias.update'
 Route::delete('/dias/{dia}', [DiasController::class, 'destroy'])->name('dias.destroy');
 Route::get('/dias/{dia}/edit', [DiasController::class, 'edit'])->name('dias.edit');
 
+
+
 //Rutas de Deportes
 Route::get('/deportes', [DeportesController::class, 'index'])->name('deportes.index');
 Route::post('/deportes', [DeportesController::class, 'store'])->name('deportes.store');
@@ -65,3 +86,4 @@ Route::get('/instalaciones/create', [InstalacionesController::class, 'create'])-
 Route::put('/instalaciones/{instalacion}', [InstalacionesController::class, 'update'])->name('instalaciones.update');
 Route::delete('/instalaciones/{instalacion}', [InstalacionesController::class, 'destroy'])->name('instalaciones.destroy');
 Route::get('/instalaciones/{instalacion}/edit', [InstalacionesController::class, 'edit'])->name('instalaciones.edit');
+
