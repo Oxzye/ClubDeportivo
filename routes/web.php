@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\DeportesController;
 use App\Http\Controllers\Formas_pagoController;
 use App\Http\Controllers\PaisesController;
 use App\Http\Controllers\DiasController;
 use App\Http\Controllers\CargosController;
 use App\Http\Controllers\TipoFacturaController;
+use App\Http\Controllers\InstalacionesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\tipodetfacturaController;
+use App\Http\Controllers\GenerosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +25,28 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//Rutas de Tipo de detalle de facturas
+Route::get('/Tipodetfactura', [tipodetfacturaController::class, 'index'])->name('tipos_detalle_factura.index');
+Route::post('/Tipodetfactura', [tipodetfacturaController::class, 'store'])->name('tipos_detalle_factura.store');
+Route::get('/Tipodetfactura/create', [tipodetfacturaController::class, 'create'])->name('tipos_detalle_factura.create');
+Route::put('/Tipodetfactura/{tdf}', [tipodetfacturaController::class, 'update'])->name('tipos_detalle_factura.update');
+Route::delete('/Tipodetfactura/{tdf}', [tipodetfacturaController::class, 'destroy'])->name('tipos_detalle_factura.destroy');
+Route::get('/Tipodetfactura/{tdf}/edit', [tipodetfacturaController::class, 'edit'])->name('tipos_detalle_factura.edit');
+
+
+//Rutas de Generos
+Route::get('/generos', [GenerosController::class, 'index'])->name('Generos.index');
+Route::post('/generos', [GenerosController::class, 'store'])->name('Generos.store');
+Route::get('/generos/create', [GenerosController::class, 'create'])->name('Generos.create');
+Route::put('/generos/{gen}', [GenerosController::class, 'update'])->name('Generos.update');
+Route::delete('/generos/{gen}', [GenerosController::class, 'destroy'])->name('Generos.destroy');
+Route::get('/generos/{gen}/edit', [GenerosController::class, 'edit'])->name('Generos.edit');
+
 
 //Rutas de Paises
 Route::get('/paises', [PaisesController::class, 'index'])->name('paises.index');
@@ -34,13 +56,15 @@ Route::put('/paises/{pais}', [PaisesController::class, 'update'])->name('paises.
 Route::delete('/paises/{pais}', [PaisesController::class, 'destroy'])->name('paises.destroy');
 Route::get('/paises/{pais}/edit', [PaisesController::class, 'edit'])->name('paises.edit');
 
+
 //Rutas de Formas Pago
 Route::get('/Formas_pago', [Formas_pagoController::class, 'index'])->name('Formas_pago.index');
 Route::post('/Formas_pago', [Formas_pagoController::class, 'store'])->name('Formas_pago.store');
 Route::get('/Formas_pago/create', [Formas_pagoController::class, 'create'])->name('Formas_pago.create');
-Route::put('/Formas_pago/{fdp}', [Formas_pagoController::class, 'update'])->name('Formas_pago.update');
-Route::delete('/Formas_pago/{fdp}', [Formas_pagoController::class, 'destroy'])->name('Formas_pago.destroy');
-Route::get('/Formas_pago/{fdp}/edit', [Formas_pagoController::class, 'edit'])->name('Formas_pago.edit');
+Route::put('/Formas_pago/{Formas_pago}', [Formas_pagoController::class, 'update'])->name('Formas_pago.update');
+Route::delete('/Formas_pago/{Formas_pago}', [Formas_pagoController::class, 'destroy'])->name('Formas_pago.destroy');
+Route::get('/Formas_pago/{Formas_pago}/edit', [Formas_pagoController::class, 'edit'])->name('Formas_pago.edit');
+
 
 //Rutas de Dias
 Route::get('/dias', [DiasController::class, 'index'])->name('dias.index');
@@ -67,3 +91,20 @@ Route::put('/Tipo_factura/{fac}', [TipoFacturaController::class, 'update'])->nam
 Route::delete('/Tipo_factura/{fac}', [TipoFacturaController::class, 'destroy'])->name('Tipo_factura.destroy');
 Route::get('/Tipo_factura/{fac}/edit', [TipoFacturaController::class, 'edit'])->name('Tipo_factura.edit');
 
+
+//Rutas de Deportes
+Route::get('/deportes', [DeportesController::class, 'index'])->name('deportes.index');
+Route::post('/deportes', [DeportesController::class, 'store'])->name('deportes.store');
+Route::get('/deportes/create', [DeportesController::class, 'create'])->name('deportes.create');
+Route::put('/deportes/{deporte}', [DeportesController::class, 'update'])->name('deportes.update');
+Route::delete('/deportes/{deporte}', [DeportesController::class, 'destroy'])->name('deportes.destroy');
+Route::get('/deportes/{deporte}/edit', [DeportesController::class, 'edit'])->name('deportes.edit');
+
+
+//Rutas de instalaciones
+Route::get('/instalaciones', [InstalacionesController::class, 'index'])->name('instalaciones.index');
+Route::post('/instalaciones', [InstalacionesController::class, 'store'])->name('instalaciones.store');
+Route::get('/instalaciones/create', [InstalacionesController::class, 'create'])->name('instalaciones.create');
+Route::put('/instalaciones/{instalacion}', [InstalacionesController::class, 'update'])->name('instalaciones.update');
+Route::delete('/instalaciones/{instalacion}', [InstalacionesController::class, 'destroy'])->name('instalaciones.destroy');
+Route::get('/instalaciones/{instalacion}/edit', [InstalacionesController::class, 'edit'])->name('instalaciones.edit');

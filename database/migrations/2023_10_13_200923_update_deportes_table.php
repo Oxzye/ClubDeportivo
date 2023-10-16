@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('dias', function (Blueprint $table) {
+        Schema::table('deportes', function (Blueprint $table) {
 
             $table->timestamps();
         });
@@ -22,9 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('dias', function (Blueprint $table) {
-            $table->dropTimestamps(); // Esto eliminará las columnas 'created_at' y 'updated_at'
-        });
+        //
     }
-
 };
