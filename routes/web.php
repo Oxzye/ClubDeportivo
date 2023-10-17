@@ -28,6 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/paises', [PaisesController::class, 'index'])->name('paises.index');
 Route::post('/paises', [PaisesController::class, 'store'])->name('paises.store');
 Route::get('/paises/create', [PaisesController::class, 'create'])->name('paises.create');
+Route::get('/paises/{pais}', [PaisesController::class, 'show'])->name('paises.show');
 Route::put('/paises/{pais}', [PaisesController::class, 'update'])->name('paises.update');
 Route::delete('/paises/{pais}', [PaisesController::class, 'destroy'])->name('paises.destroy');
 Route::get('/paises/{pais}/edit', [PaisesController::class, 'edit'])->name('paises.edit');

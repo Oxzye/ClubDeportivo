@@ -10,7 +10,7 @@
             </div>
         @endif
 
-        <a href="{{ route('paises.create') }}" class="btn btn-primary">Agregar</a>
+        <a href="{{ route('paises.create') }}" class="btn btn-primary mb-4">Agregar</a>
 
         @if ($paises->count())
             
@@ -18,25 +18,27 @@
                     <table class="table table-primary">
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col" colspan="3">Acciones</th>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($paises as $pais)
                                 <tr class="">
-                                    <td scope="row">{{ $pais->id_pais }}</td>
+                                    <td>{{ $pais->id_pais }}</td>
                                     <td>{{ $pais->nombre_pais }}</td>
-                                    <td>Ver</td>
-                                    <td>
-                                        <a href="{{ route('paises.edit', $pais->id_pais)  }}" class="btn btn-warning">Editar</a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('paises.destroy', $pais->id_pais ) }}" method="post">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route( 'paises.show', $pais->id_pais) }}"><button type="button" class="btn btn-info m-1">Ver</button></a>
+
+                                            <a href="{{ route('paises.edit', $pais->id_pais)  }}" class="btn btn-warning m-1">Editar</a>
+                                        
+                                            <form action="{{ route('paises.destroy', $pais->id_pais ) }}" method="post">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="btn btn-danger m-1">Eliminar</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>  
                             @endforeach

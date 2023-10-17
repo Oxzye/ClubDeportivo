@@ -19,12 +19,23 @@ class PaisesController extends Controller
     }
 
     public function store (Request $request) {
-        //valid
+        //Validacion de los datos
+        $validated = $request->validate(
+            [
+                'nombre_pais' => 'required|unique:paises|max:50',
+            ],
+            [
+                'nombre_pais.required' => 'El nombre es obligatorio.',
+                'nombre_pais.unique' => 'El nombre ya está registrado',
+                'nombre_pais.string' => 'El nombre debe ser una cadena de texto.',
+                'nombre_pais.max' => 'El nombre no debe tener más de 50 caracteres.',
+            ]);
+        // Guardado de los datos
+        if ($validated) {
+            Paises::create($request->all());
+        };
 
-        //Guardado de los datos
-        Paises::create($request->all());
-
-        //Redir
+        //Redireccion con un mensaje flash de sesion
         return redirect()->route('paises.index')->with('status', 'País creado correctamente');
     }
 
@@ -36,12 +47,23 @@ class PaisesController extends Controller
     public function update(Request $request, $id_pais){
         //busqueda
         $pais = Paises::findOrFail($id_pais);
-        //valid
-
-        //actualizacion
-        $pais->update($request->all());
-
-        //redireccion
+         //Validacion de los datos
+         $validated = $request->validate(
+            [
+                'nombre_pais' => 'required|unique:paises|max:50',
+            ],
+            [
+                'nombre_pais.required' => 'El nombre es obligatorio.',
+                'nombre_pais.unique' => 'El nombre ya está registrado',
+                'nombre_pais.string' => 'El nombre debe ser una cadena de texto.',
+                'nombre_pais.max' => 'El nombre no debe tener más de 50 caracteres.',
+            ]);
+        // Guardado de los datos
+        if ($validated) {        
+            //actualizacion
+            $pais->update($request->all());
+        }
+        //redireccion con un mensaje flash de sesión
         return redirect()->route('paises.index')->with('status', 'País Actualizado correctamente');
     }
 
@@ -54,6 +76,10 @@ class PaisesController extends Controller
 
         //redireccion
         return redirect()->route('paises.index')->with('status', 'País eliminado correctamente');
+    }
+    public function show($id){
+        $pais = Paises::findOrFail($id);
+        return view( 'paises.show', [ 'pais' => $pais ]);
     }
 }
 
