@@ -19,10 +19,18 @@
         @csrf
             <div class="mb-3">
               <label for="" class="form-label" name="forma_pago_fdp">Nombre de forma de pago:</label>
-              <input type="text" class="form-control" name="forma_pago_fdp" id="" aria-describedby="helpId" placeholder="">
+              <input type="text" class="form-control" name="forma_pago_fdp" id="" aria-describedby="helpId" @error('forma_pago_fdp') is-invalid @enderror">
+                @error( 'forma_pago_fdp' )
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            <br>
 
               <label for="" class="form-label" name="descripcion_fdp">Descripción de forma de pago:</label>
-              <input type="text" class="form-control" name="descripcion_fdp" id="" aria-describedby="helpId" placeholder="">
+              <input type="text" class="form-control" name="descripcion_fdp" id="" aria-describedby="helpId" @error('descripcion_fdp') is-invalid @enderror">
+                @error( 'descripcion_fdp' )
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+      <br>
             </div>
              <button type="submit" class="btn btn-primary">Guardar</button>
              <a href="{{ route('Formas_pago.index') }}" class="btn btn-danger">Cancelar</a>

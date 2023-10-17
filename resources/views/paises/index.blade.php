@@ -35,8 +35,8 @@
                                             <a href="{{ route('paises.edit', $pais->id_pais)  }}" class="btn btn-warning m-1">Editar</a>
                                         
                                             <form action="{{ route('paises.destroy', $pais->id_pais ) }}" method="post">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="btn btn-danger m-1">Eliminar</button>
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="btn btn-danger m-1">Eliminar</button>
                                             </form>
                                         </div>
                                     </td>

@@ -21,7 +21,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Descripción</th>
-                                <th scope="col" colspan="3">Acciones</th>
+                                <th scope="col" class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,15 +30,17 @@
                                     <td scope="row">{{ $fdp->id_fdp }}</td>
                                     <td>{{ $fdp->forma_pago_fdp }}</td>
                                     <td>{{ $fdp->descripcion_fdp }}</td>
-                                    <td>Ver</td>
-                                    <td>
-                                        <a href="{{ route('Formas_pago.edit', $fdp->id_fdp)  }}" class="btn btn-warning">Editar</a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('Formas_pago.destroy', $fdp->id_fdp ) }}" method="post">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route( 'Formas_pago.show',  $fdp->id_fdp) }}"><button type="button" class="btn btn-info m-1">Ver</button>
+                                            </a>
+
+                                            <a href="{{ route('Formas_pago.edit', $fdp->id_fdp)  }}" class="btn btn-warning m-1">Editar</a>
+
+                                            <form action="{{ route('Formas_pago.destroy', $fdp->id_fdp ) }}" method="post">
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="btn btn-danger m-1">Eliminar</button>
+                                            </form>
                                     </td>
                                 </tr>  
                             @endforeach
