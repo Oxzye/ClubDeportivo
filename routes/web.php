@@ -102,13 +102,13 @@ Route::delete('/deportes/{deporte}', [DeportesController::class, 'destroy'])->na
 Route::get('/deportes/{deporte}/edit', [DeportesController::class, 'edit'])->name('deportes.edit');
 
 
-//Rutas de instalaciones
+/*Rutas de instalaciones
 Route::get('/instalaciones', [InstalacionesController::class, 'index'])->name('instalaciones.index');
 Route::post('/instalaciones', [InstalacionesController::class, 'store'])->name('instalaciones.store');
 Route::get('/instalaciones/create', [InstalacionesController::class, 'create'])->name('instalaciones.create');
 Route::put('/instalaciones/{instalacion}', [InstalacionesController::class, 'update'])->name('instalaciones.update');
 Route::delete('/instalaciones/{instalacion}', [InstalacionesController::class, 'destroy'])->name('instalaciones.destroy');
-Route::get('/instalaciones/{instalacion}/edit', [InstalacionesController::class, 'edit'])->name('instalaciones.edit');
+Route::get('/instalaciones/{instalacion}/edit', [InstalacionesController::class, 'edit'])->name('instalaciones.edit');*/
 
 Auth::routes();
 

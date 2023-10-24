@@ -9,11 +9,11 @@ class InstalacionesController extends Controller
 {
     public function index () {
         $instalaciones = Instalacion::all();
-        return view('instalaciones.index', compact('instalaciones')); 
+        return view('panel.instalaciones.index', compact('instalaciones')); 
     }
 
     public function create () {
-        return view('instalaciones.create');
+        return view('panel.instalaciones.create');
     }
 
     public function store (Request $request) {
@@ -23,13 +23,13 @@ class InstalacionesController extends Controller
         Instalacion::create($request->all());
 
         //redir
-        return redirect()->route('instalaciones.index')->with('status','Instalacion creada correctamente');    
+        return redirect()->route('panel.instalaciones.index')->with('status','Instalacion creada correctamente');    
     }
 
     public function edit($id_inst)
     {
         $instalacion = Instalacion::findOrFail($id_inst);
-        return view('instalaciones.edit', ['instalacion' => $instalacion]);
+        return view('panel.instalaciones.edit', ['instalacion' => $instalacion]);
     }
 
     public function update(Request $request, $id_inst){
@@ -41,7 +41,7 @@ class InstalacionesController extends Controller
         $instalacion->update($request->all());
 
         //redir
-        return redirect()->route('instalaciones.index')->with('status','Instalacion actualizada');
+        return redirect()->route('panel.instalaciones.index')->with('status','Instalacion actualizada');
     } 
 
     public function destroy($id){
@@ -52,6 +52,6 @@ class InstalacionesController extends Controller
         $instalacion->delete();
 
         //redir
-        return redirect()->route('instalaciones.index')->with('status','Instalacion eliminada');
+        return redirect()->route('panel.instalaciones.index')->with('status','Instalacion eliminada');
     }
 }

@@ -14,11 +14,10 @@ class Socio extends Model
 
     protected $fillable = ['cuil_soc', 'fecha_asociacion', 'fecha_baja_socio', 'observaciones_soc'];
 
-    protected $primaryKey = 'id_emp';
+    protected $primaryKey = 'id_soc';
 
-    public function users(): HasOne
+    public function user()
     {
-
-        return $this->hasOne(User::class,'id_soc');
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

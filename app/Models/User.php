@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use Spatie\Permission\Traits\HasRoles;
 
@@ -25,8 +24,6 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'id_emp',
-        'id_soc',
         'name',
         'apellido',
         'dni',
@@ -57,13 +54,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function socio(): BelongsTo
+    public function empleado()
     {
-        return $this->belongsTo(Socio::class, 'id_socio');
+        return $this->hasOne(Empleado::class);
     }
 
-    public function empleado(): BelongsTo
+    public function socio()
     {
-        return $this->belongsTo(Empleado::class, 'id_emp');
+        return $this->hasOne(Socio::class);
     }
 }

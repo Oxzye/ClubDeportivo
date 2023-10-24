@@ -299,7 +299,15 @@ return [
         // Sidebar items:
         [
             'text' => 'Lista de usuarios',
-            'url' => '#',
+            'route' => 'socios.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
+            'text' => 'Lista de instalaciones',
+            'route' => 'instalaciones.index',
+            //'url' => 'panel/socios',
             'icon' => 'fas fa-users', // icono de fontawesome
             'can' => 'lista_usuarios' // permiso de admin
         ],
