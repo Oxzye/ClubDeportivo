@@ -1,18 +1,22 @@
-@extends('layouts.app')
+{{-- Extiende de la plantilla de Admin LTE, nos permite tener el panel en la vista --}}
+@extends('adminlte::page')
 
-@section('title', 'Tipo de Factura Index')
+{{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
+@section('plugins.Datatables', true)
+
+@section('title', 'tipos_detalle_factura Index')
     
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
             </div>
         @endif
 
-        <a href="{{ route('Tipo_factura.create') }}" class="btn btn-primary">Agregar</a>
+        <a href="{{ route('tipos_detalle_factura.create') }}" class="btn btn-primary">Agregar</a>
 
-        @if ($Tipo_factura->count())
+        @if ($tdf->count())
             
                 <div class="table-responsive">
                     <table class="table table-primary">
@@ -24,16 +28,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($Tipo_factura as $fac)
+                            @foreach ($tdf as $tipodetfact)
                                 <tr class="">
-                                    <td scope="row">{{ $fac->id_tipo_fac }}</td>
-                                    <td>{{ $fac->tipo_fac}}</td>
+                                    <td scope="row">{{ $tipodetfact->id_tipodetallefactura }}</td>
+                                    <td>{{ $tipodetfact->tipodetalle}}</td>
+                                    <td>{{ $tipodetfact->descripcion_tdf }}</td>
                                     <td>Ver</td>
-                                     <td>
-                                        <a href="{{ route('Tipo_factura.edit', $fac->id_tipo_fac)  }}" class="btn btn-warning">Editar</a>
+                                    <td>
+                                        <a href="{{ route('tipos_detalle_factura.edit', $tipodetfact->id_tipodetallefactura)  }}" class="btn btn-warning">Editar</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('Tipo_factura.destroy', $fac->id_tipo_fac ) }}" method="post">
+                                        <form action="{{ route('tipos_detalle_factura.destroy', $tipodetfact->id_tipodetallefactura ) }}" method="post">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                         </form>
@@ -46,7 +51,7 @@
                 </div>
     
         @else
-            <h4>¡No hay Tipo de Facturas cargadas!</h4>
+            <h4>¡No hay tipos de detalles de facturas cargados!</h4>
         @endif
     </div>
 @endsection

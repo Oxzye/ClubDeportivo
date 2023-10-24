@@ -1,9 +1,13 @@
-@extends('layouts.app')
+{{-- Extiende de la plantilla de Admin LTE, nos permite tener el panel en la vista --}}
+@extends('adminlte::page')
+
+{{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
+@section('plugins.Datatables', true)
 
 @section('title','Crear tipos_detalle_factura')
     
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
 
         <h1>Crear nuevo tipo de detalle de factura</h1>
 

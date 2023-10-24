@@ -10,11 +10,11 @@ class tipodetfacturaController extends Controller
 
         $tdf = tipodetfactura::all();
 
-        return view('tipos_detalle_factura.index', compact('tdf'));
+        return view('panel.tipos_detalle_factura.index', compact('tdf'));
     }
 
     public function create () {
-        return view('tipos_detalle_factura.create');
+        return view('panel.tipos_detalle_factura.create');
     }
 
     public function store (Request $request) {
@@ -29,7 +29,7 @@ class tipodetfacturaController extends Controller
 
     public function edit($id_tipodetallefactura) {
         $tdf = tipodetfactura::findOrFail($id_tipodetallefactura);
-        return view('tipos_detalle_factura.edit', ['tipos_detalle_factura' => $tdf]);
+        return view('panel.tipos_detalle_factura.edit', ['tipos_detalle_factura' => $tdf]);
     }
 
     public function update(Request $request, $id_tipodetallefactura){

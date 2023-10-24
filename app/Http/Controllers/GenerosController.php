@@ -11,11 +11,11 @@ class GenerosController extends Controller
 
         $generos = generos::all();
 
-        return view('Generos.index', compact('generos'));
+        return view('panel.Generos.index', compact('generos'));
     }
 
     public function create () {
-        return view('Generos.create');
+        return view('panel.Generos.create');
     }
 
     public function store (Request $request) {
@@ -30,7 +30,7 @@ class GenerosController extends Controller
 
     public function edit($cod_genero) {
         $generos = generos::findOrFail($cod_genero);
-        return view('Generos.edit', ['Generos' => $generos]);
+        return view('panel.Generos.edit', ['Generos' => $generos]);
     }
 
     public function update(Request $request, $cod_genero){

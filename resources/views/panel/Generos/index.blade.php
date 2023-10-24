@@ -1,9 +1,13 @@
-@extends('layouts.app')
+{{-- Extiende de la plantilla de Admin LTE, nos permite tener el panel en la vista --}}
+@extends('adminlte::page')
+
+{{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
+@section('plugins.Datatables', true)
 
 @section('title', 'Generos Index')
     
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -47,7 +51,7 @@
                 </div>
     
         @else
-            <h4>¡No hay tipos de detalles de facturas cargados!</h4>
+            <h4>¡No hay tipos de generos cargados!</h4>
         @endif
     </div>
 @endsection

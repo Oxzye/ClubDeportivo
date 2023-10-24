@@ -326,6 +326,48 @@ return [
             'can' => 'lista_usuarios' // permiso de admin
         ],
         [
+            'text' => 'Lista de generos',
+            'route' => 'generos.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
+            'text' => 'Lista de Tipos de facturas',
+            'route' => 'Tipo_factura.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
+            'text' => 'Lista de Tipos de detalles de facturas',
+            'route' => 'tipos_detalle_factura.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
+            'text' => 'Lista de Formas de pago',
+            'route' => 'Formas_pago.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
+            'text' => 'Lista de Dias',
+            'route' => 'dias.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
+            'text' => 'Lista de deportes',
+            'route' => 'deportes.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
             'text' => 'Lista de Productos',
             'url' => '#',
             'icon' => 'fas fa-store', // icono de fontawesome
