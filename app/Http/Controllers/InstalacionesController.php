@@ -23,7 +23,7 @@ class InstalacionesController extends Controller
         Instalacion::create($request->all());
 
         //redir
-        return redirect()->route('panel.instalaciones.index')->with('status','Instalacion creada correctamente');    
+        return redirect()->route('instalaciones.index')->with('status','Instalacion creada correctamente');    
     }
 
     public function edit($id_inst)
@@ -41,7 +41,7 @@ class InstalacionesController extends Controller
         $instalacion->update($request->all());
 
         //redir
-        return redirect()->route('panel.instalaciones.index')->with('status','Instalacion actualizada');
+        return redirect()->route('instalaciones.index')->with('status','Instalacion actualizada');
     } 
 
     public function destroy($id){
@@ -52,6 +52,6 @@ class InstalacionesController extends Controller
         $instalacion->delete();
 
         //redir
-        return redirect()->route('panel.instalaciones.index')->with('status','Instalacion eliminada');
+        return redirect()->route('instalaciones.index')->with('status','Instalacion eliminada');
     }
 }

@@ -9,11 +9,11 @@ class CargosController extends Controller
     public function index () {
 
         $cargos = Cargos::all();
-        return view('cargos.index', compact('cargos'));
+        return view('panel.cargos.index', compact('cargos'));
     }
 
     public function create() {
-        return view('cargos.create');
+        return view('panel.cargos.create');
     }
 
     public function store(Request $request) {
@@ -28,7 +28,7 @@ class CargosController extends Controller
 
     public function edit($id_cargo) {
         $cargos = Cargos::findOrFail($id_cargo);
-        return view('cargos.edit', ['cargo' => $cargos]);
+        return view('panel.cargos.edit', ['cargo' => $cargos]);
     }
 
     public function update(Request $request, $id_cargo){
