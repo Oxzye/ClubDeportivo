@@ -21,6 +21,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public $timestamps = false;
     protected $fillable = [
         'email',
         'password',
@@ -31,7 +32,9 @@ class User extends Authenticatable
         'cod_genero',
         'fecha_nac',
         'domicilio',
-        'telefono'
+        'telefono',
+        'update_at',
+        'created_at',
     ];
 
     /**

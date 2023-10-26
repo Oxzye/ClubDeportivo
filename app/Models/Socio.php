@@ -12,7 +12,11 @@ class Socio extends Model
 
     protected $table = 'socios';
 
-    protected $fillable = ['cuil_soc', 'fecha_asociacion', 'fecha_baja_socio', 'observaciones_soc'];
+    protected $fillable = ['cuil_soc',
+                            'fecha_asociacion', 
+                            'fecha_baja_socio', 
+                            'observaciones_soc',
+                        ];
 
     protected $primaryKey = 'id_soc';
 
