@@ -16,12 +16,6 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 mb-3">
-            
-            <a href="" class="btn btn-danger text-uppercase">
-                Cancelar
-            </a>
-        </div>
 
         @if ($errors->any())
             <ul>
@@ -60,6 +54,13 @@
                         </div>
                         <div class="col-5">
                             <div class="form-group">
+                                <label for="exampleInputEmail1">CUIL</label>
+                                <input type="number" class="form-control" name="cuil" id="cuil" aria-describedby="dni">
+                                <small id="" class="form-text text-muted">Posible alert.</small>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Fecha de Nacimiento</label>
                                 <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" aria-describedby="fecha_nac">
                                 <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -76,13 +77,6 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-5">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Telefono</label>
-                                <input type="number" class="form-control" id="telefono" name="telefono" aria-describedby="telefono">
-                                <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                            </div>
-                        </div>
                         <div class="col-7">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Domicilio</label>
@@ -92,22 +86,76 @@
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="localidad">Codigo postal</label>
-                                <input type="number" class="form-control" id="localidad" name="localidad" aria-describedby="localidad">
-                                <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <label for="exampleInputEmail1">Numero de telefono</label>
+                                <input type="number" class="form-control" id="telefono" name="telefono" aria-describedby="telefono">
+                                <small id="" class="form-text text-muted">We'll never share</small>
                             </div>
                         </div>
-                        <div class="col-10">
+                        <div class="col-4">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Correo electronico</label>
-                                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <label for="exampleFormControlSelect1">País</label>
+                                <select class="form-control" id="pais" name="pais" >
+                                <option selected>Seleccionar</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Provincia</label>
+                                <select class="form-control" id="provincia" name="provincia" >
+                                <option selected>Seleccionar</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Localidad</label>
+                                <select class="form-control" id="localidad" name="localidad" >
+                                <option selected>Seleccionar</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar</a>
                 </div>
+                
+                <div class="col-6">
+                    <div class="col-10">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Correo electronico</label>
+                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="form-group">
+                            <label for="localidad">Contraseña</label>
+                            <input class="form-control" type="text" value="La contraseña autogenerada será enviada al usuario vía email" readonly>
+                            <input type="text" value="1" name="password" hidden>
+                            <small id="" class="form-text text-muted">ss</small>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="form-group">
+                            <label for="observaciones_soc">¿Hay algo a tener en cuenta sobre este socio?</label>
+                            <textarea class="form-control" name="observaciones_soc" aria-label="With textarea"></textarea>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                <input type="hidden" name="id_user" value="9">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>
