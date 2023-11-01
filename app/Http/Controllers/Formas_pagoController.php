@@ -11,11 +11,11 @@ class Formas_pagoController extends Controller
 
         $Formas_pago = Formas_pago::all();
 
-        return view('Formas_pago.index', compact('Formas_pago'));
+        return view('panel.Formas_pago.index', compact('Formas_pago'));
     }
 
     public function create () {
-        return view('Formas_pago.create');
+        return view('panel.Formas_pago.create');
     }
 
     public function store (Request $request) {
@@ -30,7 +30,7 @@ class Formas_pagoController extends Controller
 
     public function edit($id_fdp) {
         $Formas_pago = Formas_pago::findOrFail($id_fdp);
-        return view('Formas_pago.edit', ['Formas_pago' => $Formas_pago]);
+        return view('panel.Formas_pago.edit', ['Formas_pago' => $Formas_pago]);
     }
 
     public function update(Request $request, $id_fdp){
