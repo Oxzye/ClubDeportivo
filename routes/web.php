@@ -8,6 +8,7 @@ use App\Http\Controllers\InstalacionesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tipodetfacturaController;
 use App\Http\Controllers\GenerosController;
+use App\Http\Controllers\ProvinciasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,3 +88,10 @@ Route::put('/instalaciones/{instalacion}', [InstalacionesController::class, 'upd
 Route::delete('/instalaciones/{instalacion}', [InstalacionesController::class, 'destroy'])->name('instalaciones.destroy');
 Route::get('/instalaciones/{instalacion}/edit', [InstalacionesController::class, 'edit'])->name('instalaciones.edit');
 
+//Rutas de Provincias
+Route::get('/Provincias', [ProvinciasController::class, 'index'])->name('Provincias.index');
+Route::post('/Provincias', [ProvinciasController::class, 'store'])->name('Provincias.store');
+Route::get('/Provincias/create', [ProvinciasController::class, 'create'])->name('Provincias.create');
+Route::put('/Provincias/{prov}', [ProvinciasController::class, 'update'])->name('Provincias.update');
+Route::delete('/Provincias/{prov}', [ProvinciasController::class, 'destroy'])->name('Provincias.destroy');
+Route::get('/Provincias/{prov}/edit', [ProvinciasController::class, 'edit'])->name('Provincias.edit');
