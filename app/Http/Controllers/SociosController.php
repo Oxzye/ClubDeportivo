@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Socio;
+use App\Models\User;
 
 class SociosController extends Controller
 {
@@ -30,13 +31,40 @@ class SociosController extends Controller
      */
     public function store(Request $request)
     {
-        //valid
+        // Valida los datos del formulario (agrega validaciones según tus necesidades).
+
+        // Crea un registro en la tabla 'users'.
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'apellido' =>$request->input('apellido'),
+            'dni' =>$request->input('dni'),
+            'fecha_nac' =>$request->input('fecha_nac'),
+            'domicilio' =>$request->input('domicilio'),
+            'telefono' =>$request->input('telefono'),
+            'password' =>'12345',
+        ]);
+
+        // Obtiene el ID del usuario creado.
+        $userId = $user->id;
+
+        // Crea un registro en la tabla 'socios' con el ID del usuario.
+        Socio::create([
+            'id_user' => $userId,
+            'cuil_soc'=>'2434396736',
+            'fecha_asociacion'=>'2022-09-01',
+            // Otros campos de 'socios'.
+        ]);
+
+        // Redirige o realiza otras acciones según tus necesidades.
+
+        /*valid
 
         //guardado de datos
-        Socio::create($request->all());
+        Socio::create($request->all());*/
 
         //Redir
-        return redirect()->route('panel.socios.create')->with('status', 'País creado correctamente');
+        return redirect()->route('socios.index')->with('status', 'País creado correctamente');
     }
 
     /**

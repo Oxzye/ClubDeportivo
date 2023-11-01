@@ -16,11 +16,17 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Buscar y eliminar registros existentes con correos electrónicos específicos
+        User::where('email', 'admin@gmail.com')->delete();
+        User::where('email', 'vendedor@gmail.com')->delete();
+        User::where('email', 'cliente@gmail.com')->delete();
+
+         // Crear nuevos registros de usuarios
         User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345'),
-            'dni' => '12345678'
+            'dni' => '12345678',
         ])->assignRole('admin');
 
         User::create([
