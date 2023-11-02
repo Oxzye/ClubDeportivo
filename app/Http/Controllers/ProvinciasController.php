@@ -4,32 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\Provincias;
 use Illuminate\Http\Request;
+use App\Models\Paises;
 class ProvinciasController extends Controller
 {
     public function index () {
 
-        $provincia = Provincias::all();
-
-        return view('Provincias.index', compact('provincia'));
+        $provincia = new Provincias;
+        $paises = Paises::all();
+        return view('panel.Provincias.index', compact('provincia', 'paises'));
     }
 
     public function create () {
-        return view('Provincias.create');
+        $paises = Paises::all();
+        $provincia = Paises::all();
+        return view('panel.Provincias.create', compact('provincia', 'paises'));
+ 
     }
 
     public function store (Request $request) {
         //valid
-
+        $provincia = new Provincias();
         //Guardado de los datos
-        Provincias::create($request->all());
-
+        $provincia -> id_pais = $request->get('id_pais');
+        $provincia -> nombre_prov = $request->get('nombre_prov');
+       
+        $provincia ->save();
         //Redir
         return redirect()->route('Provincias.index')->with('status', 'Provincia creado correctamente');
     }
 
     public function edit($id_prov) {
         $provincia = Provincias::findOrFail($id_prov);
-        return view('Provincias.edit', ['provincia' => $provincia]);
+        return view('panel.Provincias.edit', ['provincia' => $provincia]);
     }
 
     public function update(Request $request, $id_prov){

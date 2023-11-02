@@ -11,7 +11,7 @@ class Provincias extends Model
 
     protected $table = 'provincias';
     protected $fillable = ['nombre_prov'];
-    protected $primarykey= 'id_prov';
+    protected $primaryKey= 'id_prov';
 
     public function Paises() {
         return $this->belongsTo(Paises::class, 'id_pais');

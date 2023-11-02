@@ -11,11 +11,11 @@ class DeportesController extends Controller
         
         $deportes = Deporte::all();
 
-        return view('deportes.index', compact('deportes'));
+        return view('panel.deportes.index', compact('deportes'));
     }
     
     public function create () {
-        return view('deportes.create');
+        return view('panel.deportes.create');
     }
 
     public function store(Request $request)
@@ -31,7 +31,7 @@ class DeportesController extends Controller
 
     public function edit($id_dep){
         $deporte = Deporte::findOrFail($id_dep);
-        return view('deportes.edit', ['deporte' => $deporte]);
+        return view('panel.deportes.edit', ['deporte' => $deporte]);
     }
 
     public function update(Request $request, $id_dep){
