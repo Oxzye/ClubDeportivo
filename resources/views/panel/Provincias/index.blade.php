@@ -30,7 +30,7 @@
                         <tbody>
                             @foreach ($provincia as $prov)
                                 <tr class="">
-                                    <td scope="row">{{ $prov->id_prov }}</td>
+                                    <td>{{ $prov->id_prov }}</td>
                                     <td>{{ $prov->nombre_prov }}</td>
                                     <td>{{ $prov->id_pais }}</td>
                                     <td>Ver</td>

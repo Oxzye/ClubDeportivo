@@ -9,7 +9,8 @@ class ProvinciasController extends Controller
 {
     public function index () {
 
-        $provincia = new Provincias;
+        //$provincia = new Provincias;
+        $provincia = Provincias::all();
         $paises = Paises::all();
         return view('panel.Provincias.index', compact('provincia', 'paises'));
     }
@@ -25,8 +26,8 @@ class ProvinciasController extends Controller
         //valid
         $provincia = new Provincias();
         //Guardado de los datos
-        $provincia -> id_pais = $request->get('id_pais');
-        $provincia -> nombre_prov = $request->get('nombre_prov');
+        $provincia->id_pais = $request->get('id_pais');
+        $provincia->nombre_prov = $request->get('nombre_prov');
        
         $provincia ->save();
         //Redir

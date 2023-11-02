@@ -30,7 +30,7 @@
                 <div class="col-sm-8">
                 <select id="id_pais" name="id_pais" class="form-control">
                     @foreach ($paises as $pais)
-                        <option value="{{ $pais->id }}"> 
+                        <option value="{{ $pais->id_pais }}"> 
                             {{ $pais->nombre_pais }}
                         </option>
                     @endforeach
