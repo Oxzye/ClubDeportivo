@@ -9,11 +9,11 @@ class InstalacionesController extends Controller
 {
     public function index () {
         $instalaciones = Instalacion::all();
-        return view('instalaciones.index', compact('instalaciones')); 
+        return view('panel.instalaciones.index', compact('instalaciones')); 
     }
 
     public function create () {
-        return view('instalaciones.create');
+        return view('panel.instalaciones.create');
     }
 
     public function store (Request $request) {
@@ -29,7 +29,7 @@ class InstalacionesController extends Controller
     public function edit($id_inst)
     {
         $instalacion = Instalacion::findOrFail($id_inst);
-        return view('instalaciones.edit', ['instalacion' => $instalacion]);
+        return view('panel.instalaciones.edit', ['instalacion' => $instalacion]);
     }
 
     public function update(Request $request, $id_inst){

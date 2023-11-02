@@ -7,9 +7,10 @@ use App\Http\Controllers\DiasController;
 use App\Http\Controllers\CargosController;
 use App\Http\Controllers\TipoFacturaController;
 use App\Http\Controllers\InstalacionesController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\tipodetfacturaController;
 use App\Http\Controllers\GenerosController;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,13 +49,13 @@ Route::delete('/generos/{gen}', [GenerosController::class, 'destroy'])->name('Ge
 Route::get('/generos/{gen}/edit', [GenerosController::class, 'edit'])->name('Generos.edit');
 
 
-//Rutas de Paises
+/*Rutas de Paises
 Route::get('/paises', [PaisesController::class, 'index'])->name('paises.index');
 Route::post('/paises', [PaisesController::class, 'store'])->name('paises.store');
 Route::get('/paises/create', [PaisesController::class, 'create'])->name('paises.create');
 Route::put('/paises/{pais}', [PaisesController::class, 'update'])->name('paises.update');
 Route::delete('/paises/{pais}', [PaisesController::class, 'destroy'])->name('paises.destroy');
-Route::get('/paises/{pais}/edit', [PaisesController::class, 'edit'])->name('paises.edit');
+Route::get('/paises/{pais}/edit', [PaisesController::class, 'edit'])->name('paises.edit');*/
 
 
 //Rutas de Formas Pago
@@ -74,14 +75,14 @@ Route::put('/dias/{dia}', [DiasController::class, 'update'])->name('dias.update'
 Route::delete('/dias/{dia}', [DiasController::class, 'destroy'])->name('dias.destroy');
 Route::get('/dias/{dia}/edit', [DiasController::class, 'edit'])->name('dias.edit');
 
-//Rutas de Cargos
+/*Rutas de Cargos
 Route::get('/cargos', [CargosController::class, 'index'])->name('cargos.index');
 Route::post('/cargos', [CargosController::class, 'store'])->name('cargos.store');
 Route::get('/cargos/create', [CargosController::class, 'create'])->name('cargos.create');
 Route::put('/cargos/{cargo}', [CargosController::class, 'update'])->name('cargos.update');
 Route::delete('/cargos/{cargo}', [CargosController::class, 'destroy'])->name('cargos.destroy');
 Route::get('/cargos/{cargo}/edit', [CargosController::class, 'edit'])->name('cargos.edit');
-
+*/
 
 //Rutas de Tipo de Factura
 Route::get('/Tipo_factura', [TipoFacturaController::class, 'index'])->name('Tipo_factura.index');
@@ -101,10 +102,14 @@ Route::delete('/deportes/{deporte}', [DeportesController::class, 'destroy'])->na
 Route::get('/deportes/{deporte}/edit', [DeportesController::class, 'edit'])->name('deportes.edit');
 
 
-//Rutas de instalaciones
+/*Rutas de instalaciones
 Route::get('/instalaciones', [InstalacionesController::class, 'index'])->name('instalaciones.index');
 Route::post('/instalaciones', [InstalacionesController::class, 'store'])->name('instalaciones.store');
 Route::get('/instalaciones/create', [InstalacionesController::class, 'create'])->name('instalaciones.create');
 Route::put('/instalaciones/{instalacion}', [InstalacionesController::class, 'update'])->name('instalaciones.update');
 Route::delete('/instalaciones/{instalacion}', [InstalacionesController::class, 'destroy'])->name('instalaciones.destroy');
-Route::get('/instalaciones/{instalacion}/edit', [InstalacionesController::class, 'edit'])->name('instalaciones.edit');
+Route::get('/instalaciones/{instalacion}/edit', [InstalacionesController::class, 'edit'])->name('instalaciones.edit');*/
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

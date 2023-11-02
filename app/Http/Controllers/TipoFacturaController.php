@@ -10,11 +10,11 @@ class TipoFacturaController extends Controller
 
         $Tipo_factura = Tipo_factura::all();
 
-        return view('Tipo_factura.index', compact('Tipo_factura'));
+        return view('panel.Tipo_factura.index', compact('Tipo_factura'));
     }
 
     public function create () {
-        return view('Tipo_factura.create');
+        return view('panel.Tipo_factura.create');
     }
 
     public function store (Request $request) {
@@ -30,7 +30,7 @@ class TipoFacturaController extends Controller
     public function edit($id_tipo_fac)
         {
             $Tipo_factura= Tipo_factura::findOrFail($id_tipo_fac);
-            return view('Tipo_factura.edit', ['Tipo_factura'=>$Tipo_factura]);
+            return view('panel.Tipo_factura.edit', ['Tipo_factura'=>$Tipo_factura]);
         }
     public function update(Request $request, $id_tipo_fac){
         $Tipo_factura= Tipo_factura::findOrFail($id_tipo_fac);

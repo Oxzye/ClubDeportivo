@@ -12,6 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('formas_pago', function (Blueprint $table) {
+            $table->dropTimestamps(); // Esto eliminará las columnas 'created_at' y 'updated_at'
+        });
+
+        Schema::table('formas_pago', function (Blueprint $table) {
 
             $table->timestamps();
         });
