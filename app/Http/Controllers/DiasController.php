@@ -11,11 +11,11 @@ class DiasController extends Controller
 
         $dias = Dias::all();
 
-        return view('dias.index', compact('dias'));
+        return view('panel.dias.index', compact('dias'));
     }
 
     public function create () {
-        return view('dias.create');
+        return view('panel.dias.create');
     }
 
     public function store (Request $request) {
@@ -30,7 +30,7 @@ class DiasController extends Controller
 
     public function edit($id_dia) {
         $dia = Dias::findOrFail($id_dia);
-        return view('dias.edit', ['dia' => $dia]);
+        return view('panel.dias.edit', ['dia' => $dia]);
     }
 
     public function update(Request $request, $id_dia){

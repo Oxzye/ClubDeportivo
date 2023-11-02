@@ -11,11 +11,11 @@ class Formas_pagoController extends Controller
 
         $Formas_pago = Formas_pago::all();
 
-        return view('Formas_pago.index', compact('Formas_pago'));
+        return view('panel.Formas_pago.index', compact('Formas_pago'));
     }
 
     public function create () {
-        return view('Formas_pago.create');
+        return view('panel.Formas_pago.create');
     }
 
     public function store (Request $request) {
@@ -29,28 +29,28 @@ class Formas_pagoController extends Controller
     }
 
     public function edit($id_fdp) {
-        $fdp = Formas_pago::findOrFail($id_fdp);
-        return view('Formas_pago.edit', ['Formas_pago' => $fdp]);
+        $Formas_pago = Formas_pago::findOrFail($id_fdp);
+        return view('panel.Formas_pago.edit', ['Formas_pago' => $Formas_pago]);
     }
 
     public function update(Request $request, $id_fdp){
         //busqueda
-        $fdp = Formas_pago::findOrFail($id_fdp);
+        $Formas_pago = Formas_pago::findOrFail($id_fdp);
         //valid
 
         //actualizacion
-        $fdp->update($request->all());
+        $Formas_pago->update($request->all());
 
         //redireccion
         return redirect()->route('Formas_pago.index')->with('status', 'Forma de pago Actualizado correctamente');
     }
 
-    public function destroy($id) {
+    public function destroy($id_fdp) {
         //busqueda
-        $fdp = Formas_pago::findOrFail($id);
+        $Formas_pago = Formas_pago::findOrFail($id_fdp);
 
         //elminacion
-        $fdp->delete();
+        $Formas_pago->delete();
 
         //redireccion
         return redirect()->route('Formas_pago.index')->with('status', 'Forma de pago eliminado correctamente');
