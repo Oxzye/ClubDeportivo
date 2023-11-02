@@ -68,7 +68,7 @@ class SociosController extends Controller
         Socio::create($request->all());*/
 
         //Redir
-        return redirect()->route('socios.index')->with('status', 'País creado correctamente');
+        return redirect()->route('socios.index')->with('status', 'Socio creado correctamente');
     }
 
     /**
