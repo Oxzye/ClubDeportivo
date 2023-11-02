@@ -9,34 +9,47 @@
                 {{ session('status') }}
             </div>
         @endif
-
-        <a href="{{ route('paises.create') }}" class="btn btn-primary mb-4">Agregar</a>
+        <div class="row-2 d-flex flex-row-reverse bd-highlight mb-3">
+            <a href="{{ route('paises.create') }}" class="btn btn-primary mb-4">Agregar</a>
+        </div>
 
         @if ($paises->count())
             
                 <div class="table-responsive">
-                    <table class="table table-primary">
+                    <table class="table table-primary table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th class="text-center">Acciones</th>
+                                <th class="text-center">ID</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="d-flex flex-row-reverse bd-highlight pe-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($paises as $pais)
                                 <tr class="">
-                                    <td>{{ $pais->id_pais }}</td>
-                                    <td>{{ $pais->nombre_pais }}</td>
-                                    <td class="text-center">
+                                    <td class="text-center">{{ $pais->id_pais }}</td>
+                                    <td class="text-center">{{ $pais->nombre_pais }}</td>
+                                    <td class="d-flex flex-row-reverse bd-highlight">
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route( 'paises.show', $pais->id_pais) }}"><button type="button" class="btn btn-info m-1">Ver</button></a>
+                                            <a href="{{ route( 'paises.show', $pais->id_pais) }}"><button type="button" class="btn btn-outline-dark rounded-circle me-3" style="width:2.5em; height:2.5em;">
+                                                <span class="material-symbols-outlined d-flex justify-content-center">
+                                                info
+                                                </span>
+                                            </button></a>
 
-                                            <a href="{{ route('paises.edit', $pais->id_pais)  }}" class="btn btn-warning m-1">Editar</a>
+                                            <a href="{{ route('paises.edit', $pais->id_pais)  }}" class="btn btn-outline-dark rounded-circle me-3" style="width:2.5em; height:2.5em;">
+                                                <span class="material-symbols-outlined d-flex justify-content-center">
+                                                    edit_square
+                                                </span>
+                                            </a>
                                         
                                             <form action="{{ route('paises.destroy', $pais->id_pais ) }}" method="post">
                                                 @csrf @method('DELETE')
-                                                <button type="submit" class="btn btn-danger m-1">Eliminar</button>
+                                                <button type="submit" class="btn btn-outline-dark rounded-circle me-3" style="width:2.5em; height:2.5em;">
+                                                    <span class="material-symbols-outlined d-flex justify-content-center">
+                                                        cancel
+                                                    </span>
+                                                </button>
                                             </form>
                                         </div>
                                     </td>

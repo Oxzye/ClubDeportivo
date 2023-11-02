@@ -8,8 +8,11 @@ use App\Models\Formas_pago;
 class Formas_pagoController extends Controller
 {
     public function index () {
-
-        $Formas_pago = Formas_pago::all();
+        
+        // $Formas_pago = Formas_pago::orderBy('id_fdp', 'asc')->paginate(4);
+        $Formas_pago = Formas_pago::paginate(5);
+        
+        // $Formas_pago = Formas_pago::all();
 
         return view('Formas_pago.index', compact('Formas_pago'));
     }
@@ -53,7 +56,7 @@ class Formas_pagoController extends Controller
         //Validacion de los datos
         $validated = $request->validate(
             [
-                'forma_pago_fdp' => 'required|unique:Formas_pago|max:50',
+                'forma_pago_fdp' => 'required|max:50|unique:Formas_pago,forma_pago_fdp,' . $id_fdp . ',id_fdp',
                 'descripcion_fdp' => 'nullable|string|max:255',
             ],
             [

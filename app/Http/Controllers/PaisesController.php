@@ -50,7 +50,7 @@ class PaisesController extends Controller
          //Validacion de los datos
          $validated = $request->validate(
             [
-                'nombre_pais' => 'required|unique:paises|max:50',
+                'nombre_pais' => 'required|max:50|unique:paises,nombre_pais,' . $id_pais . ',id_pais'
             ],
             [
                 'nombre_pais.required' => 'El nombre es obligatorio.',
