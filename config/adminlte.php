@@ -386,6 +386,13 @@ return [
             'icon' => 'fas fa-shopping-cart', // icono de fontawesome
             'can' => 'lista_compras' // permiso del cliente
         ],
+        [
+            'text' => 'Lista de Provincias',
+            'route' => 'Provincias.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
 
 
     ],

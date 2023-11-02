@@ -12,6 +12,7 @@ use App\Http\Controllers\tipodetfacturaController;
 use App\Http\Controllers\Formas_pagoController;
 use App\Http\Controllers\DeportesController;
 use App\Http\Controllers\DiasController;
+use App\Http\Controllers\ProvinciasController;
 
 Route::get('/', function(){
         return view('panel.index');
@@ -38,3 +39,5 @@ Route::resource('/Formas_pago', Formas_pagoController::class)->names('Formas_pag
 Route::resource('/dias', DiasController::class)->names('dias');
 
 Route::resource('/deportes', DeportesController::class)->names('deportes');
+
+Route::resource('/Provincias', ProvinciasController::class)->names('Provincias');
