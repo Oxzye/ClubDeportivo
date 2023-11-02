@@ -11,4 +11,8 @@ class generos extends Model
     protected $table = 'generos';
     protected $primaryKey = 'cod_genero';
     protected $fillable = ['tipo_genero', 'abreviatura_genero'];
+
+    public function user(){
+        return $this->hasMany(User::class, 'cod_genero');
+    }
 }

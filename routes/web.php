@@ -9,6 +9,7 @@ use App\Http\Controllers\TipoFacturaController;
 use App\Http\Controllers\InstalacionesController;
 use App\Http\Controllers\tipodetfacturaController;
 use App\Http\Controllers\GenerosController;
+use App\Http\Controllers\ProvinciasController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -31,7 +32,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+
 /*Rutas de Tipo de detalle de facturas
+=======
+/*
+//Rutas de Tipo de detalle de facturas
+>>>>>>> 1425bdb36a33f2c73a415846ce222cff0c4706fc
 Route::get('/Tipodetfactura', [tipodetfacturaController::class, 'index'])->name('tipos_detalle_factura.index');
 Route::post('/Tipodetfactura', [tipodetfacturaController::class, 'store'])->name('tipos_detalle_factura.store');
 Route::get('/Tipodetfactura/create', [tipodetfacturaController::class, 'create'])->name('tipos_detalle_factura.create');
@@ -108,8 +114,17 @@ Route::post('/instalaciones', [InstalacionesController::class, 'store'])->name('
 Route::get('/instalaciones/create', [InstalacionesController::class, 'create'])->name('instalaciones.create');
 Route::put('/instalaciones/{instalacion}', [InstalacionesController::class, 'update'])->name('instalaciones.update');
 Route::delete('/instalaciones/{instalacion}', [InstalacionesController::class, 'destroy'])->name('instalaciones.destroy');
-Route::get('/instalaciones/{instalacion}/edit', [InstalacionesController::class, 'edit'])->name('instalaciones.edit');*/
+Route::get('/instalaciones/{instalacion}/edit', [InstalacionesController::class, 'edit'])->name('instalaciones.edit');
 
+
+//Rutas de Provincias
+Route::get('/Provincias', [ProvinciasController::class, 'index'])->name('Provincias.index');
+Route::post('/Provincias', [ProvinciasController::class, 'store'])->name('Provincias.store');
+Route::get('/Provincias/create', [ProvinciasController::class, 'create'])->name('Provincias.create');
+Route::put('/Provincias/{prov}', [ProvinciasController::class, 'update'])->name('Provincias.update');
+Route::delete('/Provincias/{prov}', [ProvinciasController::class, 'destroy'])->name('Provincias.destroy');
+Route::get('/Provincias/{prov}/edit', [ProvinciasController::class, 'edit'])->name('Provincias.edit');
+*/
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

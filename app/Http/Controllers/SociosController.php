@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Socio;
 use App\Models\User;
+use App\Models\generos;
 
 class SociosController extends Controller
 {
@@ -23,7 +24,8 @@ class SociosController extends Controller
      */
     public function create()
     {
-        return  view('panel.socios.create');
+        $generos = generos::all();
+        return  view('panel.socios.create',compact('generos'));
     }
 
     /**
@@ -42,6 +44,7 @@ class SociosController extends Controller
             'fecha_nac' =>$request->input('fecha_nac'),
             'domicilio' =>$request->input('domicilio'),
             'telefono' =>$request->input('telefono'),
+            'cod_genero' => $request->input('cod_genero'),
             'password' =>'12345',
         ]);
 
@@ -51,8 +54,9 @@ class SociosController extends Controller
         // Crea un registro en la tabla 'socios' con el ID del usuario.
         Socio::create([
             'id_user' => $userId,
-            'cuil_soc'=>'2434396736',
-            'fecha_asociacion'=>'2022-09-01',
+            'cuil_soc'=>$request->input('cuil'),
+            'fecha_asociacion'=> $request->input('fecha_asociacion'),
+            'observaciones_soc'=> $request->input('observaciones_soc'),
             // Otros campos de 'socios'.
         ]);
 
@@ -64,7 +68,7 @@ class SociosController extends Controller
         Socio::create($request->all());*/
 
         //Redir
-        return redirect()->route('socios.index')->with('status', 'País creado correctamente');
+        return redirect()->route('socios.index')->with('status', 'Socio creado correctamente');
     }
 
     /**
