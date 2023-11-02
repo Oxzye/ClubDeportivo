@@ -8,7 +8,7 @@ class CargosController extends Controller
 {
     public function index () {
 
-        $cargos = Cargos::all();
+        $cargos = Cargos::paginate(3);
         return view('cargos.index', compact('cargos'));
     }
 
@@ -22,7 +22,19 @@ class CargosController extends Controller
         //Guardado de los datos
         Cargos::create($request->all());
 
-        //Redir
+        //Validacion de los Datos
+        $validated=$request->validate(
+            [
+                "nombre_cargo"=>"required|string|max:20",
+                "descripcioncargo"=>"nullable|string|max:255",
+                "salario_base"=>"required|numeric|min:0.01",
+                "horas_de_trabajoxmes"=>"required|numeric|min:1",
+                "horario_de_trabajo"=>"required|string|max:255",
+            ]);
+        //Guardado de los datos
+        Cargos::create($request->all());
+
+        //Redireccionar
         return redirect()->route('cargos.index')->with('status', 'Cargo creado correctamente');
     }
 
@@ -34,7 +46,15 @@ class CargosController extends Controller
     public function update(Request $request, $id_cargo){
         //busqueda
         $cargos = Cargos::findOrFail($id_cargo);
-        //valid
+        //validacion y Guardado de los datos
+        $validated=$request->validate(
+            [
+                "nombre_cargo"=>"required|string|max:20",
+                "descripcioncargo"=>"nullable|string|max:255",
+                "salario_base"=>"required|numeric|min:0.01",
+                "horas_de_trabajoxmes"=>"required|numeric|min:1",
+                "horario_de_trabajo"=>"required|string|max:255",
+            ]);
 
         //actualizacion
         $cargos->update($request->all());
@@ -53,5 +73,11 @@ class CargosController extends Controller
         //redireccion
         return redirect()->route('cargos.index')->with('status', 'eliminado correctamente');
     }
+
+    public function show($id)
+        {
+            $cargos=Cargos::findOrFail($id);
+            return view('cargos.show',["cargo"=>$cargos]);
+        }
 }
 

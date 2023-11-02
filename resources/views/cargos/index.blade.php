@@ -15,7 +15,7 @@
         @if ($cargos->count())
             
                 <div class="table-responsive">
-                    <table class="table table-primary">
+                    <table class="table table-primary table-striped table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -56,13 +56,15 @@
                                     </td>
                                 </tr>  
                             @endforeach
-                            
+                           
                         </tbody>
+                    
                     </table>
                 </div>
-    
+                {{ $cargos->links() }} 
         @else
             <h4>¡No hay Cargos cargados!</h4>
         @endif
     </div>
+   
 @endsection
