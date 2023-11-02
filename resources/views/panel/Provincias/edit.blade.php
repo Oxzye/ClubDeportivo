@@ -19,13 +19,24 @@
             </ul>
         @endif
         
-        <form action="{{ route('Provincias.update', $pais->id_pais) }}" method="post">
+        <form action="{{ route('Provincias.update', $provincia->id_prov) }}" method="post">
         @csrf @method('PUT')
         
             <div class="mb-3">
               <label for="" class="form-label" name="nombre_prov">Nombre Provincia:</label>
-              <input type="text" class="form-control" name="nombre_prov" id="" aria-describedby="helpId" value="{{ $prov->nombre_prov }}">
+              <input type="text" class="form-control" name="nombre_prov" id="" aria-describedby="helpId" value="{{ $provincia->nombre_prov }}">
             </div>
+            <div class="mb-3 row">
+                <label for="Pais" class="col-sm-4 col-form-label"> * Pais </label>
+                <div class="col-sm-8">
+                <select id="id_pais" name="id_pais" class="form-control">
+                    @foreach ($paises as $pais)
+                        <option value="{{ $pais->id_pais }}"> 
+                            {{ $pais->nombre_pais }}
+                        </option>
+                    @endforeach
+                </select>
+                </div>
              <button type="submit" class="btn btn-primary">Guardar</button>
              <a href="{{ route('Provincias.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
