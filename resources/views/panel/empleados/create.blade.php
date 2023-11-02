@@ -5,11 +5,11 @@
 @section('plugins.Datatables', true)
 
 {{-- Titulo en las tabulaciones del Navegador --}}
-@section('title', 'Socios')
+@section('title', 'Empleados')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
-    <h1>Crear nuevo Socio</h1>
+    <h1>Crear nuevo Empleado</h1>
 @stop
 
 {{-- Contenido de la Pagina --}}
@@ -26,7 +26,7 @@
         @endif
 
     <div class="col-12">
-        <form action="{{ route('socios.store') }}" method="post">
+        <form action="{{ route('empleados.store') }}" method="post">
         @csrf
             <div class="row">
                 <div class="col-6 border border-dark">
@@ -35,14 +35,14 @@
                             <div class="form-group">
                                 <label for="name">Nombre</label>
                                 <input type="text" class="form-control" name="name" id="name" aria-describedby="name">
-                                <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <small id="" class="form-text text-muted">Obligatorio.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="apellido">Apellido</label>
                                 <input type="text" class="form-control" id="apellido" name="apellido" aria-describedby="apellido">
-                                <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <small id="" class="form-text text-muted">Obligatorio.</small>
                             </div>
                         </div>
                         <div class="col-5">
@@ -54,8 +54,8 @@
                         </div>
                         <div class="col-5">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">CUIL</label>
-                                <input type="number" class="form-control" name="cuil" id="cuil" aria-describedby="dni">
+                                <label for="exampleInputEmail1">CUIT</label>
+                                <input type="number" class="form-control" name="cuit" id="cuit" aria-describedby="dni">
                                 <small id="" class="form-text text-muted">Posible alert.</small>
                             </div>
                         </div>
@@ -148,23 +148,43 @@
                         </div>
                         <div class="col-10">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Fecha de Asociacion</label>
-                                <input type="date" class="form-control" id="fecha_asociacion" name="fecha_asociacion" aria-describedby="fecha_nac">
+                                <label for="exampleFormControlSelect1">Cargo de empleado</label>
+                                <select id="id_cargo" name="id_cargo" class="form-control">
+                                    <option value="" selected>Seleccione uno...</option>
+                                    @foreach ($cargos as $cargo)
+                                        <option value="{{ $cargo->id_cargo }}"> 
+                                            {{ $cargo->nombre_cargo }}
+                                        </option>
+                                    @endforeach
+                                </select> 
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="exampleInput">Fecha de alta de empleado</label>
+                                <input type="date" class="form-control" id="fecha_alta_emp" name="fecha_alta_emp" aria-describedby="fecha_nac">
                                 <small id="" class="form-text text-muted">Obligatorio.</small>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="exampleInput">Fecha de baja de empleado</label>
+                                <input type="date" class="form-control" id="fecha_baja_emp" name="fecha_baja_emp" aria-describedby="fecha_nac">
+                                <small id="" class="form-text text-muted">Puede estar vacio.</small>
                             </div>
                         </div>
                         <div class="col-10">
                             <div class="form-group">
-                                <label for="observaciones_soc">¿Hay algo a tener en cuenta sobre este socio?</label>
-                                <textarea class="form-control" name="observaciones_soc" id="observaciones_soc" aria-label="With textarea"></textarea>
+                                <label for="observaciones_soc">¿Hay algo a tener en cuenta sobre este empleado?</label>
+                                <textarea class="form-control" name="observaciones_soc" aria-label="With textarea"></textarea>
                             </div>
-                        </div> 
+                        </div>  
                     </div>
                 </div>
 
-                <input type="hidden" name="id_user" value="9">
+                <input type="hidden" name="id_user" value="">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar</a>
+                <a href="{{ route('empleados.index') }}" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>

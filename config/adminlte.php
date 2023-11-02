@@ -368,6 +368,13 @@ return [
             'can' => 'lista_usuarios' // permiso de admin
         ],
         [
+            'text' => 'Lista de Empleados',
+            'route' => 'empleados.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
             'text' => 'Lista de Productos',
             'url' => '#',
             'icon' => 'fas fa-store', // icono de fontawesome

@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Instalacion;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SociosController;
+use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\InstalacionesController;
 use App\Http\Controllers\CargosController;
 use App\Http\Controllers\PaisesController;
@@ -13,12 +13,13 @@ use App\Http\Controllers\Formas_pagoController;
 use App\Http\Controllers\DeportesController;
 use App\Http\Controllers\DiasController;
 
-
 Route::get('/', function(){
         return view('panel.index');
 });
 
 Route::resource('/socios', SociosController::class)->names('socios');
+
+Route::resource('/empleados', EmpleadosController::class)->names('empleados');
 
 Route::resource('/instalaciones', InstalacionesController::class)->names('instalaciones');
 
