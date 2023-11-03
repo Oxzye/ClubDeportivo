@@ -30,6 +30,10 @@ class RolSeeder extends Seeder
         $rol_invitado = Role::create(['name' => 'invitado']);
 
         // Permisos para cada Rol
-    } 
-}
+        Permission::create(['name' => 'lista_usuarios'])->assignRole($rol_admin);
+        Permission::create(['name' => 'lista_productos'])->assignRole($rol_canchero);
+        Permission::create(['name' => 'lista_compras'])->assignRole($rol_invitado);
+        //Permission::create(['name' => 'lista_pagos'])->syncRoles([$rol_vendedor, $rol_cliente]);
+    }
+}  
 
