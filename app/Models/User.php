@@ -66,4 +66,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Socio::class);
     }
+
+    public function genero()
+    {
+        return $this->belongsTo(generos::class, 'cod_genero');
+    }
 }

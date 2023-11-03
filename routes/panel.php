@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Instalacion;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SociosController;
+use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\InstalacionesController;
 use App\Http\Controllers\CargosController;
 use App\Http\Controllers\PaisesController;
@@ -12,13 +12,15 @@ use App\Http\Controllers\tipodetfacturaController;
 use App\Http\Controllers\Formas_pagoController;
 use App\Http\Controllers\DeportesController;
 use App\Http\Controllers\DiasController;
-
+use App\Http\Controllers\ProvinciasController;
 
 Route::get('/', function(){
         return view('panel.index');
 });
 
 Route::resource('/socios', SociosController::class)->names('socios');
+
+Route::resource('/empleados', EmpleadosController::class)->names('empleados');
 
 Route::resource('/instalaciones', InstalacionesController::class)->names('instalaciones');
 
@@ -37,3 +39,5 @@ Route::resource('/Formas_pago', Formas_pagoController::class)->names('Formas_pag
 Route::resource('/dias', DiasController::class)->names('dias');
 
 Route::resource('/deportes', DeportesController::class)->names('deportes');
+
+Route::resource('/Provincias', ProvinciasController::class)->names('Provincias');
