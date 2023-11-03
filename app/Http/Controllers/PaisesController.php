@@ -11,11 +11,11 @@ class PaisesController extends Controller
 
         $paises = Paises::all();
 
-        return view('paises.index', compact('paises'));
+        return view('panel.paises.index', compact('paises'));
     }
 
     public function create () {
-        return view('paises.create');
+        return view('panel.paises.create');
     }
 
     public function store (Request $request) {
@@ -41,7 +41,7 @@ class PaisesController extends Controller
 
     public function edit($id_pais) {
         $pais = Paises::findOrFail($id_pais);
-        return view('paises.edit', ['pais' => $pais]);
+        return view('panel.paises.edit', ['pais' => $pais]);
     }
 
     public function update(Request $request, $id_pais){
