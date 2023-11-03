@@ -13,6 +13,7 @@ use App\Http\Controllers\Formas_pagoController;
 use App\Http\Controllers\DeportesController;
 use App\Http\Controllers\DiasController;
 use App\Http\Controllers\ProvinciasController;
+use App\Http\Controllers\LocalidadesController;
 
 Route::get('/', function(){
         return view('panel.index');
@@ -41,3 +42,5 @@ Route::resource('/dias', DiasController::class)->names('dias');
 Route::resource('/deportes', DeportesController::class)->names('deportes');
 
 Route::resource('/Provincias', ProvinciasController::class)->names('Provincias');
+
+Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
