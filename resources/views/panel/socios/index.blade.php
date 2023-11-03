@@ -31,7 +31,7 @@
                 </div>
             </div>
         @endif
-
+@if ($socios->count())       
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -93,6 +93,9 @@
             </div>
         </div>
     </div>
+@else
+            <h4>¡No hay socios cargadas!</h4>
+        @endif
 </div>
 @stop
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 
 class UserSeeder extends Seeder
@@ -16,10 +17,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Desactiva temporalmente la revisión de claves foráneas
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
         // Buscar y eliminar registros existentes con correos electrónicos específicos
         User::truncate();
 
-         // Crear nuevos registros de usuarios
+        // Crear nuevos registros de usuarios
         User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
@@ -47,11 +51,24 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345'),
             'dni' => '44444444',
         ])->assignRole('cajero');
+            'dni' => '44444444',
+        ])->assignRole('cajero');
 
         User::create([
             'name' => 'canchero',
             'email' => 'canchero@gmail.com',
+            'name' => 'canchero',
+            'email' => 'canchero@gmail.com',
             'password' => Hash::make('12345'),
+            'dni' => '55555555',
+        ])->assignRole('canchero');
+
+        User::create([
+            'name' => 'invitado',
+            'email' => 'invitado@gmail.com',
+            'password' => Hash::make('12345'),
+            'dni' => '66666666',
+        ])->assignRole('invitado');
             'dni' => '55555555',
         ])->assignRole('canchero');
 
