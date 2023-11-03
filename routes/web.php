@@ -31,8 +31,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
+/*Rutas de Tipo de detalle de facturas
+=======
 /*
 //Rutas de Tipo de detalle de facturas
+>>>>>>> 1425bdb36a33f2c73a415846ce222cff0c4706fc
 Route::get('/Tipodetfactura', [tipodetfacturaController::class, 'index'])->name('tipos_detalle_factura.index');
 Route::post('/Tipodetfactura', [tipodetfacturaController::class, 'store'])->name('tipos_detalle_factura.store');
 Route::get('/Tipodetfactura/create', [tipodetfacturaController::class, 'create'])->name('tipos_detalle_factura.create');
