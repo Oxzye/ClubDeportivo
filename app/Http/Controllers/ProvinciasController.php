@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Provincias;
 use Illuminate\Http\Request;
 use App\Models\Paises;
+
 class ProvinciasController extends Controller
 {
     public function index () {
