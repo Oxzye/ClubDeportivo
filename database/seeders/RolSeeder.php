@@ -36,3 +36,4 @@ class RolSeeder extends Seeder
         //Permission::create(['name' => 'lista_pagos'])->syncRoles([$rol_vendedor, $rol_cliente]);
     }
 }  
+

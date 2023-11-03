@@ -302,7 +302,8 @@ return [
             'route' => 'socios.index',
             //'url' => 'panel/socios',
             'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
+            'can' => 'lista_usuarios', // permiso de admin
+            'active' => request()->is('panel/socios*'),
         ],
         [
             'text' => 'Lista de instalaciones',
