@@ -33,6 +33,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //Rutas de Tipo de detalle de facturas
+
 Route::get('/Tipodetfactura', [tipodetfacturaController::class, 'index'])->name('tipos_detalle_factura.index');
 Route::post('/Tipodetfactura', [tipodetfacturaController::class, 'store'])->name('tipos_detalle_factura.store');
 Route::get('/Tipodetfactura/create', [tipodetfacturaController::class, 'create'])->name('tipos_detalle_factura.create');
@@ -122,6 +123,6 @@ Route::put('/Provincias/{prov}', [ProvinciasController::class, 'update'])->name(
 Route::delete('/Provincias/{prov}', [ProvinciasController::class, 'destroy'])->name('Provincias.destroy');
 Route::get('/Provincias/{prov}/edit', [ProvinciasController::class, 'edit'])->name('Provincias.edit');
 
-//Auth::routes();
+Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

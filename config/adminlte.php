@@ -393,7 +393,13 @@ return [
             'icon' => 'fas fa-users', // icono de fontawesome
             'can' => 'lista_usuarios' // permiso de admin
         ],
-
+        [
+        'text' => 'Lista de Localidades',
+            'route' => 'Localidades.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
 
     ],
 
