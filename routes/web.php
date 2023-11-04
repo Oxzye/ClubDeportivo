@@ -31,7 +31,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-/*
+
 //Rutas de Tipo de detalle de facturas
 Route::get('/Tipodetfactura', [tipodetfacturaController::class, 'index'])->name('tipos_detalle_factura.index');
 Route::post('/Tipodetfactura', [tipodetfacturaController::class, 'store'])->name('tipos_detalle_factura.store');
@@ -50,7 +50,7 @@ Route::delete('/generos/{gen}', [GenerosController::class, 'destroy'])->name('Ge
 Route::get('/generos/{gen}/edit', [GenerosController::class, 'edit'])->name('Generos.edit');
 
 
-Rutas de Paises
+//Rutas de Paises
 Route::get('/paises', [PaisesController::class, 'index'])->name('paises.index');
 Route::post('/paises', [PaisesController::class, 'store'])->name('paises.store');
 Route::get('/paises/create', [PaisesController::class, 'create'])->name('paises.create');
@@ -76,10 +76,11 @@ Route::put('/dias/{dia}', [DiasController::class, 'update'])->name('dias.update'
 Route::delete('/dias/{dia}', [DiasController::class, 'destroy'])->name('dias.destroy');
 Route::get('/dias/{dia}/edit', [DiasController::class, 'edit'])->name('dias.edit');
 
-Rutas de Cargos
+//Rutas de Cargos
 Route::get('/cargos', [CargosController::class, 'index'])->name('cargos.index');
 Route::post('/cargos', [CargosController::class, 'store'])->name('cargos.store');
 Route::get('/cargos/create', [CargosController::class, 'create'])->name('cargos.create');
+Route::get('/cargos/{cargo}', [CargosController::class, 'show'])->name('cargos.show');
 Route::put('/cargos/{cargo}', [CargosController::class, 'update'])->name('cargos.update');
 Route::delete('/cargos/{cargo}', [CargosController::class, 'destroy'])->name('cargos.destroy');
 Route::get('/cargos/{cargo}/edit', [CargosController::class, 'edit'])->name('cargos.edit');
@@ -89,6 +90,7 @@ Route::get('/cargos/{cargo}/edit', [CargosController::class, 'edit'])->name('car
 Route::get('/Tipo_factura', [TipoFacturaController::class, 'index'])->name('Tipo_factura.index');
 Route::post('/Tipo_factura', [TipoFacturaController::class, 'store'])->name('Tipo_factura.store');
 Route::get('/Tipo_factura/create', [TipoFacturaController::class, 'create'])->name('Tipo_factura.create');
+//Route::get('/Tipo_factura/{deporte}', [TipoFacturaController::class, 'show'])->name('Tipo_factura.show');
 Route::put('/Tipo_factura/{fac}', [TipoFacturaController::class, 'update'])->name('Tipo_factura.update');
 Route::delete('/Tipo_factura/{fac}', [TipoFacturaController::class, 'destroy'])->name('Tipo_factura.destroy');
 Route::get('/Tipo_factura/{fac}/edit', [TipoFacturaController::class, 'edit'])->name('Tipo_factura.edit');
@@ -103,7 +105,7 @@ Route::delete('/deportes/{deporte}', [DeportesController::class, 'destroy'])->na
 Route::get('/deportes/{deporte}/edit', [DeportesController::class, 'edit'])->name('deportes.edit');
 
 
-Rutas de instalaciones
+//Rutas de instalaciones
 Route::get('/instalaciones', [InstalacionesController::class, 'index'])->name('instalaciones.index');
 Route::post('/instalaciones', [InstalacionesController::class, 'store'])->name('instalaciones.store');
 Route::get('/instalaciones/create', [InstalacionesController::class, 'create'])->name('instalaciones.create');
@@ -119,7 +121,7 @@ Route::get('/Provincias/create', [ProvinciasController::class, 'create'])->name(
 Route::put('/Provincias/{prov}', [ProvinciasController::class, 'update'])->name('Provincias.update');
 Route::delete('/Provincias/{prov}', [ProvinciasController::class, 'destroy'])->name('Provincias.destroy');
 Route::get('/Provincias/{prov}/edit', [ProvinciasController::class, 'edit'])->name('Provincias.edit');
-*/
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

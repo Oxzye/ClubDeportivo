@@ -9,7 +9,7 @@ class CargosController extends Controller
     public function index () {
 
         $cargos = Cargos::paginate(3);
-        return view('cargos.index', compact('cargos'));
+        return view('panel.cargos.index', compact('cargos'));
 
     }
 
@@ -38,7 +38,11 @@ class CargosController extends Controller
         //Redireccionar
         return redirect()->route('cargos.index')->with('status', 'Cargo creado correctamente');
     }
-
+    public function show($id)
+    {
+        $cargos=Cargos::findOrFail($id);
+        return view('cargos.show',['cargo'=> $cargos]);
+    }
     public function edit($id_cargo) {
         $cargos = Cargos::findOrFail($id_cargo);
         return view('panel.cargos.edit', ['cargo' => $cargos]);
@@ -75,10 +79,6 @@ class CargosController extends Controller
         return redirect()->route('cargos.index')->with('status', 'eliminado correctamente');
     }
 
-    public function show($id)
-        {
-            $cargos=Cargos::findOrFail($id);
-            return view('cargos.show',["cargo"=>$cargos]);
-        }
+   
 }
 

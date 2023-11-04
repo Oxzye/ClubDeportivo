@@ -45,14 +45,14 @@
                                     <td>{{ $cargo->horas_de_trabajoxmes}}</td>
                                     <td>{{ $cargo->horario_de_trabajo}}</td>
 
+                                    <td class="mb-3">
+                                    <a href="{{route('cargos.show',$cargo->id_cargo)}}" class="btn btn-sm btn-info text-white text-uppercase me-1">Ver</a>
+                                    
+                                    <a>
+                                        <a href="{{ route('cargos.edit', $cargo->id_cargo)  }}" class="btn btn-warning">Editar</a>
+                                    </a>
 
                                     
-                                    {{-- <td>Ver</td> --}}
-                                    <td>
-                                        <a href="{{ route('cargos.edit', $cargo->id_cargo)  }}" class="btn btn-warning">Editar</a>
-                                    </td>
-
-                                    <td>
                                         <form action="{{ route('cargos.destroy', $cargo->id_cargo ) }}" method="post">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
