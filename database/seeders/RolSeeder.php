@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\DB;
+
 
 class RolSeeder extends Seeder
 {
@@ -15,11 +16,11 @@ class RolSeeder extends Seeder
     public function run()
     {
         // Elimina registros existentes de la tabla "model_has_permissions" para evitar restricciones de clave externa
-        DB::table('model_has_permissions')->delete();
+       // DB::table('model_has_permissions')->delete();
 
         // Elimina los registros existentes en las tablas "permissions" y "roles"
-        Permission::query()->delete();
-        Role::query()->delete();
+      //  Permission::query()->delete();
+       // Role::query()->delete();
 
         // Roles
         $rol_admin = Role::create(['name' => 'admin']);

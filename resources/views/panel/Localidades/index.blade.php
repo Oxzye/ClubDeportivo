@@ -1,10 +1,8 @@
-{{-- Extiende de la plantilla de Admin LTE, nos permite tener el panel en la vista --}}
 @extends('adminlte::page')
 
-{{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
 
-@section('title', 'Tipo de Factura Index')
+@section('title', 'Localidades Index')
     
 @section('content')
     <div class="container-fluid">
@@ -14,9 +12,9 @@
             </div>
         @endif
 
-        <a href="{{ route('Tipo_factura.create') }}" class="btn btn-primary">Agregar</a>
+        <a href="{{ route('Localidades.create') }}" class="btn btn-primary">Agregar</a>
 
-        @if ($Tipo_factura->count())
+        @if ($localidad->count())
             
                 <div class="table-responsive">
                     <table class="table table-primary">
@@ -24,23 +22,22 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Creación</th>
-                                <th scope="col">Actualizaciones</th>
                                 <th scope="col" colspan="3">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($Tipo_factura as $fac)
+                            @foreach ($localidad as $loc)
                                 <tr class="">
-                                    <td scope="row">{{ $fac->id_tipo_fac }}</td>
-                                    <td>{{ $fac->tipo_fac}}</td>
-                                    <td>{{ $fac->created_at}}</td>
-                                    <td>{{ $fac->updated_at}}</td>
-                                     <td>
-                                        <a href="{{ route('Tipo_factura.edit', $fac->id_tipo_fac)  }}" class="btn btn-warning">Editar</a>
+                                    <td>{{ $loc->id_loc }}</td>
+                                    <td>{{ $loc->nombre_loc }}</td>
+                                    <td>{{ $loc->id_prov }}</td>
+                                    <td>{{ $loc->cod_postal }}</td>
+                                    <td>Ver</td>
+                                    <td>
+                                        <a href="{{ route('Localidades.edit', $loc->id_loc)  }}" class="btn btn-warning">Editar</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('Tipo_factura.destroy', $fac->id_tipo_fac ) }}" method="post">
+                                        <form action="{{ route('Localidades.destroy', $loc->id_loc ) }}" method="post">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                         </form>
@@ -53,7 +50,7 @@
                 </div>
     
         @else
-            <h4>¡No hay Tipo de Facturas cargadas!</h4>
+            <h4>¡No hay Localidades cargadas!</h4>
         @endif
     </div>
 @endsection

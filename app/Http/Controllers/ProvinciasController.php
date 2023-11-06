@@ -17,7 +17,7 @@ class ProvinciasController extends Controller
 
     public function create () {
         $paises = Paises::all();
-        $provincia = Paises::all();
+        $provincia = Provincias::all();
         return view('panel.Provincias.create', compact('provincia', 'paises'));
  
     }
@@ -36,17 +36,23 @@ class ProvinciasController extends Controller
 
     public function edit($id_prov) {
         $provincia = Provincias::findOrFail($id_prov);
-        return view('panel.Provincias.edit', ['provincia' => $provincia]);
+
+        if ($provincia) {
+            $paises = Paises::all();
+            return view('panel.Provincias.edit', compact('provincia', 'paises'));
+        } else {
+            return redirect()->route('Provincias.index')->with('error', 'Provincia no encontrada');
+        }
     }
 
-    public function update(Request $request, $id_prov){
-        //busqueda
-        $provincia = Provincias::findOrFail($id_prov);
-        //valid
-
-        //actualizacion
-        $provincia->update($request->all());
-
+    public function update(Request $request, $id){
+        //$paises = Paises::all();
+        $provincia = Provincias::findOrFail($id);
+        $provincia->nombre_prov = $request->input('nombre_prov');
+        $provincia->id_pais = $request->input('id_pais');
+        $provincia->save();
+        
+        
         //redireccion
         return redirect()->route('Provincias.index')->with('status', 'Provincia Actualizada correctamente');
     }
