@@ -24,7 +24,7 @@
               <label for="" class="form-label" name="nombre_loc">Nombre Localidad:</label>
               <input type="text" class="form-control" name="nombre_loc" id="" aria-describedby="helpId" value="{{ $localidad->nombre_loc }}">
             </div>
-            <div class="mb-3 row">
+            <div class="mb-3">
                 <label for="Localidad" class="col-sm-4 col-form-label"> * Localidad </label>
                 <div class="col-sm-8">
                 <select id="id_loc" name="id_loc" class="form-control">

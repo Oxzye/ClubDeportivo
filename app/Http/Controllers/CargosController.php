@@ -33,15 +33,15 @@ class CargosController extends Controller
                 "horario_de_trabajo"=>"required|string|max:255",
             ]);
         //Guardado de los datos
-        Cargos::create($request->all());
+        //Cargos::create($request->all());
 
         //Redireccionar
         return redirect()->route('cargos.index')->with('status', 'Cargo creado correctamente');
     }
-    public function show($id)
+    public function show($id_cargo)
     {
-        $cargos=Cargos::findOrFail($id);
-        return view('cargos.show',['cargo'=> $cargos]);
+        $cargos = Cargos::findOrFail($id_cargo);
+        return view('panel.cargos.show',['cargos'=>$cargos]);
     }
     public function edit($id_cargo) {
         $cargos = Cargos::findOrFail($id_cargo);

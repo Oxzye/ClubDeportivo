@@ -17,7 +17,7 @@ class ProvinciasController extends Controller
 
     public function create () {
         $paises = Paises::all();
-        //$provincia = Provincias::all();
+        $provincia = Provincias::all();
         return view('panel.Provincias.create', compact('provincia', 'paises'));
  
     }

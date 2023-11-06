@@ -36,13 +36,14 @@ class LocalidadesController extends Controller
     }
 
     public function edit($id_loc) {
+        
         $localidad = Localidades::findOrFail($id_loc);
-
         if ($localidad) {
-            $localidad = Provincias::all();
-            return view('panel.Localidades.edit', compact('Localidad', 'provincia'));
+            $provincia = Provincias::all();
+            
+            return view('panel.Localidades.edit', compact('localidad', 'provincia'));
         } else {
-            return redirect()->route('Localidades.index')->with('error', 'Localidad no encontrada');
+            return redirect()->route('panel.Localidades.index')->with('error', 'Localidad no encontrada');
         }
     }
 
