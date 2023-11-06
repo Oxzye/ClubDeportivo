@@ -20,5 +20,5 @@
         </ul>
         
         <br>
-        <a href="{{ route('/Formas_pago.index') }}" class="btn btn-primary">Volver</a>
+        <a href="{{ route('Formas_pago.index') }}" class="btn btn-primary">Volver</a>
 @endsection

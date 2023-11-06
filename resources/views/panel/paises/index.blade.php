@@ -3,7 +3,7 @@
 
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @section('title', 'Paises Index')
     
 @section('content')
@@ -35,13 +35,13 @@
                                     <td class="text-center">{{ $pais->nombre_pais }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route( 'paises.show', $pais->id_pais) }}"><button type="button" class="btn btn-outline-dark rounded-circle me-3" style="width:2.5em; height:2.5em;">
+                                            <a href="{{ route( 'paises.show', $pais->id_pais) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                 <span class="material-symbols-outlined d-flex justify-content-center">
                                                 info
                                                 </span>
                                             </button></a>
 
-                                            <a href="{{ route('paises.edit', $pais->id_pais)  }}" class="btn btn-outline-dark rounded-circle me-3" style="width:2.5em; height:2.5em;">
+                                            <a href="{{ route('paises.edit', $pais->id_pais)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                 <span class="material-symbols-outlined d-flex justify-content-center">
                                                     edit_square
                                                 </span>
@@ -49,7 +49,7 @@
                                         
                                             <form action="{{ route('paises.destroy', $pais->id_pais ) }}" method="post">
                                                 @csrf @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-dark rounded-circle me-3" style="width:2.5em; height:2.5em;">
+                                                <button type="submit" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                     <span class="material-symbols-outlined d-flex justify-content-center">
                                                         cancel
                                                     </span>

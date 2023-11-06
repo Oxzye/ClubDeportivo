@@ -1,9 +1,9 @@
 {{-- Extiende de la plantilla de Admin LTE, nos permite tener el panel en la vista --}}
 @extends('adminlte::page')
-
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 {{-- @include('components.pagination') --}}
 
 @section('title', 'Formas de pago Index')
@@ -38,13 +38,13 @@
                                     <td class="text-center">{{ $fdp->descripcion_fdp }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route( 'Formas_pago.show',  $fdp->id_fdp) }}"><button type="button" class="btn btn-outline-dark rounded-circle me-3" style="width:2.5em; height:2.5em;">
+                                            <a href="{{ route( 'Formas_pago.show',  $fdp->id_fdp) }}"><button type="button" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                 <span class="material-symbols-outlined d-flex justify-content-center">
                                                 info
                                                 </span>
                                             </button></a>
 
-                                            <a href="{{ route('Formas_pago.edit', $fdp->id_fdp)  }}" class="btn btn-outline-dark rounded-circle me-3" style="width:2.5em; height:2.5em;">
+                                            <a href="{{ route('Formas_pago.edit', $fdp->id_fdp)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                 <span class="material-symbols-outlined d-flex justify-content-center">
                                                 edit_square
                                                 </span>
@@ -52,7 +52,7 @@
 
                                             <form action="{{ route('Formas_pago.destroy', $fdp->id_fdp ) }}" method="post">
                                                 @csrf @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-dark rounded-circle me-3" style="width:2.5em; height:2.5em;">
+                                                <button type="submit" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                     <span class="material-symbols-outlined d-flex justify-content-center">
                                                     cancel
                                                     </span>

@@ -67,9 +67,9 @@ class PaisesController extends Controller
         return redirect()->route('paises.index')->with('status', 'País Actualizado correctamente');
     }
 
-    public function destroy($id) {
+    public function destroy($id_pais) {
         //busqueda
-        $pais = Paises::findOrFail($id);
+        $pais = Paises::findOrFail($id_pais);
 
         //elminacion
         $pais->delete();
@@ -77,9 +77,9 @@ class PaisesController extends Controller
         //redireccion
         return redirect()->route('paises.index')->with('status', 'País eliminado correctamente');
     }
-    public function show($id){
-        $pais = Paises::findOrFail($id);
-        return view( 'paises.show', [ 'pais' => $pais ]);
+    public function show($id_pais){
+        $pais = Paises::findOrFail($id_pais);
+        return view( 'panel.paises.show', [ 'pais' => $pais ]);
     }
 }
 

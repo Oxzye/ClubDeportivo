@@ -86,9 +86,9 @@ class Formas_pagoController extends Controller
         //redireccion
         return redirect()->route('Formas_pago.index')->with('status', 'Forma de pago eliminado correctamente');
     }
-    public function show($id){
-        $Formas_pago = Formas_pago::findOrFail($id);
-        return view( 'Formas_pago.show', [ 'Formas_pago' => $Formas_pago ]);
+    public function show($id_fdp){
+        $Formas_pago = Formas_pago::findOrFail($id_fdp);
+        return view( 'panel.Formas_pago.show', [ 'Formas_pago' => $Formas_pago ]);
     }
 }
 
