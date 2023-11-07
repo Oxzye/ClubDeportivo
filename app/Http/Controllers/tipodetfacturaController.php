@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\tipodetfactura;
-class tipodetfacturaController extends Controller
+class TipodetfacturaController extends Controller
 {
      public function index () {
 
-        $tdf = tipodetfactura::all();
+        $tdf = Tipodetfactura::all();
 
         return view('panel.tipos_detalle_factura.index', compact('tdf'));
     }
@@ -21,20 +21,20 @@ class tipodetfacturaController extends Controller
         //valid
 
         //Guardado de los datos
-        tipodetfactura::create($request->all());
+        Tipodetfactura::create($request->all());
 
         //Redir
         return redirect()->route('tipos_detalle_factura.index')->with('status', 'Tipo de detalle de factura creado correctamente');
     }
 
     public function edit($id_tipodetallefactura) {
-        $tdf = tipodetfactura::findOrFail($id_tipodetallefactura);
+        $tdf = Tipodetfactura::findOrFail($id_tipodetallefactura);
         return view('panel.tipos_detalle_factura.edit', ['tipos_detalle_factura' => $tdf]);
     }
 
     public function update(Request $request, $id_tipodetallefactura){
         //busqueda
-        $tdf = tipodetfactura::findOrFail($id_tipodetallefactura);
+        $tdf = Tipodetfactura::findOrFail($id_tipodetallefactura);
         //valid
 
         //actualizacion
@@ -46,7 +46,7 @@ class tipodetfacturaController extends Controller
 
     public function destroy($id) {
         //busqueda
-        $tdf = tipodetfactura::findOrFail($id);
+        $tdf = Tipodetfactura::findOrFail($id);
 
         //elminacion
         $tdf->delete();

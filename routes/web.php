@@ -7,9 +7,10 @@ use App\Http\Controllers\DiasController;
 use App\Http\Controllers\CargosController;
 use App\Http\Controllers\TipoFacturaController;
 use App\Http\Controllers\InstalacionesController;
-use App\Http\Controllers\tipodetfacturaController;
+use App\Http\Controllers\TipodetfacturaController;
 use App\Http\Controllers\GenerosController;
 use App\Http\Controllers\ProvinciasController;
+use App\Http\Controllers\CajasController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -125,6 +126,9 @@ Route::put('/Provincias/{prov}', [ProvinciasController::class, 'update'])->name(
 Route::delete('/Provincias/{prov}', [ProvinciasController::class, 'destroy'])->name('Provincias.destroy');
 Route::get('/Provincias/{prov}/edit', [ProvinciasController::class, 'edit'])->name('Provincias.edit');
 */
+
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

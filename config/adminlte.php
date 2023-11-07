@@ -303,7 +303,7 @@ return [
             //'url' => 'panel/socios',
             'icon' => 'fas fa-users', // icono de fontawesome
             'can' => 'lista_usuarios', // permiso de admin
-            'active' => request()->is('panel/socios*'),
+            
         ],
         [
             'text' => 'Lista de instalaciones',
@@ -400,6 +400,13 @@ return [
             //'url' => 'panel/socios',
             'icon' => 'fas fa-users', // icono de fontawesome
             'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
+            'text' => 'Cajas',
+                'route' => 'Cajas.index',
+                //'url' => 'panel/socios',
+                'icon' => 'fas fa-users', // icono de fontawesome
+                'can' => 'lista_usuarios' // permiso de admin
         ],
 
     ],
