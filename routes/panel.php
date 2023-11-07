@@ -31,7 +31,7 @@ Route::resource('/cargos', CargosController::class)->names('cargos');
 
 Route::resource('/paises', PaisesController::class)->names('paises');
 
-Route::resource('/genereos', GenerosController::class)->names('generos');
+Route::resource('/Generos', GenerosController::class)->names('Generos');
 
 Route::resource('/Tipo_factura', TipoFacturaController::class)->names('Tipo_factura');
 
