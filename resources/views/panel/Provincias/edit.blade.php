@@ -4,12 +4,12 @@
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
 
-@section('title','Crear Países')
+@section('title','Editar Provincias')
     
 @section('content')
     <div class="container-fluid">
 
-        <h1>Editar país</h1>
+        <h1>Editar Localidad</h1>
 
         @if ($errors->any())
             <ul>
