@@ -31,9 +31,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-/*
 //Rutas de Tipo de detalle de facturas
-
+/*
 Route::get('/Tipodetfactura', [tipodetfacturaController::class, 'index'])->name('tipos_detalle_factura.index');
 Route::post('/Tipodetfactura', [tipodetfacturaController::class, 'store'])->name('tipos_detalle_factura.store');
 Route::get('/Tipodetfactura/create', [tipodetfacturaController::class, 'create'])->name('tipos_detalle_factura.create');
@@ -51,7 +50,7 @@ Route::delete('/generos/{gen}', [GenerosController::class, 'destroy'])->name('Ge
 Route::get('/generos/{gen}/edit', [GenerosController::class, 'edit'])->name('Generos.edit');
 
 
-Rutas de Paises
+// Rutas de Paises
 Route::get('/paises', [PaisesController::class, 'index'])->name('paises.index');
 Route::post('/paises', [PaisesController::class, 'store'])->name('paises.store');
 Route::get('/paises/create', [PaisesController::class, 'create'])->name('paises.create');
@@ -79,7 +78,7 @@ Route::put('/dias/{dia}', [DiasController::class, 'update'])->name('dias.update'
 Route::delete('/dias/{dia}', [DiasController::class, 'destroy'])->name('dias.destroy');
 Route::get('/dias/{dia}/edit', [DiasController::class, 'edit'])->name('dias.edit');
 
-Rutas de Cargos
+// Rutas de Cargos
 Route::get('/cargos', [CargosController::class, 'index'])->name('cargos.index');
 Route::post('/cargos', [CargosController::class, 'store'])->name('cargos.store');
 Route::get('/cargos/create', [CargosController::class, 'create'])->name('cargos.create');
@@ -106,7 +105,7 @@ Route::delete('/deportes/{deporte}', [DeportesController::class, 'destroy'])->na
 Route::get('/deportes/{deporte}/edit', [DeportesController::class, 'edit'])->name('deportes.edit');
 
 
-Rutas de instalaciones
+// Rutas de instalaciones
 Route::get('/instalaciones', [InstalacionesController::class, 'index'])->name('instalaciones.index');
 Route::post('/instalaciones', [InstalacionesController::class, 'store'])->name('instalaciones.store');
 Route::get('/instalaciones/create', [InstalacionesController::class, 'create'])->name('instalaciones.create');
@@ -122,7 +121,5 @@ Route::get('/Provincias/create', [ProvinciasController::class, 'create'])->name(
 Route::put('/Provincias/{prov}', [ProvinciasController::class, 'update'])->name('Provincias.update');
 Route::delete('/Provincias/{prov}', [ProvinciasController::class, 'destroy'])->name('Provincias.destroy');
 Route::get('/Provincias/{prov}/edit', [ProvinciasController::class, 'edit'])->name('Provincias.edit');
-*/
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+*/
