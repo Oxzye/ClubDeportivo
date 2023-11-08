@@ -303,7 +303,7 @@ return [
             //'url' => 'panel/socios',
             'icon' => 'fas fa-users', // icono de fontawesome
             'can' => 'lista_usuarios', // permiso de admin
-            'active' => request()->is('panel/socios*'),
+            
         ],
         [
             'text' => 'Lista de instalaciones',
@@ -328,7 +328,7 @@ return [
         ],
         [
             'text' => 'Lista de generos',
-            'route' => 'generos.index',
+            'route' => 'Generos.index',
             //'url' => 'panel/socios',
             'icon' => 'fas fa-users', // icono de fontawesome
             'can' => 'lista_usuarios' // permiso de admin
@@ -394,7 +394,20 @@ return [
             'icon' => 'fas fa-users', // icono de fontawesome
             'can' => 'lista_usuarios' // permiso de admin
         ],
-
+        [
+        'text' => 'Lista de Localidades',
+            'route' => 'Localidades.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
+        [
+            'text' => 'Cajas',
+                'route' => 'Cajas.index',
+                //'url' => 'panel/socios',
+                'icon' => 'fas fa-users', // icono de fontawesome
+                'can' => 'lista_usuarios' // permiso de admin
+        ],
 
     ],
 

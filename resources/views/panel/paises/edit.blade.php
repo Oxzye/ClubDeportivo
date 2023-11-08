@@ -4,7 +4,7 @@
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
 
-@section('title','Crear Países')
+@section('title','Editar Países')
     
 @section('content')
     <div class="container-fluid">
