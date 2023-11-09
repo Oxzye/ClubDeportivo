@@ -428,90 +428,86 @@ return [
         ],
     //
 
+    //Otros
         [
-            'text' => 'Lista de instalaciones',
-            'route' => 'instalaciones.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
+            'text' => 'Otros',
+            'icon' => 'fas fa-link',
+            'submenu' => [
+                [
+                    'text' => 'Instalaciones',
+                    'route' => 'instalaciones.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Géneros',
+                    'route' => 'Generos.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_generos', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Tipos de facturas',
+                    'route' => 'Tipo_factura.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Tipos de detalles de facturas',
+                    'route' => 'tipos_detalle_factura.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Formas de pago',
+                    'route' => 'Formas_pago.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Dias',
+                    'route' => 'dias.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_dias', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Deportes',
+                    'route' => 'deportes.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Países',
+                    'route' => 'paises.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_paises', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Provincias',
+                    'route' => 'Provincias.index',
+                    //'url' => 'panel/socios',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_prov', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Localidades',
+                    'route' => 'Localidades.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_localidades', // permiso
+                    'shift' => 'ml-3',
+                ],
+            ]
         ],
-        [
-            'text' => 'Lista de cargos',
-            'route' => 'cargos.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-            'text' => 'Lista de paises',
-            'route' => 'paises.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-            'text' => 'Lista de generos',
-            'route' => 'Generos.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-            'text' => 'Tipos de facturas',
-            'route' => 'Tipo_factura.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-            'text' => 'Tipos de detalles de facturas',
-            'route' => 'tipos_detalle_factura.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-            'text' => 'Formas de pago',
-            'route' => 'Formas_pago.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-            'text' => 'Dias',
-            'route' => 'dias.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-            'text' => 'Deportes',
-            'route' => 'deportes.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-            'text' => 'Empleados',
-            'route' => 'empleados.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-            'text' => 'Provincias',
-            'route' => 'Provincias.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
-        [
-        'text' => 'Localidades',
-            'route' => 'Localidades.index',
-            //'url' => 'panel/socios',
-            'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
-        ],
+    //
+
 
     ],
 
