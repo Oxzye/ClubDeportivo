@@ -18,7 +18,7 @@ class CajasController extends Controller
     public function create () {
         $empleado = Empleado::all();
         $cajas = Cajas::all();
-        return view('panel.Cajas.create', compact('cajas', 'empleado'));
+        return view('panel.Cajas.index', compact('cajas', 'empleado'));
  
     }
 
@@ -33,7 +33,7 @@ class CajasController extends Controller
        
         $cajas ->save();
         //Redir
-        return redirect()->route('Cajas.index')->with('status', 'Cajas creada correctamente');
+        return redirect()->route('Cajas.index')->with('status', 'Cajas abierta correctamente');
     }
 
     public function edit($id_caja) {
@@ -72,14 +72,29 @@ class CajasController extends Controller
         return redirect()->route('Cajas.index')->with('status', 'Cajas eliminada correctamente');
     }
 
-    public function apertura()
+    public function apertura(Request $request)
     {
         // Lógica para la apertura de caja aquí
+        $cajas = new Cajas();
+        //Guardado de los datos
+        $cajas->monto_inicial_caja = $request->get('monto_inicial_caja');
+        $cajas->total_ventas_caja = $request->get('total_ventas_caja');
+        $cajas->saldo_caja = $request->get('saldo_caja');
+        $cajas->id_emp = $request->get('id_emp');
+       
+        $cajas ->save();
+        //Redir
+        return redirect()->route('Cajas.apertura')->with('status', 'Cajas abierta correctamente');
+        echo '<script>showCajaIndicator();</script>';
+        echo '<script>viewFacturacion();</script>';
     }
 
     public function cierre()
     {
         // Lógica para el cierre de caja aquí
+        echo '<script>hideCajaIndicator();</script>';
+        echo '<script>hideFacturacion();</script>';
+
     }
 
 }

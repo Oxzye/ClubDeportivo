@@ -1,0 +1,20 @@
+
+  // Muestra el indicador verde
+  function showCajaIndicator() {
+    document.getElementById('caja-indicator').style.display = 'block';
+  }
+
+  // Oculta el indicador verde
+  function hideCajaIndicator() {
+    document.getElementById('caja-indicator').style.display = 'none';
+  }
+
+  document.getElementById('cierrecj').addEventListener('click', function() {
+    var div = document.getElementById('cierre-caja');
+    
+    if (div.style.display === 'none') {
+        div.style.display = 'block';
+    } else {
+        div.style.display = 'none';
+    }
+});
