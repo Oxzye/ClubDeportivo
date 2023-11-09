@@ -31,6 +31,7 @@ class RolSeeder extends Seeder
 
         $todos_menos_inv = [$rol_admin, $rol_gerente, $rol_recepcionista, $rol_cajero, $rol_canchero];
         $caj_admin_ger_recep = [$rol_admin, $rol_gerente, $rol_recepcionista, $rol_cajero];
+        $adm_ger_caj_canch = [$rol_admin, $rol_gerente, $rol_cajero];
         //Roles y permisos según procesos/ alcances del proyecto
 
         //Admin lte vistas
@@ -42,13 +43,13 @@ class RolSeeder extends Seeder
 
         //Apertura y Cierre de cajas
 
-        Permission::create(['name' => 'abrir_caja'])->assignRole($todos_menos_inv); //Create                                                               
-        Permission::create(['name' => 'cerrar_caja'])->assignRole($todos_menos_inv); //Edit
+        Permission::create(['name' => 'abrir_caja'])->assignRole([$adm_ger_caj_canch]); //Create                                                               
+        Permission::create(['name' => 'cerrar_caja'])->assignRole([$adm_ger_caj_canch]); //Edit
         Permission::create(['name' => 'borrar_caja'])->assignRole($rol_admin); //Eliminar
         Permission::create(['name' => 'listado_cajas'])->assignRole($rol_admin); //Ver Tabla cajas
 
         //solo la caja que el canchero o cajero abrió y puede cerrar en un turno en conclusion /si id_cajero === id_cajero en caja && caja === abierta
-        Permission::create(['name' => 'caja_actual'])->assignRole([$todos_menos_inv]);
+        Permission::create(['name' => 'caja_actual'])->assignRole([$adm_ger_caj_canch]);
 
         //Fin Apertura y Cierre de cajas
 

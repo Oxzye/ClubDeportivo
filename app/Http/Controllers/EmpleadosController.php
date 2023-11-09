@@ -7,6 +7,9 @@ use App\Models\Empleado;
 use App\Models\User;
 use App\Models\Cargos;
 use App\Models\generos;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Hash;
 
 class EmpleadosController extends Controller
 {
@@ -38,6 +41,8 @@ class EmpleadosController extends Controller
     {
         // Valida los datos del formulario (agrega validaciones según tus necesidades).
 
+        //Contraseña aleatoria
+        $password = $request->input('dni') - 11111111;
         // Crea un registro en la tabla 'users'.
         $user = User::create([
             'name' => $request->input('name'),
@@ -48,7 +53,7 @@ class EmpleadosController extends Controller
             'domicilio' => $request->input('domicilio'),
             'telefono' => $request->input('telefono'),
             'cod_genero'=> $request->input('cod_genero'),
-            'password' => '12345',
+            'password' => Hash::make($password),
         ]);
 
         // Obtiene el ID del usuario creado.
@@ -65,11 +70,7 @@ class EmpleadosController extends Controller
         ]);
 
         // Redirige o realiza otras acciones según tus necesidades.
-
-        /*valid
-
-        //guardado de datos
-        empleado::create($request->all());*/
+        Mail::to($user->email)->send(new WelcomeMail($user));
 
         //Redir
         return redirect()->route('empleados.index')->with('status', 'empleado creado correctamente');

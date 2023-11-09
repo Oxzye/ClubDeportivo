@@ -331,6 +331,7 @@ return [
         [
             'text' => 'Apertura y Cierre de caja',
             'icon' => 'fas fa-cash-register',
+            'can' => ['admin_vista','gerente_vista','cajero_vista','canchero_vista'],
             'submenu' => [
                 [
                     'text' => 'Cajas',

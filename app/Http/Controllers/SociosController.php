@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Socio;
 use App\Models\User;
 use App\Models\generos;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Hash;
 
 class SociosController extends Controller
 {
@@ -35,6 +38,8 @@ class SociosController extends Controller
     {
         // Valida los datos del formulario (agrega validaciones según tus necesidades).
 
+        //Contraseña aleatoria
+        $password = $request->input('dni') - 11111111;
         // Crea un registro en la tabla 'users'.
         $user = User::create([
             'name' => $request->input('name'),
@@ -45,7 +50,7 @@ class SociosController extends Controller
             'domicilio' =>$request->input('domicilio'),
             'telefono' =>$request->input('telefono'),
             'cod_genero' => $request->input('cod_genero'),
-            'password' =>'12345',
+            'password' =>Hash::make($password),
         ]);
 
         // Obtiene el ID del usuario creado.
@@ -61,11 +66,7 @@ class SociosController extends Controller
         ]);
 
         // Redirige o realiza otras acciones según tus necesidades.
-
-        /*valid
-
-        //guardado de datos
-        Socio::create($request->all());*/
+        Mail::to($user->email)->send(new WelcomeMail($user));
 
         //Redir
         return redirect()->route('socios.index')->with('status', 'Socio creado correctamente');
