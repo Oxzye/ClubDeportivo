@@ -14,6 +14,8 @@ use App\Http\Controllers\DeportesController;
 use App\Http\Controllers\DiasController;
 use App\Http\Controllers\ProvinciasController;
 use App\Http\Controllers\LocalidadesController;
+use App\Http\Controllers\DisponibilidadesController;
+
 
 Route::get('/', function(){
         return view('panel.index');
@@ -44,3 +46,5 @@ Route::resource('/deportes', DeportesController::class)->names('deportes');
 Route::resource('/Provincias', ProvinciasController::class)->names('Provincias');
 
 Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
+
+Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('Disponibilidades');

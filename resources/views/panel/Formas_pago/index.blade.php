@@ -15,8 +15,8 @@
                 {{ session('status') }}
             </div>
         @endif
-        <div class="row-2 d-flex flex-row-reverse bd-highlight mb-3">
-            <a href="{{ route('Formas_pago.create') }}" class="btn btn-primary">Agregar</a>
+        <div class="row-2 bd-highlight mb-3">
+            <a href="{{ route('Formas_pago.create') }}" class="btn btn-primary  mb-4 mt-4">Agregar</a>
         </div>
 
         @if ($Formas_pago->count())
