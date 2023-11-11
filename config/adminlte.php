@@ -349,14 +349,14 @@ return [
                     'active' => ['panel/cajas/create'],
                     'shift' => 'ml-3',
                 ],
-                [
+                /*[
                     'text' => 'Cerrar Caja',
                     'route' => 'Cajas.index',
                     'icon' => 'fas fa-lock', // icono de fontawesome
                     'can' => 'cerrar_caja', // permiso
                     //'active' => ['panel/cajas/cerrar'],
                     'shift' => 'ml-3',
-                ],
+                ],*/
             ]
         ],
     //

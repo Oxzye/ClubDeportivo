@@ -48,8 +48,6 @@ Route::resource('/Provincias', ProvinciasController::class)->names('Provincias')
 Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
 
 Route::resource('/Cajas', CajasController::class)->names('Cajas');
-Route::get('/Cajas/apertura', 'CajasController@apertura')->name('panel.Cajas.apertura');
-Route::post('/Cajas/apertura', 'CajasController@storeApertura')->name('panel.Cajas.storeApertura');
+//Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre');
 
-Route::get('/Cajas/cierre', 'CajasController@cierre')->name('panel.Cajas.cierre');
-Route::post('/Cajas/cierre', 'CajasController@storeCierre')->name('panel.Cajas.storeCierre');
+//Route::post('/Cajas/apertura', CajasController::class, 'apertura')->name('Cajas.apertura');

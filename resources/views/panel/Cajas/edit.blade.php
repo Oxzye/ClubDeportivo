@@ -24,7 +24,7 @@
                     <h3 class="box-title" >Cierre de Caja</h3>
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{ route('panel.Cajas.cierre') }}">
+                    <form method="POST" action="{{ route('panel.update') }}">
                         @csrf
                         <div class="form-group">
                             <label for="monto_cierre">Monto de Cierre</label>
