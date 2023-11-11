@@ -37,6 +37,33 @@ class SociosController extends Controller
     public function store(Request $request)
     {
         // Valida los datos del formulario (agrega validaciones según tus necesidades).
+        // Define las reglas de validación
+        $rules = [
+            'name' =>       'required|string|max:40',
+            'apellido' =>   'required|string|max:40',
+            'dni' =>        'required|integer|unique:users|min:10000000|max:99999999',
+            'cuil_soc' =>   'required|integer|unique:socios|min:1000000000|max:9999999999',
+            'email' =>      'required|string|unique:users|max:255|email',
+            'fecha_nac' =>  'required|date|before:tomorrow',
+            'cod_genero' => 'required|integer',
+            'domicilio' =>  'required|string|max:200',
+            'telefono' =>   'required|string|max:20',
+            'fecha_asociacion' => 'required|date|after:fecha_nac',
+            'observaciones_soc'=> 'string|max:40',
+        ];
+
+        // Define los mensajes de error personalizados (opcional)
+        $messages = [
+            'required' => 'Debe llenar el campo :attribute.',
+            'max' => 'El :attribute es demasiado largo.',
+            '*.unique' => 'Ese :attribute ya esta registrado',
+            'dni.*' => 'Ingrese un DNI valido',
+            'cuil_soc.*' => 'Ingrese un CUIL valido',
+            'email.*' =>'Ingrese un Email valido',
+        ];
+
+        // Valida los datos del formulario
+        $request->validate($rules, $messages);
 
         //Contraseña aleatoria
         $password = $request->input('dni') - 11111111;
@@ -59,7 +86,7 @@ class SociosController extends Controller
         // Crea un registro en la tabla 'socios' con el ID del usuario.
         Socio::create([
             'id_user' => $userId,
-            'cuil_soc'=>$request->input('cuil'),
+            'cuil_soc'=>$request->input('cuil_soc'),
             'fecha_asociacion'=> $request->input('fecha_asociacion'),
             'observaciones_soc'=> $request->input('observaciones_soc'),
             // Otros campos de 'socios'.

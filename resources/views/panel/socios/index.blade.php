@@ -39,8 +39,8 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col" class="text-uppercase">DNI/CUIL</th>
-                            <th scope="col" class="text-uppercase">Nombre(y apellido)</th>
+                            <th scope="col" class="text-uppercase">DNI</th>
+                            <th scope="col" class="text-uppercase">Socio</th>
                             <th scope="col" class="text-uppercase">Email</th>
                             <th scope="col" class="text-uppercase">Localidad</th>
                             <th scope="col" class="text-uppercase">Genero</th>
@@ -56,8 +56,8 @@
                         @foreach ($socios as $socio)
                         <tr>
                             <td>{{ $socio->id_soc }}</td>
-                            <td>{{ $socio->user->dni .' / '. $socio->cuil}}</td>
-                            <td>{{ $socio->user->name .' '. $socio->user->apellido }}</td>
+                            <td>{{ $socio->user->dni /*$socio->cuil_soc*/}}</td>
+                            <td><b>{{ $socio->user->name}}</b>{{' '. $socio->user->apellido }}</td>
                             <td>{{ $socio->user->email }}</td>
                             <td>{{ $socio->user->id_loc }}</td>
                             <td>{{ $socio->user->cod_genero }}</td>

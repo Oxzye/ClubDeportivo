@@ -55,7 +55,7 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">CUIL</label>
-                                <input type="number" class="form-control" name="cuil" id="cuil" aria-describedby="dni">
+                                <input type="number" class="form-control" name="cuil_soc" id="cuil_soc" aria-describedby="dni">
                                 <small id="" class="form-text text-muted">Posible alert.</small>
                             </div>
                         </div>
