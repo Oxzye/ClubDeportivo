@@ -74,7 +74,7 @@
                                     <a href="" class="btn btn-sm btn-info text-white text-uppercase me-1">
                                         Ver
                                     </a>
-                                    <a href="" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                    <a href="{{ route('socios.edit', $socio->id_soc) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
                                     <form action="" method="POST">
