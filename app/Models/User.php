@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+
+
 
 class User extends Authenticatable
 {
+    use HasRoles;
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -17,10 +21,20 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public $timestamps = false;
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'name',
+        'apellido',
+        'dni',
+        'id_loc',
+        'cod_genero',
+        'fecha_nac',
+        'domicilio',
+        'telefono',
+        'update_at',
+        'created_at',
     ];
 
     /**
@@ -42,4 +56,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function empleado()
+    {
+        return $this->hasOne(Empleado::class);
+    }
+
+    public function socio()
+    {
+        return $this->hasOne(Socio::class);
+    }
+
+    public function genero()
+    {
+        return $this->belongsTo(generos::class, 'cod_genero');
+    }
 }
