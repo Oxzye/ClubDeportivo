@@ -30,13 +30,8 @@
             </div>
 
             <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect" name="tipo_inst" aria-label="Floating label select example">
-                    <option selected>-----</option>
-                    <option value="Canchas Futbol 5">Canchas Futbol 5</option>
-                    <option value="Canchas Futbol 11">Canchas Futbol 11</option>
-                    <option value="Polideportivo">Polideportivo</option>
-                </select>
-                <label for="floatingSelect">Seleccione un tipo de instalacion</label>
+            <input type="text" class="form-control" id="tipo_inst" name="tipo_inst">
+            <label for="floatingInput">tipo_inst:</label>
             </div>
 
             <div class="form-floating mb-3">

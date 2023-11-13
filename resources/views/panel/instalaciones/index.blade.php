@@ -58,7 +58,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $instalaciones->links() }} 
         @else
             <h4>¡No hay instalaciones cargadas!</h4>
         @endif

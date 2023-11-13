@@ -19,7 +19,7 @@
         @if ($cargos->count())
             
                 <div class="table-responsive">
-                    <table class="table table-primary">
+                    <table class="table table-primary table-striped table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -45,28 +45,29 @@
                                     <td>{{ $cargo->horas_de_trabajoxmes}}</td>
                                     <td>{{ $cargo->horario_de_trabajo}}</td>
 
+                                    <td class="mb-3">
+                                        <form action="{{ route('cargos.destroy', $cargo->id_cargo ) }}" method="post" class="d-inline">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            </form>
 
+                                    <a href="{{route('cargos.show',$cargo->id_cargo)}}" class="btn btn-sm btn-info text-white text-uppercase mx-1">Ver</a>
                                     
-                                    {{-- <td>Ver</td> --}}
-                                    <td>
-                                        <a href="{{ route('cargos.edit', $cargo->id_cargo)  }}" class="btn btn-warning">Editar</a>
-                                    </td>
-
-                                    <td>
-                                        <form action="{{ route('cargos.destroy', $cargo->id_cargo ) }}" method="post">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
+                                        <a href="{{ route('cargos.edit', $cargo->id_cargo)  }}" class="btn btn-warning mx-1">Editar</a>
+                                        
                                     </td>
                                 </tr>  
                             @endforeach
-                            
+                           
                         </tbody>
+                        
                     </table>
+                    
                 </div>
-    
+                {{ $cargos->links() }} 
         @else
             <h4>¡No hay Cargos cargados!</h4>
         @endif
     </div>
+   
 @endsection
