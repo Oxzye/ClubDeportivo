@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\DB;
+
 
 class RolSeeder extends Seeder
 {
@@ -113,6 +114,11 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'editar_cliente'])->assignRole([$rol_admin, $rol_gerente]);
         Permission::create(['name' => 'eliminar_cliente'])->assignRole([$rol_admin, $rol_gerente]);
 
+        //Permiso para la tabla listado_disponibilidades
+        Permission::create(['name' => 'crear_disponibilidades'])->assignRole([$rol_admin, $rol_gerente]);
+        Permission::create(['name' => 'listado_disponibilidades'])->assignRole([$rol_admin, $rol_gerente, $rol_cajero, $rol_recepcionista]);
+        Permission::create(['name' => 'editar_disponibilidades'])->assignRole([$rol_admin, $rol_gerente, $rol_recepcionista]);
+        Permission::create(['name' => 'eliminar_disponibilidades'])->assignRole([$rol_admin, $rol_gerente]);
     //Fin Inscripciones de socios y empleados
 
     }

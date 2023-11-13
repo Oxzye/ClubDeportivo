@@ -48,7 +48,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $localidad->links() }} 
         @else
             <h4>¡No hay Localidades cargadas!</h4>
         @endif

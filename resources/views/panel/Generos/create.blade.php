@@ -19,7 +19,7 @@
             </ul>
         @endif
         
-        <form action="{{ route('Generos.store') }}" method="post">
+        <form action="{{ route('generos.store') }}" method="post">
         @csrf
         <div class="mb-3">
             <label for="" class="form-label" name="tipo_genero">Tipo de genero:</label>
@@ -30,7 +30,7 @@
               <input type="text" class="form-control" name="abreviatura_genero" id="" aria-describedby="helpId" placeholder="">
             </div>
              <button type="submit" class="btn btn-primary">Guardar</button>
-             <a href="{{ route('Generos.index') }}" class="btn btn-danger">Cancelar</a>
+             <a href="{{ route('generos.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
     </div>
 

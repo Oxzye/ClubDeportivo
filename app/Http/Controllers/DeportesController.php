@@ -9,7 +9,7 @@ class DeportesController extends Controller
 {
     public function index() {
         
-        $deportes = Deporte::all();
+        $deportes = Deporte::paginate(3);
 
         return view('panel.deportes.index', compact('deportes'));
     }

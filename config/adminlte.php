@@ -443,7 +443,7 @@ return [
                 ],
                 [
                     'text' => 'Géneros',
-                    'route' => 'Generos.index',
+                    'route' => 'generos.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
                     'can' => 'listado_generos', // permiso
                     'shift' => 'ml-3',
@@ -505,10 +505,22 @@ return [
                     'can' => 'listado_localidades', // permiso
                     'shift' => 'ml-3',
                 ],
+                [
+                    'text' => 'Disponibilidades',
+                    'route' => 'Disponibilidades.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_disponibilidades', // permiso 
+                    'shift' => 'ml-3',
+                ],
             ]
         ],
-    //
-
+        [
+            'text' => 'Lista de Disponibilidades',
+            'route' => 'Disponibilidades.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
 
     ],
 

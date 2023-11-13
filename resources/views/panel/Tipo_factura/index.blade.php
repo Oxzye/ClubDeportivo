@@ -24,6 +24,8 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
+                                <th scope="col">Creación</th>
+                                <th scope="col">Actualizaciones</th>
                                 <th scope="col" colspan="3">Acciones</th>
                             </tr>
                         </thead>
@@ -32,7 +34,8 @@
                                 <tr class="">
                                     <td scope="row">{{ $fac->id_tipo_fac }}</td>
                                     <td>{{ $fac->tipo_fac}}</td>
-                                    <td>Ver</td>
+                                    <td>{{ $fac->created_at}}</td>
+                                    <td>{{ $fac->updated_at}}</td>
                                      <td>
                                         <a href="{{ route('Tipo_factura.edit', $fac->id_tipo_fac)  }}" class="btn btn-warning">Editar</a>
                                     </td>
@@ -48,7 +51,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $Tipo_factura->links() }}
         @else
             <h4>¡No hay Tipo de Facturas cargadas!</h4>
         @endif
