@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cajas;
 use App\Models\Empleado;
+use App\Models\User;
 class CajasController extends Controller
 {
     public function index () {
@@ -12,7 +13,9 @@ class CajasController extends Controller
         //$empleado = new Cajas;
         $cajas = Cajas::all();
         $empleado = Empleado::all();
-        return view('panel.Cajas.index', compact('cajas', 'empleado'));
+        $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
+        $cajaAbierta = $cajaso->where('estado_caja', true);
+        return view('panel.Cajas.index', compact('cajas', 'empleado', 'cajaAbierta'));
     }
 
     public function create () {
@@ -27,23 +30,25 @@ class CajasController extends Controller
         $cajas = new Cajas();
         //Guardado de los datos
         $cajas->monto_inicial_caja = $request->get('monto_inicial_caja');
-        $cajas->total_ventas_caja = $request->get('total_ventas_caja');
         $cajas->saldo_caja = $request->get('saldo_caja');
         $cajas->id_emp = $request->get('id_emp');
+        $cajas->total_ventas_caja = $request->get('total_ventas_caja');
+        $cajas->estado_caja = $request->get('estado_caja');
+        $cajas->monto_final = $request->get('monto_final');
        
         $cajas ->save();
         //Redir
-        return redirect()->route('Cajas.index')->with('status', 'Cajas creada correctamente');
+       return redirect()->route('Cajas.index')->with('status', 'Caja abierta correctamente');
     }
 
     public function edit($id_caja) {
-        $cajas = Cajas::findOrFail($id_caja);
-
-        if ($cajas) {
-            $cajas = Cajas::all();
-            return view('panel.Cajas.edit', compact('cajas', 'empleado'));
+        $caja = Cajas::findOrFail($id_caja);
+        $empleado = Empleado::all();
+        
+        if ($caja) {
+            return view('panel.Cajas.edit', compact('caja', 'empleado'));
         } else {
-            return redirect()->route('Cajas.index')->with('error', 'Cajas no encontrada');
+            return redirect()->route('Cajas.index')->with('error', 'Caja no encontrada');
         }
     }
 
@@ -54,11 +59,13 @@ class CajasController extends Controller
         $cajas->total_ventas_caja = $request->input('total_ventas_caja');
         $cajas->saldo_caja = $request->input('saldo_caja');
         $cajas->id_emp = $request->input('id_emp');
+        $cajas->estado_caja = $request->input('estado_caja');
+        $cajas->monto_final = $request->input('monto_final');
         $cajas->save();
         
         
         //redireccion
-        return redirect()->route('Cajas.index')->with('status', 'Cajas Actualizada correctamente');
+        return redirect()->route('Cajas.index')->with('status', 'Cajas Cerrada correctamente');
     }
 
     public function destroy($id) {
@@ -72,14 +79,40 @@ class CajasController extends Controller
         return redirect()->route('Cajas.index')->with('status', 'Cajas eliminada correctamente');
     }
 
-    public function apertura()
+  /*  public function apertura(Request $request)
     {
         // Lógica para la apertura de caja aquí
+        $cajas = new Cajas();
+        //Guardado de los datos
+        $cajas->monto_inicial_caja = $request->get('monto_inicial_caja');
+        $cajas->saldo_caja = $request->get('saldo_caja');
+        $cajas->id_emp = $request->get('id_emp');
+        $cajas->total_ventas_caja = $request->get('total_ventas_caja');
+        $cajas->estado_caja = $request->get('estado_caja');
+        $cajas->monto_final = $request->get('monto_final');
+       
+        $cajas ->save();
+        //Redir
+        return redirect()->route('Cajas.edit')->with('status', 'Cajas abierta correctamente');
+        echo '<script>showCajaIndicator();</script>';
+        echo '<script>viewFacturacion();</script>';
     }
 
     public function cierre()
     {
         // Lógica para el cierre de caja aquí
-    }
+        echo '<script>hideCajaIndicator();</script>';
+        echo '<script>hideFacturacion();</script>';
+
+    }*/
+    public function show($id)
+{
+    // Lógica para mostrar una caja específica por su ID
+    $cajas = Cajas::findOrFail($id);
+    $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
+    $cajaAbierta = $cajaso->where('estado_caja', true);
+    // Puedes pasar la caja a una vista o realizar cualquier otra lógica necesaria
+    return view('panel.Cajas.index', compact('cajas','cajaAbierta'));
+}
 
 }
