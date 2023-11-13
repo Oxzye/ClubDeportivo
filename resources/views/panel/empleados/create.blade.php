@@ -66,6 +66,7 @@
                                 <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
+
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Genero</label>
@@ -79,6 +80,7 @@
                             </select> 
                             </div>
                         </div>
+
                         <div class="col-7">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Domicilio</label>
@@ -93,17 +95,21 @@
                                 <small id="" class="form-text text-muted">We'll never share</small>
                             </div>
                         </div>
+
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">País</label>
-                                <select class="form-control" id="pais" name="pais" >
-                                <option selected>Seleccionar</option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
+                                <label for="exampleFormControlSelect2">País</label>
+                                <select class="form-control" id="id_pais" name="id_pais" >
+                                <option value="" selected>Seleccionar</option>
+                                @foreach ($paises as $pais)
+                                <option value="{{ $pais->id_pais }}"> 
+                                    {{ $pais->nombre_pais }}
+                                </option>
+                            @endforeach
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Provincia</label>
