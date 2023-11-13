@@ -48,7 +48,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $dias->links() }} 
         @else
             <h4>¡No hay dias cargados!</h4>
         @endif

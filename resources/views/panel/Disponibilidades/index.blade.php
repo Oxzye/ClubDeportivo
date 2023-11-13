@@ -65,7 +65,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $disponibilidades->links() }} 
         @else
             <h4>¡No hay Disponibilidades cargadas!</h4>
         @endif

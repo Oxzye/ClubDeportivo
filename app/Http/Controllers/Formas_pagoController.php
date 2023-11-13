@@ -10,7 +10,7 @@ class Formas_pagoController extends Controller
     public function index () {
         
         // $Formas_pago = Formas_pago::orderBy('id_fdp', 'asc')->paginate(4);
-        $Formas_pago = Formas_pago::paginate(5);
+        $Formas_pago = Formas_pago::paginate(3);
         
         // $Formas_pago = Formas_pago::all();
 

@@ -35,10 +35,10 @@
                                     <td>{{ $gender->abreviatura_genero }}</td>
                                     <td>Ver</td>
                                     <td>
-                                        <a href="{{ route('Generos.edit', $gender->cod_genero)  }}" class="btn btn-warning">Editar</a>
+                                        <a href="{{ route('generos.edit', $gender->cod_genero)  }}" class="btn btn-warning">Editar</a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('Generos.destroy', $gender->cod_genero ) }}" method="post">
+                                        <form action="{{ route('generos.destroy', $gender->cod_genero ) }}" method="post">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
                                         </form>
@@ -48,8 +48,9 @@
                             
                         </tbody>
                     </table>
+                    {{ $generos->links() }} 
                 </div>
-    
+                
         @else
             <h4>¡No hay tipos de generos cargados!</h4>
         @endif

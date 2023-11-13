@@ -64,11 +64,10 @@
                             
                         </tbody>
                     </table>
-                    <div class="d-flex justify-content-end">
-                        {!! $Formas_pago->links() !!}
-                    </div>
                 </div>
-    
+                <div class="d-flex justify-content-end">
+                    {!! $Formas_pago->links() !!}
+                </div>
         @else
             <h4>¡No hay Formas de pago cargados!</h4>
         @endif

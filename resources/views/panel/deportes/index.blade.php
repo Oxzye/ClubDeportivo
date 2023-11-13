@@ -52,7 +52,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $deportes->links() }} 
         @else
             <h4>¡No hay deportes cargados!</h4>
         @endif

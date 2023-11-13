@@ -46,3 +46,5 @@ Route::resource('/deportes', DeportesController::class)->names('deportes');
 Route::resource('/Provincias', ProvinciasController::class)->names('Provincias');
 
 Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
+
+Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('Disponibilidades');

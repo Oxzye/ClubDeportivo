@@ -63,7 +63,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $paises->links() }} 
         @else
             <h4>¡No hay países cargados!</h4>
         @endif
