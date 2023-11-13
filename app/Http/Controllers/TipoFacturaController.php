@@ -8,7 +8,7 @@ class TipoFacturaController extends Controller
 {
     public function index () {
 
-        $Tipo_factura = Tipo_factura::all();
+        $Tipo_factura = Tipo_factura::paginate(3);
 
         return view('panel.Tipo_factura.index', compact('Tipo_factura'));
     }

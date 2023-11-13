@@ -18,30 +18,53 @@ class UserSeeder extends Seeder
     {
         // Buscar y eliminar registros existentes con correos electrónicos específicos
         User::where('email', 'admin@gmail.com')->delete();
-        User::where('email', 'vendedor@gmail.com')->delete();
-        User::where('email', 'cliente@gmail.com')->delete();
+        User::where('email', 'gerente@gmail.com')->delete();
+        User::where('email', 'recepcionista@gmail.com')->delete();
+        User::where('email', 'cajero@gmail.com')->delete();
+        User::where('email', 'canchero@gmail.com')->delete();
+        User::where('email', 'invitado@gmail.com')->delete();
 
-         // Crear nuevos registros de usuarios
+        // Crear nuevos registros de usuarios
         User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345'),
-            'dni' => '12345678',
+            'dni' => '11111111',
         ])->assignRole('admin');
 
         User::create([
-            'name' => 'vendedor',
-            'email' => 'vendedor@gmail.com',
+            'name' => 'gerente',
+            'email' => 'gerente@gmail.com',
             'password' => Hash::make('12345'),
-            'dni' => '12345679'
-        ])->assignRole('vendedor');
+            'dni' => '22222222',
+        ])->assignRole('gerente');
 
         User::create([
-            'name' => 'cliente',
-            'email' => 'cliente@gmail.com',
+            'name' => 'recepcionista',
+            'email' => 'recepcionista@gmail.com',
             'password' => Hash::make('12345'),
-            'dni' => '12345689'
+            'dni' => '33333333',
+        ])->assignRole('recepcionista');
 
-        ])->assignRole('cliente');
+        User::create([
+            'name' => 'cajero',
+            'email' => 'cajero@gmail.com',
+            'password' => Hash::make('12345'),
+            'dni' => '44444444',
+        ])->assignRole('cajero');
+
+        User::create([
+            'name' => 'canchero',
+            'email' => 'canchero@gmail.com',
+            'password' => Hash::make('12345'),
+            'dni' => '55555555',
+        ])->assignRole('canchero');
+
+        User::create([
+            'name' => 'invitado',
+            'email' => 'invitado@gmail.com',
+            'password' => Hash::make('12345'),
+            'dni' => '66666666',
+        ])->assignRole('invitado');
     }
-}
+} 

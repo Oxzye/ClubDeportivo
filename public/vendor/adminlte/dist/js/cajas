@@ -1,0 +1,32 @@
+
+  // Muestra el indicador verde
+  function showCajaIndicator() {
+    document.getElementById('caja-indicator').style.display = 'block';
+  }
+
+  // Oculta el indicador verde
+  function hideCajaIndicator() {
+    document.getElementById('caja-indicator').style.display = 'none';
+  }
+
+  document.getElementById('cierrecj').addEventListener('click', function() {
+    var div = document.getElementById('cierre-cajas');
+    
+    if (div.style.display === 'none') {
+        div.style.display = 'block';
+    } else {
+        div.style.display = 'none';
+    }
+});
+$(document).ready(function() {
+  // Tu código JavaScript existente aquí
+  
+  // Verifica si hay cajas creadas
+  if ($(".caja").length > 0) {
+      // Se ha creado al menos una caja, oculta el botón de apertura
+      $("#abrircj").hide();
+  } else {
+      // No se han creado cajas, oculta el botón de cierre
+      $("#cerrarcj").hide();
+  }
+});

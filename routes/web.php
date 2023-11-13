@@ -7,22 +7,13 @@ use App\Http\Controllers\DiasController;
 use App\Http\Controllers\CargosController;
 use App\Http\Controllers\TipoFacturaController;
 use App\Http\Controllers\InstalacionesController;
-use App\Http\Controllers\tipodetfacturaController;
+use App\Http\Controllers\TipodetfacturaController;
 use App\Http\Controllers\GenerosController;
 use App\Http\Controllers\ProvinciasController;
+use App\Http\Controllers\CajasController;
 use Illuminate\Support\Facades\Route;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +22,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+/*Rutas de Tipo de detalle de facturas
+=======
+/*
 //Rutas de Tipo de detalle de facturas
 /*
 Route::get('/Tipodetfactura', [tipodetfacturaController::class, 'index'])->name('tipos_detalle_factura.index');
@@ -121,5 +116,7 @@ Route::get('/Provincias/create', [ProvinciasController::class, 'create'])->name(
 Route::put('/Provincias/{prov}', [ProvinciasController::class, 'update'])->name('Provincias.update');
 Route::delete('/Provincias/{prov}', [ProvinciasController::class, 'destroy'])->name('Provincias.destroy');
 Route::get('/Provincias/{prov}/edit', [ProvinciasController::class, 'edit'])->name('Provincias.edit');
-
 */
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -6,13 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Instalacion;
 use App\Models\Disponibilidades;
 
-
 class DisponibilidadesController extends Controller
 {
     public function index () {
 
         //$provincia = new Provincias;
-        $dias = Dias::all();
+        $dias = Dias::paginate(3);
         $instalacion = Instalacion::all();
         $disponibilidades = Disponibilidades::all();
         return view('panel.Disponibilidades.index', compact('dias', 'instalacion', 'disponibilidades'));

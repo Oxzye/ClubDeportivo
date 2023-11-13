@@ -9,7 +9,7 @@ class PaisesController extends Controller
 {
     public function index () {
 
-        $paises = Paises::all();
+        $paises = Paises::paginate(3);
 
         return view('panel.paises.index', compact('paises'));
     }

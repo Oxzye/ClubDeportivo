@@ -10,7 +10,7 @@ class LocalidadesController extends Controller
     public function index () {
 
         //$provincia = new Localidades;
-        $localidad = Localidades::all();
+        $localidad = Localidades::paginate(3);
         $provincia = Provincias::all();
         return view('panel.Localidades.index', compact('localidad', 'provincia'));
     }
@@ -40,7 +40,6 @@ class LocalidadesController extends Controller
         $localidad = Localidades::findOrFail($id_loc);
         if ($localidad) {
             $provincia = Provincias::all();
-            
             return view('panel.Localidades.edit', compact('localidad', 'provincia'));
         } else {
             return redirect()->route('panel.Localidades.index')->with('error', 'Localidad no encontrada');
@@ -50,8 +49,8 @@ class LocalidadesController extends Controller
     public function update(Request $request, $id){
         //$provincia = Paises::all();
         $localidad = Localidades::findOrFail($id);
-        $localidad->nombre_loc = $request->input('nombre_prov');
-        $localidad->id_loc = $request->input('id_pais');
+        $localidad->nombre_loc = $request->input('nombre_loc');
+        $localidad->id_loc = $request->input('id_loc');
         $localidad->cod_postal = $request->input('cod_postal');
         $localidad->save();
         
