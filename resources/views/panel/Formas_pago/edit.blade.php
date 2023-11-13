@@ -24,10 +24,15 @@
         
             <div class="mb-3">
               <label for="" class="form-label" name="forma_pago_fdp">Nombre Forma de pago:</label>
-              <input type="text" class="form-control" name="forma_pago_fdp" id="" aria-describedby="helpId" value="{{ $Formas_pago->forma_pago_fdp }}">
-
+              <input type="text" class="form-control" name="forma_pago_fdp" id="" aria-describedby="helpId" value="{{ old('forma_pago_fdp',$Formas_pago->forma_pago_fdp) }}">
+                @error( 'forma_pago_fdp' )
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               <label for="" class="form-label" name="descripcion_fdp">Descripción de forma de pago:</label>
-              <input type="text" class="form-control" name="descripcion_fdp" id="" aria-describedby="helpId" value="{{ $Formas_pago->descripcion_fdp }}">
+              <input type="text" class="form-control" name="descripcion_fdp" id="" aria-describedby="helpId" value="{{ old('descripcion_fdp', $Formas_pago->descripcion_fdp) }}" @error('descripcion_fdp') is-invalid @enderror">
+                @error( 'descripcion_fdp' )
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror             
             </div>
              <button type="submit" class="btn btn-primary">Guardar</button>
              <a href="{{ route('Formas_pago.index') }}" class="btn btn-danger">Cancelar</a>

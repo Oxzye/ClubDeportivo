@@ -49,7 +49,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $provincia->links() }}
         @else
             <h4>¡No hay Provincias cargados!</h4>
         @endif
