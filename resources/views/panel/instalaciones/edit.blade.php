@@ -32,12 +32,8 @@
             </div>
             
             <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect" name="tipo_inst" aria-label="Floating label select example">
-                    <option value="Canchas Futbol 5" @if($instalacion->tipo_inst == 'Canchas Futbol 5') selected @endif>Canchas Futbol 5</option>
-                    <option value="Canchas Futbol 11" @if($instalacion->tipo_inst == 'Canchas Futbol 11') selected @endif>Canchas Futbol 11</option>
-                    <option value="Polideportivo" @if($instalacion->tipo_inst == 'Polideportivo') selected @endif>Polideportivo</option>
-                </select>
-                <label for="floatingSelect">Seleccione un tipo de instalacion</label>
+            <input type="text" class="form-control" id="tipo_inst" name="tipo_inst" value="{{ $instalacion->tipo_inst }}">
+            <label for="floatingInput">tipo_inst:</label>
             </div>
 
             <div class="form-floating mb-3">
