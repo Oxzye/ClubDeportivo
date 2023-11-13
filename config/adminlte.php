@@ -505,6 +505,12 @@ return [
                     'can' => 'listado_localidades', // permiso
                     'shift' => 'ml-3',
                 ],
+                [
+                    'text' => 'Lista de Disponibilidades',
+                    'route' => 'Disponibilidades.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_disponibilidades' // permiso 
+                ],
             ]
         ],
         [

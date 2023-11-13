@@ -16,11 +16,11 @@ class RolSeeder extends Seeder
     public function run()
     {
         // Elimina registros existentes de la tabla "model_has_permissions" para evitar restricciones de clave externa
-       // DB::table('model_has_permissions')->delete();
+        DB::table('model_has_permissions')->delete();
 
         // Elimina los registros existentes en las tablas "permissions" y "roles"
-      //  Permission::query()->delete();
-       // Role::query()->delete();
+        Permission::query()->delete();
+        Role::query()->delete();
 
         // Roles
         $rol_admin = Role::create(['name' => 'admin']);
@@ -114,6 +114,11 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'editar_cliente'])->assignRole([$rol_admin, $rol_gerente]);
         Permission::create(['name' => 'eliminar_cliente'])->assignRole([$rol_admin, $rol_gerente]);
 
+        //Permiso para la tabla listado_disponibilidades
+        Permission::create(['name' => 'crear_disponibilidades'])->assignRole([$rol_admin, $rol_gerente]);
+        Permission::create(['name' => 'listado_disponibilidades'])->assignRole([$rol_admin, $rol_gerente, $rol_cajero, $rol_recepcionista]);
+        Permission::create(['name' => 'editar_disponibilidades'])->assignRole([$rol_admin, $rol_gerente, $rol_recepcionista]);
+        Permission::create(['name' => 'eliminar_disponibilidades'])->assignRole([$rol_admin, $rol_gerente]);
     //Fin Inscripciones de socios y empleados
 
     }
