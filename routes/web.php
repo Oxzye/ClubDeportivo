@@ -31,7 +31,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
+/*
 //Rutas de Tipo de detalle de facturas
 
 Route::get('/Tipodetfactura', [tipodetfacturaController::class, 'index'])->name('tipos_detalle_factura.index');
@@ -126,3 +126,4 @@ Route::get('/Provincias/{prov}/edit', [ProvinciasController::class, 'edit'])->na
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+*/
