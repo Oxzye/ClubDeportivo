@@ -9,7 +9,7 @@
 @section('content')
     <div class="container-fluid">
 
-        <h1>Editar tipo de detalle de factura</h1>
+        <h1>Editar tipo de genero</h1>
 
         @if ($errors->any())
             <ul>
@@ -19,7 +19,7 @@
             </ul>
         @endif
         
-        <form action="{{ route('generos.update', $Generos->cod_genero) }}" method="post">
+        <form action="{{ route('generos.update', $generos->cod_genero) }}" method="post">
         @csrf @method('PUT')
         
         <div class="mb-3">

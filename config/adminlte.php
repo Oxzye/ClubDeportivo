@@ -443,7 +443,7 @@ return [
                 ],
                 [
                     'text' => 'Géneros',
-                    'route' => 'Generos.index',
+                    'route' => 'generos.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
                     'can' => 'listado_generos', // permiso
                     'shift' => 'ml-3',
@@ -506,10 +506,11 @@ return [
                     'shift' => 'ml-3',
                 ],
                 [
-                    'text' => 'Lista de Disponibilidades',
+                    'text' => 'Disponibilidades',
                     'route' => 'Disponibilidades.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_disponibilidades' // permiso 
+                    'can' => 'listado_disponibilidades', // permiso 
+                    'shift' => 'ml-3',
                 ],
             ]
         ],
