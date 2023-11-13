@@ -11,13 +11,13 @@ class ProvinciasController extends Controller
     public function index () {
 
         //$provincia = new Provincias;
-        $provincia = Provincias::all();
+        $provincia = Provincias::paginate(3);
         $paises = Paises::all();
         return view('panel.Provincias.index', compact('provincia', 'paises'));
     }
 
     public function create () {
-        $paises = Paises::all();
+        $paises = Paises::paginate(3);
         $provincia = Provincias::all();
         return view('panel.Provincias.create', compact('provincia', 'paises'));
  

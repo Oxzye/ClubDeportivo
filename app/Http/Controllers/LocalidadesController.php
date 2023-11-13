@@ -10,7 +10,7 @@ class LocalidadesController extends Controller
     public function index () {
 
         //$provincia = new Localidades;
-        $localidad = Localidades::all();
+        $localidad = Localidades::paginate(3);
         $provincia = Provincias::all();
         return view('panel.Localidades.index', compact('localidad', 'provincia'));
     }

@@ -8,7 +8,7 @@ use App\Models\Instalacion;
 class InstalacionesController extends Controller
 {
     public function index () {
-        $instalaciones = Instalacion::all();
+        $instalaciones = Instalacion::paginate(3);
         return view('panel.instalaciones.index', compact('instalaciones')); 
     }
 

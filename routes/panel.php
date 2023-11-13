@@ -15,6 +15,7 @@ use App\Http\Controllers\DeportesController;
 use App\Http\Controllers\DiasController;
 use App\Http\Controllers\ProvinciasController;
 use App\Http\Controllers\LocalidadesController;
+use App\Http\Controllers\DisponibilidadesController;
 
 
 Route::get('/', function(){
@@ -31,7 +32,7 @@ Route::resource('/cargos', CargosController::class)->names('cargos');
 
 Route::resource('/paises', PaisesController::class)->names('paises');
 
-Route::resource('/Generos', GenerosController::class)->names('Generos');
+Route::resource('/generos', GenerosController::class)->names('generos');
 
 Route::resource('/Tipo_factura', TipoFacturaController::class)->names('Tipo_factura');
 
@@ -51,3 +52,5 @@ Route::resource('/Cajas', CajasController::class)->names('Cajas');
 //Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre');
 
 //Route::post('/Cajas/apertura', CajasController::class, 'apertura')->name('Cajas.apertura');
+
+Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('Disponibilidades');

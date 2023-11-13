@@ -507,8 +507,13 @@ return [
                 ],
             ]
         ],
-    //
-
+        [
+            'text' => 'Lista de Disponibilidades',
+            'route' => 'Disponibilidades.index',
+            //'url' => 'panel/socios',
+            'icon' => 'fas fa-users', // icono de fontawesome
+            'can' => 'lista_usuarios' // permiso de admin
+        ],
 
     ],
 

@@ -51,7 +51,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $Tipo_factura->links() }}
         @else
             <h4>¡No hay Tipo de Facturas cargadas!</h4>
         @endif

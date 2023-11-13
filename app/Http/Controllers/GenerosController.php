@@ -9,13 +9,13 @@ class GenerosController extends Controller
 {
     public function index () {
 
-        $generos = generos::all();
+        $generos = generos::paginate(3);
 
-        return view('panel.Generos.index', compact('generos'));
+        return view('panel.generos.index', compact('generos'));
     }
 
     public function create () {
-        return view('panel.Generos.create');
+        return view('panel.generos.create');
     }
 
     public function store (Request $request) {
@@ -25,12 +25,12 @@ class GenerosController extends Controller
         generos::create($request->all());
 
         //Redir
-        return redirect()->route('Generos.index')->with('status', 'Genero creado correctamente');
+        return redirect()->route('generos.index')->with('status', 'Genero creado correctamente');
     }
 
     public function edit($cod_genero) {
         $generos = generos::findOrFail($cod_genero);
-        return view('panel.Generos.edit', ['Generos' => $generos]);
+        return view('panel.generos.edit', ['generos' => $generos]);
     }
 
     public function update(Request $request, $cod_genero){
@@ -42,7 +42,7 @@ class GenerosController extends Controller
         $generos->update($request->all());
 
         //redireccion
-        return redirect()->route('Generos.index')->with('status', 'Genero Actualizado correctamente');
+        return redirect()->route('generos.index')->with('status', 'Genero Actualizado correctamente');
     }
 
     public function destroy($id) {
@@ -53,6 +53,6 @@ class GenerosController extends Controller
         $generos->delete();
 
         //redireccion
-        return redirect()->route('Generos.index')->with('status', 'Genero eliminado correctamente');
+        return redirect()->route('generos.index')->with('status', 'Genero eliminado correctamente');
     }
 }
