@@ -8,7 +8,7 @@ class TipodetfacturaController extends Controller
 {
      public function index () {
 
-        $tdf = tipodetfactura::pagiante(3);
+        $tdf = tipodetfactura::paginate(3);
 
         return view('panel.tipos_detalle_factura.index', compact('tdf'));
     }
