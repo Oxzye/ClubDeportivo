@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <a href="{{ route('Generos.create') }}" class="btn btn-primary">Agregar</a>
+        <a href="{{ route('generos.create') }}" class="btn btn-primary">Agregar</a>
 
         @if ($generos->count())
             

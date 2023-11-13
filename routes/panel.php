@@ -14,6 +14,8 @@ use App\Http\Controllers\DeportesController;
 use App\Http\Controllers\DiasController;
 use App\Http\Controllers\ProvinciasController;
 use App\Http\Controllers\LocalidadesController;
+use App\Http\Controllers\DisponibilidadesController;
+
 
 Route::get('/', function(){
         return view('panel.index');
@@ -29,7 +31,7 @@ Route::resource('/cargos', CargosController::class)->names('cargos');
 
 Route::resource('/paises', PaisesController::class)->names('paises');
 
-Route::resource('/genereos', GenerosController::class)->names('generos');
+Route::resource('/generos', GenerosController::class)->names('generos');
 
 Route::resource('/Tipo_factura', TipoFacturaController::class)->names('Tipo_factura');
 
@@ -44,4 +46,3 @@ Route::resource('/deportes', DeportesController::class)->names('deportes');
 Route::resource('/Provincias', ProvinciasController::class)->names('Provincias');
 
 Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
-
