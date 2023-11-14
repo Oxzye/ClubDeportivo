@@ -5,9 +5,9 @@
 
 @section('content')
 <div class="container">
-    <div id="caja-indicator" class="alert alert-success" style="display: none;">
+    <!--<div id="caja-indicator" class="alert alert-success" style="display: none;">
         La caja ha sido abierta.
-      </div>
+      </div>-->
       
     <h1>Apertura y Cierre de Caja</h1>
     @if (session('status'))
@@ -80,6 +80,7 @@ function showCajaIndicator() {
             div.style.display = 'block';
         } else {
             div.style.display = 'none';
+            
         }
     });
 

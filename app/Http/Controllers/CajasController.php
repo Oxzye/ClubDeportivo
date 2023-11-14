@@ -38,6 +38,7 @@ class CajasController extends Controller
        
         $cajas ->save();
         //Redir
+        echo '<script>showCajaIndicator();</script>';
        return redirect()->route('Cajas.index')->with('status', 'Caja abierta correctamente');
     }
 
@@ -63,7 +64,7 @@ class CajasController extends Controller
         $cajas->monto_final = $request->input('monto_final');
         $cajas->save();
         
-        
+        echo '<script>hideCajaIndicator();</script>';
         //redireccion
         return redirect()->route('Cajas.index')->with('status', 'Cajas Cerrada correctamente');
     }
