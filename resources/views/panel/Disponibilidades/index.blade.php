@@ -34,8 +34,8 @@
                             @foreach ($disponibilidades as $disp)
                                 <tr class="">
                                     <td class="text-center">{{ $disp->id_disp }}</td>
-                                    <td class="text-center">{{ $disp->id_inst }}</td>
-                                    <td class="text-center">{{ $disp->id_dia }}</td>
+                                    <td class="text-center">{{ $disp->instalaciones->nombre_inst }}</td>
+                                    <td class="text-center">{{ $disp->dias->nombre_dia }}</td>
                                     <td class="text-center">{{ $disp->horariodisp }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">
                                         {{-- <div class="btn-group" role="group" aria-label="Basic example"> --}}

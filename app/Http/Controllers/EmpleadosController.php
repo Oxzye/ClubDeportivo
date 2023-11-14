@@ -46,14 +46,16 @@ class EmpleadosController extends Controller
         // Crea un registro en la tabla 'users'.
         $user = User::create([
             'name' => $request->input('name'),
-            //'email' => $request->input('email'),
+            'email' => $request->input('email'),
             'apellido' => $request->input('apellido'),
             'dni' => $request->input('dni'),
             'fecha_nac' => $request->input('fecha_nac'),
             'domicilio' => $request->input('domicilio'),
             'telefono' => $request->input('telefono'),
             'cod_genero'=> $request->input('cod_genero'),
+            'id_prov'=> $request->input('id_prov'),
             'id_pais'=> $request->input('id_pais'),
+            
             'password' => Hash::make($password),
         ]);
 

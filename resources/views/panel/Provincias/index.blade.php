@@ -23,7 +23,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
+                                <th scope="col">Nombre de Provincias</th>
+                                <th scope="col">Paises</th>
                                 <th scope="col" colspan="3">Acciones</th>
                             </tr>
                         </thead>
@@ -32,7 +33,7 @@
                                 <tr class="">
                                     <td>{{ $prov->id_prov }}</td>
                                     <td>{{ $prov->nombre_prov }}</td>
-                                    <td>{{ $prov->id_pais }}</td>
+                                    <td>{{ $prov->paises->nombre_pais }}</td>
                                     <td>Ver</td>
                                     <td>
                                         <a href="{{ route('Provincias.edit', $prov->id_prov)  }}" class="btn btn-warning">Editar</a>

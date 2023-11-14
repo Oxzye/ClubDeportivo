@@ -11,9 +11,9 @@ class DisponibilidadesController extends Controller
     public function index () {
 
         //$provincia = new Provincias;
-        $dias = Dias::paginate(3);
+        $dias = Dias::all();
         $instalacion = Instalacion::all();
-        $disponibilidades = Disponibilidades::all();
+        $disponibilidades = Disponibilidades::paginate(3);
         return view('panel.Disponibilidades.index', compact('dias', 'instalacion', 'disponibilidades'));
     }
 

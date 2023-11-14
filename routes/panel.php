@@ -49,7 +49,7 @@ Route::resource('/Provincias', ProvinciasController::class)->names('Provincias')
 Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
 
 Route::resource('/Cajas', CajasController::class)->names('Cajas');
-//Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre');
+Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre');
 
 //Route::post('/Cajas/apertura', CajasController::class, 'apertura')->name('Cajas.apertura');
 

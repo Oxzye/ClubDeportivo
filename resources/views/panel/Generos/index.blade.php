@@ -24,6 +24,7 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre</th>
+                                <th scope="col">Sigla</th>
                                 <th scope="col" colspan="3">Acciones</th>
                             </tr>
                         </thead>

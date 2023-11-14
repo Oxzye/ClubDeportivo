@@ -21,7 +21,9 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
+                                <th scope="col">Nombre de Localidad</th>
+                                <th scope="col">Provincias</th>
+                                <th scope="col">Código Postal</th>
                                 <th scope="col" colspan="3">Acciones</th>
                             </tr>
                         </thead>
@@ -30,7 +32,7 @@
                                 <tr class="">
                                     <td>{{ $loc->id_loc }}</td>
                                     <td>{{ $loc->nombre_loc }}</td>
-                                    <td>{{ $loc->id_prov }}</td>
+                                    <td>{{ $loc->provincias->nombre_prov }}</td>
                                     <td>{{ $loc->cod_postal }}</td>
                                     <td>Ver</td>
                                     <td>

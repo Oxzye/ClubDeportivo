@@ -112,12 +112,14 @@
 
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Provincia</label>
-                                <select class="form-control" id="provincia" name="provincia" >
+                                <label for="exampleFormControlSelect2">Provincias</label>
+                                <select class="form-control" id="provincia" name="provincia">
                                 <option selected>Seleccionar</option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
+                                @foreach ($paises as $pais)
+                                <option value="{{ $pais->id_pais }}"> 
+                                    {{ $pais->nombre_pais }}
+                                </option>
+                            @endforeach
                                 </select>
                             </div>
                         </div>
@@ -126,9 +128,11 @@
                                 <label for="exampleFormControlSelect1">Localidad</label>
                                 <select class="form-control" id="localidad" name="localidad" >
                                 <option selected>Seleccionar</option>
-                                <option></option>
-                                <option></option>
-                                <option></option>
+                                 @foreach ($paises as $pais)
+                                <option value="{{ $pais->id_pais }}"> 
+                                    {{ $pais->nombre_pais }}
+                                </option>
+                            @endforeach
                                 </select>
                             </div>
                         </div>
