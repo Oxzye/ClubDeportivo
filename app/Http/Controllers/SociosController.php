@@ -19,6 +19,7 @@ class SociosController extends Controller
     public function index()
     {
         $socios = Socio::with('user')->get();
+        //logger($socios[0]->cuil_soc);
 
         return view('panel.socios.index', compact('socios'));
     }
@@ -130,9 +131,10 @@ class SociosController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $socio = Socio::with('user')->find($id);
         // Valida los datos del formulario de edición
         $request->validate([
-            'cuil_soc' => 'required|integer|unique:socios,cuil_soc,' . $id,
+            'cuil_soc' => 'required|integer|unique:socios,cuil_soc,' . $id .',id_soc',
             'fecha_asociacion' => 'required|date',
             'observaciones_soc' => 'string|max:40',
             // Otros campos...
