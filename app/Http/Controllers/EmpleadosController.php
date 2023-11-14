@@ -19,7 +19,7 @@ class EmpleadosController extends Controller
     public function index()
     {
         $empleados = Empleado::with('user')->get();
-    
+        $empleados = Empleado::paginate(2);
 
         return view('panel.empleados.index', compact('empleados',));
     }

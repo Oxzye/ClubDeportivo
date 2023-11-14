@@ -23,7 +23,11 @@
         @csrf
             <div class="mb-3">
               <label for="" class="form-label" name="nombre_pais">Nombre país:</label>
-              <input type="text" class="form-control" name="nombre_pais" id="" aria-describedby="helpId" placeholder="">
+              <input type="text" class="form-control" name="nombre_pais" value="{{ old( 'nombre_pais' ) }}" aria-describedby="helpId" @error('nombre_pais') is-invalid @enderror">
+                @error( 'nombre_pais' )
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                <br>
             </div>
              <button type="submit" class="btn btn-primary">Guardar</button>
              <a href="{{ route('paises.index') }}" class="btn btn-danger">Cancelar</a>

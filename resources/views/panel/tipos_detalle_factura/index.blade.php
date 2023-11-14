@@ -49,7 +49,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+                {{ $tdf->links() }}
         @else
             <h4>¡No hay tipos de detalles de facturas cargados!</h4>
         @endif
