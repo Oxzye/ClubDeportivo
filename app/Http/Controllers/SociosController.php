@@ -130,14 +130,13 @@ class SociosController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {   //agregando recuperacion de socio
+    {   
+        //agregando recuperacion de socio
         $socio = Socio::with('user')->find($id);
         // Valida los datos del formulario de edición
         $request->validate([
             'cuil_soc' => 'required|integer|unique:socios,cuil_soc,' . $id .',id_soc',
-            'fecha_asociacion' => 'required|date',
             'observaciones_soc' => 'string|max:40',
-            // Otros campos...
             'name' => 'required|string|max:40',
             'apellido' => 'required|string|max:40',
             'dni' => 'required|integer|min:10000000|max:99999999',
@@ -163,7 +162,7 @@ class SociosController extends Controller
         // Actualiza los datos en la tabla 'socios'
         $socio->update([
             'cuil_soc' => $request->input('cuil_soc'),
-            'fecha_asociacion' => $request->input('fecha_asociacion'),
+            'fecha_asociacion' => $socio->fecha_asociacion,
             'observaciones_soc' => $request->input('observaciones_soc'),
             // Otros campos...
         ]);

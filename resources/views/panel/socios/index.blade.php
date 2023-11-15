@@ -35,7 +35,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table id="tabla-productos" class="table table-striped table-hover w-100">
+                <table id="tabla-productos" class="table table-striped table-hover w-80">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -60,14 +60,14 @@
                             <td><b>{{ $socio->user->name}}</b>{{' '. $socio->user->apellido }}</td>
                             <td>{{ $socio->user->email }}</td>
                             <td>{{ $socio->user->id_loc }}</td>
-                            <td>{{ $socio->user->cod_genero }}</td>
+                            <td>{{ $socio->user->genero->abreviatura_genero }}</td>
                             <td>{{ $socio->user->fecha_nac }}</td>
                             <td>{{ $socio->user->domicilio }}</td>
                             <td>{{ $socio->user->telefono }}</td>
 
                             <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td>
                             <td>
-                                <img src="" alt="imagen socio" class="img-fluid" style="width: 150px;">
+                                <img src="" alt="imagen socio" class="img-fluid" style="width: 10px;">
                             </td>
                             <td>
                                 <div class="d-flex">

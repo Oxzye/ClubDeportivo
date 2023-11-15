@@ -40,7 +40,18 @@ class EmpleadosController extends Controller
     public function store(Request $request)
     {
         // Valida los datos del formulario (agrega validaciones según tus necesidades).
-
+        $request->validate([
+            'cuit_emp' =>   'required|integer|unique:empleados|min:1000000000|max:9999999999',
+            'dni' =>        'required|integer|min:10000000|max:99999999',
+            'name' =>       'required|string|max:40',
+            'apellido' =>   'required|string|max:40',
+            'fecha_nac' =>  'required|date|before:tomorrow',
+            'domicilio' =>  'required|string|max:200',
+            'telefono' =>   'required|string|max:20',
+            'cod_genero' => 'required|integer',
+            'email' =>      'required|string|unique:users|max:255|email',
+            'fecha_alta_emp' => 'required|date|after:fecha_nac',
+        ]);
         //Contraseña aleatoria
         $password = $request->input('dni') - 11111111;
         // Crea un registro en la tabla 'users'.
@@ -63,7 +74,7 @@ class EmpleadosController extends Controller
         Empleado::create([
             'id_cargo' => $request->input('id_cargo'),
             'id_user' => $userId,
-            'cuit_emp' => $request->input('cuit'),
+            'cuit_emp' => $request->input('cuit_emp'),
             'fecha_alta_emp' => $request->input('fecha_alta_emp'),
             'fecha_baja_emp' => $request->input('fecha_baja_emp'),
             // Otros campos de 'empleados'.
@@ -89,7 +100,13 @@ class EmpleadosController extends Controller
      */
     public function edit(string $id)
     {
+        // Recupera el socio y el usuario que deseas editar
+        $generos = generos::all();
         $cargos = Cargos::all();
+        $empleado = Empleado::with('user')->find($id);
+
+        // Muestra el formulario de edición con los datos actuales del socio y el usuario
+        return view('panel.empleados.edit', compact('empleado', 'generos', 'cargos'));
     }
 
     /**
@@ -97,7 +114,44 @@ class EmpleadosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //agregando recuperacion de socio
+        $empleado = Empleado::with('user')->find($id);
+        // Valida los datos del formulario de edición
+        $request->validate([
+            'cuit_emp' => 'required|integer|unique:empleados,cuit_emp,' . $id . ',id_emp',
+            'name' => 'required|string|max:40',
+            'apellido' => 'required|string|max:40',
+            'dni' => 'required|integer|min:10000000|max:99999999',
+            'fecha_nac' => 'required|date|before:tomorrow',
+            'domicilio' => 'required|string|max:200',
+            'telefono' => 'required|string|max:20',
+            'cod_genero' => 'required|integer',
+            'email' => 'required|string|max:255|email|unique:users,email,' . $empleado->user->id,
+        ]);
+
+        // Actualiza los datos en la tabla 'users'
+        $empleado->user->update([
+            'name' => $request->input('name'),
+            'apellido' => $request->input('apellido'),
+            'dni' => $request->input('dni'),
+            'fecha_nac' => $request->input('fecha_nac'),
+            'domicilio' => $request->input('domicilio'),
+            'telefono' => $request->input('telefono'),
+            'cod_genero' => $request->input('cod_genero'),
+            'email' => $request->input('email'),
+        ]);
+
+        // Actualiza los datos en la tabla 'socios'
+        $empleado->update([
+            'cuit_emp' => $request->input('cuit_emp'),
+            'id_cargo' => $request->input('id_cargo'),
+            'fecha_alta_emp' => $empleado->fecha_alta_emp,
+            'fecha_baja_emp' => $request->input('observaciones_soc'),
+            // Otros campos...
+        ]);
+
+        // Redirige a la vista de detalles o cualquier otra ruta que desees
+        return redirect()->route('empleados.index', $id)->with('status', 'Empleado actualizado correctamente');
     }
 
     /**

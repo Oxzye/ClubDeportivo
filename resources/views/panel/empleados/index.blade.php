@@ -61,7 +61,7 @@
                             <td>{{ $empleado->user->name .' '. $empleado->user->apellido }}</td>
                             <td>{{ $empleado->user->email }}</td>
                             <td>{{ $empleado->user->id_loc }}</td>
-                            <td>{{ $empleado->user->cod_genero }}</td>
+                            <td>{{ $empleado->user->genero->abreviatura_genero }}</td>
                             <td>{{ $empleado->user->fecha_nac }}</td>
                             <td>{{ $empleado->user->domicilio }}</td>
                             <td>{{ $empleado->user->telefono }}</td>
@@ -73,7 +73,7 @@
                                     <a href="" class="btn btn-sm btn-info text-white text-uppercase me-1">
                                         Ver
                                     </a>
-                                    <a href="" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                    <a href="{{ route('empleados.edit', $empleado->id_emp) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
                                     <form action="" method="POST">
