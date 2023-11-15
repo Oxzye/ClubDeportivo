@@ -19,7 +19,7 @@ class EmpleadosController extends Controller
     public function index()
     {
         $empleados = Empleado::with('user')->get();
-        $empleados = Empleado::paginate(2);
+        $empleados = Empleado::paginate(10);
 
         return view('panel.empleados.index', compact('empleados',));
     }
@@ -159,6 +159,16 @@ class EmpleadosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Recupera el empleado y el usuario que deseas eliminar
+        $empleado = Empleado::with('user')->find($id);
+
+        // Elimina el registro de 'empleados'
+        $empleado->delete();
+
+        // Elimina el registro de 'users'
+        $empleado->user->delete();
+
+        // Redirige a la vista de empleados o cualquier otra ruta que desees
+        return redirect()->route('empleados.index')->with('status', 'Empleado eliminado correctamente');
     }
 }

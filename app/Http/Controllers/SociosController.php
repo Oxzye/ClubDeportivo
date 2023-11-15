@@ -19,6 +19,7 @@ class SociosController extends Controller
     public function index()
     {
         $socios = Socio::with('user')->get();
+        $socios = Socio::paginate(10);
         //logger($socios[0]->cuil_soc);
 
         return view('panel.socios.index', compact('socios'));
