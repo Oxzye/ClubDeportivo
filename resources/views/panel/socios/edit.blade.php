@@ -165,7 +165,7 @@
 
                 <input type="hidden" name="id_user" value="9">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar</a>
+                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar lo</a>
             </div>
         </form>
     </div>

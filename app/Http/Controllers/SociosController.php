@@ -130,7 +130,7 @@ class SociosController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
+    {   //agregando recuperacion de socio
         $socio = Socio::with('user')->find($id);
         // Valida los datos del formulario de edición
         $request->validate([
