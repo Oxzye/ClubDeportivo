@@ -77,13 +77,9 @@
                                     <a href="{{ route('socios.edit', $socio->id_soc) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
-                                    <form action="" method="POST">
-                                        @csrf 
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger text-uppercase">
-                                            Eliminar
-                                        </button>
-                                    </form>
+                                    <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase me-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $socio->id_soc }}" data-nombre="{{ $socio->user->name }}">
+                                        Eliminar
+                                    </button>   
                                 </div>
                             </td>
                         </tr>
@@ -97,6 +93,36 @@
             <h4>¡No hay socios cargadas!</h4>
         @endif
 </div>
+ {{-- Modal de eliminacion --}}
+ <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirmar eliminación</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="formDelete" method="POST" action="#">
+            <div class="modal-body">
+                @csrf 
+                @method('DELETE')
+                <p id="message"></p>   
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger text-uppercase">
+                    Eliminar
+                </button>
+                <button type="button" class="btn btn-secondary text-uppercase" data-dismiss="modal">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
+
+
 @stop
 
 {{-- Importacion de Archivos CSS --}}
@@ -107,7 +133,22 @@
 
 {{-- Importacion de Archivos JS --}}
 @section('js')
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('js/cargos.js') }}"></script>
+    <script>
+        $(document).ready(function(){
 
-    {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-    <script src="{{ asset('js/productos.js') }}"></script>
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                const button = $(event.relatedTarget) // Button that triggered the modal
+                const id_socio = button.data('id') // Extract info from data-* attributes
+                const dni_socio = button.data('user->dni') // Extract info from data-* attributes
+                
+                const modal = $(this)
+                const form = $('#formDelete')
+                form.attr('action', `{{ env('APP_URL') }}/panel/socios/${id_socio}`);
+                modal.find('.modal-body #message').text(`¿Estás seguro de eliminar el cargo "${user->dni, user->name}"?`)
+            })
+        });
+    </script>
 @stop
