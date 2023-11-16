@@ -18,7 +18,8 @@ class Socio extends Model
                             'fecha_baja_socio', 
                             'observaciones_soc',
                             'updated_at',
-                            'created_at'
+                            'created_at',
+                            'enabled',
                         ];
 
     protected $primaryKey = 'id_soc';
@@ -26,5 +27,9 @@ class Socio extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+    public function getStatusText()
+    {
+        return $this->enabled ? 'Activo' : 'Inactivo';
     }
 }

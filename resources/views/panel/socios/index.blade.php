@@ -3,13 +3,16 @@
 
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 {{-- Titulo en las tabulaciones del Navegador --}}
 @section('title', 'Socios')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
-    <h1>Lista de Socios</h1>
+    <div class="container-fluid text-uppercase">
+        <h1>Lista de Socios</h1>
+    </div>
+    
 @stop
 
 {{-- Contenido de la Pagina --}}
@@ -40,21 +43,16 @@
                                         Agregar
                                     </a>
                                 </div>
-                                <div class="col-10">
-                                    <form action="#" method="get" id="search-form">
-                                        <div class="col-lg-12">
-                                            <div class="form-row">
-                                                <div class="col-2">
-                                                    <input type="text" class="form-control" placeholder="First name">
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <input type="text" class="form-control" placeholder="Last name">
-                                                </div>
-                                            </div>
-                                    </form>
+                                <div class="col-lg-2 mb-3 ml-auto">
+                                    <select class="custom-select filter-select">
+                                        <option selected value="Todos">--filtrar por--</option>
+                                        <option value="0">Socios Inactivos</option>
+                                        <option value="1">Socios Activos</option>
+                                    </select>
                                 </div>
+
                             </div>
-                            <table id="tabla-productos" class="table table-striped table-hover w-80">
+                            <table id="tabla-socios" class="table table-striped table-hover w-80">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -68,6 +66,7 @@
                                         <th scope="col" class="text-uppercase">Telefono</th>
                                         <th scope="col" class="text-uppercase">Observaciones</th> --}}
                                         <th scope="col" class="text-uppercase">Foto</th>
+                                        <th scope="col" class="text-uppercase">Estado</th>
                                         <th scope="col" class="text-uppercase">Opciones</th>
                                     </tr>
                                 </thead>
@@ -86,25 +85,37 @@
 
                                             <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td> --}}
                                             <td>
-                                                <img src="" alt="imagen socio" class="img-fluid"
-                                                    style="width: 10px;">
+                                                <img src="" alt="imagen_socio" class="img-fluid"
+                                                style="width: 10px;">
+                                            </td>
+                                            <td >
+                                                <div class="d-none">{{ $socio->enabled }}</div>
+                                                {{ $socio->getStatusText() }}
                                             </td>
                                             <td>
-                                                <div class="d-flex">
+                                                <div class="btn-group" role="group">
                                                     <a href=""
-                                                        class="btn btn-sm btn-info text-white text-uppercase me-1">
-                                                        Ver
+                                                        class="btn btn-outline-dark rounded-circle mx-2"
+                                                        style="width:2.5em; height:2.5em;">
+                                                        <span class="material-symbols-outlined d-flex justify-content-center">
+                                                            info
+                                                        </span>
                                                     </a>
                                                     <a href="{{ route('socios.edit', $socio->id_soc) }}"
-                                                        class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                                        Editar
+                                                        class="btn btn-outline-dark rounded-circle mx-2"
+                                                        style="width:2.5em; height:2.5em;">
+                                                        <span class="material-symbols-outlined d-flex justify-content-center">
+                                                            edit_square
+                                                        </span>
                                                     </a>
-                                                    <form action="{{ route('socios.destroy', $socio->id_soc) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger text-uppercase">
-                                                            Eliminar
+                                                    <form action="{{ route('socios.destroy', $socio->id_soc) }}" method="post">
+                                                        @csrf @method('DELETE')
+                                                        <button type="submit" class="btn btn-outline-dark rounded-circle mx-2"
+                                                            style="width:2.5em; height:2.5em;">
+                                                            <span
+                                                                class="material-symbols-outlined d-flex justify-content-center">
+                                                                cancel
+                                                            </span>
                                                         </button>
                                                     </form>
                                                 </div>
@@ -114,7 +125,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{ $socios->links() }}
                     </div>
                 </div>
             @else
@@ -137,5 +147,5 @@
 @section('js')
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-    <script src="{{ asset('js/productos.js') }}"></script>
+    <script src="{{ asset('js/socios.js') }}"></script>
 @stop
