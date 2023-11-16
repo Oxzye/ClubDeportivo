@@ -5,11 +5,11 @@
 @section('plugins.Datatables', true)
 
 {{-- Titulo en las tabulaciones del Navegador --}}
-@section('title', 'Empleados')
+@section('title', 'Clientes')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
-    <h1>Crear nuevo Empleado</h1>
+    <h1>Crear nuevo Cliente</h1>
 @stop
 
 {{-- Contenido de la Pagina --}}
@@ -26,7 +26,7 @@
         @endif
 
     <div class="col-12">
-        <form action="{{ route('empleados.store') }}" method="post">
+        <form action="{{ route('clientes.store') }}" method="post">
         @csrf
             <div class="row">
                 <div class="col-6 border border-dark">
@@ -34,28 +34,21 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="name">
-                                <small id="" class="form-text text-muted">Obligatorio.</small>
+                                <input type="text" class="form-control" name="nombre_cli" id="nombre_cli" aria-describedby="name">
+                                <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="apellido">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" name="apellido" aria-describedby="apellido">
-                                <small id="" class="form-text text-muted">Obligatorio.</small>
+                                <input type="text" class="form-control" id="apellido_cli" name="apellido_cli" aria-describedby="apellido">
+                                <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">DNI</label>
-                                <input type="number" class="form-control" name="dni" id="dni" aria-describedby="dni">
-                                <small id="" class="form-text text-muted">Posible alert.</small>
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">CUIT</label>
-                                <input type="number" class="form-control" name="cuit" id="cuit" aria-describedby="dni">
+                                <input type="number" class="form-control" name="dni_cli" id="dni_cli" aria-describedby="dni">
                                 <small id="" class="form-text text-muted">Posible alert.</small>
                             </div>
                         </div>
@@ -66,7 +59,6 @@
                                 <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
-
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Genero</label>
@@ -80,7 +72,6 @@
                             </select> 
                             </div>
                         </div>
-
                         <div class="col-7">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Domicilio</label>
@@ -88,49 +79,45 @@
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nro de telefono</label>
                                 <input type="number" class="form-control" id="telefono" name="telefono" aria-describedby="telefono">
                                 <small id="" class="form-text text-muted">We'll never share</small>
                             </div>
                         </div>
-
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">País</label>
-                                <select class="form-control" id="id_pais" name="id_pais" >
-                                <option value="" selected>Seleccionar</option>
-                                @foreach ($paises as $pais)
-                                <option value="{{ $pais->id_pais }}"> 
-                                    {{ $pais->nombre_pais }}
-                                </option>
-                            @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect2">Provincias</label>
-                                <select class="form-control" id="provincia" name="provincia">
+                                <label for="exampleFormControlSelect1">País</label>
+                                <select class="form-control" id="pais" name="pais" >
                                 <option selected>Seleccionar</option>
-                                @foreach ($paises as $pais)
-                                <option value="{{ $pais->id_pais }}"> 
-                                    {{ $pais->nombre_pais }}
+                                @foreach ($localidades as $loc)
+                                <option value="{{ $loc->id_loc }}"> 
+                                    {{ $loc->nombre_loc }}
                                 </option>
                             @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-3">
+                        
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Provincia</label>
+                                <select class="form-control" id="provincia" name="provincia" >
+                                <option selected>Seleccionar</option>
+                                @foreach ($localidades as $loc)
+                                <option value="{{ $loc->id_loc }}"> 
+                                    {{ $loc->nombre_loc }}
+                                </option>
+                            @endforeach
+                                </select>
+                            </div>
+                        
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Localidad</label>
                                 <select class="form-control" id="localidad" name="localidad" >
                                 <option selected>Seleccionar</option>
-                                 @foreach ($paises as $pais)
-                                <option value="{{ $pais->id_pais }}"> 
-                                    {{ $pais->nombre_pais }}
+                                @foreach ($localidades as $loc)
+                                <option value="{{ $loc->id_loc }}"> 
+                                    {{ $loc->nombre_loc }}
                                 </option>
                             @endforeach
                                 </select>
@@ -148,6 +135,7 @@
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
+                        <!--
                         <div class="col-10">
                             <div class="form-group">
                                 <label for="localidad">Contraseña</label>
@@ -156,45 +144,27 @@
                                 <small id="" class="form-text text-muted">ss</small>
                             </div>
                         </div>
+                        
                         <div class="col-10">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Cargo de empleado</label>
-                                <select id="id_cargo" name="id_cargo" class="form-control">
-                                    <option value="" selected>Seleccione uno...</option>
-                                    @foreach ($cargos as $cargo)
-                                        <option value="{{ $cargo->id_cargo }}"> 
-                                            {{ $cargo->nombre_cargo }}
-                                        </option>
-                                    @endforeach
-                                </select> 
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            <div class="form-group">
-                                <label for="exampleInput">Fecha de alta de empleado</label>
-                                <input type="date" class="form-control" id="fecha_alta_emp" name="fecha_alta_emp" aria-describedby="fecha_nac">
+                                <label for="exampleInputEmail1">Fecha de Asociacion</label>
+                                <input type="date" class="form-control" id="fecha_asociacion" name="fecha_asociacion" aria-describedby="fecha_nac">
                                 <small id="" class="form-text text-muted">Obligatorio.</small>
                             </div>
                         </div>
-                        <div class="col-5">
-                            <div class="form-group">
-                                <label for="exampleInput">Fecha de baja de empleado</label>
-                                <input type="date" class="form-control" id="fecha_baja_emp" name="fecha_baja_emp" aria-describedby="fecha_nac">
-                                <small id="" class="form-text text-muted">Puede estar vacio.</small>
-                            </div>
-                        </div>
+                    -->
                         <div class="col-10">
                             <div class="form-group">
-                                <label for="observaciones_soc">¿Hay algo a tener en cuenta sobre este empleado?</label>
-                                <textarea class="form-control" name="observaciones_soc" aria-label="With textarea"></textarea>
+                                <label for="observaciones_soc">¿Hay algo a tener en cuenta sobre este Cliente?</label>
+                                <textarea class="form-control" name="observaciones_soc" id="observaciones" aria-label="With textarea"></textarea>
                             </div>
-                        </div>  
+                        </div> 
                     </div>
                 </div>
 
-                <input type="hidden" name="id_user" value="">
+                <input type="hidden" name="id_user" value="9">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('empleados.index') }}" class="btn btn-danger">Cancelar</a>
+                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>
@@ -212,5 +182,5 @@
 @section('js')
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-    <script src="{{ asset('js/productos.js') }}"></script>
+    <script src="{{ asset('js/cargos.js') }}"></script>
 @stop

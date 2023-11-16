@@ -414,6 +414,14 @@ return [
                     'can' => 'listado_socios', // permiso de admin
                     'active' => ['panel/socios*'],
                     'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Lista de Clientes',
+                    'route' => 'clientes.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_clientes', // permiso de admin
+                    'active' => ['panel/clientes*'],
+                    'shift' => 'ml-3',
                 ]
             ]
         ],
