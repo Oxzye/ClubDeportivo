@@ -19,11 +19,9 @@ class SociosController extends Controller
     public function index()
     {
         $socios = Socio::with('user')->get();
-        $inactivos = Socio::whereIn('enabled', ['Inactivo'])->with('user')->get();
-        $activos = Socio::whereIn('enabled', ['Activo'])->with('user')->get();
         //logger($socios[0]->cuil_soc);
 
-        return view('panel.socios.index', compact('socios', 'inactivos','activos'));
+        return view('panel.socios.index', compact('socios'));
     }
 
     /**

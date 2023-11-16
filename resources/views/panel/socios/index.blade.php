@@ -85,8 +85,8 @@
 
                                             <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td> --}}
                                             <td>
-                                                <img src="" alt="imagen_socio" class="img-fluid"
-                                                style="width: 10px;">
+                                                <img src="{{ $socio->user->imagen }}" alt="imagen_socio" class="img-fluid"
+                                                style="width: 100px;">
                                             </td>
                                             <td >
                                                 <div class="d-none">{{ $socio->enabled }}</div>
