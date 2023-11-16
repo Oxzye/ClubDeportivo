@@ -98,12 +98,6 @@
                 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 mb-3">
-                <a href="{{ route('empleados.create') }}" class="btn btn-success text-uppercase">
-                    Nuevo Empleado
-                </a>
-            </div>
-
             @if (session('alert'))
                 <div class="col-12">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -117,6 +111,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="col-12 mb-3">
+                        <a href="{{ route('empleados.create') }}" class="btn btn-success">
+                            Agregar
+                        </a>
+                    </div>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -130,11 +129,11 @@
                                 <th scope="col" class="text-uppercase">Empleado</th>
                                 <th scope="col" class="text-uppercase">Cargo</th>
                                 <th scope="col" class="text-uppercase">Email</th>
-                                <th scope="col" class="text-uppercase">Localidad</th>
-                                <th scope="col" class="text-uppercase">Genero</th>
-                                <th scope="col" class="text-uppercase">Fecha de nac/edad</th>
-                                <th scope="col" class="text-uppercase">Domicilio</th>
-                                <th scope="col" class="text-uppercase">Telefono</th>
+                                <!--<th scope="col" class="text-uppercase">Localidad</th>-->
+                                <!--<th scope="col" class="text-uppercase">Genero</th>-->
+                                <!--<th scope="col" class="text-uppercase">Fecha de nac/edad</th>-->
+                                <!--<th scope="col" class="text-uppercase">Domicilio</th>-->
+                                <!--<th scope="col" class="text-uppercase">Telefono</th>-->
                                 <th scope="col" class="text-uppercase">Foto</th>
                                 <th scope="col" class="text-uppercase">Opciones</th>
                             </tr>
@@ -147,11 +146,11 @@
                                     <td>{{ $empleado->user->name .' '. $empleado->user->apellido }}</td>
                                     <td>{{ $empleado->cargo->nombre_cargo}}</td>
                                     <td>{{ $empleado->user->email }}</td>
-                                    <td>{{ $empleado->user->id_loc }}</td>
-                                    <td>{{ $empleado->user->genero->abreviatura_genero }}</td>
-                                    <td>{{ $empleado->user->fecha_nac }}</td>
-                                    <td>{{ $empleado->user->domicilio }}</td>
-                                    <td>{{ $empleado->user->telefono }}</td>
+                                    {{--<td>{{ $empleado->user->id_loc }}</td>--}}
+                                    {{--<td>{{ $empleado->user->genero->abreviatura_genero }}</td>--}}
+                                    {{--<td>{{ $empleado->user->fecha_nac }}</td>--}}
+                                    {{--<td>{{ $empleado->user->domicilio }}</td>--}}
+                                    {{--<td>{{ $empleado->user->telefono }}</td>--}}
                                     <td>
                                         <img src="" alt="imagen empleado" class="img-fluid" style="width: 150px;">
                                     </td>
