@@ -16,6 +16,10 @@ use App\Http\Controllers\DiasController;
 use App\Http\Controllers\ProvinciasController;
 use App\Http\Controllers\LocalidadesController;
 use App\Http\Controllers\DisponibilidadesController;
+use App\Http\Controllers\DiasxActController;
+use App\Http\Controllers\ActividadesController;
+use App\Http\Controllers\EmpleadosxActividadesController;
+use App\Http\Controllers\SociosxActividadesController;
 
 
 Route::get('/', function(){
@@ -54,3 +58,15 @@ Route::resource('/Cajas', CajasController::class)->names('Cajas');
 //Route::post('/Cajas/apertura', CajasController::class, 'apertura')->name('Cajas.apertura');
 
 Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('Disponibilidades');
+
+Route::resource('/Actividades', ActividadesController::class)->names('Actividades');
+
+Route::resource('/DiasxAct', DiasxActController::class)->names('DiasxAct');
+
+Route::resource('/SocxAct', SociosxActividadesController::class)->names('SocxAct');
+
+Route::resource('/EmpxAct', EmpleadosxActividadesController::class)->names('EmpxAct');
+
+// Route::resource('/Detalles_Factura', DisponibilidadesController::class)->names('Detalles_Factura');
+
+

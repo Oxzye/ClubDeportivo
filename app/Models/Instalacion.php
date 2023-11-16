@@ -17,4 +17,8 @@ class Instalacion extends Model
     {
         return $this->hasMany(Disponibilidades::class);
     }
+    public function actividades(): HasMany
+    {
+        return $this->hasMany(Actividad::class);
+    }
 }

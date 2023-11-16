@@ -424,8 +424,56 @@ return [
             'text' => 'Gestión de actividades',
             'icon' => 'fas fa-running',
             'submenu' => [
-                
-            ]
+                [
+                    'text' => 'Actividades',
+                    'route' => 'Actividades.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_act', // permiso 
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Disponibilidades',
+                    'route' => 'Disponibilidades.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_disponibilidades', // permiso 
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Dias por Actividades',
+                    'route' => 'DiasxAct.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_diasxact', // permiso 
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Socios por Actividades',
+                    'route' => 'SocxAct.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_sxa', // permiso 
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Empleados por Actividades',
+                    'route' => 'EmpxAct.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_exa', // permiso 
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Instalaciones',
+                    'route' => 'instalaciones.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Deportes',
+                    'route' => 'deportes.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ]
+            ],
         ],
     //
 
@@ -434,13 +482,13 @@ return [
             'text' => 'Otros',
             'icon' => 'fas fa-link',
             'submenu' => [
-                [
-                    'text' => 'Instalaciones',
-                    'route' => 'instalaciones.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_user', // permiso
-                    'shift' => 'ml-3',
-                ],
+                                // [
+                //     'text' => 'Detalles de Facturas',
+                //     'route' => 'Det.index',
+                //     'icon' => 'fas fa-users', // icono de fontawesome
+                //     'can' => 'listado_detallefactura', // permiso 
+                //     'shift' => 'ml-3',
+                // ],
                 [
                     'text' => 'Géneros',
                     'route' => 'generos.index',
@@ -477,13 +525,6 @@ return [
                     'shift' => 'ml-3',
                 ],
                 [
-                    'text' => 'Deportes',
-                    'route' => 'deportes.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_user', // permiso
-                    'shift' => 'ml-3',
-                ],
-                [
                     'text' => 'Países',
                     'route' => 'paises.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
@@ -504,14 +545,7 @@ return [
                     'icon' => 'fas fa-users', // icono de fontawesome
                     'can' => 'listado_localidades', // permiso
                     'shift' => 'ml-3',
-                ],
-                [
-                    'text' => 'Disponibilidades',
-                    'route' => 'Disponibilidades.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_disponibilidades', // permiso 
-                    'shift' => 'ml-3',
-                ],
+                ]
             ]
         ],
         [

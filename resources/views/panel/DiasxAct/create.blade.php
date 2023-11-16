@@ -2,12 +2,12 @@
 
 @section('plugins.Datatables', true)
 
-@section('title','Crear Disponibilidades')
+@section('title','Crear Dias por Actividades')
     
 @section('content')
     <div class="container-fluid">
 
-        <h1>Crear nueva Disponibilidad</h1>
+        <h1>Crear nuevo Dias por Actividades</h1>
 
         @if ($errors->any())
             <ul>
@@ -17,7 +17,7 @@
             </ul>
         @endif
         
-        <form action="{{ route('Disponibilidades.store') }}" method="post">
+        <form action="{{ route('DiasxAct.store') }}" method="post">
         @csrf
             {{-- dias con select --}}
             <div class="mb-3 row">
@@ -31,28 +31,29 @@
                 </select>
             </div>
             {{-- fin  dias con select--}}
-            {{-- instalaciones con select --}}
+            {{-- actividades con select --}}
             <div class="mb-3 row">
-                <label for="id_inst" class="col-sm-4 col-form-label" name="id_inst"> ID instalación: </label>
-                <select id="id_inst" name="id_inst" class="form-control">
-                    @foreach ($instalacion as $instalacion)
-                        <option value="{{ $instalacion->id_inst }}"> 
-                            {{ $instalacion->nombre_inst }}
+                <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> ID actividad: </label>
+                <select id="id_act" name="id_act" class="form-control">
+                    @foreach ($actividades as $act)
+                        <option value="{{ $act->id_act }}"> 
+                            {{ $act->nombre_act }}
                         </option>
                     @endforeach
                 </select>
             </div>
-            {{-- fin instalaciones con select --}}
+            {{-- fin actividades con select --}}
             <div class="mb-3">
-              <label for="" class="form-label" name="horariodisp">Horario disponible:</label>
-              <input type="text" class="form-control" name="horariodisp" value="{{ old( 'horariodisp' ) }}" aria-describedby="helpId" @error('horariodisp') is-invalid @enderror">
-              @error( 'horariodisp' )
-                  <div class="alert alert-danger">{{ $message }}</div>
-              @enderror
-              <br>
+              <label for="" class="form-label" name="horario_inicio">Horario de inicio:</label>
+              <input type="text" class="form-control" name="horario_inicio" id="" aria-describedby="helpId" placeholder="">
             </div>   
+
+            <div class="mb-3">
+                <label for="" class="form-label" name="horario_fin">Horario de fin:</label>
+                <input type="text" class="form-control" name="horario_fin" id="" aria-describedby="helpId" placeholder="">
+              </div>   
              <button type="submit" class="btn btn-primary">Guardar</button>
-             <a href="{{ route('Disponibilidades.index') }}" class="btn btn-danger">Cancelar</a>
+             <a href="{{ route('DiasxAct.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
     </div>
 
