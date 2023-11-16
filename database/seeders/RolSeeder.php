@@ -77,6 +77,12 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'editar_empleados'])->assignRole([$rol_admin, $rol_cajero]);
         Permission::create(['name' => 'eliminar_empleados'])->assignRole([$rol_admin, $rol_cajero]);
 
+        // Permisos para la tabla "dias"
+        Permission::create(['name' => 'crear_dias'])->assignRole([$rol_admin, $rol_gerente]);
+        Permission::create(['name' => 'listado_dias'])->assignRole([$rol_admin, $rol_gerente]);
+        Permission::create(['name' => 'editar_dias'])->assignRole($rol_admin);
+        Permission::create(['name' => 'eliminar_dias'])->assignRole($rol_admin);
+
         // Permisos para la tabla "países"
         Permission::create(['name' => 'crear_paises'])->assignRole([$rol_admin, $rol_gerente]);
         Permission::create(['name' => 'listado_paises'])->assignRole([$rol_admin, $rol_gerente]);

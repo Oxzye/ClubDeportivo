@@ -9,7 +9,7 @@ class DiasController extends Controller
 {
     public function index () {
 
-        $dias = Dias::paginate(3);
+        $dias = Dias::all();
 
         return view('panel.dias.index', compact('dias'));
     }
