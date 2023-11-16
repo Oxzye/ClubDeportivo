@@ -16,13 +16,6 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 mb-3">
-                <a href="{{ route('socios.create') }}" class="btn btn-success text-uppercase">
-                    Nuevo Socio
-                </a>
-
-            </div>
-
             @if (session('alert'))
                 <div class="col-12">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -31,9 +24,9 @@
                     </div>
                 </div>
             @endif
-            
+
             @if ($socios->count())
-                <div class="col-12">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             @if (session('status'))
@@ -41,6 +34,26 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
+                            <div class="row">
+                                <div class="col-lg-1 mb-3">
+                                    <a href="{{ route('socios.create') }}" class="btn btn-success">
+                                        Agregar
+                                    </a>
+                                </div>
+                                <div class="col-10">
+                                    <form action="#" method="get" id="search-form">
+                                        <div class="col-lg-12">
+                                            <div class="form-row">
+                                                <div class="col-2">
+                                                    <input type="text" class="form-control" placeholder="First name">
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <input type="text" class="form-control" placeholder="Last name">
+                                                </div>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
                             <table id="tabla-productos" class="table table-striped table-hover w-80">
                                 <thead>
                                     <tr>
@@ -48,12 +61,12 @@
                                         <th scope="col" class="text-uppercase">DNI</th>
                                         <th scope="col" class="text-uppercase">Socio</th>
                                         <th scope="col" class="text-uppercase">Email</th>
-                                        <th scope="col" class="text-uppercase">Localidad</th>
+                                        {{-- <th scope="col" class="text-uppercase">Localidad</th>
                                         <th scope="col" class="text-uppercase">Genero</th>
                                         <th scope="col" class="text-uppercase">Fecha de nac/edad</th>
                                         <th scope="col" class="text-uppercase">Domicilio</th>
                                         <th scope="col" class="text-uppercase">Telefono</th>
-                                        <th scope="col" class="text-uppercase">Observaciones</th>
+                                        <th scope="col" class="text-uppercase">Observaciones</th> --}}
                                         <th scope="col" class="text-uppercase">Foto</th>
                                         <th scope="col" class="text-uppercase">Opciones</th>
                                     </tr>
@@ -63,27 +76,31 @@
                                         <tr>
                                             <td>{{ $socio->id_soc }}</td>
                                             <td>{{ $socio->user->dni }}</td>
-                                            <td><b>{{ $socio->user->name }}</b>{{' '. $socio->user->apellido }}</td>
+                                            <td><b>{{ $socio->user->name }}</b>{{ ' ' . $socio->user->apellido }}</td>
                                             <td>{{ $socio->user->email }}</td>
-                                            <td>{{ $socio->user->id_loc }}</td>
+                                            {{--  <td>{{ $socio->user->id_loc }}</td>
                                             <td>{{ $socio->user->genero->abreviatura_genero }}</td>
                                             <td>{{ $socio->user->fecha_nac }}</td>
                                             <td>{{ $socio->user->domicilio }}</td>
                                             <td>{{ $socio->user->telefono }}</td>
 
-                                            <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td>
+                                            <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td> --}}
                                             <td>
-                                                <img src="" alt="imagen socio" class="img-fluid" style="width: 10px;">
+                                                <img src="" alt="imagen socio" class="img-fluid"
+                                                    style="width: 10px;">
                                             </td>
                                             <td>
                                                 <div class="d-flex">
-                                                    <a href="" class="btn btn-sm btn-info text-white text-uppercase me-1">
+                                                    <a href=""
+                                                        class="btn btn-sm btn-info text-white text-uppercase me-1">
                                                         Ver
                                                     </a>
-                                                    <a href="{{ route('socios.edit', $socio->id_soc) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                                    <a href="{{ route('socios.edit', $socio->id_soc) }}"
+                                                        class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                                         Editar
                                                     </a>
-                                                    <form action="{{ route('socios.destroy', $socio->id_soc) }}" method="POST">
+                                                    <form action="{{ route('socios.destroy', $socio->id_soc) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-danger text-uppercase">
@@ -112,7 +129,7 @@
 
 {{-- Importacion de Archivos CSS --}}
 @section('css')
-    
+
 @stop
 
 
