@@ -16,7 +16,7 @@ use App\Http\Controllers\DiasController;
 use App\Http\Controllers\ProvinciasController;
 use App\Http\Controllers\LocalidadesController;
 use App\Http\Controllers\DisponibilidadesController;
-
+use App\Http\Controllers\ClientesController;
 
 Route::get('/', function(){
         return view('panel.index');
@@ -54,3 +54,5 @@ Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre')
 //Route::post('/Cajas/apertura', CajasController::class, 'apertura')->name('Cajas.apertura');
 
 Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('Disponibilidades');
+
+Route::resource('/clientes', ClientesController::class)->names('clientes');
