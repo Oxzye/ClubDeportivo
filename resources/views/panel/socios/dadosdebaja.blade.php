@@ -10,7 +10,7 @@
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
     <div class="container-fluid text-uppercase">
-        <h1>Lista de Socios</h1>
+        <h1>Lista de Socios dados de baja</h1>
     </div>
     
 @stop
@@ -37,25 +37,9 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <div class="row">
-                                <div class="col-lg-1 mb-3">
-                                    <a href="{{ route('socios.create') }}" class="btn btn-success">
-                                        Agregar
-                                    </a>
-                                </div>
-                                <div class="col-lg-2 mb-3">
-                                    <a href="{{ route('socios.dadosdebaja') }}" class="btn btn-danger">
-                                        Recuperar Socio
-                                    </a>
-                                </div>
-                                <div class="col-lg-2 mb-3 ml-auto">
-                                    <select class="custom-select filter-select">
-                                        <option selected value="Todos">--filtrar por--</option>
-                                        <option  value="0">Socios Inactivos</option>
-                                        <option  value="1">Socios Activos</option>
-                                    </select>
-                                </div>
-
+                            <div>
+                                <a href="{{ route('socios.index') }}" class="btn btn-info">Regresar</a>
+                            </div>
                             </div>
                             <table id="tabla-socios" class="table table-striped table-hover w-80">
                                 <thead>
@@ -65,13 +49,12 @@
                                         <th scope="col" class="text-uppercase">Socio</th>
                                         <th scope="col" class="text-uppercase">Email</th>
                                         {{-- <th scope="col" class="text-uppercase">Localidad</th>
-                                        <th scope="col" class="text-uppercase">Genero</th>
-                                        <th scope="col" class="text-uppercase">Fecha de nac/edad</th>
-                                        <th scope="col" class="text-uppercase">Domicilio</th>
+                                        <th scope="col" class="text-uppercase">Genero</th>--}}
+                                        <th scope="col" class="text-uppercase">Fecha de baja</th>
+                                        {{-- <th scope="col" class="text-uppercase">Domicilio</th>
                                         <th scope="col" class="text-uppercase">Telefono</th>
                                         <th scope="col" class="text-uppercase">Observaciones</th> --}}
                                         <th scope="col" class="text-uppercase">Foto</th>
-                                        <th scope="col" class="text-uppercase">Estado</th>
                                         <th scope="col" class="text-uppercase">Opciones</th>
                                     </tr>
                                 </thead>
@@ -83,9 +66,9 @@
                                             <td><b>{{ $socio->user->name }}</b>{{ ' ' . $socio->user->apellido }}</td>
                                             <td>{{ $socio->user->email }}</td>
                                             {{--  <td>{{ $socio->user->id_loc }}</td>
-                                            <td>{{ $socio->user->genero->abreviatura_genero }}</td>
-                                            <td>{{ $socio->user->fecha_nac }}</td>
-                                            <td>{{ $socio->user->domicilio }}</td>
+                                            <td>{{ $socio->user->genero->abreviatura_genero }}</td>--}}
+                                            <td><b>{{ $socio->deleted_at->format('H:i:s d/m/Y') }}</b></td>
+                                            {{--<td>{{ $socio->user->domicilio }}</td>
                                             <td>{{ $socio->user->telefono }}</td>
 
                                             <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td> --}}
@@ -93,41 +76,10 @@
                                                 <img src="{{ $socio->user->imagen }}" alt="imagen_socio" class="img-fluid"
                                                 style="width: 100px;">
                                             </td>
-                                            <td >
-                                                <div class="d-none">{{ $socio->enabled }}</div>
-                                                {{ $socio->getStatusText() }}
-                                            </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href=""
-                                                        class="btn btn-outline-dark rounded-circle mx-2"
-                                                        style="width:2.5em; height:2.5em;">
-                                                        <span class="material-symbols-outlined d-flex justify-content-center">
-                                                            info
-                                                        </span>
-                                                    </a>
-                                                    @can('editar_socio')
-                                                    <a href="{{ route('socios.edit', $socio->id_soc) }}"
-                                                        class="btn btn-outline-dark rounded-circle mx-2"
-                                                        style="width:2.5em; height:2.5em;">
-                                                        <span class="material-symbols-outlined d-flex justify-content-center">
-                                                            edit_square
-                                                        </span>
-                                                    </a>
-                                                    @endcan
-                                                    @can('eliminar_socio')
-                                                    <form action="{{ route('socios.destroy', $socio->id_soc) }}" method="post">
-                                                        @csrf @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-dark rounded-circle mx-2"
-                                                            style="width:2.5em; height:2.5em;">
-                                                            <span
-                                                                class="material-symbols-outlined d-flex justify-content-center">
-                                                                cancel
-                                                            </span>
-                                                        </button>
-                                                    </form>
-                                                    @endcan
                                                 </div>
+                                                <a href="{{ route('socios.restore', $socio->id_soc) }}">Recuperar este socio</a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SociosController extends Controller
 {
@@ -176,6 +177,38 @@ class SociosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Recupera el empleado y el usuario que deseas eliminar
+        $socio = Socio::with('user')->find($id);
+
+        // Elimina el registro de 'empleados'
+        $socio->delete();
+
+        // Elimina el registro de 'users'
+        $socio->user->delete();
+
+        // Redirige a la vista de empleados o cualquier otra ruta que desees
+        return redirect()->route('socios.index')->with('status', 'Empleado eliminado correctamente');
     }
+
+    public function dadosdebaja()
+    {
+        $socios = Socio::onlyTrashed()->orderBy('deleted_at', 'asc')->with('user')->get();
+
+        //logger($socios[0]->cuil_soc);
+        return view('panel.socios.dadosdebaja', compact('socios'));
+    }
+
+    public function restore(string $id)
+    {
+        // Restaura el modelo 'User'
+        User::withTrashed()->where('id', $id)->restore();
+
+        // Restaura el modelo 'Socio'
+        Socio::withTrashed()->where('id_user', $id)->restore();
+
+        dd($id);
+
+        return redirect()->route('socios.index')->with('status', 'Socio ' . $id . ' recuperado exitosamente');
+    }
+
 }

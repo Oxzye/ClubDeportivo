@@ -325,8 +325,11 @@ return [
             'header' => 'canchero view',
             'can' => 'canchero_vista',
         ],
-    //
-    
+        //
+        [
+            'header' => 'Apertura y cierre de cajas',
+            'can' => 'admin_vista',
+        ],
     //Apertura y cierre de cajas
         [
             'text' => 'Apertura y Cierre de caja',
@@ -359,8 +362,11 @@ return [
                 ],*/
             ]
         ],
-    //
-
+        //
+        [
+            'header' => 'Venta y Facturación',
+            'can' => 'admin_vista',
+        ],
     //Cobro de cuotas sociales
         [
             'text' => 'Cobro de cuota social',
@@ -376,7 +382,43 @@ return [
             'submenu' => []
         ],
     //
+        [
+            'header' => 'Inscripción de socios',
+            'can' => 'admin_vista',
+        ],
+    //Inscripción de socios
+            [
+                'text' => 'Gestión de Socios',
+                'icon' => 'far fa-address-card',
+                'submenu' => [
+                    [
+                        'text' => 'Lista de Socios',
+                        'route' => 'socios.index',
+                        'icon' => 'fas fa-users', // icono de fontawesome
+                        'can' => 'listado_socios', // permiso de admin
+                        'active' => ['panel/socios/index'],
+                        'shift' => 'ml-3',
+                    ],
+                    [
+                        'text' => 'Crear Socio',
+                        'route' => 'socios.create',
+                        'icon' => 'fas fa-plus-circle', // icono de fontawesome
+                        'can' => 'crear_socio', // permiso de admin
+                        'active' => ['panel/socios/create'],
+                        'shift' => 'ml-3',
+                    ],
+                    [
+                        'text' => 'Recuperar Contraseña',
+                        'route' => 'socios.resetPassword',
+                        'icon' => 'fas fa-key', // icono de fontawesome
+                        'can' => 'reset_password', // permiso de admin
+                        'active' => ['panel/socios/resetPassword'],
+                        'shift' => 'ml-3',
+                    ],
 
+                ]
+            ],
+    //
     //Gestión de empleados
         [
             'text'    => 'Gestión de empleados',
@@ -402,22 +444,6 @@ return [
         ],
     //
 
-    //Inscripción de socios
-        [
-            'text' => 'Gestión de Socios',
-            'icon' => 'far fa-address-card',
-            'submenu' => [
-                [
-                    'text' => 'Lista de Socios',
-                    'route' => 'socios.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_socios', // permiso de admin
-                    'active' => ['panel/socios*'],
-                    'shift' => 'ml-3',
-                ]
-            ]
-        ],
-    //
 
     //Gestión de actividades
         [
