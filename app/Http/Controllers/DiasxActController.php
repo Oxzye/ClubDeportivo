@@ -15,6 +15,8 @@ class DiasxActController extends Controller
     {
         $dias = Dias::all();
         $actividades = Actividad::all();
+        $diasxact = DiasxAct::with('dia')->get();
+        $diasxact = DiasxAct::with('actividad')->get();
         $diasxact = DiasxAct::paginate(4);
         return view('panel.DiasxAct.index', compact('dias', 'actividades', 'diasxact'));
     }
@@ -26,8 +28,7 @@ class DiasxActController extends Controller
     {
         $dias = Dias::all();
         $actividades = Actividad::all();
-        $diasxact = DiasxAct::all();
-        return view('panel.DiasxAct.create', compact('dias', 'actividades', 'diasxact'));
+        return view('panel.DiasxAct.create', compact('dias', 'actividades'));
     }
 
     /**
@@ -49,8 +50,10 @@ class DiasxActController extends Controller
             'id_act.required' => 'El campo es obligatorio',
             'id_act.integer' => 'Ingrese un valor numerico',
             'id_act.max' => 'Solo se permiten hasta 50 caracteres',
+
             'horario_inicio.required' => 'El campo es obligatorio',
             'horario_inicio.datetime' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
+            
             'horario_fin.required' => 'El campo es obligatorio',
             'horario_fin.datetime' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
         ]);
@@ -74,12 +77,12 @@ class DiasxActController extends Controller
      */
     public function edit($id_diasxact)
     {
-        $diasxact=DiasxAct::findOrFail($id_diasxact);
+        $dxact=DiasxAct::findOrFail($id_diasxact);
 
-        if($diasxact) {
+        if($dxact) {
             $dias = Dias::all();
             $actividades = Actividad::all();
-            return view("panel.DiasxAct.edit", compact("dias","actividades"));
+            return view("panel.DiasxAct.edit", compact("dias","actividades", 'dxact'));
         } else {
             return redirect()->route('DiasxAct.index')->with('error','Día por actividad no encontrado');
         }
@@ -90,7 +93,7 @@ class DiasxActController extends Controller
      */
     public function update(Request $request, $id_diasxact)
     {
-        $diasxact=DiasxAct::findOrFail($id_diasxact);
+        $dxact=DiasxAct::findOrFail($id_diasxact);
          //Validacion de los datos
          $validated = $request->validate(
             [
@@ -112,7 +115,7 @@ class DiasxActController extends Controller
                 'horario_fin.datetime' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
             ]);
             if($validated) {
-                $diasxact->update($request->all());
+                $dxact->update($request->all());
             };
             //Redireccion con un mensaje flash de sesion
             return redirect()->route('DiasxAct.index')->with('status', 'Dia por Actividad actualizado correctamente');
@@ -124,9 +127,9 @@ class DiasxActController extends Controller
     public function destroy($id_diasxact)
     {
         //busqueda
-        $diasxact = DiasxAct::findOrFail($id_diasxact);
+        $dxact = DiasxAct::findOrFail($id_diasxact);
         // eliminación
-        $diasxact->delete();
+        $dxact->delete();
         //eliminar el registro del dia y acta que coincidan en la tabla diasxact
         return redirect()->route('DiasxAct.index')->with('status', 'Dia por Actividad eliminado correctamente');
     }

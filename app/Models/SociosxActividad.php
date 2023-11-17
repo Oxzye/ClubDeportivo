@@ -21,6 +21,11 @@ class SociosxActividad extends Model
 
     public function actividad(): BelongsTo
     {
-        return $this->belongsTo(Actividad::class);
+        return $this->belongsTo(Actividad::class, 'id_act');
+    }
+
+    public function socio(): BelongsTo
+    {
+        return $this->belongsTo(Socio::class, 'id_soc');
     }
 }

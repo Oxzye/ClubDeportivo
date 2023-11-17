@@ -15,8 +15,10 @@ class EmpleadosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $empleados = Empleado::all();
-        $empxact = EmpleadosxActividad::paginate(4);
-        return view('panel.EmpxAct.index', compact('empleados', 'actividades', 'empxact'));
+        $empxactiv = EmpleadosxActividad::with('actividad')->get();
+        $empxactiv = EmpleadosxActividad::with('empleado')->get();
+        $empxactiv = EmpleadosxActividad::paginate(4);
+        return view('panel.EmpxAct.index', compact('empleados', 'actividades', 'empxactiv'));
     }
 
     /**
@@ -26,8 +28,7 @@ class EmpleadosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $empleados = Empleado::all();
-        $empxact = EmpleadosxActividad::all();
-        return view('panel.EmpxAct.create', compact('empleados', 'actividades', 'empxact'));
+        return view('panel.EmpxAct.create', compact('empleados', 'actividades'));
     }
 
     /**
@@ -60,7 +61,8 @@ class EmpleadosxActividadesController extends Controller
      */
     public function show(string $id_exa)
     {
-        //
+        $empxact = EmpleadosxActividad::findOrFail($id_exa);
+        return view('panel.EmpxAct.show', ['empxact' => $empxact]);
     }
 
     /**
@@ -70,10 +72,10 @@ class EmpleadosxActividadesController extends Controller
     {
         $empxact=EmpleadosxActividad::findOrFail($id_exa);
 
-        if($id_exa){
+        if($empxact){
             $actividades = Actividad::all();
             $empleados = Empleado::all();
-            return view('panel.EmpxAct.edit', compact('empleados', 'actividades'));
+            return view('panel.EmpxAct.edit', compact('empleados', 'actividades', 'empxact'));
         } else {
             return redirect()->route('EmpxAct.index')->with('error', 'Empleado por Actividad no encontrado');
         }

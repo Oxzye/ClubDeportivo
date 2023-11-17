@@ -23,7 +23,7 @@
         @csrf @method('PUT')
         
             <div class="col-9 mb-3">
-              <label for="" class="form-label" name="nombre_pais">Nombre dia:</label>
+              <label for="" class="form-label" name="nombre_pais">Nombre país:</label>
               <input type="text" class="form-control" name="nombre_pais" aria-describedby="helpId" value="{{ old( 'nombre_pais', $pais->nombre_pais) }}" @error('nombre_pais') is-invalid @enderror">
               @error( 'nombre_pais' )
                 <div class="alert alert-danger">{{ $message }}</div>

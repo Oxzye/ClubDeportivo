@@ -15,21 +15,21 @@ class Disponibilidades extends Model
 
     protected $primaryKey = 'id_disp';
     
-    public function Dias() {
-        return $this->belongsTo(Dias::class, 'id_dia');
-    }
+    // public function Dias() {
+    //     return $this->belongsTo(Dias::class);
+    // }
     
-    public function Instalaciones() {
-        return $this->belongsTo(Instalacion::class, 'id_inst');
-    }
+    // public function Instalaciones() {
+    //     return $this->belongsTo(Instalacion::class);
+    // }
 
     public function instalacion(): BelongsTo
     {
-        return $this->belongsTo(Instalacion::class);
+        return $this->belongsTo(Instalacion::class, 'id_inst');
     }
 
     public function dia(): BelongsTo
     {
-        return $this->belongsTo(Dias::class);
+        return $this->belongsTo(Dias::class, 'id_dia');
     }
 }

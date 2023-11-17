@@ -28,11 +28,11 @@ class Actividad extends Model
      // Actividas recibe mucho a uno
     public function instalacion(): BelongsTo
     {
-        return $this->belongsTo(Instalacion::class);
+        return $this->belongsTo(Instalacion::class, 'id_inst');
     }
     public function deporte(): BelongsTo
     {
-        return $this->belongsTo(Deporte::class);
+        return $this->belongsTo(Deporte::class, 'id_dep');
     }
     // Actividad manda uno a mucho
     public function diasxactividades(): HasMany

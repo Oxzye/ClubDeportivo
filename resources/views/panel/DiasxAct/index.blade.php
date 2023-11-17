@@ -38,23 +38,23 @@
                             @foreach ($diasxact as $dxact)
                                 <tr class="">
                                     <td class="text-center">{{ $dxact->id_diasxact }}</td>
-                                    <td class="text-center">{{ $dxact->id_act }}</td>
-                                    <td class="text-center">{{ $dxact->id_dia }}</td>
+                                    <td class="text-center">{{ $dxact->actividad->nombre_act }}</td>
+                                    <td class="text-center">{{ $dxact->dia->nombre_dia }}</td>
                                     <td class="text-center">{{ $dxact->horario_inicio }}</td>
                                     <td class="text-center">{{ $dxact->horario_fin }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">
-                                        {{-- <div class="btn-group" role="group" aria-label="Basic example"> --}}
-                                            {{-- <a href="{{ route( 'paises.show', $pais->id_pais) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route( 'DiasxAct.show', $dxact->id_diasxact) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                 <span class="material-symbols-outlined d-flex justify-content-center">
                                                 info
                                                 </span>
-                                            </button></a> --}}
-                                        <a href="{{ route('DiasxAct.edit', $dxact->id_disp)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                            </button></a>
+                                        <a href="{{ route('DiasxAct.edit', $dxact->id_diasxact)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
                                                 edit_square
                                             </span>
                                         </a>
-                                        <form action="{{ route('DiasxAct.destroy', $dxact->id_disp ) }}" method="post">
+                                        <form action="{{ route('DiasxAct.destroy', $dxact->id_diasxact ) }}" method="post">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
@@ -62,7 +62,7 @@
                                             </span>
                                         </button>
                                         </form>
-                                        {{-- </div> --}}
+                                        </div>
                                     </td>
                                 </tr>  
                             @endforeach

@@ -16,6 +16,8 @@ class SociosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $socios = Socio::all();
+        $socxact = SociosxActividad::with('actividad')->get();
+        $socxact = SociosxActividad::with('socio')->get();
         $socxact = SociosxActividad::paginate(4);
         return view('panel.SocxAct.index', compact('socios', 'actividades', 'socxact'));
     }
@@ -27,8 +29,7 @@ class SociosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $socios = Socio::all();
-        $socxact = SociosxActividad::all();
-        return view('panel.SocxAct.create', compact('socios', 'actividades', 'socxact'));
+        return view('panel.SocxAct.create', compact('socios', 'actividades'));
     }
 
     /**
@@ -69,7 +70,8 @@ class SociosxActividadesController extends Controller
      */
     public function show(string $id_sxa)
     {
-        //
+        $sxa = SociosxActividad::findOrFail($id_sxa);
+        return view('panel.SocxAct.show', ['sxa' => $sxa]);
     }
 
     /**
@@ -77,12 +79,12 @@ class SociosxActividadesController extends Controller
      */
     public function edit(string $id_sxa)
     {
-        $socxact=SociosxActividad::findOrFail($id_sxa);
+        $sxa = SociosxActividad::findOrFail($id_sxa);
 
-        if($id_sxa){
+        if($sxa){
             $actividades = Actividad::all();
             $socios = Socio::all();
-            return view('panel.SocxAct.edit', compact('socios', 'actividades'));
+            return view('panel.SocxAct.edit', compact('socios', 'actividades', 'sxa'));
         } else {
             return redirect()->route('SocxAct.index')->with('error', 'Socio por Actividad no encontrado');
         }
@@ -93,7 +95,7 @@ class SociosxActividadesController extends Controller
      */
     public function update(Request $request, string $id_sxa)
     {
-        $socxact = SociosxActividad::findOrFail($id_sxa);
+        $sxa = SociosxActividad::findOrFail($id_sxa);
         //validacion
         $validated = $request->validate(
             [
@@ -117,7 +119,7 @@ class SociosxActividadesController extends Controller
                 'opinion_soc.max' => 'Solo se permiten hasta 250 caracteres',
             ]);
             if($validated) {
-                $socxact->update($request->all());
+                $sxa->update($request->all());
             };
             //Redireccion con un mensaje flash de sesion
             return redirect()->route('SocxAct.index')->with('status', 'Socio por Actividad actualizado correctamente');
@@ -129,9 +131,9 @@ class SociosxActividadesController extends Controller
     public function destroy(string $id_sxa)
     {
         //busqueda
-        $socxact = SociosxActividad::findOrFail($id_sxa);
+        $sxa = SociosxActividad::findOrFail($id_sxa);
         // eliminación
-        $socxact->delete();
+        $sxa->delete();
 
         return redirect()->route('SocxAct.index')->with('status', 'Socio por Actividad eliminado correctamente');
     }

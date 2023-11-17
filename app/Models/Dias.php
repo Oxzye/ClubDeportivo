@@ -16,4 +16,8 @@ class Dias extends Model
     {
         return $this->hasMany(Disponibilidades::class);
     }
+    public function diasxact(): HasMany
+    {
+        return $this->hasMany(DiasxAct::class);
+    }
 }

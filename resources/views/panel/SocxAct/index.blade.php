@@ -28,7 +28,7 @@
                             <tr>
                                 <th class="text-center">id_sxa</th>
                                 <th class="text-center">id_act</th>
-                                <th class="text-center">dni_soc</th>
+                                <th class="text-center">cuil_soc</th>
                                 <th class="text-center">fecha_inscripcion</th>
                                 <th class="text-center">opinion_soc</th>
                                 <th class="d-flex flex-row-reverse bd-highlight pe-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -38,17 +38,17 @@
                             @foreach ($socxact as $sxa)
                                 <tr class="">
                                     <td class="text-center">{{ $sxa->id_sxa }}</td>
-                                    <td class="text-center">{{ $sxa->id_act }}</td>
-                                    <td class="text-center">{{ $sxa->dni_soc }}</td>
+                                    <td class="text-center">{{ $sxa->actividad->nombre_act }}</td>
+                                    <td class="text-center">{{ $sxa->socio->cuil_soc }}</td>
                                     <td class="text-center">{{ $sxa->fecha_inscripcion }}</td>
                                     <td class="text-center">{{ $sxa->opinion_soc }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">
-                                        {{-- <div class="btn-group" role="group" aria-label="Basic example"> --}}
-                                            {{-- <a href="{{ route( 'paises.show', $pais->id_pais) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route( 'SocxAct.show', $sxa->id_sxa) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                 <span class="material-symbols-outlined d-flex justify-content-center">
                                                 info
                                                 </span>
-                                            </button></a> --}}
+                                            </button></a>
                                         <a href="{{ route('SocxAct.edit', $sxa->id_sxa)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
                                                 edit_square
@@ -62,7 +62,7 @@
                                             </span>
                                         </button>
                                         </form>
-                                        {{-- </div> --}}
+                                        </div>
                                     </td>
                                 </tr>  
                             @endforeach

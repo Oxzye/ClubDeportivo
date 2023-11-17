@@ -19,6 +19,10 @@ class EmpleadosxActividad extends Model
 
     public function actividad(): BelongsTo
     {
-        return $this->belongsTo(Actividad::class);
+        return $this->belongsTo(Actividad::class, 'id_act');
+    }
+    public function empleado(): BelongsTo
+    {
+        return $this->belongsTo(Empleado::class, 'id_emp');
     }
 }

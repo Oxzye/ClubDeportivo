@@ -2,12 +2,12 @@
 
 @section('plugins.Datatables', true)
 
-@section('title','Crear Disponibilidades')
+@section('title','Editar Disponibilidades')
     
 @section('content')
     <div class="container-fluid">
 
-        <h1>Crear nueva Disponibilidad</h1>
+        <h1>Editar Disponibilidad</h1>
 
         @if ($errors->any())
             <ul>
@@ -17,8 +17,8 @@
             </ul>
         @endif
         
-        <form action="{{ route('Disponibilidades.store') }}" method="post">
-        @csrf
+        <form action="{{ route('Disponibilidades.update', $disp->id_disp) }}" method="post" novalidate>
+        @csrf @method('PUT')
             {{-- dias con select --}}
             <div class="mb-3 row">
                 <label for="id_dia" class="col-sm-4 col-form-label" name="id_dia"> ID día: </label>
@@ -48,7 +48,7 @@
             {{-- fin instalaciones con select --}}
             <div class="mb-3">
                 <label for="" class="form-label" name="horariodisp">Horario disponible:</label>
-                <input type="text" class="form-control" name="horariodisp" value="{{ old( 'horariodisp' ) }}" aria-describedby="helpId" @error('horariodisp') is-invalid @enderror">
+                <input type="text" class="form-control" name="horariodisp" value="{{ old( 'horariodisp', $disp->horariodisp ) }}" aria-describedby="helpId" @error('horariodisp') is-invalid @enderror">
                 @error( 'horariodisp' )
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror

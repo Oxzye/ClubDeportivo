@@ -20,7 +20,7 @@
         <a href="{{ route('EmpxAct.create') }}" class="btn btn-primary mb-4 mt-4">Agregar</a>
         </div>
 
-        @if ($empxact->count())
+        @if ($empxactiv->count())
             
                 <div class="table-responsive">
                     <table class="table table-primary">
@@ -33,24 +33,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($empxact as $exa)
+                            @foreach ($empxactiv as $empxact)
                                 <tr class="">
-                                    <td class="text-center">{{ $exa->id_exa }}</td>
-                                    <td class="text-center">{{ $exa->id_emp }}</td>
-                                    <td class="text-center">{{ $exa->id_act }}</td>
+                                    <td class="text-center">{{ $empxact->id_exa }}</td>
+                                    <td class="text-center">{{ $empxact->empleado->cuit_emp }}</td>
+                                    <td class="text-center">{{ $empxact->actividad->nombre_act }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">
-                                        {{-- <div class="btn-group" role="group" aria-label="Basic example"> --}}
-                                            {{-- <a href="{{ route( 'EmpxAct.show', $exa->id_exa) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route( 'EmpxAct.show', $empxact->id_exa) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                 <span class="material-symbols-outlined d-flex justify-content-center">
                                                 info
                                                 </span>
-                                            </button></a> --}}
-                                        <a href="{{ route('EmpxAct.edit', $exa->id_exa)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                            </button></a>
+                                        <a href="{{ route('EmpxAct.edit', $empxact->id_exa)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
                                                 edit_square
                                             </span>
                                         </a>
-                                        <form action="{{ route('EmpxAct.destroy', $exa->id_exa ) }}" method="post">
+                                        <form action="{{ route('EmpxAct.destroy', $empxact->id_exa ) }}" method="post">
                                         @csrf @method('DELETE')
                                         <button type="submit" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
@@ -58,7 +58,7 @@
                                             </span>
                                         </button>
                                         </form>
-                                        {{-- </div> --}}
+                                        </div>
                                     </td>
                                 </tr>  
                             @endforeach
@@ -66,7 +66,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $empxact->links() }} 
+                {{ $empxactiv->links() }} 
         @else
             <h4>¡No hay empleados por actividades cargadas!</h4>
         @endif

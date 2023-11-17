@@ -2,12 +2,12 @@
 
 @section('plugins.Datatables', true)
 
-@section('title','Crear Dias por Actividades')
+@section('title','Editar socio por actividad')
     
 @section('content')
     <div class="container-fluid">
 
-        <h1>Crear nuevo Dias por Actividades</h1>
+        <h1>Editar socio por actividad</h1>
 
         @if ($errors->any())
             <ul>
@@ -17,15 +17,15 @@
             </ul>
         @endif
         
-        <form action="{{ route('DiasxAct.store') }}" method="post">
-        @csrf
+        <form action="{{ route('SocxAct.update', $sxa->id_sxa) }}" method="post" novalidate>
+            @csrf @method('PUT')
             {{-- dias con select --}}
             <div class="mb-3 row">
-                <label for="id_dia" class="col-sm-4 col-form-label" name="id_dia"> Día: </label>
-                <select id="id_dia" name="id_dia" class="form-control">
-                    @foreach ($dias as $dia)
-                        <option value="{{ $dia->id_dia }}"> 
-                            {{ $dia->nombre_dia }}
+                <label for="id_soc" class="col-sm-4 col-form-label" name="id_soc"> Socio: </label>
+                <select id="id_soc" name="id_soc" class="form-control">
+                    @foreach ($socios as $socio)
+                        <option value="{{ $socio->id_soc }}"> 
+                            {{ $socio->cuil_soc }}
                         </option>
                     @endforeach
                 </select>
@@ -33,7 +33,7 @@
             {{-- fin  dias con select--}}
             {{-- actividades con select --}}
             <div class="mb-3 row">
-                <label for="id_act" class="col-sm-4 col-form-label" name="id_act">Actividad: </label>
+                <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad: </label>
                 <select id="id_act" name="id_act" class="form-control">
                     @foreach ($actividades as $act)
                         <option value="{{ $act->id_act }}"> 
@@ -44,24 +44,24 @@
             </div>
             {{-- fin actividades con select --}}
             <div class="mb-3">
-              <label for="" class="form-label" name="horario_inicio">Horario de inicio, con formato YYYY-MM-DD HH:mm:ss:</label>
-              <input type="text" class="form-control" name="horario_inicio" value="{{ old( 'horario_inicio' ) }}" aria-describedby="helpId" @error('horario_inicio') is-invalid @enderror">
-              @error( 'horario_inicio' )
+              <label for="" class="form-label" name="fecha_inscripcion">Fecha de inscripción, con formato YYYY-MM-DD HH:mm:ss:</label>
+              <input type="text" class="form-control" name="fecha_inscripcion" value="{{ old( 'fecha_inscripcion', $sxa->fecha_inscripcion ) }}" aria-describedby="helpId" @error('fecha_inscripcion') is-invalid @enderror">
+              @error( 'fecha_inscripcion' )
                   <div class="alert alert-danger">{{ $message }}</div>
               @enderror
               <br>
             </div>   
 
             <div class="mb-3">
-                <label for="" class="form-label" name="horario_fin">Horario de fin, con formato YYYY-MM-DD HH:mm:ss:</label>
-                <input type="text" class="form-control" name="horario_fin" value="{{ old( 'horario_fin' ) }}" aria-describedby="helpId" @error('horario_fin') is-invalid @enderror">
-                @error( 'horario_fin' )
+                <label for="" class="form-label" name="opinion_soc">Opinión de socio:</label>
+                <input type="text" class="form-control" name="opinion_soc" value="{{ old( 'opinion_soc', $sxa->opinion_soc ) }}" aria-describedby="helpId" @error('opinion_soc') is-invalid @enderror">
+                @error( 'opinion_soc' )
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <br>
               </div>   
              <button type="submit" class="btn btn-primary">Guardar</button>
-             <a href="{{ route('DiasxAct.index') }}" class="btn btn-danger">Cancelar</a>
+             <a href="{{ route('SocxAct.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
     </div>
 

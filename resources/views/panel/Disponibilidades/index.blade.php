@@ -34,16 +34,16 @@
                             @foreach ($disponibilidades as $disp)
                                 <tr class="">
                                     <td class="text-center">{{ $disp->id_disp }}</td>
-                                    <td class="text-center">{{ $disp->id_inst }}</td>
-                                    <td class="text-center">{{ $disp->id_dia }}</td>
+                                    <td class="text-center">{{ $disp->instalacion->nombre_inst }}</td>
+                                    <td class="text-center">{{ $disp->dia->nombre_dia }}</td>
                                     <td class="text-center">{{ $disp->horariodisp }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">
-                                        {{-- <div class="btn-group" role="group" aria-label="Basic example"> --}}
-                                            {{-- <a href="{{ route( 'paises.show', $pais->id_pais) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route( 'Disponibilidades.show', $disp->id_disp) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                 <span class="material-symbols-outlined d-flex justify-content-center">
                                                 info
                                                 </span>
-                                            </button></a> --}}
+                                            </button></a>
                                         <a href="{{ route('Disponibilidades.edit', $disp->id_disp)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
                                                 edit_square
@@ -57,7 +57,7 @@
                                             </span>
                                         </button>
                                         </form>
-                                        {{-- </div> --}}
+                                        </div>
                                     </td>
                                 </tr>  
                             @endforeach
