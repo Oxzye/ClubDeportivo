@@ -408,6 +408,14 @@ return [
                         'shift' => 'ml-3',
                     ],
                     [
+                        'text' => 'Socios dados de Baja',
+                        'route' => 'socios.dadosdebaja',
+                        'icon' => 'fas fa-user-times', // icono de fontawesome
+                        'can' => 'crear_socio', // permiso de admin
+                        'active' => ['panel/socios/dadosdebaja'],
+                        'shift' => 'ml-3',
+                    ],
+                    [
                         'text' => 'Recuperar Contraseña',
                         'route' => 'socios.resetPassword',
                         'icon' => 'fas fa-key', // icono de fontawesome
@@ -429,8 +437,24 @@ return [
                     'route' => 'empleados.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
                     'can' => 'listado_empleados', // permiso de admin
-                    'active' => ['panel/empleados*'],
+                    'active' => ['panel/empleados/index'],
                     'shift' =>'ml-3',
+                ],
+                [
+                    'text' => 'Crear Empleado',
+                    'route' => 'empleados.create',
+                    'icon' => 'fas fa-plus-circle', // icono de fontawesome
+                    'can' => 'crear_empleados', // permiso de admin
+                    'active' => ['panel/empleados/create'],
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Empleados dados de Baja',
+                    'route' => 'empleados.dadosdebaja',
+                    'icon' => 'fas fa-user-times', // icono de fontawesome
+                    'can' => 'crear_empleados', // permiso de admin
+                    'active' => ['panel/empleados/dadosdebaja'],
+                    'shift' => 'ml-3',
                 ],
                 [
                     'text' => 'Cargos',

@@ -3,7 +3,8 @@
 
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 {{-- Titulo en las tabulaciones del Navegador --}}
 @section('title', 'Socios')
 
@@ -12,7 +13,7 @@
     <div class="container-fluid text-uppercase">
         <h1>Lista de Socios</h1>
     </div>
-    
+
 @stop
 
 {{-- Contenido de la Pagina --}}
@@ -32,27 +33,36 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            @if (session('status'))
-                                <div class="alert alert-success">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
                             <div class="row">
-                                <div class="col-lg-1 mb-3">
-                                    <a href="{{ route('socios.create') }}" class="btn btn-success">
-                                        Agregar
-                                    </a>
-                                </div>
-                                <div class="col-lg-2 mb-3">
-                                    <a href="{{ route('socios.dadosdebaja') }}" class="btn btn-danger">
-                                        Recuperar Socio
-                                    </a>
-                                </div>
+                                @if (session('status'))
+                                    <div class="col-12 alert alert-success">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                                @can('crear_socio')
+                                    <div class="col-lg-1 mb-3">
+                                        <a href="{{ route('socios.create') }}" class="btn btn-success">
+                                            Agregar
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-2 mb-3">
+                                        <a href="{{ route('socios.dadosdebaja') }}" class="btn btn-danger">
+                                            Recuperar Socio
+                                        </a>
+                                    </div>
+                                @endcan
+                                @can('recepcionista_vista')
+                                    <div class="col-lg-5 mb-3">
+                                        <a href="{{ route('socios.dadosdebaja') }}" class="btn btn-danger">
+                                            Socios dados de baja
+                                        </a>
+                                    </div>
+                                @endcan
                                 <div class="col-lg-2 mb-3 ml-auto">
                                     <select class="custom-select filter-select">
                                         <option selected value="Todos">--filtrar por--</option>
-                                        <option  value="0">Socios Inactivos</option>
-                                        <option  value="1">Socios Activos</option>
+                                        <option value="0">Socios Inactivos</option>
+                                        <option value="1">Socios Activos</option>
                                     </select>
                                 </div>
 
@@ -91,41 +101,44 @@
                                             <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td> --}}
                                             <td>
                                                 <img src="{{ $socio->user->imagen }}" alt="imagen_socio" class="img-fluid"
-                                                style="width: 100px;">
+                                                    style="width: 100px;">
                                             </td>
-                                            <td >
+                                            <td>
                                                 <div class="d-none">{{ $socio->enabled }}</div>
                                                 {{ $socio->getStatusText() }}
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href=""
-                                                        class="btn btn-outline-dark rounded-circle mx-2"
+                                                    <a href="" class="btn btn-outline-dark rounded-circle mx-2"
                                                         style="width:2.5em; height:2.5em;">
-                                                        <span class="material-symbols-outlined d-flex justify-content-center">
+                                                        <span
+                                                            class="material-symbols-outlined d-flex justify-content-center">
                                                             info
                                                         </span>
                                                     </a>
                                                     @can('editar_socio')
-                                                    <a href="{{ route('socios.edit', $socio->id_soc) }}"
-                                                        class="btn btn-outline-dark rounded-circle mx-2"
-                                                        style="width:2.5em; height:2.5em;">
-                                                        <span class="material-symbols-outlined d-flex justify-content-center">
-                                                            edit_square
-                                                        </span>
-                                                    </a>
-                                                    @endcan
-                                                    @can('eliminar_socio')
-                                                    <form action="{{ route('socios.destroy', $socio->id_soc) }}" method="post">
-                                                        @csrf @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-dark rounded-circle mx-2"
+                                                        <a href="{{ route('socios.edit', $socio->id_soc) }}"
+                                                            class="btn btn-outline-dark rounded-circle mx-2"
                                                             style="width:2.5em; height:2.5em;">
                                                             <span
                                                                 class="material-symbols-outlined d-flex justify-content-center">
-                                                                cancel
+                                                                edit_square
                                                             </span>
-                                                        </button>
-                                                    </form>
+                                                        </a>
+                                                    @endcan
+                                                    @can('eliminar_socio')
+                                                        <form action="{{ route('socios.destroy', $socio->id_soc) }}"
+                                                            method="post">
+                                                            @csrf @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-outline-dark rounded-circle mx-2"
+                                                                style="width:2.5em; height:2.5em;">
+                                                                <span
+                                                                    class="material-symbols-outlined d-flex justify-content-center">
+                                                                    cancel
+                                                                </span>
+                                                            </button>
+                                                        </form>
                                                     @endcan
                                                 </div>
                                             </td>

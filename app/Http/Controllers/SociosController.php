@@ -200,15 +200,17 @@ class SociosController extends Controller
 
     public function restore(string $id)
     {
+        $datos = User::onlyTrashed()->find($id);
         // Restaura el modelo 'User'
-        User::withTrashed()->where('id', $id)->restore();
+        $user = User::whereId($id);
+        $user->restore();
 
         // Restaura el modelo 'Socio'
-        Socio::withTrashed()->where('id_user', $id)->restore();
+        $socio = Socio::where('id_user', $id);
+        $socio->restore();
 
-        dd($id);
 
-        return redirect()->route('socios.index')->with('status', 'Socio ' . $id . ' recuperado exitosamente');
+        return redirect()->route('socios.dadosdebaja')->with('status', 'Socio ' . $datos->name." ".$datos->apellido  . ' recuperado exitosamente');
     }
 
 }

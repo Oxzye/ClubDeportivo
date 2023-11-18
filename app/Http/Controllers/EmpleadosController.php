@@ -10,6 +10,7 @@ use App\Models\generos;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EmpleadosController extends Controller
 {
@@ -19,8 +20,6 @@ class EmpleadosController extends Controller
     public function index()
     {
         $empleados = Empleado::with('user')->get();
-        $empleados = Empleado::paginate(10);
-
         return view('panel.empleados.index', compact('empleados',));
     }
 
@@ -170,5 +169,27 @@ class EmpleadosController extends Controller
 
         // Redirige a la vista de empleados o cualquier otra ruta que desees
         return redirect()->route('empleados.index')->with('status', 'Empleado eliminado correctamente');
+    }
+
+    public function dadosdebaja()
+    {
+        $empleados = Empleado::onlyTrashed()->orderBy('deleted_at', 'asc')->with('user')->get();
+        //logger($socios[0]->cuil_soc);
+        return view('panel.empleados.dadosdebaja', compact('empleados'));
+    }
+
+    public function restore(string $id)
+    {
+        $datos = User::onlyTrashed()->find($id);
+        // Restaura el modelo 'User'
+        $user = User::whereId($id);
+        $user->restore();
+
+        // Restaura el modelo 'Socio'
+        $empleado = Empleado::where('id_user', $id);
+        $empleado->restore();
+
+
+        return redirect()->route('empleados.dadosdebaja')->with('status', 'Empleado: ' . $datos->name . " " . $datos->apellido  . ' recuperado exitosamente');
     }
 }

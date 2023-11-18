@@ -6,12 +6,12 @@
 <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 {{-- Titulo en las tabulaciones del Navegador --}}
-@section('title', 'Socios')
+@section('title', 'Empleados')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
     <div class="container-fluid text-uppercase">
-        <h1>Lista de Socios dados de baja</h1>
+        <h1>Lista de Empleados dados de baja</h1>
     </div>
 
 @stop
@@ -22,28 +22,23 @@
         <div class="row">
             @if (session('alert'))
                 <div class="col-12">
-                    <div class="col-12 alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('alert') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
             @endif
-            @if (!$socios->count())
-                <div>
-                    <a href="{{ route('socios.index') }}" class="btn btn-info">Regresar</a>
-                </div>
-            @endif
             @if (session('status'))
-                <div class="alert alert-success">
+                <div class="col-12 alert alert-success">
                     {{ session('status') }}
                 </div>
             @endif
-            @if ($socios->count())
-                <div class="col-lg-12" id="tableta">
+            @if ($empleados->count())
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <div>
-                                <a href="{{ route('socios.index') }}" class="btn btn-info">Regresar</a>
+                                <a href="{{ route('empleados.index') }}" class="btn btn-info">Regresar</a>
                             </div>
                         </div>
                         <table id="tabla-socios" class="table table-striped table-hover w-80">
@@ -51,7 +46,8 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col" class="text-uppercase">DNI</th>
-                                    <th scope="col" class="text-uppercase">Socio</th>
+                                    <th scope="col" class="text-uppercase">Cargo</th>
+                                    <th scope="col" class="text-uppercase">Empleado</th>
                                     <th scope="col" class="text-uppercase">Email</th>
                                     {{-- <th scope="col" class="text-uppercase">Localidad</th>
                                         <th scope="col" class="text-uppercase">Genero</th> --}}
@@ -64,29 +60,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($socios as $socio)
+                                @foreach ($empleados as $empleado)
                                     <tr>
-                                        <td>{{ $socio->id_soc }}</td>
-                                        <td>{{ $socio->user->dni }}</td>
-                                        <td><b>{{ $socio->user->name }}</b>{{ ' ' . $socio->user->apellido }}</td>
-                                        <td>{{ $socio->user->email }}</td>
+                                        <td>{{ $empleado->id_emp }}</td>
+                                        <td>{{ $empleado->user->dni }}</td>
+                                        <td>{{ $empleado->cargo->nombre_cargo }}</td>
+                                        <td><b>{{ $empleado->user->name }}</b>{{ ' ' . $empleado->user->apellido }}</td>
+                                        <td>{{ $empleado->user->email }}</td>
                                         {{--  <td>{{ $socio->user->id_loc }}</td>
                                             <td>{{ $socio->user->genero->abreviatura_genero }}</td> --}}
-                                        <td><b>{{ $socio->deleted_at->format('H:i:s d/m/Y') }}</b></td>
+                                        <td><b>{{ $empleado->deleted_at->format('H:i:s d/m/Y') }}</b></td>
                                         {{-- <td>{{ $socio->user->domicilio }}</td>
                                             <td>{{ $socio->user->telefono }}</td>
 
                                             <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td> --}}
                                         <td>
-                                            <img src="{{ $socio->user->imagen }}" alt="imagen_socio" class="img-fluid"
+                                            <img src="{{ $empleado->user->imagen }}" alt="imagen_socio" class="img-fluid"
                                                 style="width: 100px;">
                                         </td>
                                         <td>
-                                            @can('crear_socio')
-                                                <div class="btn-group" role="group">
-                                                    <a href="{{ route('socios.restore', $socio->id_user) }}">Recuperar</a>
-                                                </div>
-                                            @endcan
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route('empleados.restore', $empleado->id_user) }}">Recuperar</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -97,7 +92,7 @@
         </div>
     @else
         <div class="col-12">
-            <h4>¡No hay socios cargados!</h4>
+            <h4>¡No hay Empleados cargados!</h4>
         </div>
         @endif
     </div>

@@ -63,12 +63,12 @@ class User extends Authenticatable
 
     public function empleado()
     {
-        return $this->hasOne(Empleado::class);
+        return $this->hasOne(Empleado::class)->withTrashed();
     }
 
     public function socio()
     {
-        return $this->hasOne(Socio::class);
+        return $this->hasOne(Socio::class)->withTrashed();
     }
 
     public function genero()
