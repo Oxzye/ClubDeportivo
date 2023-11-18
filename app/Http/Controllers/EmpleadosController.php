@@ -9,7 +9,9 @@ use App\Models\Cargos;
 use App\Models\generos;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
+use App\Models\Paises;
 use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EmpleadosController extends Controller
@@ -20,6 +22,7 @@ class EmpleadosController extends Controller
     public function index()
     {
         $empleados = Empleado::with('user')->get();
+
         return view('panel.empleados.index', compact('empleados',));
     }
 
@@ -30,7 +33,8 @@ class EmpleadosController extends Controller
     {
         $cargos = Cargos::all();
         $generos = generos::all();
-        return  view('panel.empleados.create',compact('cargos','generos'));
+        $paises = Paises::all();
+        return  view('panel.empleados.create',compact('cargos','generos','paises'));
     }
 
     /**
@@ -63,6 +67,9 @@ class EmpleadosController extends Controller
             'domicilio' => $request->input('domicilio'),
             'telefono' => $request->input('telefono'),
             'cod_genero'=> $request->input('cod_genero'),
+            'id_prov'=> $request->input('id_prov'),
+            'id_pais'=> $request->input('id_pais'),
+            
             'password' => Hash::make($password),
         ]);
 
