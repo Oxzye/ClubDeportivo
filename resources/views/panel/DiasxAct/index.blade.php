@@ -23,7 +23,7 @@
         @if ($diasxact->count())
             
                 <div class="table-responsive">
-                    <table class="table table-primary">
+                    <table class="table table-primary table-striped table-hover">
                         <thead>
                             <tr>
                                 <th class="text-center">id_diasxact</th>
@@ -31,7 +31,7 @@
                                 <th class="text-center">id_dia</th>
                                 <th class="text-center">horario_inicio</th>
                                 <th class="text-center">horario_fin</th>
-                                <th class="d-flex flex-row-reverse bd-highlight pe-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="d-flex flex-row-reverse bd-highlight px-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>

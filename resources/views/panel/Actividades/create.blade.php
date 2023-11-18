@@ -24,7 +24,8 @@
                 <label for="id_dep" class="col-sm-4 col-form-label" name="id_dep"> Deporte: </label>
                 <select id="id_dep" name="id_dep" class="form-control">
                     @foreach ($deportes as $deporte)
-                        <option value="{{ $deporte->id_dep }}"> 
+                        <option value="{{ $deporte->id_dep }}">
+                            
                             {{ $deporte->id_dep }}
                             {{ $deporte->nombreDep }}
                             {{ $deporte->M_F_Mixto }}
@@ -90,8 +91,8 @@
               </div>   
 
               <div class="mb-3">
-                <label for="" class="form-label" name="fecha_inicio_act">Fecha de inicio de actividad, con formato YYYY-MM-DD HH:mm:ss:</label>
-                <input type="text" class="form-control" name="fecha_inicio_act"  value="{{ old( 'fecha_inicio_act' ) }}" aria-describedby="helpId" @error('fecha_inicio_act') is-invalid @enderror">
+                <label for="" class="form-label" name="fecha_inicio_act">Fecha de inicio de actividad, con formato YYYY-MM-DD:</label>
+                <input type="date" class="form-control" name="fecha_inicio_act"  value="{{ old( 'fecha_inicio_act' ) }}" aria-describedby="helpId" @error('fecha_inicio_act') is-invalid @enderror">
                 @error( 'fecha_inicio_act' )
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -99,16 +100,18 @@
               </div>   
 
               <div class="mb-3">
-                <label for="" class="form-label" name="fecha_fin_act">Fecha de fin de actividad, con formato YYYY-MM-DD HH:mm:ss:</label>
-                <input type="text" class="form-control" name="fecha_fin_act"  value="{{ old( 'fecha_fin_act' ) }}" aria-describedby="helpId" @error('fecha_fin_act') is-invalid @enderror">
+                <label for="" class="form-label" name="fecha_fin_act">Fecha de fin de actividad, con formato YYYY-MM-DD:</label>
+                <input type="date" class="form-control" name="fecha_fin_act"  value="{{ old( 'fecha_fin_act' ) }}" aria-describedby="helpId" @error('fecha_fin_act') is-invalid @enderror">
                 @error( 'fecha_fin_act' )
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <br>
               </div>   
 
-             <button type="submit" class="btn btn-primary">Guardar</button>
+             <div class="row mb-4">
+                <button type="submit" class="btn btn-primary mx-4">Guardar</button>
              <a href="{{ route('Actividades.index') }}" class="btn btn-danger">Cancelar</a>
+             </div>
         </form>
     </div>
 

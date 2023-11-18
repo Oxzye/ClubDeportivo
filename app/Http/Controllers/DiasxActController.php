@@ -28,7 +28,8 @@ class DiasxActController extends Controller
     {
         $dias = Dias::all();
         $actividades = Actividad::all();
-        return view('panel.DiasxAct.create', compact('dias', 'actividades'));
+        $dxact =DiasxAct::all();
+        return view('panel.DiasxAct.create', compact('dias', 'actividades', 'dxact'));
     }
 
     /**
@@ -38,27 +39,24 @@ class DiasxActController extends Controller
     { //Validacion de los datos
         $validated = $request->validate(
         [
-            'id_dia' =>  'required|integer|max:50',
-            'id_act' =>  'required|integer|max:50',
-            'horario_inicio' => 'required|datetime',
-            'horario_fin' => 'required|datetime',
+            'horario_inicio' => 'required|date',
+            'horario_fin' => 'required|date',
         ],[
-            'id_dia.required' => 'El campo es obligatorio',
-            'id_dia.integer' => 'Ingrese un valor numerico',
-            'id_dia.max' => 'Solo se permiten hasta 50 caracteres',
-            
-            'id_act.required' => 'El campo es obligatorio',
-            'id_act.integer' => 'Ingrese un valor numerico',
-            'id_act.max' => 'Solo se permiten hasta 50 caracteres',
-
             'horario_inicio.required' => 'El campo es obligatorio',
-            'horario_inicio.datetime' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
+            'horario_inicio.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
             
             'horario_fin.required' => 'El campo es obligatorio',
-            'horario_fin.datetime' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
+            'horario_fin.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
         ]);
         if($validated) {
-            DiasxAct::create($request->all());
+            $dxact = new DiasxAct();
+            $dxact->id_dia = $request->input('id_dia');
+            $dxact->id_act = $request->input('id_act');
+            $dxact->horario_inicio = $request->input('horario_inicio');
+            $dxact->horario_fin = $request->input('horario_fin');  
+            
+            $dxact->save();
+            // DiasxAct::create($request->all());
         };
         //Redireccion con un mensaje flash de sesion
         return redirect()->route('DiasxAct.index')->with('status', 'Dia por Actividad creado correctamente');
@@ -69,7 +67,8 @@ class DiasxActController extends Controller
      */
     public function show($id_diasxact)
     {
-        //
+        $dxact=DiasxAct::findOrFail($id_diasxact);
+        return view("panel.DiasxAct.show", ['dxact'=> $dxact]);
     }
 
     /**
@@ -82,7 +81,7 @@ class DiasxActController extends Controller
         if($dxact) {
             $dias = Dias::all();
             $actividades = Actividad::all();
-            return view("panel.DiasxAct.edit", compact("dias","actividades", 'dxact'));
+            return view("panel.DiasxAct.edit", compact('dias','actividades', 'dxact'));
         } else {
             return redirect()->route('DiasxAct.index')->with('error','Día por actividad no encontrado');
         }
@@ -97,25 +96,22 @@ class DiasxActController extends Controller
          //Validacion de los datos
          $validated = $request->validate(
             [
-                'dia_id' =>  'required|integer|max:50',
-                'id_act' =>  'required|integer|max:50',
-                'horario_inicio' => 'required|datetime',
-                'horario_fin' => 'required|datetime',
+                'horario_inicio' => 'required|date',
+                'horario_fin' => 'required|date',
             ],[
-                'dia_id.required' => 'El campo es obligatorio',
-                'dia_id.integer' => 'Ingrese un valor numerico',
-                'dia_id.max' => 'Solo se permiten hasta 50 caracteres',
-                
-                'id_act.required' => 'El campo es obligatorio',
-                'id_act.integer' => 'Ingrese un valor numerico',
-                'id_act.max' => 'Solo se permiten hasta 50 caracteres',
                 'horario_inicio.required' => 'El campo es obligatorio',
-                'horario_inicio.datetime' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
+                'horario_inicio.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
+
                 'horario_fin.required' => 'El campo es obligatorio',
-                'horario_fin.datetime' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
+                'horario_fin.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
             ]);
             if($validated) {
-                $dxact->update($request->all());
+                $dxact->id_dia = $request->input('id_dia');
+                $dxact->id_act = $request->input('id_act');
+                $dxact->horario_inicio = $request->input('horario_inicio');
+                $dxact->horario_fin = $request->input('horario_fin');  
+                
+                $dxact->save();
             };
             //Redireccion con un mensaje flash de sesion
             return redirect()->route('DiasxAct.index')->with('status', 'Dia por Actividad actualizado correctamente');

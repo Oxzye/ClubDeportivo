@@ -29,7 +29,8 @@ class SociosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $socios = Socio::all();
-        return view('panel.SocxAct.create', compact('socios', 'actividades'));
+        $sxa = Socio::all();
+        return view('panel.SocxAct.create', compact('socios', 'actividades', 'sxa'));
     }
 
     /**
@@ -39,19 +40,9 @@ class SociosxActividadesController extends Controller
     {
         $validated = $request->validate(
             [
-                'id_act' => 'required|integer|max:50',
-                'dni_soc' => 'required|integer|max:50',
                 'fecha_inscripcion' => 'required',
                 'opinion_soc' => 'nullable|string|max:250',
             ],[
-                'id_act.required' => 'El campo es obligatorio',
-                'id_act.integer' => 'Ingrese un valor numerico',
-                'id_act.max' => 'Solo se permiten hasta 50 caracteres',
-
-                'dni_soc.required' => 'El campo es obligatorio',
-                'dni_soc.integer' => 'Ingrese un valor numerico',
-                'dni_soc.max' => 'Solo se permiten hasta 50 caracteres',
-
                 'fecha_inscripcion.required' => 'El campo es obligatorio',
 
                 'opinion_soc.nullable' => 'El campo puede ser null',

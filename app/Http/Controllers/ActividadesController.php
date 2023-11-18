@@ -32,7 +32,8 @@ class ActividadesController extends Controller
     {
         $deportes = Deporte::all();
         $instalaciones = Instalacion::all();
-        return view('panel.Actividades.create', compact('deportes', 'instalaciones'));
+        $act = Actividad::all();
+        return view('panel.Actividades.create', compact('deportes', 'instalaciones', 'act'));
     }
 
     /**
@@ -40,30 +41,22 @@ class ActividadesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->input('id_dep'));
         $validated = $request->validate(
             [
-                // 'id_dep' => 'required|exists:deportes, nombreDep,' . $id_dep .',id_dep',
-                // 'id_inst' => 'required|exists:instalaciones, nombre_inst,'. $id_inst .'id_inst',
-                'nombre_act' => 'required|string|max:100',
-                'limite_soc_atc' => 'required|integer|max:60',
+                'nombre_act' => 'required|string|max:60',
+                'limite_soc_atc' => 'required|integer',
                 'descripcion_act' => 'required|string|max:200',
                 'actividad_en_curso' => 'required|boolean',
                 'fecha_inicio_act' => 'required|date',
                 'fecha_fin_act' => 'nullable|date',
             ],[
-                // 'id_dep.required' => 'El campo deporte es obligatorio',
-                // 'id_dep.exists' => 'El deporte seleccionado no es válido',
-
-                // 'id_inst.required' => 'El campo instalación es obligatorio',
-                // 'id_inst.exists' => 'La instalación seleccionada no es válida',
-                
                 'nombre_act.required' => 'El campo nombre de la actividad es obligatorio',
                 'nombre_act.string' => 'Ingrese texto',
-                'nombre_act.max' => 'Solo se permiten hasta 0 caracteres',
+                'nombre_act.max' => 'Solo se permiten hasta 60 caracteres',
 
                 'limite_soc_atc.required' => 'El campo limite de socios por actividada es obligatorio',
                 'limite_soc_atc.integer' => 'Ingrese un valor numerico',
-                'limite_soc_atc.max' => 'Solo se permiten hasta 50 caracteres',
 
                 'descripcion_act.required' => 'El campo descripción de actividad es obligatorio',
                 'descripcion_act.string' => 'Ingrese texto',
@@ -79,7 +72,18 @@ class ActividadesController extends Controller
             ]);
             if($validated) {
                 //Guardado de los datos
-                Actividad::create($request->all());
+                $act = new Actividad();
+                $act->id_dep = $request->input('id_dep');
+                $act->id_inst = $request->input('id_inst');
+                $act->nombre_act = $request->input('nombre_act');
+                $act->limite_soc_atc = $request->input('limite_soc_atc');
+                $act->descripcion_act = $request->input('descripcion_act');
+                $act->actividad_en_curso = $request->input('actividad_en_curso');
+                $act->fecha_inicio_act = $request->input('fecha_inicio_act');
+                $act->fecha_fin_act = $request->input('fecha_fin_act');                
+
+                $act->save();
+               
             }
         // redir
         return redirect()->route('Actividades.index')->with('status', 'Actividad creada correctamente');
@@ -97,17 +101,16 @@ class ActividadesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id_act, $id_dep, $id_inst)
+    public function edit($id_act)
     {
         $act = Actividad::findOrFail($id_act);
 
         if($act) {
             //Recupera el deporte y la instalación que deseas editar
-            // $deportes = Deporte::all();
-            $deporte = Deporte::with('deportes')->find($id_dep);
-            $instalacion = Deporte::with('instalaciones')->find($id_inst);
-            // $instalaciones = Instalacion::all();
-            return view('panel.Actividades.edit', compact('deporte', 'instalacion', 'act'));
+            $deportes = Deporte::all();
+           
+            $instalaciones = Instalacion::all();
+            return view('panel.Actividades.edit', compact('deportes', 'instalaciones', 'act'));
         } else {
             return redirect()->route('Actividades.index')->with('error', 'Actividad no encontrada');
         }
@@ -116,17 +119,15 @@ class ActividadesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id_act, $id_dep, $id_inst)
+    public function update(Request $request, $id_act)
     {
         $act = Actividad::findOrFail($id_act);
-        // Agregando recuperación de deporte e instalación
-        $deporte = Deporte::with('deportes')->find($id_dep);
-        $instalacion = Deporte::with('instalaciones')->find($id_inst);
+        // $deporte = Deporte::with('deportes')->find($id_dep);
+        // $instalacion = Deporte::with('instalaciones')->find($id_inst);
+                // dd($request->input('id_dep'));
         // Validar los datos del formulario de edición
         $validated = $request->validate(
             [
-                'id_dep' => 'required|unique:deportes,nombreDep,'.$id_dep.'id_dep',
-                'id_inst' => 'required|unique:instalaciones,nombre_inst,'.$id_inst.'id_inst',
                 'nombre_act' => 'required|string|max:100',
                 'limite_soc_atc' => 'required|integer|max:60',
                 'descripcion_act' => 'required|string|max:200',
@@ -134,14 +135,6 @@ class ActividadesController extends Controller
                 'fecha_inicio_act' => 'required|date',
                 'fecha_fin_act' => 'nullable|date',
             ],[
-                'id_dep.required' => 'El campo deporte es obligatorio',
-                'id_dep.integer' => 'Ingrese un valor numerico',
-                'id_dep.max' => 'Solo se permiten hasta 50 caracteres',
-
-                'id_inst.required' => 'El campo instalación es obligatorio',
-                'id_inst.integer' => 'Ingrese un valor numerico',
-                'id_inst.max' => 'Solo se permiten hasta 50 caracteres',
-                
                 'nombre_act.required' => 'El campo nombre de la actividad es obligatorio',
                 'nombre_act.string' => 'Ingrese texto',
                 'nombre_act.max' => 'Solo se permiten hasta 0 caracteres',
@@ -164,7 +157,17 @@ class ActividadesController extends Controller
             ]);
             if($validated) {
                 //Guardado de los datos
-                $act->update($request->all());
+                $act->id_dep = $request->input('id_dep');
+                $act->id_inst = $request->input('id_inst');
+                $act->nombre_act = $request->input('nombre_act');
+                $act->limite_soc_atc = $request->input('limite_soc_atc');
+                $act->descripcion_act = $request->input('descripcion_act');
+                $act->actividad_en_curso = $request->input('actividad_en_curso');
+                $act->fecha_inicio_act = $request->input('fecha_inicio_act');
+                $act->fecha_fin_act = $request->input('fecha_fin_act');                
+
+                $act->save();
+                // $act->update($request->all());
             }
 
         // redir

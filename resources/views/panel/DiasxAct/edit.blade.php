@@ -24,7 +24,7 @@
                 <label for="id_dia" class="col-sm-4 col-form-label" name="id_dia"> Día: </label>
                 <select id="id_dia" name="id_dia" class="form-control">
                     @foreach ($dias as $dia)
-                        <option value="{{ $dia->id_dia }}"> 
+                        <option value="{{ $dia->id_dia }}" {{ $dia->id_dia == $dxact->id_dia ? 'selected' : '' }}> 
                             {{ $dia->nombre_dia }}
                         </option>
                     @endforeach
@@ -36,7 +36,7 @@
                 <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad: </label>
                 <select id="id_act" name="id_act" class="form-control">
                     @foreach ($actividades as $act)
-                        <option value="{{ $act->id_act }}"> 
+                        <option value="{{ $act->id_act }}" {{ $act->id_act == $dxact->id_act ? 'selected' : '' }}> 
                             {{ $act->nombre_act }}
                         </option>
                     @endforeach

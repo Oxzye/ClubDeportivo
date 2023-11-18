@@ -19,7 +19,7 @@
         @if ($Tipo_factura->count())
             
                 <div class="table-responsive">
-                    <table class="table table-primary">
+                    <table class="table table-primary table-striped table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>

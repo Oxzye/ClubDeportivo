@@ -23,7 +23,7 @@
         @if ($socxact->count())
             
                 <div class="table-responsive">
-                    <table class="table table-primary">
+                    <table class="table table-primary table-striped table-hover">
                         <thead>
                             <tr>
                                 <th class="text-center">id_sxa</th>

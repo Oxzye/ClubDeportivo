@@ -23,7 +23,7 @@ class DisponibilidadesController extends Controller
         $dias = Dias::all();
         $instalaciones = Instalacion::all();
         $disponibilidades = Disponibilidades::all();
-        return view('panel.Disponibilidades.create', compact('dias', 'instalaciones', 'disponibilidades'));
+        return view('panel.Disponibilidades.index', compact('dias', 'instalaciones', 'disponibilidades'));
  
     }
 
