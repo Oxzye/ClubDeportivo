@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cajas;
 use App\Models\Empleado;
-use App\Models\User;
+
 class CajasController extends Controller
 {
     public function index () {

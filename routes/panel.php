@@ -17,6 +17,7 @@ use App\Http\Controllers\ProvinciasController;
 use App\Http\Controllers\LocalidadesController;
 use App\Http\Controllers\DisponibilidadesController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\FacturacionController;
 
 Route::get('/', function(){
         return view('panel.index');
@@ -49,10 +50,11 @@ Route::resource('/Provincias', ProvinciasController::class)->names('Provincias')
 Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
 
 Route::resource('/Cajas', CajasController::class)->names('Cajas');
-Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre');
-
-//Route::post('/Cajas/apertura', CajasController::class, 'apertura')->name('Cajas.apertura');
+//Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre');
 
 Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('Disponibilidades');
 
 Route::resource('/clientes', ClientesController::class)->names('clientes');
+
+Route::resource('/facturas', FacturacionController::class)->names('facturas');
+Route::put('/products/{id}/update-payment-status', 'ProductController@updatePaymentStatus');
