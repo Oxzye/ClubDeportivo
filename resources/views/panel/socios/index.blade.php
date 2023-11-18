@@ -109,13 +109,14 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <a href="" class="btn btn-outline-dark rounded-circle mx-2"
+                                                    <button href="" class="btn btn-outline-dark rounded-circle mx-2" data-toggle="modal" data-target="#exampleModal"
                                                         style="width:2.5em; height:2.5em;">
                                                         <span
                                                             class="material-symbols-outlined d-flex justify-content-center">
                                                             info
                                                         </span>
-                                                    </a>
+                                                    </button>
+                                                    
                                                     @can('editar_socio')
                                                         <a href="{{ route('socios.edit', $socio->id_soc) }}"
                                                             class="btn btn-outline-dark rounded-circle mx-2"
