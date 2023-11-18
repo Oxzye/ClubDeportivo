@@ -109,7 +109,7 @@
               </div>   
 
              <div class="row mb-4">
-                <button type="submit" class="btn btn-primary mx-4">Guardar</button>
+                <button type="submit" class="btn btn-success mx-4">Guardar</button>
              <a href="{{ route('Actividades.index') }}" class="btn btn-danger">Cancelar</a>
              </div>
         </form>

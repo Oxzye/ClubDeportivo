@@ -13,6 +13,9 @@
                 {{ session('status') }}
             </div>
         @endif
+        <div class="row">
+            <h1>Disponibilidades</h1>
+        </div>
         <div class="row-2 bd-highlight mb-3">
         <a href="{{ route('Disponibilidades.create') }}" class="btn btn-primary mb-4 mt-4">Agregar</a>
         </div>

@@ -21,11 +21,11 @@
             @csrf @method('PUT')
             {{-- dias con select --}}
             <div class="mb-3 row">
-                <label for="id_soc" class="col-sm-4 col-form-label" name="id_soc"> Socio: </label>
+                <label for="id_soc" class="col-sm-4 col-form-label" name="id_soc">Cuil socio: </label>
                 <select id="id_soc" name="id_soc" class="form-control">
                     @foreach ($socios as $socio)
-                        <option value="{{ $socio->id_soc }}"> 
-                            {{ $socio->cuil_soc }}
+                        <option value="{{ $socio->id_soc }}" {{ $socio->id_soc == $sxa->id_soc ? 'selected' : '' }}>
+                            {{ $socio->user->name .' '. $socio->user->apellido }}
                         </option>
                     @endforeach
                 </select>
@@ -36,7 +36,7 @@
                 <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad: </label>
                 <select id="id_act" name="id_act" class="form-control">
                     @foreach ($actividades as $act)
-                        <option value="{{ $act->id_act }}"> 
+                        <option value="{{ $act->id_act }}" {{ $act->id_act == $sxa->id_act ? 'selected' : '' }}> 
                             {{ $act->nombre_act }}
                         </option>
                     @endforeach

@@ -28,7 +28,7 @@
                             <tr>
                                 <th class="text-center">id_sxa</th>
                                 <th class="text-center">id_act</th>
-                                <th class="text-center">cuil_soc</th>
+                                <th class="text-center">socio</th>
                                 <th class="text-center">fecha_inscripcion</th>
                                 <th class="text-center">opinion_soc</th>
                                 <th class="d-flex flex-row-reverse bd-highlight pe-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -39,7 +39,7 @@
                                 <tr class="">
                                     <td class="text-center">{{ $sxa->id_sxa }}</td>
                                     <td class="text-center">{{ $sxa->actividad->nombre_act }}</td>
-                                    <td class="text-center">{{ $sxa->socio->cuil_soc }}</td>
+                                    <td class="text-center">{{ $sxa->socio->user->name .' '. $sxa->socio->user->apellido }}</td>
                                     <td class="text-center">{{ $sxa->fecha_inscripcion }}</td>
                                     <td class="text-center">{{ $sxa->opinion_soc }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">

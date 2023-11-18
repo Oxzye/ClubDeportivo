@@ -23,20 +23,29 @@ class DisponibilidadesController extends Controller
         $dias = Dias::all();
         $instalaciones = Instalacion::all();
         $disponibilidades = Disponibilidades::all();
-        return view('panel.Disponibilidades.index', compact('dias', 'instalaciones', 'disponibilidades'));
+        return view('panel.Disponibilidades.create', compact('dias', 'instalaciones', 'disponibilidades'));
  
     }
 
     public function store (Request $request) {
         //valid
-        $disponibilidades = new Disponibilidades();
-        //Guardado de los datos
-        $disponibilidades->id_dia = $request->get('id_dia');
-        $disponibilidades->id_inst = $request->get('id_inst');
-        $disponibilidades->horariodisp = $request->get('horariodisp');
+        $validated = $request->validate(
+        [
+            'horariodisp' => 'required|date',
+        ],[
+            'horariodisp.required' => 'El campo es obligatorio',
+            'horariodisp.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: YYYY-MM-DD HH:mm:ss)',
+        ]);
+        if($validated) {
+            $disponibilidades = new Disponibilidades();
+            //Guardado de los datos
+            $disponibilidades->id_dia = $request->get('id_dia');
+            $disponibilidades->id_inst = $request->get('id_inst');
+            $disponibilidades->horariodisp = $request->get('horariodisp');
 
-       
-        $disponibilidades ->save();
+        
+            $disponibilidades ->save();
+        };
         //Redir
         return redirect()->route('Disponibilidades.index')->with('status', 'Disponibilidad creado correctamente');
     }

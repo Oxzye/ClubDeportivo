@@ -36,7 +36,7 @@
                             @foreach ($empxactiv as $empxact)
                                 <tr class="">
                                     <td class="text-center">{{ $empxact->id_exa }}</td>
-                                    <td class="text-center">{{ $empxact->empleado->cuit_emp }}</td>
+                                    <td class="text-center">{{ $empxact->empleado->user->name .' '. $empxact->empleado->user->apellido }}</td>
                                     <td class="text-center">{{ $empxact->actividad->nombre_act }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">
                                         <div class="btn-group" role="group" aria-label="Basic example">

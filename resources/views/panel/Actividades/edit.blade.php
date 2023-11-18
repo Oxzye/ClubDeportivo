@@ -87,7 +87,7 @@
 
               <div class="mb-3">
                 <label for="" class="form-label" name="fecha_inicio_act">Fecha de inicio de actividad:</label>
-                <input type="date" class="form-control" name="fecha_inicio_act"  value="{{ old( 'fecha_inicio_act', $act->fecha_inicio_act ) }}" aria-describedby="helpId" @error('fecha_inicio_act') is-invalid @enderror">
+                <input type="text" class="form-control" name="fecha_inicio_act"  value="{{ old( 'fecha_inicio_act', $act->fecha_inicio_act ) }}" aria-describedby="helpId" @error('fecha_inicio_act') is-invalid @enderror">
                 @error( 'fecha_inicio_act' )
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -96,7 +96,7 @@
 
               <div class="mb-3">
                 <label for="" class="form-label" name="fecha_fin_act">Fecha de fin de actividad:</label>
-                <input type="date" class="form-control" name="fecha_fin_act"  value="{{ old( 'fecha_fin_act', $act->fecha_fin_act ) }}" aria-describedby="helpId" @error('fecha_fin_act') is-invalid @enderror">
+                <input type="text" class="form-control" name="fecha_fin_act"  value="{{ old( 'fecha_fin_act', $act->fecha_fin_act ) }}" aria-describedby="helpId" @error('fecha_fin_act') is-invalid @enderror">
                 @error( 'fecha_fin_act' )
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -104,7 +104,7 @@
               </div>   
 
               <div class="row mb-4">
-                <button type="submit" class="btn btn-primary mx-4">Guardar</button>
+                <button type="submit" class="btn btn-success mx-4">Guardar</button>
              <a href="{{ route('Actividades.index') }}" class="btn btn-danger">Cancelar</a>
              </div>
         </form>

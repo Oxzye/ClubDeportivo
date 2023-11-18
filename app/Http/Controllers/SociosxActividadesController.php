@@ -29,7 +29,7 @@ class SociosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $socios = Socio::all();
-        $sxa = Socio::all();
+        $sxa = SociosxActividad::all();
         return view('panel.SocxAct.create', compact('socios', 'actividades', 'sxa'));
     }
 
@@ -50,7 +50,14 @@ class SociosxActividadesController extends Controller
                 'opinion_soc.max' => 'Solo se permiten hasta 250 caracteres',
             ]);
             if($validated) {
-                SociosxActividad::create($request->all());
+                $sxa = new SociosxActividad();
+                $sxa->id_act = $request->input('id_act');
+                $sxa->id_soc = $request->input('id_soc');
+                $sxa->fecha_inscripcion = $request->input('fecha_inscripcion');
+                $sxa->opinion_soc = $request->input('opinion_soc');
+                
+                $sxa->save();
+                // SociosxActividad::create($request->all());
             };
             //Redireccion con un mensaje flash de sesion
             return redirect()->route('SocxAct.index')->with('status', 'Socio por Actividad creado correctamente');
@@ -90,19 +97,9 @@ class SociosxActividadesController extends Controller
         //validacion
         $validated = $request->validate(
             [
-                'id_act' => 'required|integer|max:50',
-                'dni_soc' => 'required|integer|max:50',
                 'fecha_inscripcion' => 'required',
                 'opinion_soc' => 'nullable|string|max:250',
             ],[
-                'id_act.required' => 'El campo es obligatorio',
-                'id_act.integer' => 'Ingrese un valor numerico',
-                'id_act.max' => 'Solo se permiten hasta 50 caracteres',
-
-                'dni_soc.required' => 'El campo es obligatorio',
-                'dni_soc.integer' => 'Ingrese un valor numerico',
-                'dni_soc.max' => 'Solo se permiten hasta 50 caracteres',
-
                 'fecha_inscripcion.required' => 'El campo es obligatorio',
 
                 'opinion_soc.nullable' => 'El campo puede ser null',
@@ -110,7 +107,13 @@ class SociosxActividadesController extends Controller
                 'opinion_soc.max' => 'Solo se permiten hasta 250 caracteres',
             ]);
             if($validated) {
-                $sxa->update($request->all());
+                $sxa->id_act = $request->input('id_act');
+                $sxa->id_soc = $request->input('id_soc');
+                $sxa->fecha_inscripcion = $request->input('fecha_inscripcion');
+                $sxa->opinion_soc = $request->input('opinion_soc');
+                
+                $sxa->save();
+                // $sxa->update($request->all());
             };
             //Redireccion con un mensaje flash de sesion
             return redirect()->route('SocxAct.index')->with('status', 'Socio por Actividad actualizado correctamente');

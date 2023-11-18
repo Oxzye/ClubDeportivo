@@ -25,7 +25,7 @@
                 <select id="id_soc" name="id_soc" class="form-control">
                     @foreach ($socios as $socio)
                         <option value="{{ $socio->id_soc }}"> 
-                            {{ $socio->cuil_soc }}
+                            {{ $socio->user->name .' '. $socio->user->apellido }}
                         </option>
                     @endforeach
                 </select>

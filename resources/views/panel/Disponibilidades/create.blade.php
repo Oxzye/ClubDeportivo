@@ -47,14 +47,14 @@
             </div>
             {{-- fin instalaciones con select --}}
             <div class="mb-3">
-                <label for="" class="form-label" name="horariodisp">Horario disponible:</label>
+                <label for="" class="form-label" name="horariodisp">Horario disponible, con formato YYYY-MM-DD HH:mm:ss:</label>
                 <input type="text" class="form-control" name="horariodisp" value="{{ old( 'horariodisp' ) }}" aria-describedby="helpId" @error('horariodisp') is-invalid @enderror">
                 @error( 'horariodisp' )
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <br>
             </div>   
-             <button type="submit" class="btn btn-primary">Guardar</button>
+             <button type="submit" class="btn btn-success">Guardar</button>
              <a href="{{ route('Disponibilidades.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
     </div>

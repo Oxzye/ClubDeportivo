@@ -54,7 +54,7 @@
                 @enderror
                 <br>
             </div>   
-             <button type="submit" class="btn btn-primary">Guardar</button>
+             <button type="submit" class="btn btn-success">Guardar</button>
              <a href="{{ route('Disponibilidades.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
     </div>

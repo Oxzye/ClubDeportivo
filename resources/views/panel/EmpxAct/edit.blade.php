@@ -24,7 +24,7 @@
                 <label for="id_emp" class="col-sm-4 col-form-label" name="id_emp"> Empleado: </label>
                 <select id="id_emp" name="id_emp" class="form-control">
                     @foreach ($empleados as $empleado)
-                        <option value="{{ $empleado->id_emp }}"> 
+                        <option value="{{ $empleado->id_emp }}" {{ $empleado->id_emp == $empxact->id_emp ? 'selected' : '' }}> 
                             {{ $empleado->user->name .' '. $empleado->user->apellido }}
                         </option>
                     @endforeach
@@ -36,7 +36,7 @@
                 <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad: </label>
                 <select id="id_act" name="id_act" class="form-control">
                     @foreach ($actividades as $act)
-                        <option value="{{ $act->id_act }}"> 
+                        <option value="{{ $act->id_act }}" {{ $act->id_act == $empxact->id_act ? 'selected' : '' }}> 
                             {{ $act->nombre_act }}
                         </option>
                     @endforeach

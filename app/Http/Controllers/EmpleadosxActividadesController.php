@@ -28,14 +28,20 @@ class EmpleadosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $empleados = Empleado::all();
-        return view('panel.EmpxAct.create', compact('empleados', 'actividades'));
+        $empxact = EmpleadosxActividad::all();
+        return view('panel.EmpxAct.create', compact('empleados', 'actividades','empxact'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   //Validacion de los datos
+        // $empxact = new EmpleadosxActividad();
+        // $empxact->id_act = $request->input('id_act');
+        // $empxact->id_emp = $request->input('id_emp');
+        
+        // $empxact->save();
         $validated = $request->validate(
             [
                 'id_act' => 'required|integer|max:50',
@@ -87,25 +93,30 @@ class EmpleadosxActividadesController extends Controller
     public function update(Request $request, string $id_exa)
     {
         $empxact = EmpleadosxActividad::findOrFail($id_exa);
-        //validacion
-        $validated = $request->validate(
-            [
-                'id_act' => 'required|integer|max:50',
-                'id_emp' => 'required|integer|max:50',
-                'fecha_inscripcion' => 'required',
-                'opinion_soc' => 'nullable|string|max:250',
-            ],[
-                'id_act.required' => 'El campo es obligatorio',
-                'id_act.integer' => 'Ingrese un valor numerico',
-                'id_act.max' => 'Solo se permiten hasta 50 caracteres',
 
-                'id_emp.required' => 'El campo es obligatorio',
-                'id_emp.integer' => 'Ingrese un valor numerico',
-                'id_emp.max' => 'Solo se permiten hasta 50 caracteres'
-            ]);
-            if($validated) {
-                $empxact->update($request->all());
-            };
+        $empxact->id_act = $request->input('id_act');
+        $empxact->id_emp = $request->input('id_emp');
+        
+        $empxact->save();
+        //validacion
+        // $validated = $request->validate(
+        //     [
+        //         'id_act' => 'required|integer|max:50',
+        //         'id_emp' => 'required|integer|max:50',
+        //         'fecha_inscripcion' => 'required',
+        //         'opinion_soc' => 'nullable|string|max:250',
+        //     ],[
+        //         'id_act.required' => 'El campo es obligatorio',
+        //         'id_act.integer' => 'Ingrese un valor numerico',
+        //         'id_act.max' => 'Solo se permiten hasta 50 caracteres',
+
+        //         'id_emp.required' => 'El campo es obligatorio',
+        //         'id_emp.integer' => 'Ingrese un valor numerico',
+        //         'id_emp.max' => 'Solo se permiten hasta 50 caracteres'
+        //     ]);
+        //     if($validated) {
+        //         $empxact->update($request->all());
+        //     };
             //Redireccion con un mensaje flash de sesion
             return redirect()->route('EmpxAct.index')->with('status', 'Empleado por Actividad actualizado correctamente');
     }
