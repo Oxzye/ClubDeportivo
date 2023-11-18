@@ -2,7 +2,7 @@
 
 @section('plugins.Datatables', true)
 
-@section('title', 'Localidades Index')
+@section('title', 'facturas Index')
     
 @section('content')
     <div class="container-fluid">
@@ -11,35 +11,46 @@
                 {{ session('status') }}
             </div>
         @endif
+        @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
+        <a href="{{ route('facturas.create') }}" class="btn btn-primary">Agregar</a>
 
-        <a href="{{ route('Localidades.create') }}" class="btn btn-primary">Agregar</a>
-
-        @if ($localidad->count())
+        @if ($facturacion->count())
             
                 <div class="table-responsive">
                     <table class="table table-primary">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Nombre de Localidad</th>
-                                <th scope="col">Provincias</th>
-                                <th scope="col">Código Postal</th>
+                                <th scope="col">Num Caja</th>
+                                <th scope="col">Forma de pago</th>
+                                <th scope="col">tipo de factura</th>
+                                <th scope="col">Dni socio</th>
+                                <th scope="col">Dni cliente</th>
+                                <th scope="col">Monto fac</th>
+                                <th scope="col">Estado de factura</th>
                                 <th scope="col" colspan="3">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($localidad as $loc)
+                            @foreach ($facturacion as $fact)
                                 <tr class="">
-                                    <td>{{ $loc->id_loc }}</td>
-                                    <td>{{ $loc->nombre_loc }}</td>
-                                    <td>{{ $loc->provincias->nombre_prov }}</td>
-                                    <td>{{ $loc->cod_postal }}</td>
+                                    <td>{{ $fact->id_caja }}</td>
+                                    <td>{{ $fact->id_fdp }}</td>
+                                    <td>{{ $fact->tipo_fac }}</td>
+                                    <td>{{ $fact->dni_soc }}</td>
+                                    <td>{{ $fact->dni_cli }}</td>
+                                    <td>{{ $fact->monto_fac }}</td>
+                                    <td>{{ $fact->pagada_fac }}</td>
                                     <td>Ver</td>
                                     <td>
-                                        <a href="{{ route('Localidades.edit', $loc->id_loc)  }}" class="btn btn-warning">Editar</a>
+                                        <a href="{{ route('facturas.edit', $fact->id_caja)  }}" class="btn btn-warning">Editar</a>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase me-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $loc->id_loc }}" data-nombre="{{ $loc->nombre_loc }}">
+                                        <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase me-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $fact->id_caja }}" data-nombre="{{ $fact->id_caja }}">
                                             Eliminar
                                         </button>   
                                     </td>
@@ -49,9 +60,9 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $localidad->links() }} 
+                
         @else
-            <h4>¡No hay Localidades cargadas!</h4>
+            <h4>¡No hay facturas cargadas!</h4>
         @endif
     </div>
     {{-- Modal de eliminacion --}}
@@ -83,25 +94,3 @@
         </div>
     </div>
 @endsection
-
- {{-- Importacion de Archivos JS --}}
- @section('js')
- <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
- <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
- <script src="{{ asset('js/cargos.js') }}"></script>
- <script>
-     $(document).ready(function(){
-
-         $('#deleteModal').on('show.bs.modal', function (event) {
-             const button = $(event.relatedTarget) // Button that triggered the modal
-             const id_loc = button.data('id') // Extract info from data-* attributes
-             const nombre_loc = button.data('nombre') // Extract info from data-* attributes
-             
-             const modal = $(this)
-             const form = $('#formDelete')
-             form.attr('action', `{{ env('APP_URL') }}/panel/Localidades/${id_loc}`);
-             modal.find('.modal-body #message').text(`¿Estás seguro de eliminar el cargo "${nombre_loc}"?`)
-         })
-     });
- </script>
-@stop

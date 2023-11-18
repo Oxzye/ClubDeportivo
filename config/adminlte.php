@@ -349,6 +349,7 @@ return [
                     'active' => ['panel/cajas/create'],
                     'shift' => 'ml-3',
                 ],
+                
                 /*[
                     'text' => 'Cerrar Caja',
                     'route' => 'Cajas.index',
@@ -414,6 +415,14 @@ return [
                     'can' => 'listado_socios', // permiso de admin
                     'active' => ['panel/socios*'],
                     'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Lista de Clientes',
+                    'route' => 'clientes.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_clientes', // permiso de admin
+                    'active' => ['panel/clientes*'],
+                    'shift' => 'ml-3',
                 ]
             ]
         ],
@@ -434,6 +443,20 @@ return [
             'text' => 'Otros',
             'icon' => 'fas fa-link',
             'submenu' => [
+                [
+                    'text' => 'Facturas',
+                        'route' => 'facturas.index',
+                        'icon' => 'fas fa-lock-open', // icono de fontawesome
+                        'can' => 'listado_user', // permiso
+                        'shift' => 'ml-3',
+                    ],
+                    [
+                        'text' => 'facturacion',
+                        'route' => 'facturas.create',
+                        'icon' => 'fas fa-lock-open', // icono de fontawesome
+                        'can' => 'listado_user', // permiso
+                        'shift' => 'ml-3',
+                    ],
                 [
                     'text' => 'Instalaciones',
                     'route' => 'instalaciones.index',

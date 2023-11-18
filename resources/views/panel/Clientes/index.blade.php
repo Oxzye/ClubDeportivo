@@ -5,11 +5,11 @@
 @section('plugins.Datatables', true)
 
 {{-- Titulo en las tabulaciones del Navegador --}}
-@section('title', 'Socios')
+@section('title', 'Clientes')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
-    <h1>Lista de Socios</h1>
+    <h1>Lista de Clientes</h1>
 @stop
 
 {{-- Contenido de la Pagina --}}
@@ -18,8 +18,8 @@
     <div class="row">
         <div class="col-12 mb-3">
             
-            <a href="{{ route('socios.create') }}" class="btn btn-success text-uppercase">
-                Nuevo Socio
+            <a href="{{ route('clientes.create') }}" class="btn btn-success text-uppercase">
+                Nuevo Cliente
             </a>
         </div>
         
@@ -31,7 +31,7 @@
                 </div>
             </div>
         @endif
-@if ($socios->count())       
+@if ($clientes->count())       
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -40,44 +40,43 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col" class="text-uppercase">DNI</th>
-                            <th scope="col" class="text-uppercase">Socio</th>
-                            <th scope="col" class="text-uppercase">Email</th>
+                            <th scope="col" class="text-uppercase">Nombre</th>
+                            <th scope="col" class="text-uppercase">Apellido</th>
+                            <th scope="col" class="text-uppercase">Domicilio</th>
                             <th scope="col" class="text-uppercase">Localidad</th>
                             <th scope="col" class="text-uppercase">Genero</th>
                             <th scope="col" class="text-uppercase">Fecha de nac/edad</th>
-                            <th scope="col" class="text-uppercase">Domicilio</th>
                             <th scope="col" class="text-uppercase">Telefono</th>
+                            <th scope="col" class="text-uppercase">Email</th>
                             <th scope="col" class="text-uppercase">Observaciones</th>
-                            <th scope="col" class="text-uppercase">Foto</th>
-                            <th scope="col" class="text-uppercase">Opciones</th>
+                           
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($socios as $socio)
+                        @foreach ($clientes as $cliente)
                         <tr>
-                            <td>{{ $socio->id_soc }}</td>
-                            <td>{{ $socio->user->dni /*$socio->cuil_soc*/}}</td>
-                            <td><b>{{ $socio->user->name}}</b>{{' '. $socio->user->apellido }}</td>
-                            <td>{{ $socio->user->email }}</td>
-                            <td>{{ $socio->user->id_loc }}</td>
-                            <td>{{ $socio->user->cod_genero }}</td>
-                            <td>{{ $socio->user->fecha_nac }}</td>
-                            <td>{{ $socio->user->domicilio }}</td>
-                            <td>{{ $socio->user->telefono }}</td>
-
-                            <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td>
+                            <td>{{ $cliente->dni_cli }}</td>
+                            <td>{{ $cliente->nombre_cli }}</td>
+                            <td>{{ $cliente->apellido_cli }}</td>
+                            <td>{{ $cliente->domicilio_cli }}</td>
+                            <td>{{ $cliente->Localidades->id_loc}}</td>
+                            <td>{{ $cliente->generos->cod_genero}}</td>
+                            <td>{{ $cliente->fecha_nac_cli }}</td>
+                            <td>{{ $cliente->telefono_cli }}</td>
+                            <td>{{ $cliente->user->email }}</td>
+                            <td>{{ Str::limit($cliente->observaciones, 80) }}</td>
                             <td>
-                                <img src="" alt="imagen socio" class="img-fluid" style="width: 150px;">
+                                <img src="" alt="imagen cliente" class="img-fluid" style="width: 150px;">
                             </td>
                             <td>
                                 <div class="d-flex">
                                     <a href="" class="btn btn-sm btn-info text-white text-uppercase me-1">
                                         Ver
                                     </a>
-                                    <a href="{{ route('socios.edit', $socio->id_soc) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                    <a href="{{ route('socios.edit', $cliente->dni_cli) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
-                                    <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase me-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $socio->id_soc }}" data-nombre="{{ $socio->user->name }}">
+                                    <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase me-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $cliente->dni_cli }}" data-nombre="{{ $cliente->nombre_cli }}">
                                         Eliminar
                                     </button>   
                                 </div>
@@ -141,13 +140,13 @@
 
             $('#deleteModal').on('show.bs.modal', function (event) {
                 const button = $(event.relatedTarget) // Button that triggered the modal
-                const id_socio = button.data('id') // Extract info from data-* attributes
-                const dni_socio = button.data('user->dni') // Extract info from data-* attributes
+                const dni_cli = button.data('id') // Extract info from data-* attributes
+                const nombre_cli = button.data('nombre') // Extract info from data-* attributes
                 
                 const modal = $(this)
                 const form = $('#formDelete')
-                form.attr('action', `{{ env('APP_URL') }}/panel/socios/${id_socio}`);
-                modal.find('.modal-body #message').text(`¿Estás seguro de eliminar el cargo "${user->dni, user->name}"?`)
+                form.attr('action', `{{ env('APP_URL') }}/panel/clientes/${dni_cli}`);
+                modal.find('.modal-body #message').text(`¿Estás seguro de eliminar el cargo "${dni_cli, nombre_cli}"?`)
             })
         });
     </script>
