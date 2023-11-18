@@ -11,7 +11,11 @@
                 {{ session('status') }}
             </div>
         @endif
-
+        @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
         <a href="{{ route('facturas.create') }}" class="btn btn-primary">Agregar</a>
 
         @if ($facturacion->count())
@@ -56,7 +60,7 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $facturacion->links() }} 
+                
         @else
             <h4>¡No hay facturas cargadas!</h4>
         @endif

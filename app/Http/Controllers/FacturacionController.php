@@ -12,24 +12,32 @@ use Illuminate\Http\Request;
 class FacturacionController extends Controller
 {
     public function index () {
+        $cajasAbierta = Cajas::where('estado_caja', true)->first();
 
+       
         //$clientes = new Cajas;
         $facturacion = Facturacion::all();
         $cajas = Cajas::all();
         $clientes = clientes::all();
         $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
         $cajaAbierta = $cajaso->where('estado_caja', true);
-        return view('panel.facturas.index', compact('facturacion', 'cajas', 'clientes', 'cajaAbierta'));
+        return view('panel.facturas.index', compact('facturacion', 'cajas', 'clientes', 'cajasAbierta'));
     }
 
     public function create () {
+        $cajaAbierta = Cajas::where('estado_caja', true)->first();
+
+        if (!$cajaAbierta) {
+            return redirect()->route('facturas.index')->with('error', 'No hay cajas abiertas. No se pueden crear facturas.');
+        }
+
         $facturacion = Facturacion::all();
         $clientes = clientes::all();
         $cajas = Cajas::all();
         $formdp = Formas_pago::all();
         $tipofac = Tipo_factura::all();
         $socio = Socio::all();
-        return view('panel.facturas.create', compact('facturacion', 'cajas','formdp', 'tipofac', 'socio', 'clientes'));
+        return view('panel.facturas.create', compact('facturacion', 'cajas','formdp', 'tipofac', 'socio', 'clientes', 'cajaAbierta'));
  
     }
 
@@ -37,7 +45,7 @@ class FacturacionController extends Controller
         //valid
         $cajasAbierta = Cajas::where('estado_caja', true)->first();
 
-        if ($cajasAbierta == 0) {
+        if (!$cajasAbierta) {
             return redirect()->route('facturas.index')->with('error', 'No hay cajas abiertas. No se pueden crear facturas.');
         }
 
@@ -52,6 +60,12 @@ class FacturacionController extends Controller
         $facturacion->monto_fac = $request->get('monto_fac');
         $facturacion->pagada_fac = $request->get('pagada_fac');
        
+        $cajas = Cajas::findOrFail($facturacion->id_caja);
+    
+        $cajas->total_ventas_caja += 1; // Incrementar la cantidad de ventas
+        $cajas->monto_final += $facturacion->monto_fac; // Incrementar el monto recaudado
+
+        $cajas->save();
         $facturacion ->save();
         //Redir
         //echo '<script>showCajaIndicator();</script>';

@@ -39,7 +39,7 @@
             <div class="mb-3">
                 <label for="tipofac" class="col-sm-4 col-form-label"> * Tipo de fac </label>
                 <div class="col-sm-8">
-                <select id="id_tf" name="id_tf" class="form-control">
+                <select id="tipo_fac" name="tipo_fac" class="form-control">
                     @foreach ($tipofac as $tfac)
                         <option value="{{ $tfac->id_tipo_fac }}"> 
                             {{ $tfac->tipo_fac }}
@@ -51,10 +51,10 @@
             <div class="mb-3">
                 <label for="socio" class="col-sm-4 col-form-label"> * DNI socio </label>
                 <div class="col-sm-8">
-                <select id="id_soc" name="id_soc" class="form-control">
+                <select id="dni_soc" name="dni_soc" class="form-control">
                     @foreach ($socio as $soc)
                         <option value="{{ $soc->id_soc }}"> 
-                            {{ $soc->user->dni }}, {{ $cli->user->name }}
+                            {{ $soc->user->dni }}, {{ $soc->user->name }}
                         </option>
                     @endforeach
                 </select>
@@ -63,7 +63,7 @@
             <div class="mb-3">
                 <label for="cli" class="col-sm-4 col-form-label"> * DNI cliente </label>
                 <div class="col-sm-8">
-                <select id="id_cli" name="id_cli" class="form-control">
+                <select id="dni_cli" name="dni_cli" class="form-control">
                     @foreach ($clientes as $cli)
                         <option value="{{ $cli->id_cli }}"> 
                             {{ $cli->user->dni }}, {{ $cli->user->name }}
@@ -74,10 +74,10 @@
             </div>
             <div class="mb-3">
               <label for="" class="form-label" name="estado_fac">Estado de factura</label>
-              @foreach ($facturacion as $factura)
-              <button class="btn btn-success" onclick="markAsPaid({{ $factura->num_fac }})">Marcar como Pagado</button>
-              <button class="btn btn-danger" onclick="markAsUnpaid({{ $factura->num_fac }})">Marcar como No Pagado</button>
-              @endforeach
+            <select class="form-select" id="pagada_fac" name="pagada_fac">
+                <option value="1">Pagada</option>
+                <option value="0">No Pagada</option>
+            </select>
             </div>   
              <button type="submit" class="btn btn-primary">Guardar</button>
              <a href="{{ route('facturas.index') }}" class="btn btn-danger">Cancelar</a>

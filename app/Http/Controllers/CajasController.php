@@ -15,7 +15,8 @@ class CajasController extends Controller
         $empleado = Empleado::all();
         $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
         $cajaAbierta = $cajaso->where('estado_caja', true);
-        return view('panel.Cajas.index', compact('cajas', 'empleado', 'cajaAbierta'));
+        
+        return view('panel.Cajas.index', compact('cajas', 'empleado', 'cajaAbierta',));
     }
 
     public function create () {
@@ -55,6 +56,7 @@ class CajasController extends Controller
 
     public function update(Request $request, $id){
         //$empleado = Paises::all();
+        
         $cajas = Cajas::findOrFail($id);
         $cajas->monto_inicial_caja = $request->input('monto_inicial_caja');
         $cajas->total_ventas_caja = $request->input('total_ventas_caja');

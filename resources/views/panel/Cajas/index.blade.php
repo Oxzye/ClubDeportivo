@@ -40,11 +40,14 @@
                             @csrf
                             @method('PATCH')
                             <input type="text" class="" name="monto_inicial_caja" id="" aria-describedby="helpId" value="{{ $caja->monto_inicial_caja }}" hidden>
+                            
                             <div class="form-group">
-                                <label for="Monto_final">Monto final:</label>
-                                <input type="number" name="monto_final" id="" class="form-control">
+                                <label for="Monto_final" >Monto final:</label>
+                                <input type="number" name="monto_final" id="" class="form-control" value="{{ $caja->monto_final }}" readonly>
                             </div>
-                            <input type="" name="total_ventas_caja" id="" value="10" hidden>
+                            
+                            <input type="" name="total_ventas_caja" id="" value="{{ $caja->total_ventas_caja }}" hidden>
+                            
                             <input type="text" name="estado_caja" id="" class="form-control" placeholder="" aria-describedby="helpId" value="0" hidden>
                             <input type="text" class="" name="saldo_caja" id="" aria-describedby="helpId" value="{{ $caja->saldo_caja }}" hidden>
                             <input type="text" class="" name="id_emp" id="" aria-describedby="helpId" value="{{ $caja->id_emp }}" hidden>
@@ -62,16 +65,6 @@
 </div>
 <script type="text/javascript">
 
-  
-// Muestra el indicador verde
-function showCajaIndicator() {
-        document.getElementById('caja-indicator').style.display = 'block';
-    }
-
-    // Oculta el indicador verde
-    function hideCajaIndicator() {
-        document.getElementById('caja-indicator').style.display = 'none';
-    }
 
     document.getElementById('cierrecj').addEventListener('click', function() {
         var div = document.getElementById('cierre_cajas');
