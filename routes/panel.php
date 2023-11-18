@@ -23,9 +23,15 @@ Route::get('/', function(){
         return view('panel.index');
 });
 
+Route::get('/socios/dadosdebaja', [SociosController::class, 'dadosdebaja'])->name('socios.dadosdebaja');
+Route::get('/socios/restore/{id}', [SociosController::class, 'restore'])->name('socios.restore');
+Route::get('/socios/resetPassword', [SociosController::class, 'resetPassword'])->name('socios.resetPassword');
 Route::resource('/socios', SociosController::class)->names('socios');
 
+Route::get('/empleados/dadosdebaja', [EmpleadosController::class, 'dadosdebaja'])->name('empleados.dadosdebaja');
+Route::get('/empleados/restore/{id}', [EmpleadosController::class, 'restore'])->name('empleados.restore');
 Route::resource('/empleados', EmpleadosController::class)->names('empleados');
+
 
 Route::resource('/instalaciones', InstalacionesController::class)->names('instalaciones');
 

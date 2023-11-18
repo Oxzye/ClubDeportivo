@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SociosController extends Controller
 {
@@ -19,6 +20,7 @@ class SociosController extends Controller
     public function index()
     {
         $socios = Socio::with('user')->get();
+        //logger($socios[0]->cuil_soc);
 
         return view('panel.socios.index', compact('socios'));
     }
@@ -129,13 +131,13 @@ class SociosController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
+    {   
+        //agregando recuperacion de socio
+        $socio = Socio::with('user')->find($id);
         // Valida los datos del formulario de edición
         $request->validate([
-            'cuil_soc' => 'required|integer|unique:socios,cuil_soc,' . $id,
-            'fecha_asociacion' => 'required|date',
+            'cuil_soc' => 'required|integer|unique:socios,cuil_soc,' . $id .',id_soc',
             'observaciones_soc' => 'string|max:40',
-            // Otros campos...
             'name' => 'required|string|max:40',
             'apellido' => 'required|string|max:40',
             'dni' => 'required|integer|min:10000000|max:99999999',
@@ -161,7 +163,7 @@ class SociosController extends Controller
         // Actualiza los datos en la tabla 'socios'
         $socio->update([
             'cuil_soc' => $request->input('cuil_soc'),
-            'fecha_asociacion' => $request->input('fecha_asociacion'),
+            'fecha_asociacion' => $socio->fecha_asociacion,
             'observaciones_soc' => $request->input('observaciones_soc'),
             // Otros campos...
         ]);
@@ -175,6 +177,40 @@ class SociosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Recupera el empleado y el usuario que deseas eliminar
+        $socio = Socio::with('user')->find($id);
+
+        // Elimina el registro de 'empleados'
+        $socio->delete();
+
+        // Elimina el registro de 'users'
+        $socio->user->delete();
+
+        // Redirige a la vista de empleados o cualquier otra ruta que desees
+        return redirect()->route('socios.index')->with('status', 'Empleado eliminado correctamente');
     }
+
+    public function dadosdebaja()
+    {
+        $socios = Socio::onlyTrashed()->orderBy('deleted_at', 'asc')->with('user')->get();
+
+        //logger($socios[0]->cuil_soc);
+        return view('panel.socios.dadosdebaja', compact('socios'));
+    }
+
+    public function restore(string $id)
+    {
+        $datos = User::onlyTrashed()->find($id);
+        // Restaura el modelo 'User'
+        $user = User::whereId($id);
+        $user->restore();
+
+        // Restaura el modelo 'Socio'
+        $socio = Socio::where('id_user', $id);
+        $socio->restore();
+
+
+        return redirect()->route('socios.dadosdebaja')->with('status', 'Socio ' . $datos->name." ".$datos->apellido  . ' recuperado exitosamente');
+    }
+
 }

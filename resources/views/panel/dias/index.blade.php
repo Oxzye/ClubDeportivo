@@ -3,54 +3,97 @@
 
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
-
+{{-- Agregar este link para ver los iconos de opciones --}}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @section('title', 'Dias Index')
-    
+
 @section('content')
     <div class="container-fluid">
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
+        <div class="row">
+            <div class="col-12 mb-3">
+
+                <a href="{{ route('dias.create') }}" class="btn btn-success text-uppercase">
+                    Nuevo Dia
+                </a>
             </div>
-        @endif
 
-        <a href="{{ route('dias.create') }}" class="btn btn-primary">Agregar</a>
-
-        @if ($dias->count())
-            
-                <div class="table-responsive">
-                    <table class="table table-primary">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col" colspan="3">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($dias as $dia)
-                                <tr class="">
-                                    <td scope="row">{{ $dia->id_dia }}</td>
-                                    <td>{{ $dia->nombre_dia }}</td>
-                                    <td>Ver</td>
-                                    <td>
-                                        <a href="{{ route('dias.edit', $dia->id_dia)  }}" class="btn btn-warning">Editar</a>
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('dias.destroy', $dia->id_dia ) }}" method="post">
-                                        @csrf @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>  
-                            @endforeach
-                            
-                        </tbody>
-                    </table>
+            @if (session('alert'))
+                <div class="col-12">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('alert') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 </div>
-                {{ $dias->links() }} 
-        @else
-            <h4>¡No hay dias cargados!</h4>
-        @endif
-    </div>
-@endsection
+            @endif
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="tabla-dias" class="table table-striped table-hover w-100">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col" class="text-uppercase">Nombre</th>
+                                    <th scope="col" class="text-uppercase">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($dias as $dia)
+                                    <tr>
+                                        <td>{{ $dia->id_dia }}</td>
+                                        <td>{{ $dia->nombre_dia }}</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href=""
+                                                    class="btn btn-outline-dark rounded-circle mx-2"
+                                                    style="width:2.5em; height:2.5em;">
+                                                    <span class="material-symbols-outlined d-flex justify-content-center">
+                                                        info
+                                                    </span>
+                                                </a>
+                                                <a href="{{ route('dias.edit', $dia) }}"
+                                                    class="btn btn-outline-dark rounded-circle mx-2"
+                                                    style="width:2.5em; height:2.5em;">
+                                                    <span class="material-symbols-outlined d-flex justify-content-center">
+                                                        edit_square
+                                                    </span>
+                                                </a>
+                                                <form action="{{ route('dias.destroy', $dia) }}" method="post">
+                                                    @csrf @method('DELETE')
+                                                    <button type="submit" class="btn btn-outline-dark rounded-circle mx-2"
+                                                        style="width:2.5em; height:2.5em;">
+                                                        <span
+                                                            class="material-symbols-outlined d-flex justify-content-center">
+                                                            cancel
+                                                        </span>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endsection
+
+    {{-- Importacion de Archivos CSS --}}
+    @section('css')
+
+    @stop
+
+
+    {{-- Importacion de Archivos JS --}}
+    @section('js')
+
+        {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
+        <script src="{{ asset('js/dias.js') }}"></script>
+    @stop

@@ -34,92 +34,84 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name', $empleado->user->name) }}">
                                 <small id="" class="form-text text-muted">Obligatorio.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="apellido">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" name="apellido" value="{{ old('apellido') }}">
+                                <input type="text" class="form-control" id="apellido" name="apellido" value="{{ old('apellido', $empleado->user->apellido) }}">
                                 <small id="" class="form-text text-muted">Obligatorio.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">DNI</label>
-                                <input type="number" class="form-control" name="dni" id="dni" value="{{ old('dni') }}">
+                                <input type="number" class="form-control" name="dni" id="dni" value="{{ old('dni', $empleado->user->dni) }}">
                                 <small id="" class="form-text text-muted">Posible alert.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">CUIT</label>
-                                <input type="number" class="form-control" name="cuit_emp" id="cuit_emp" value="{{ old('cuit_emp') }}">
+                                <input type="number" class="form-control" name="cuit_emp" id="cuit_emp" value="{{ old('cuit_emp', $empleado->cuit_emp) }}">
                                 <small id="" class="form-text text-muted">Posible alert.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Fecha de Nacimiento</label>
-                                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="{{ old('fecha_nac') }}">
+                                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="{{ old('fecha_nac', $empleado->user->fecha_nac) }}">
                                 <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
-
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Genero</label>
                             <select id="cod_genero" name="cod_genero" class="form-control">
                                 <option value="" selected>Seleccione uno...</option>
                                 @foreach ($generos as $genero)
-                                    <option value="{{ $genero->cod_genero }}"> 
+                                    <option {{ $empleado->user->cod_genero && $empleado->user->cod_genero == $genero->cod_genero ? 'selected': ''}} value="{{ $genero->cod_genero }}"> 
                                         {{ $genero->tipo_genero }}
                                     </option>
                                 @endforeach
                             </select> 
                             </div>
                         </div>
-
                         <div class="col-7">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Domicilio</label>
-                                <input type="text" class="form-control" name="domicilio" id="" aria-describedby="emailHelp">
+                                <input type="text" class="form-control" name="domicilio" id="" value="{{ old('domicilio', $empleado->user->domicilio) }}">
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nro de telefono</label>
-                                <input type="number" class="form-control" id="telefono" name="telefono" aria-describedby="telefono">
+                                <input type="number" class="form-control" id="telefono" name="telefono" value="{{ old('domicilio', $empleado->user->telefono) }}">
                                 <small id="" class="form-text text-muted">We'll never share</small>
                             </div>
                         </div>
-
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">País</label>
-                                <select class="form-control" id="id_pais" name="id_pais" >
-                                <option value="" selected>Seleccionar</option>
-                                @foreach ($paises as $pais)
-                                <option value="{{ $pais->id_pais }}"> 
-                                    {{ $pais->nombre_pais }}
-                                </option>
-                            @endforeach
+                                <label for="exampleFormControlSelect1">País</label>
+                                <select class="form-control" id="pais" name="pais" >
+                                <option selected>Seleccionar</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">Provincias</label>
-                                <select class="form-control" id="provincia" name="provincia">
+                                <label for="exampleFormControlSelect1">Provincia</label>
+                                <select class="form-control" id="provincia" name="provincia" >
                                 <option selected>Seleccionar</option>
-                                @foreach ($paises as $pais)
-                                <option value="{{ $pais->id_pais }}"> 
-                                    {{ $pais->nombre_pais }}
-                                </option>
-                            @endforeach
+                                <option></option>
+                                <option></option>
+                                <option></option>
                                 </select>
                             </div>
                         </div>
@@ -128,11 +120,9 @@
                                 <label for="exampleFormControlSelect1">Localidad</label>
                                 <select class="form-control" id="localidad" name="localidad" >
                                 <option selected>Seleccionar</option>
-                                 @foreach ($paises as $pais)
-                                <option value="{{ $pais->id_pais }}"> 
-                                    {{ $pais->nombre_pais }}
-                                </option>
-                            @endforeach
+                                <option></option>
+                                <option></option>
+                                <option></option>
                                 </select>
                             </div>
                         </div>
@@ -144,7 +134,7 @@
                         <div class="col-10">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Correo electronico</label>
-                                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                                <input type="email" class="form-control" name="email" id="email" value="{{ old('email', $empleado->user->email) }}">
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
@@ -162,11 +152,11 @@
                                 <select id="id_cargo" name="id_cargo" class="form-control">
                                     <option value="" selected>Seleccione uno...</option>
                                     @foreach ($cargos as $cargo)
-                                        <option value="{{ $cargo->id_cargo }}"> 
-                                            {{ $cargo->nombre_cargo }}
-                                        </option>
-                                    @endforeach
-                                </select> 
+                                    <option {{ $empleado->cargo->id_cargo && $empleado->cargo->id_cargo == $cargo->id_cargo ? 'selected': ''}} value="{{ $cargo->id_cargo }}"> 
+                                        {{ $cargo->nombre_cargo }}
+                                    </option>
+                                @endforeach
+                            </select> 
                             </div>
                         </div>
                         <div class="col-5">
