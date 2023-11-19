@@ -33,14 +33,14 @@
             {{-- fin  dias con select--}}
             {{-- instalaciones con select --}}
             <div class="mb-3 row">
-                <label for="id_inst" class="col-sm-4 col-form-label" name="id_inst"> ID instalación: </label>
+                <label for="id_inst" class="col-sm-4 col-form-label" name="id_inst"> Instalación (nombre_inst | tipo_inst | capacidad): </label>
                 <select id="id_inst" name="id_inst" class="form-control">
                     @foreach ($instalaciones as $instalacion)
                         <option value="{{ $instalacion->id_inst, old( 'id_inst' ) }}" aria-describedby="helpId" @error('id_inst') is-invalid @enderror">
                         @error( 'id_inst' )
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                            {{ $instalacion->nombre_inst }}
+                        {{ $instalacion->nombre_inst .' | '.$instalacion->tipo_inst .' | '. $instalacion->capacidad_inst}}
                         </option>
                     @endforeach
                 </select>

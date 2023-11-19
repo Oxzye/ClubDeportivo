@@ -30,8 +30,8 @@
                         <thead>
                             <tr>
                                 <th class="text-center">id_exa</th>
-                                <th class="text-center">id_emp</th>
-                                <th class="text-center">id_act</th>
+                                <th class="text-center">Empleado</th>
+                                <th class="text-center">Actividad</th>
                                 <th class="d-flex flex-row-reverse bd-highlight px-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
                         </thead>

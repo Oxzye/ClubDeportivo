@@ -43,7 +43,7 @@ class ActividadesController extends Controller
         // dd($request->input('id_dep'));
         $validated = $request->validate(
             [
-                'nombre_act' => 'required|string|max:60',
+                'nombre_act' => 'required|string|unique:actividades|max:60',
                 'limite_soc_atc' => 'required|integer',
                 'descripcion_act' => 'required|string|max:200',
                 'actividad_en_curso' => 'required|boolean',
@@ -52,6 +52,7 @@ class ActividadesController extends Controller
             ],[
                 'nombre_act.required' => 'El campo nombre de la actividad es obligatorio',
                 'nombre_act.string' => 'Ingrese texto',
+                'nombre_act.unique' => 'El nombre ya está registrado',
                 'nombre_act.max' => 'Solo se permiten hasta 60 caracteres',
 
                 'limite_soc_atc.required' => 'El campo limite de socios por actividada es obligatorio',
@@ -127,7 +128,7 @@ class ActividadesController extends Controller
         // Validar los datos del formulario de edición
         $validated = $request->validate(
             [
-                'nombre_act' => 'required|string|max:100',
+                'nombre_act' => 'required|string|unique:actividades,nombre_act, '. $id_act.',id_act|max:100',
                 'limite_soc_atc' => 'required|integer',
                 'descripcion_act' => 'required|string|max:200',
                 'actividad_en_curso' => 'required|boolean',
@@ -136,6 +137,7 @@ class ActividadesController extends Controller
             ],[
                 'nombre_act.required' => 'El campo nombre de la actividad es obligatorio',
                 'nombre_act.string' => 'Ingrese texto',
+                'nombre_act.unique' => 'El nombre ya está registrado',
                 'nombre_act.max' => 'Solo se permiten hasta 60 caracteres',
 
                 'limite_soc_atc.required' => 'El campo limite de socios por actividada es obligatorio',

@@ -14,8 +14,8 @@
     @endif
         <ul class="list-group">
             <li class="list-group-item"><strong><u>ID de actividad:</strong></u> {{ $act->id_act }}</li>
-            <li class="list-group-item"><strong><u>Nombre del deporte:</u></strong> {{ $act->deporte->nombreDep }}</li>
-            <li class="list-group-item"><strong><u>Nombre de la la instalación:</u></strong> {{ $act->instalacion->nombre_inst }}</li>
+            <li class="list-group-item"><strong><u>Deporte:</u></strong> {{ $act->deporte->nombreDep .', '. $act->deporte->M_F_Mixto.', '. $act->deporte->descripcionDep}}</li>
+            <li class="list-group-item"><strong><u>Instalación:</u></strong> {{ $act->instalacion->nombre_inst .', '.$act->instalacion->tipo_inst .', '. $act->instalacion->capacidad_inst}}.</li>
 
             <li class="list-group-item"><strong><u>Nombre de la actividad:</u></strong> {{ $act->nombre_act }}</li>
             <li class="list-group-item"><strong><u>Limite de socios por actividad:</strong></u> {{ $act->limite_soc_atc }}</li>

@@ -33,11 +33,11 @@
             {{-- fin  dias con select--}}
             {{-- actividades con select --}}
             <div class="mb-3 row">
-                <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad: </label>
+                <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad (nombre_act | descripcion_act): </label>
                 <select id="id_act" name="id_act" class="form-control">
                     @foreach ($actividades as $act)
                         <option value="{{ $act->id_act }}" {{ $act->id_act == $dxact->id_act ? 'selected' : '' }}> 
-                            {{ $act->nombre_act }}
+                            {{ $act->nombre_act . ' | '. $act->descripcion_act}}
                         </option>
                     @endforeach
                 </select>

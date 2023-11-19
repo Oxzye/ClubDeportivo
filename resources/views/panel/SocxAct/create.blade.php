@@ -21,11 +21,11 @@
         @csrf
             {{-- dias con select --}}
             <div class="mb-3 row">
-                <label for="id_soc" class="col-sm-4 col-form-label" name="id_soc"> Socio: </label>
+                <label for="id_soc" class="col-sm-4 col-form-label" name="id_soc"> Socio (nombre y apellido | dni): </label>
                 <select id="id_soc" name="id_soc" class="form-control">
                     @foreach ($socios as $socio)
                         <option value="{{ $socio->id_soc }}"> 
-                            {{ $socio->user->name .' '. $socio->user->apellido }}
+                            {{ $socio->user->name .' '. $socio->user->apellido .' | '. $socio->user->dni}}
                         </option>
                     @endforeach
                 </select>
@@ -33,11 +33,11 @@
             {{-- fin  dias con select--}}
             {{-- actividades con select --}}
             <div class="mb-3 row">
-                <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad: </label>
+                <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad (nombre_act | descripcion_act): </label>
                 <select id="id_act" name="id_act" class="form-control">
                     @foreach ($actividades as $act)
                         <option value="{{ $act->id_act }}"> 
-                            {{ $act->nombre_act }}
+                            {{ $act->nombre_act . ' | '. $act->descripcion_act }}
                         </option>
                     @endforeach
                 </select>

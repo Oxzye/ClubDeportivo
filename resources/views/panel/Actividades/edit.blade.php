@@ -21,11 +21,11 @@
         @csrf @method('PUT')
             {{-- deportes con select --}}
             <div class="mb-3 row">
-                <label for="id_dep" class="col-sm-4 col-form-label" name="id_dep"> Deporte (nombreDep | M_F_Mixto): </label>
+                <label for="id_dep" class="col-sm-4 col-form-label" name="id_dep"> Deporte (nombreDep | M_F_Mixto | descripcionDep): </label>
                 <select id="id_dep" name="id_dep" class="form-control">
                     @foreach ($deportes as $deporte)
                         <option value="{{ $deporte->id_dep }}" {{ $deporte->id_dep == $act->id_dep ? 'selected' : '' }}> 
-                            {{$deporte->nombreDep .' | '. $deporte->M_F_Mixto }}
+                            {{$deporte->nombreDep .' | '. $deporte->M_F_Mixto .' | '. $deporte->descripcionDep }}
                         </option>
                     @endforeach
                 </select>

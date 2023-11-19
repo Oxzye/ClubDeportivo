@@ -31,8 +31,8 @@
                         <thead>
                             <tr>
                                 <th class="text-center">id_disp</th>
-                                <th class="text-center">id_inst</th>
-                                <th class="text-center">id_dia</th>
+                                <th class="text-center">Instalación</th>
+                                <th class="text-center">Día</th>
                                 <th class="text-center">horariodisp</th>
                                 <th class="d-flex flex-row-reverse bd-highlight px-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>

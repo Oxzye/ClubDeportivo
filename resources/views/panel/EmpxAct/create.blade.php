@@ -21,11 +21,11 @@
         @csrf
             {{-- actividades con select --}}
             <div class="mb-3 row">
-                <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad: </label>
+                <label for="id_act" class="col-sm-4 col-form-label" name="id_act"> Actividad (nombre_act | descripcion_act): </label>
                 <select id="id_act" name="id_act" class="form-control">
                     @foreach ($actividades as $act)
                         <option value="{{ $act->id_act }}"> 
-                            {{ $act->nombre_act }}
+                            {{ $act->nombre_act . ' | '. $act->descripcion_act }}
                         </option>
                     @endforeach
                 </select>
@@ -35,11 +35,11 @@
 
             {{-- empleados con select --}}
             <div class="mb-3 row">
-                <label for="id_emp" class="col-sm-4 col-form-label" name="id_emp"> Empleado: </label>
+                <label for="id_emp" class="col-sm-4 col-form-label" name="id_emp"> Empleado (nombre y apellido | dni): </label>
                 <select id="id_emp" name="id_emp" class="form-control">
                     @foreach ($empleados as $empleado)
                         <option value="{{ $empleado->id_emp }}"> 
-                            {{ $empleado->user->name .' '. $empleado->user->apellido }}
+                            {{ $empleado->user->name .' '. $empleado->user->apellido .' | '. $empleado->user->dni }}
                         </option>
                     @endforeach
                 </select>

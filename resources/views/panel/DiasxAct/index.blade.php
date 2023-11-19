@@ -31,8 +31,8 @@
                         <thead>
                             <tr>
                                 <th class="text-center">id_diasxact</th>
-                                <th class="text-center">id_act</th>
-                                <th class="text-center">id_dia</th>
+                                <th class="text-center">Actividad</th>
+                                <th class="text-center">Día</th>
                                 <th class="text-center">horario_inicio</th>
                                 <th class="text-center">horario_fin</th>
                                 <th class="d-flex flex-row-reverse bd-highlight px-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>

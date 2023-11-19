@@ -14,7 +14,7 @@
     @endif
         <ul class="list-group">
             <li class="list-group-item"><strong><u>ID de disponibilidad:</strong></u> {{ $disp->id_disp }}</li>
-            <li class="list-group-item"><strong><u>Nombre de la instalación:</u></strong> {{ $disp->instalacion->nombre_inst }}</li>
+            <li class="list-group-item"><strong><u>Nombre de la instalación:</u></strong> {{ $disp->instalacion->nombre_inst .', '.$disp->instalacion->tipo_inst .', '. $disp->instalacion->capacidad_inst}}.</li>
             <li class="list-group-item"><strong><u>Nombre de día:</strong></u> {{ $disp->dia->nombre_dia }}</li>
             <li class="list-group-item"><strong><u>Horario disponible:</strong></u> {{$disp->horariodisp }}</li>
             <li class="list-group-item"><strong><u>Creación:</strong></u> {{ $disp->created_at }}</li>

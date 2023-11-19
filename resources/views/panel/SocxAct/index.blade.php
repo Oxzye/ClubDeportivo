@@ -31,11 +31,11 @@
                         <thead>
                             <tr>
                                 <th class="text-center">id_sxa</th>
-                                <th class="text-center">id_act</th>
-                                <th class="text-center">socio</th>
+                                <th class="text-center">Actividad</th>
+                                <th class="text-center">Socio</th>
                                 <th class="text-center">fecha_inscripcion</th>
-                                <th class="text-center">opinion_soc</th>
-                                <th class="d-flex flex-row-reverse bd-highlight pe-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="text-center">Opinión_soc</th>
+                                <th class="d-flex flex-row-reverse bd-highlight px-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
