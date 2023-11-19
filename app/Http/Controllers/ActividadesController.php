@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Instalacion;
 use App\Models\Deporte;
 use App\Models\Actividad;
-use Barryvdh\DomPDF\Facade\Pdf;
+// use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\ActividadesExportExcel;
+use Maatwebsite\Excel\Facades\Excel;
 class ActividadesController extends Controller
 {
     /**
@@ -184,17 +186,36 @@ class ActividadesController extends Controller
         return redirect()->route('Actividades.index')->with('status', 'Actividad eliminada correctamente');
     }
 
-    public function exportarActividadesPDF() {
-        set_time_limit(6000);
-        $admin_id = auth()->user()->id;
-            // Traemos las actividades con relaciones a instalaciones y deportes
-        $actividades = Actividad::with('instalacion', 'deporte')
-            ->where('admin_id',auth()->user()->name)->get();
-        // capturamos la vista y los datos que enviaremos a la misma
-        $pdf = Pdf::loadView('panel.Actividades.pdf_actividades', compact('actividades'));
-        //Renderizamos la vista
-        $pdf->render();
-        // Visualizaremos el PDF en el navegador
-        return $pdf->stream('actividades.pdf');
+    public function exportarActividadesExcel() {
+        return Excel::download(new ActividadesExportExcel, 'actividades.xlsx');
     }
+
+    // public function exportarActividadesPDF() {
+    //     set_time_limit(6000);
+    //     // $admin_id = auth()->user()->id;
+    //         // Traemos las actividades con relaciones a instalaciones y deportes
+    //     $actividades = Actividad::with('instalacion', 'deporte')
+    //         ->where('id',auth()->user()->id)->get();
+    //     // capturamos la vista y los datos que enviaremos a la misma
+    //     $pdf = Pdf::loadView('panel.Actividades.pdf_actividades', compact('actividades'));
+    //     //Renderizamos la vista
+    //     $pdf->render();
+    //     // Visualizaremos el PDF en el navegador
+    //     return $pdf->stream('actividades.pdf');
+
+
+// otra solucion que no funciona
+        // Obtener la actividad con id 191
+        // $actividad = Actividad::where('id', 191)->whereNull('deleted_at')->first();
+        // if ($act) {
+        //     $pdf = Pdf::loadView('panel.Actividades.pdf_actividades', compact('act'));
+        //     // Visualizaremos el PDF en el navegador
+        //     return $pdf->stream('actividades.pdf');
+        //     // Descargar el PDF
+        //     return $pdf->download('reporte_actividad_.pdf');
+        // } else {
+        //     // La actividad no fue encontrada
+        //     return response()->json(['error' => 'Actividad no encontrada'], 404);
+        // }
+
 }

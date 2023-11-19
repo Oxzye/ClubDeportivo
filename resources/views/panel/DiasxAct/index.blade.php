@@ -18,6 +18,10 @@
         </div>
         <div class="row-2 bd-highlight mb-3">
         <a href="{{ route('DiasxAct.create') }}" class="btn btn-primary mb-4 mt-4">Agregar</a>
+
+        <a href="{{ route('exportar-diasxact-excel') }}" class="btn btn-warning mx-3" title="PDF" target="_blank">
+            <i class="fas fa-file-excel"></i> Excel
+        </a>
         </div>
 
         @if ($diasxact->count())

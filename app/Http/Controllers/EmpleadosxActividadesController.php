@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Actividad;
 use App\Models\EmpleadosxActividad;
 use App\Models\Empleado;
+use App\Exports\EmpxActExportExcel;
+use Maatwebsite\Excel\Facades\Excel;
+
 class EmpleadosxActividadesController extends Controller
 {
     /**
@@ -132,5 +135,9 @@ class EmpleadosxActividadesController extends Controller
         $empxact->delete();
 
         return redirect()->route('EmpxAct.index')->with('status', 'Empleado por Actividad eliminado correctamente');
+    }
+
+    public function exportarEmpxactExcel() {
+        return Excel::download(new EmpxActExportExcel, 'empxact.xlsx');
     }
 }

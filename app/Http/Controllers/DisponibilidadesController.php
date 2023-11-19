@@ -5,7 +5,8 @@ use App\Models\Dias;
 use Illuminate\Http\Request;
 use App\Models\Instalacion;
 use App\Models\Disponibilidades;
-
+use App\Exports\DisponibilidadesExportExcel;
+use Maatwebsite\Excel\Facades\Excel;
 class DisponibilidadesController extends Controller
 {
     public function index () {
@@ -89,5 +90,9 @@ class DisponibilidadesController extends Controller
     {
         $disp = Disponibilidades::findOrFail($id_disp);
         return view('panel.Disponibilidades.show', ['disp' => $disp]);
+    }
+
+    public function exportarDisponibilidadesExcel() {
+        return Excel::download(new DisponibilidadesExportExcel, 'disponibilidades.xlsx');
     }
 }

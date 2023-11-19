@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Exports\DiasxActExportExcel;
 use App\Models\Dias;
 use App\Models\Actividad;
 use Illuminate\Http\Request;
 use App\Models\DiasxAct;
+use App\Exports\EmpxActExportExcel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DiasxActController extends Controller
 {
@@ -128,5 +132,9 @@ class DiasxActController extends Controller
         $dxact->delete();
         //eliminar el registro del dia y acta que coincidan en la tabla diasxact
         return redirect()->route('DiasxAct.index')->with('status', 'Dia por Actividad eliminado correctamente');
+    }
+
+    public function exportarDiasxActExcel() {
+        return Excel::download(new DiasxActExportExcel, 'diasxact.xlsx');
     }
 }

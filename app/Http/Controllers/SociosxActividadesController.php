@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\Actividad;
 use App\Models\SociosxActividad;
 use App\Models\Socio;
-
 use Illuminate\Http\Request;
+use App\Exports\SocxActExportExcel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SociosxActividadesController extends Controller
 {
@@ -130,5 +131,9 @@ class SociosxActividadesController extends Controller
         $sxa->delete();
 
         return redirect()->route('SocxAct.index')->with('status', 'Socio por Actividad eliminado correctamente');
+    }
+
+        public function exportarSocxActExcel() {
+        return Excel::download(new SocxActExportExcel, 'socxact.xlsx');
     }
 }
