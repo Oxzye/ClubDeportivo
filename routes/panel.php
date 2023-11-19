@@ -60,13 +60,13 @@ Route::resource('/Cajas', CajasController::class)->names('Cajas');
 Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('Disponibilidades');
 
 Route::resource('/Actividades', ActividadesController::class)->names('Actividades');
+Route::get('/exportar-actividades-pdf', [ActividadesController::class, 'exportarActividadesPDF'])->name('exportar-actividades-pdf');
+Route::get('/exportar-actividades-excel', [ActividadesController::class, 'exportarActividadesPDF'])->name('exportar-actividades-excel');
 
 Route::resource('/DiasxAct', DiasxActController::class)->names('DiasxAct');
 
 Route::resource('/SocxAct', SociosxActividadesController::class)->names('SocxAct');
 
 Route::resource('/EmpxAct', EmpleadosxActividadesController::class)->names('EmpxAct');
-
-// Route::resource('/Detalles_Factura', DisponibilidadesController::class)->names('Detalles_Factura');
 
 

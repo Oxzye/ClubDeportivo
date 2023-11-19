@@ -6,10 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Instalacion;
 use App\Models\Deporte;
 use App\Models\Actividad;
-use App\Models\DiasxAct;
-// use App\Models\SociosxActividad;
-// use App\Models\Detalles_Factura;
-use App\Models\EmpleadosxActividad;
+use Barryvdh\DomPDF\Facade\Pdf;
 class ActividadesController extends Controller
 {
     /**
@@ -185,5 +182,19 @@ class ActividadesController extends Controller
         $act->delete();
         //redirección
         return redirect()->route('Actividades.index')->with('status', 'Actividad eliminada correctamente');
+    }
+
+    public function exportarActividadesPDF() {
+        set_time_limit(6000);
+        $admin_id = auth()->user()->id;
+            // Traemos las actividades con relaciones a instalaciones y deportes
+        $actividades = Actividad::with('instalacion', 'deporte')
+            ->where('admin_id',auth()->user()->name)->get();
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = Pdf::loadView('panel.Actividades.pdf_actividades', compact('actividades'));
+        //Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('actividades.pdf');
     }
 }

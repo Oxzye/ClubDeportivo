@@ -17,6 +17,12 @@
         
         <div class="row-2 bd-highlight mb-3">
         <a href="{{ route('Actividades.create') }}" class="btn btn-primary mb-4 mt-4">Agregar</a>
+
+        {{-- <a href="{{ route('exportar-actividades-pdf') }}" class="btn btn-warning mx-3" title="PDF"
+            target="_blank">
+                <i class="fas fa-file-pdf"></i> PDF
+        </a> --}}
+
         </div>
             @if ($actividades->count())
                 
