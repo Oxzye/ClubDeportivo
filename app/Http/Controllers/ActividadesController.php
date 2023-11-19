@@ -128,7 +128,7 @@ class ActividadesController extends Controller
         $validated = $request->validate(
             [
                 'nombre_act' => 'required|string|max:100',
-                'limite_soc_atc' => 'required|integer|max:60',
+                'limite_soc_atc' => 'required|integer',
                 'descripcion_act' => 'required|string|max:200',
                 'actividad_en_curso' => 'required|boolean',
                 'fecha_inicio_act' => 'required|date',
@@ -136,11 +136,10 @@ class ActividadesController extends Controller
             ],[
                 'nombre_act.required' => 'El campo nombre de la actividad es obligatorio',
                 'nombre_act.string' => 'Ingrese texto',
-                'nombre_act.max' => 'Solo se permiten hasta 0 caracteres',
+                'nombre_act.max' => 'Solo se permiten hasta 60 caracteres',
 
                 'limite_soc_atc.required' => 'El campo limite de socios por actividada es obligatorio',
                 'limite_soc_atc.integer' => 'Ingrese un valor numerico',
-                'limite_soc_atc.max' => 'Solo se permiten hasta 50 caracteres',
 
                 'descripcion_act.required' => 'El campo descripción de actividad es obligatorio',
                 'descripcion_act.string' => 'Ingrese texto',

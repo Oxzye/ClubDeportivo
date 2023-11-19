@@ -33,8 +33,8 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">id_act</th>
-                                    <th class="text-center">id_dep</th>
-                                    <th class="text-center">id_inst</th>
+                                    <th class="text-center">Deporte</th>
+                                    <th class="text-center">Instalación</th>
                                     <th class="text-center">nombre_act</th>
                                     <th class="text-center">limite_soc_atc</th>
                                     <th class="text-center">descripcion_act</th>

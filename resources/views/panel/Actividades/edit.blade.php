@@ -21,13 +21,11 @@
         @csrf @method('PUT')
             {{-- deportes con select --}}
             <div class="mb-3 row">
-                <label for="id_dep" class="col-sm-4 col-form-label" name="id_dep"> Deporte: </label>
+                <label for="id_dep" class="col-sm-4 col-form-label" name="id_dep"> Deporte (nombreDep | M_F_Mixto): </label>
                 <select id="id_dep" name="id_dep" class="form-control">
                     @foreach ($deportes as $deporte)
                         <option value="{{ $deporte->id_dep }}" {{ $deporte->id_dep == $act->id_dep ? 'selected' : '' }}> 
-                            {{ $deporte->id_dep }}
-                            {{ $deporte->nombreDep }}
-                            {{ $deporte->M_F_Mixto }}
+                            {{$deporte->nombreDep .' | '. $deporte->M_F_Mixto }}
                         </option>
                     @endforeach
                 </select>
@@ -36,11 +34,11 @@
 
             {{-- instalaciones con select --}}
             <div class="mb-3 row">
-                <label for="id_inst" class="col-sm-4 col-form-label" name="id_inst"> Instalación: </label>
+                <label for="id_inst" class="col-sm-4 col-form-label" name="id_inst"> Instalación (nombre_inst | tipo_inst | capacidad): </label>
                 <select id="id_inst" name="id_inst" class="form-control">
                     @foreach ($instalaciones as $instalacion)
                         <option value="{{ $instalacion->id_inst }}" {{ $instalacion->id_inst == $act->id_inst ? 'selected' : '' }}> 
-                            {{ $instalacion->nombre_inst }}
+                            {{ $instalacion->nombre_inst .' | '.$instalacion->tipo_inst .' | '. $instalacion->capacidad_inst}}
                         </option>
                     @endforeach
                 </select>
@@ -86,7 +84,7 @@
               </div>   
 
               <div class="mb-3">
-                <label for="" class="form-label" name="fecha_inicio_act">Fecha de inicio de actividad:</label>
+                <label for="" class="form-label" name="fecha_inicio_act">Fecha de inicio de actividad, con formato YYYY-MM-DD:</label>
                 <input type="text" class="form-control" name="fecha_inicio_act"  value="{{ old( 'fecha_inicio_act', $act->fecha_inicio_act ) }}" aria-describedby="helpId" @error('fecha_inicio_act') is-invalid @enderror">
                 @error( 'fecha_inicio_act' )
                     <div class="alert alert-danger">{{ $message }}</div>
