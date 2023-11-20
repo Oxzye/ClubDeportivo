@@ -32,10 +32,10 @@ class DisponibilidadesController extends Controller
         //valid
         $validated = $request->validate(
         [
-            'horariodisp' => 'required|date',
+            'horariodisp' => 'required|string',
         ],[
             'horariodisp.required' => 'El campo es obligatorio',
-            'horariodisp.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: YYYY-MM-DD HH:mm:ss)',
+            'horariodisp.string' => 'Formato incorrecto, por favor ingrese horas, ejemplo: "HH:mm a HH:mm")',
         ]);
         if($validated) {
             $disp = new Disponibilidades();
@@ -68,10 +68,10 @@ class DisponibilidadesController extends Controller
         //$paises = Paises::all();
         $validated = $request->validate(
             [
-                'horariodisp' => 'required|date',
+                'horariodisp' => 'required|string',
             ],[
                 'horariodisp.required' => 'El campo es obligatorio',
-                'horariodisp.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: YYYY-MM-DD HH:mm:ss)',
+                'horariodisp.string' => 'Formato incorrecto, por favor ingrese horas, ejemplo: "HH:mm a HH:mm")',
             ]);
             if($validated) {
                 //Guardado de los datos
