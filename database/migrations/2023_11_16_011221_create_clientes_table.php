@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    /*public function up(): void
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->droptimestamps();
@@ -21,9 +21,9 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     */
+     
     public function down(): void
     {
         //
-    }
+    }*/
 };
