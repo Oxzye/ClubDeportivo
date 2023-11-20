@@ -31,24 +31,25 @@
             <div class="row">
                 <div class="col-6 border border-dark">
                     <div class="row">
+
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" name="nombre_cli" id="nombre_cli" aria-describedby="name">
-                                <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <input type="text" class="form-control" name="name" id="name" aria-describedby="name">
+                                <small id="" class="form-text text-muted">Obligatorio</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="apellido">Apellido</label>
-                                <input type="text" class="form-control" id="apellido_cli" name="apellido_cli" aria-describedby="apellido">
-                                <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <input type="text" class="form-control" id="apellido" name="apellido" aria-describedby="apellido">
+                                <small id="" class="form-text text-muted">Obligatorio</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">DNI</label>
-                                <input type="number" class="form-control" name="dni_cli" id="dni_cli" aria-describedby="dni">
+                                <input type="number" class="form-control" name="dni_cli" id="dni_cli" aria-describedby="dni_cli">
                                 <small id="" class="form-text text-muted">Posible alert.</small>
                             </div>
                         </div>
@@ -75,7 +76,7 @@
                         <div class="col-7">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Domicilio</label>
-                                <input type="text" class="form-control" name="domicilio" id="" aria-describedby="emailHelp">
+                                <input type="text" class="form-control" name="domicilio" id="domicilio" aria-describedby="emailHelp">
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>
@@ -89,7 +90,7 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">País</label>
-                                <select class="form-control" id="pais" name="pais" >
+                                <select class="form-control" id="id_loc" name="id_loc" >
                                 <option selected>Seleccionar</option>
                                 @foreach ($localidades as $loc)
                                 <option value="{{ $loc->id_loc }}"> 
@@ -101,7 +102,7 @@
                         
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Provincia</label>
-                                <select class="form-control" id="provincia" name="provincia" >
+                                <select class="form-control" id="id_loc" name="id_loc" >
                                 <option selected>Seleccionar</option>
                                 @foreach ($localidades as $loc)
                                 <option value="{{ $loc->id_loc }}"> 
@@ -113,7 +114,7 @@
                         
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Localidad</label>
-                                <select class="form-control" id="localidad" name="localidad" >
+                                <select class="form-control" id="localidades" name="localidades" >
                                 <option selected>Seleccionar</option>
                                 @foreach ($localidades as $loc)
                                 <option value="{{ $loc->id_loc }}"> 
@@ -156,7 +157,7 @@
                         <div class="col-10">
                             <div class="form-group">
                                 <label for="observaciones_soc">¿Hay algo a tener en cuenta sobre este Cliente?</label>
-                                <textarea class="form-control" name="observaciones_soc" id="observaciones" aria-label="With textarea"></textarea>
+                                <textarea class="form-control" name="observaciones" id="observaciones" aria-label="With textarea"></textarea>
                             </div>
                         </div> 
                     </div>
@@ -164,7 +165,7 @@
 
                 <input type="hidden" name="id_user" value="9">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar</a>
+                <a href="{{ route('clientes.index') }}" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>

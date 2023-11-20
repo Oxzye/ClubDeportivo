@@ -128,7 +128,7 @@ class SociosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id, socio $socio)
     {
         // Valida los datos del formulario de edición
         $request->validate([

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\clientes;
 use Illuminate\Http\Request;
 use App\Models\Localidades;
+use App\Models\Paises;
+use App\Models\Provincias;
 use App\Models\generos;
 
 class ClientesController extends Controller
@@ -15,8 +17,8 @@ class ClientesController extends Controller
     public function index()
     {
         //
-        $generos = generos::all();
         $localidades = Localidades::all();
+        $generos = generos::all();
         $clientes = clientes::paginate(3);
         return view('panel.clientes.index', compact('generos', 'localidades', 'clientes'));
     }
@@ -28,6 +30,8 @@ class ClientesController extends Controller
     {
         $generos = generos::all();
         $localidades = Localidades::all();
+        // $paises = Paises::all();
+        // $provincias = Provincias::all();
         $clientes = clientes::paginate(3);
         return view('panel.clientes.create', compact('generos', 'localidades', 'clientes'));
     }
@@ -40,15 +44,16 @@ class ClientesController extends Controller
          //valid
          $clientes = new clientes();
          //Guardado de los datos
-         $clientes->cod_genero = $request->get('cod_genero');
-         $clientes->id_loc = $request->get('id_loc');
-         $clientes->nombre_cli = $request->get('nombre_cli');
-         $clientes->apellido_cli = $request->get('apellido_cli');
-         $clientes->domicilio_cli = $request->get('domicilio_cli');
-         $clientes->telefono_cli = $request->get('telefono_cli');
-         $clientes->fecha_nac_cli = $request->get('fecha_nac_cli');
-         $clientes->email_cli = $request->get('email_cli');
-         $clientes->observaciones = $request->get('observaciones');
+         $clientes->dni_cli = $request->input('dni_cli');
+         $clientes->cod_genero = $request->input('cod_genero');
+         $clientes->id_loc = $request->input('id_loc');
+         $clientes->nombre_cli = $request->input('name');
+         $clientes->apellido_cli = $request->input('apellido');
+         $clientes->domicilio_cli = $request->input('domicilio');
+         $clientes->telefono_cli = $request->input('telefono');
+         $clientes->fecha_nac_cli = $request->input('fecha_nac');
+         $clientes->email_cli = $request->input('email');
+         $clientes->observaciones = $request->input('observaciones');
          $clientes->save();
 
          //redireccionar
