@@ -28,8 +28,9 @@ use App\Models\Cajas;
 
 Route::get('/', function () {
         $cajasAbiertas = Cajas::where('estado_caja', 1)->count();
-
-        return view('panel.index', compact('cajasAbiertas'));
+        $saldo_cajas = Cajas::where('estado_caja', 1)->sum('saldo_caja');
+        
+        return view('panel.index', compact('cajasAbiertas', 'saldo_cajas'));
 });
 
 
