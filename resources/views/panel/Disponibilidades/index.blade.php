@@ -58,7 +58,7 @@
                                         </a>
 
                                         <button type="button" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;"
-                                         data-toggle="modal" data-target="#deleteModal" data-id="{{ $disp->id_disp }}" data-nombre="{{ $disp->instalaciones->nombre_inst }}">
+                                         data-toggle="modal" data-target="#deleteModal" data-id="{{ $disp->id_disp }}">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
                                                 cancel
                                             </span>
