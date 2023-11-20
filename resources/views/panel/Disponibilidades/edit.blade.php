@@ -24,7 +24,7 @@
                 <label for="id_dia" class="col-sm-4 col-form-label" name="id_dia"> ID día: </label>
                 <select id="id_dia" name="id_dia" class="form-control">
                     @foreach ($dias as $dia)
-                        <option value="{{ $dia->id_dia }}"> 
+                        <option value="{{ $dia->id_dia }}" {{ $dia->id_dia == $disp->id_dia ? 'selected' : '' }}>  
                             {{ $dia->nombre_dia }}
                         </option>
                     @endforeach
@@ -36,10 +36,8 @@
                 <label for="id_inst" class="col-sm-4 col-form-label" name="id_inst"> Instalación (nombre_inst | tipo_inst | capacidad): </label>
                 <select id="id_inst" name="id_inst" class="form-control">
                     @foreach ($instalaciones as $instalacion)
-                        <option value="{{ $instalacion->id_inst, old( 'id_inst' ) }}" aria-describedby="helpId" @error('id_inst') is-invalid @enderror">
-                        @error( 'id_inst' )
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <option value="{{ $instalacion->id_inst }}" {{ $instalacion->id_inst == $disp->id_inst ? 'selected' : '' }}>
+
                         {{ $instalacion->nombre_inst .' | '.$instalacion->tipo_inst .' | '. $instalacion->capacidad_inst}}
                         </option>
                     @endforeach
@@ -47,7 +45,7 @@
             </div>
             {{-- fin instalaciones con select --}}
             <div class="mb-3">
-                <label for="" class="form-label" name="horariodisp">Horario disponible:</label>
+                <label for="" class="form-label" name="horariodisp">Horario disponible (ejemplo: YYYY-MM-DD HH:mm:ss):</label>
                 <input type="text" class="form-control" name="horariodisp" value="{{ old( 'horariodisp', $disp->horariodisp ) }}" aria-describedby="helpId" @error('horariodisp') is-invalid @enderror">
                 @error( 'horariodisp' )
                     <div class="alert alert-danger">{{ $message }}</div>
