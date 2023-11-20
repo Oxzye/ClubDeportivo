@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Factous',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -109,11 +109,11 @@ return [
     'preloader' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => '../logo/F.png',
             'alt' => 'AdminLTE Preloader Image',
-            'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'effect' => 'animation_wobble',
+            'width' => 600,
+            'height' => 600,
         ],
     ],
 
@@ -130,7 +130,7 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-danger',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -150,7 +150,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -174,6 +174,7 @@ return [
     'classes_auth_icon' => '',
     'classes_auth_btn' => 'btn-flat btn-primary',
 
+
     /*
     |--------------------------------------------------------------------------
     | Admin Panel Classes
@@ -192,8 +193,8 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
-    'classes_sidebar_nav' => '',
+    'classes_sidebar' => 'sidebar-dark-danger elevation-4',
+    'classes_sidebar_nav' => 'nav-child-indent',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
@@ -218,7 +219,7 @@ return [
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 300,
+    'sidebar_nav_animation_speed' => 190,
 
     /*
     |--------------------------------------------------------------------------
@@ -302,6 +303,7 @@ return [
         [
             'text' => 'Inicio',
             'icon' => 'fas fa-home',
+            'classes' => '',
             'url' => 'panel',
 
         ],
@@ -325,8 +327,11 @@ return [
             'header' => 'canchero view',
             'can' => 'canchero_vista',
         ],
-    //
-    
+        //
+        [
+            'header' => 'Apertura y cierre de cajas',
+            'can' => 'admin_vista',
+        ],
     //Apertura y cierre de cajas
         [
             'text' => 'Apertura y Cierre de caja',
@@ -349,6 +354,7 @@ return [
                     'active' => ['panel/cajas/create'],
                     'shift' => 'ml-3',
                 ],
+                
                 /*[
                     'text' => 'Cerrar Caja',
                     'route' => 'Cajas.index',
@@ -359,8 +365,11 @@ return [
                 ],*/
             ]
         ],
-    //
-
+        //
+        [
+            'header' => 'Venta y Facturación',
+            'can' => 'admin_vista',
+        ],
     //Cobro de cuotas sociales
         [
             'text' => 'Cobro de cuota social',
@@ -376,7 +385,51 @@ return [
             'submenu' => []
         ],
     //
+        [
+            'header' => 'Inscripción de socios',
+            'can' => 'admin_vista',
+        ],
+    //Inscripción de socios
+            [
+                'text' => 'Gestión de Socios',
+                'icon' => 'far fa-address-card',
+                'submenu' => [
+                    [
+                        'text' => 'Lista de Socios',
+                        'route' => 'socios.index',
+                        'icon' => 'fas fa-users', // icono de fontawesome
+                        'can' => 'listado_socios', // permiso de admin
+                        'active' => ['panel/socios/index'],
+                        'shift' => 'ml-3',
+                    ],
+                    [
+                        'text' => 'Crear Socio',
+                        'route' => 'socios.create',
+                        'icon' => 'fas fa-plus-circle', // icono de fontawesome
+                        'can' => 'crear_socio', // permiso de admin
+                        'active' => ['panel/socios/create'],
+                        'shift' => 'ml-3',
+                    ],
+                    [
+                        'text' => 'Socios dados de Baja',
+                        'route' => 'socios.dadosdebaja',
+                        'icon' => 'fas fa-user-times', // icono de fontawesome
+                        'can' => 'crear_socio', // permiso de admin
+                        'active' => ['panel/socios/dadosdebaja'],
+                        'shift' => 'ml-3',
+                    ],
+                    [
+                        'text' => 'Recuperar Contraseña',
+                        'route' => 'socios.resetPassword',
+                        'icon' => 'fas fa-key', // icono de fontawesome
+                        'can' => 'reset_password', // permiso de admin
+                        'active' => ['panel/socios/resetPassword'],
+                        'shift' => 'ml-3',
+                    ],
 
+                ]
+            ],
+    //
     //Gestión de empleados
         [
             'text'    => 'Gestión de empleados',
@@ -387,8 +440,24 @@ return [
                     'route' => 'empleados.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
                     'can' => 'listado_empleados', // permiso de admin
-                    'active' => ['panel/empleados*'],
+                    'active' => ['panel/empleados/index'],
                     'shift' =>'ml-3',
+                ],
+                [
+                    'text' => 'Crear Empleado',
+                    'route' => 'empleados.create',
+                    'icon' => 'fas fa-plus-circle', // icono de fontawesome
+                    'can' => 'crear_empleados', // permiso de admin
+                    'active' => ['panel/empleados/create'],
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Empleados dados de Baja',
+                    'route' => 'empleados.dadosdebaja',
+                    'icon' => 'fas fa-user-times', // icono de fontawesome
+                    'can' => 'crear_empleados', // permiso de admin
+                    'active' => ['panel/empleados/dadosdebaja'],
+                    'shift' => 'ml-3',
                 ],
                 [
                     'text' => 'Cargos',
@@ -399,23 +468,6 @@ return [
                     'shift' => 'ml-3',
                 ],
             ],
-        ],
-    //
-
-    //Inscripción de socios
-        [
-            'text' => 'Gestión de Socios',
-            'icon' => 'far fa-address-card',
-            'submenu' => [
-                [
-                    'text' => 'Lista de Socios',
-                    'route' => 'socios.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_socios', // permiso de admin
-                    'active' => ['panel/socios*'],
-                    'shift' => 'ml-3',
-                ]
-            ]
         ],
     //
 
@@ -482,13 +534,42 @@ return [
             'text' => 'Otros',
             'icon' => 'fas fa-link',
             'submenu' => [
-                                // [
+                // [
                 //     'text' => 'Detalles de Facturas',
                 //     'route' => 'Det.index',
                 //     'icon' => 'fas fa-users', // icono de fontawesome
                 //     'can' => 'listado_detallefactura', // permiso 
                 //     'shift' => 'ml-3',
                 // ],
+                [
+                    'text' => 'Facturas',
+                    'route' => 'facturas.index',
+                    'icon' => 'fas fa-lock-open', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'facturacion',
+                    'route' => 'facturas.create',
+                    'icon' => 'fas fa-lock-open', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Lista de Clientes',
+                    'route' => 'clientes.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_user', // permiso de admin
+                    'active' => ['panel/clientes*'],
+                    'shift' => 'ml-3',
+                ],
+                [
+                    'text' => 'Instalaciones',
+                    'route' => 'instalaciones.index',
+                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'can' => 'listado_user', // permiso
+                    'shift' => 'ml-3',
+                ],
                 [
                     'text' => 'Géneros',
                     'route' => 'generos.index',
@@ -594,7 +675,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
