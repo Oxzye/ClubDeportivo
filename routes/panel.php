@@ -78,6 +78,7 @@ Route::get('/exportar-diasxact-excel', [DiasxActController::class, 'exportarDias
 
 Route::resource('/SocxAct', SociosxActividadesController::class)->names('SocxAct');
 Route::get('/exportar-socxact-excel', [SociosxActividadesController::class, 'exportarSocxActExcel'])->name('exportar-socxact-excel');
+Route::get('graficos-socxact',[SociosxActividadesController::class,'graficosSocxAct'])->name('graficos-socxact');
 
 Route::resource('/EmpxAct', EmpleadosxActividadesController::class)->names('EmpxAct');
 
