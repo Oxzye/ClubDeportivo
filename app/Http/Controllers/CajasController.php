@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cajas;
 use App\Models\Empleado;
-use App\Models\User;
+
 class CajasController extends Controller
 {
     public function index () {
@@ -15,7 +15,8 @@ class CajasController extends Controller
         $empleado = Empleado::all();
         $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
         $cajaAbierta = $cajaso->where('estado_caja', true);
-        return view('panel.Cajas.index', compact('cajas', 'empleado', 'cajaAbierta'));
+        
+        return view('panel.Cajas.index', compact('cajas', 'empleado', 'cajaAbierta',));
     }
 
     public function create () {
@@ -38,6 +39,7 @@ class CajasController extends Controller
        
         $cajas ->save();
         //Redir
+        echo '<script>showCajaIndicator();</script>';
        return redirect()->route('Cajas.index')->with('status', 'Caja abierta correctamente');
     }
 
@@ -54,6 +56,7 @@ class CajasController extends Controller
 
     public function update(Request $request, $id){
         //$empleado = Paises::all();
+        
         $cajas = Cajas::findOrFail($id);
         $cajas->monto_inicial_caja = $request->input('monto_inicial_caja');
         $cajas->total_ventas_caja = $request->input('total_ventas_caja');
@@ -63,7 +66,7 @@ class CajasController extends Controller
         $cajas->monto_final = $request->input('monto_final');
         $cajas->save();
         
-        
+        echo '<script>hideCajaIndicator();</script>';
         //redireccion
         return redirect()->route('Cajas.index')->with('status', 'Cajas Cerrada correctamente');
     }

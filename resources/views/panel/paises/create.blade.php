@@ -21,7 +21,7 @@
         
         <form action="{{ route('paises.store') }}" method="post">
         @csrf
-            <div class="mb-3">
+            <div class="col-9 mb-3">
               <label for="" class="form-label" name="nombre_pais">Nombre país:</label>
               <input type="text" class="form-control" name="nombre_pais" value="{{ old( 'nombre_pais' ) }}" aria-describedby="helpId" @error('nombre_pais') is-invalid @enderror">
                 @error( 'nombre_pais' )
