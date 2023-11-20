@@ -16,15 +16,27 @@ use App\Http\Controllers\DiasController;
 use App\Http\Controllers\ProvinciasController;
 use App\Http\Controllers\LocalidadesController;
 use App\Http\Controllers\DisponibilidadesController;
+use App\Http\Controllers\DiasxActController;
+use App\Http\Controllers\ActividadesController;
+use App\Http\Controllers\EmpleadosxActividadesController;
+use App\Http\Controllers\SociosxActividadesController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\FacturacionController;
+
 
 Route::get('/', function(){
         return view('panel.index');
 });
 
+Route::get('/socios/dadosdebaja', [SociosController::class, 'dadosdebaja'])->name('socios.dadosdebaja');
+Route::get('/socios/restore/{id}', [SociosController::class, 'restore'])->name('socios.restore');
+Route::get('/socios/resetPassword', [SociosController::class, 'resetPassword'])->name('socios.resetPassword');
 Route::resource('/socios', SociosController::class)->names('socios');
 
+Route::get('/empleados/dadosdebaja', [EmpleadosController::class, 'dadosdebaja'])->name('empleados.dadosdebaja');
+Route::get('/empleados/restore/{id}', [EmpleadosController::class, 'restore'])->name('empleados.restore');
 Route::resource('/empleados', EmpleadosController::class)->names('empleados');
+
 
 Route::resource('/instalaciones', InstalacionesController::class)->names('instalaciones');
 
@@ -49,10 +61,28 @@ Route::resource('/Provincias', ProvinciasController::class)->names('Provincias')
 Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
 
 Route::resource('/Cajas', CajasController::class)->names('Cajas');
-Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre');
-
-//Route::post('/Cajas/apertura', CajasController::class, 'apertura')->name('Cajas.apertura');
+//Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre');
 
 Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('Disponibilidades');
 
+Route::get('/exportar-disponibilidades-excel', [DisponibilidadesController::class, 'exportarDisponibilidadesExcel'])->name('exportar-disponibilidades-excel');
+
+Route::resource('/Actividades', ActividadesController::class)->names('Actividades');
+Route::get('/exportar-actividades-pdf', [ActividadesController::class, 'exportarActividadesPDF'])->name('exportar-actividades-pdf');
+Route::get('/exportar-actividades-excel', [ActividadesController::class, 'exportarActividadesExcel'])->name('exportar-actividades-excel');
+
+Route::resource('/DiasxAct', DiasxActController::class)->names('DiasxAct');
+Route::get('/exportar-diasxact-excel', [DiasxActController::class, 'exportarDiasxActExcel'])->name('exportar-diasxact-excel');
+
+Route::resource('/SocxAct', SociosxActividadesController::class)->names('SocxAct');
+Route::get('/exportar-socxact-excel', [SociosxActividadesController::class, 'exportarSocxActExcel'])->name('exportar-socxact-excel');
+
+Route::resource('/EmpxAct', EmpleadosxActividadesController::class)->names('EmpxAct');
+
+Route::get('/exportar-empxact-excel', [EmpleadosxActividadesController::class, 'exportarEmpxactExcel'])->name('exportar-empxact-excel');
+
 Route::resource('/clientes', ClientesController::class)->names('clientes');
+
+Route::resource('/facturas', FacturacionController::class)->names('facturas');
+Route::put('/products/{id}/update-payment-status', 'ProductController@updatePaymentStatus');
+

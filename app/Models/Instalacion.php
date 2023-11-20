@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Instalacion extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    
     protected $table = 'instalaciones';
     protected $fillable = ['nombre_inst', 'tipo_inst', 'capacidad_inst'];
     protected $primaryKey = 'id_inst';
@@ -16,5 +19,9 @@ class Instalacion extends Model
     public function disponibilidades(): HasMany
     {
         return $this->hasMany(Disponibilidades::class);
+    }
+    public function actividades(): HasMany
+    {
+        return $this->hasMany(Actividad::class);
     }
 }

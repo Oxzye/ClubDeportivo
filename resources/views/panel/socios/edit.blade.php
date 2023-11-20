@@ -73,7 +73,7 @@
                             <select id="cod_genero" name="cod_genero" class="form-control">
                                 <option value="" selected>Seleccione uno...</option>
                                 @foreach ($generos as $genero)
-                                    <option {{ $socio->user->cod_genero && $socio->user->cod_genero == $genero->cod_genero ? 'selected': ''}} value="{{ $genero->tipo_genero }}"> 
+                                    <option {{ $socio->user->cod_genero && $socio->user->cod_genero == $genero->cod_genero ? 'selected': ''}} value="{{ $genero->cod_genero }}"> 
                                         {{ $genero->tipo_genero }}
                                     </option>
                                 @endforeach
@@ -165,7 +165,7 @@
 
                 <input type="hidden" name="id_user" value="9">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar</a>
+                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar lo</a>
             </div>
         </form>
     </div>

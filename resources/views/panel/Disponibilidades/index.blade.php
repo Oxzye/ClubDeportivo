@@ -13,37 +13,44 @@
                 {{ session('status') }}
             </div>
         @endif
+        <div class="row">
+            <h1>Disponibilidades</h1>
+        </div>
         <div class="row-2 bd-highlight mb-3">
         <a href="{{ route('Disponibilidades.create') }}" class="btn btn-primary mb-4 mt-4">Agregar</a>
+
+        <a href="{{ route('exportar-disponibilidades-excel') }}" class="btn btn-warning mx-3" title="PDF" target="_blank">
+            <i class="fas fa-file-excel"></i> Excel
+        </a>
         </div>
 
         @if ($disponibilidades->count())
             
                 <div class="table-responsive">
-                    <table class="table table-primary">
+                    <table class="table table-primary table-striped table-hover">
                         <thead>
                             <tr>
                                 <th class="text-center">id_disp</th>
-                                <th class="text-center">id_inst</th>
-                                <th class="text-center">id_dia</th>
+                                <th class="text-center">Instalación</th>
+                                <th class="text-center">Día</th>
                                 <th class="text-center">horariodisp</th>
-                                <th class="d-flex flex-row-reverse bd-highlight pe-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="d-flex flex-row-reverse bd-highlight px-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($disponibilidades as $disp)
                                 <tr class="">
                                     <td class="text-center">{{ $disp->id_disp }}</td>
-                                    <td class="text-center">{{ $disp->instalaciones->nombre_inst }}</td>
-                                    <td class="text-center">{{ $disp->dias->nombre_dia }}</td>
+                                    <td class="text-center">{{ $disp->instalacion->nombre_inst }}</td>
+                                    <td class="text-center">{{ $disp->dia->nombre_dia }}</td>
                                     <td class="text-center">{{ $disp->horariodisp }}</td>
                                     <td class="d-flex flex-row-reverse bd-highlight">
-                                        {{-- <div class="btn-group" role="group" aria-label="Basic example"> --}}
-                                            {{-- <a href="{{ route( 'paises.show', $pais->id_pais) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a href="{{ route( 'Disponibilidades.show', $disp->id_disp) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                                 <span class="material-symbols-outlined d-flex justify-content-center">
                                                 info
                                                 </span>
-                                            </button></a> --}}
+                                            </button></a>
                                         <a href="{{ route('Disponibilidades.edit', $disp->id_disp)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
                                                 edit_square
@@ -51,12 +58,13 @@
                                         </a>
 
                                         <button type="button" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;"
-                                         data-toggle="modal" data-target="#deleteModal" data-id="{{ $disp->id_disp }}" data-nombre="{{ $disp->instalaciones->nombre_inst }}">
+                                         data-toggle="modal" data-target="#deleteModal" data-id="{{ $disp->id_disp }}">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
                                                 cancel
                                             </span>
-                                        </button>      
-                                        {{-- </div> --}}
+                                        </button>
+                                        </form>
+                                        </div>
                                     </td>
                                 </tr>  
                             @endforeach

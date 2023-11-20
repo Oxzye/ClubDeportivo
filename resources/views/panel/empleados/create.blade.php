@@ -34,35 +34,35 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="name">
+                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
                                 <small id="" class="form-text text-muted">Obligatorio.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="apellido">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" name="apellido" aria-describedby="apellido">
+                                <input type="text" class="form-control" id="apellido" name="apellido" value="{{ old('apellido') }}">
                                 <small id="" class="form-text text-muted">Obligatorio.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">DNI</label>
-                                <input type="number" class="form-control" name="dni" id="dni" aria-describedby="dni">
+                                <input type="number" class="form-control" name="dni" id="dni" value="{{ old('dni') }}">
                                 <small id="" class="form-text text-muted">Posible alert.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">CUIT</label>
-                                <input type="number" class="form-control" name="cuit" id="cuit" aria-describedby="dni">
+                                <input type="number" class="form-control" name="cuit_emp" id="cuit_emp" value="{{ old('cuit_emp') }}">
                                 <small id="" class="form-text text-muted">Posible alert.</small>
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Fecha de Nacimiento</label>
-                                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" aria-describedby="fecha_nac">
+                                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="{{ old('fecha_nac') }}">
                                 <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
                         </div>

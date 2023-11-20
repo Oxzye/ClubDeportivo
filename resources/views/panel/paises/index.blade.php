@@ -3,9 +3,9 @@
 
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @section('title', 'Paises Index')
-    
+{{-- Agregar este link para ver los iconos de opciones --}}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @section('content')
     <div class="container-fluid">
         @if (session('status'))
@@ -13,6 +13,9 @@
                 {{ session('status') }}
             </div>
         @endif
+        <div class="row d-flex justify-content-center">
+            <h1>Paises</h1>
+        </div>
         <div class="row-2 bd-highlight mb-3">
             <a href="{{ route('paises.create') }}" class="btn btn-primary mb-4 mt-4">Agregar</a>
         </div>
@@ -25,7 +28,7 @@
                             <tr>
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Nombre</th>
-                                <th class="d-flex flex-row-reverse bd-highlight pe-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;</th>
+                                <th class="d-flex flex-row-reverse bd-highlight pe-5">Acciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
