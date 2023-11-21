@@ -19,7 +19,7 @@
                 <form action="{{ route('Detalle_fact.store') }}" method="post" id="form-detalle">
                     @csrf
                     <label for="" class="form-label">* Actividades</label>
-                    <select name="detalles[0][id_act]" class="form-select actividad-select">
+                    <select name="id_act[]" class="form-select actividad-select">
                         <option value=" ">--Ninguna--</option>
                         @foreach ($actividad as $act)
                             <option value="{{ $act->id_act }}">
@@ -29,7 +29,7 @@
                     </select>
 
                     <label for="" class="form-label">* Producto</label>
-                    <select name="detalles[0][id_tipodetfact]" class="select-tdf producto-select">
+                    <select name="id_tipodetfact[]" class="select-tdf producto-select">
                         <option value="0">-nada-</option>
                         @foreach ($tipodetfact as $tdf)
                             <option value="{{ $tdf->id_tipodetallefactura }}" data-precio="{{ $tdf->precio_tdf }}">
@@ -54,7 +54,22 @@
         var precioSeleccionado = $(this).find(':selected').data('precio');
         $(this).closest(".detalle").find("[name$='[precio]']").val(precioSeleccionado);
     });
+    $('.clonar').click(function() {
+  // Clona el .input-group
+  var $clone = $('#formulario .input-group').last().clone();
 
+  // Borra los valores de los inputs clonados
+  $clone.find(':input').each(function () {
+    if ($(this).is('select')) {
+      this.selectedIndex = 0;
+    } else {
+      this.value = '';
+    }
+  });
+
+  // Agrega lo clonado al final del #formulario
+  $clone.appendTo('#formulario');
+});
     $("#form-detalle").on("click", ".agregar-detalle", function () {
         var nuevoDetalle = $(".detalle:first").clone();
         var numDetalles = $(".detalle").length;
