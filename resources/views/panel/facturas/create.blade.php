@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-fluid">
 
-        <h1>Crear nueva Localidades</h1>
+        <h1>Facturacion</h1>
 
         @if ($errors->any())
             <ul>
