@@ -12,7 +12,7 @@ use App\Http\Controllers\GenerosController;
 use App\Http\Controllers\ProvinciasController;
 use App\Http\Controllers\CajasController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {

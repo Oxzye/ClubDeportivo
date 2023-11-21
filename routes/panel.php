@@ -22,11 +22,13 @@ use App\Http\Controllers\EmpleadosxActividadesController;
 use App\Http\Controllers\SociosxActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturacionController;
-
+ 
 
 Route::get('/', function(){
         return view('panel.index');
 });
+
+
 
 Route::get('/socios/dadosdebaja', [SociosController::class, 'dadosdebaja'])->name('socios.dadosdebaja');
 Route::get('/socios/restore/{id}', [SociosController::class, 'restore'])->name('socios.restore');
@@ -68,7 +70,7 @@ Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('
 Route::get('/exportar-disponibilidades-excel', [DisponibilidadesController::class, 'exportarDisponibilidadesExcel'])->name('exportar-disponibilidades-excel');
 
 Route::resource('/Actividades', ActividadesController::class)->names('Actividades');
-Route::get('/exportar-actividades-pdf', [ActividadesController::class, 'exportarActividadesPDF'])->name('exportar-actividades-pdf');
+// Route::get('/exportar-actividades-pdf', [ActividadesController::class, 'exportarActividadesPDF'])->name('exportar-actividades-pdf');
 Route::get('/exportar-actividades-excel', [ActividadesController::class, 'exportarActividadesExcel'])->name('exportar-actividades-excel');
 
 Route::resource('/DiasxAct', DiasxActController::class)->names('DiasxAct');

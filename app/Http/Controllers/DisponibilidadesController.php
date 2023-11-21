@@ -32,7 +32,7 @@ class DisponibilidadesController extends Controller
         //valid
         $validated = $request->validate(
         [
-            'horariodisp' => 'required|date',
+            'horariodisp' => 'required|string',
         ],[
             'horariodisp.required' => 'El campo es obligatorio',
             'horariodisp.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: YYYY-MM-DD HH:mm:ss)',
@@ -40,12 +40,10 @@ class DisponibilidadesController extends Controller
         if($validated) {
             $disp = new Disponibilidades();
             //Guardado de los datos
-            $disp->id_dia = $request->get('id_dia');
-            $disp->id_inst = $request->get('id_inst');
-            $disp->horariodisp = $request->get('horariodisp');
-
-        
-            $disp ->save();
+            $disp->id_dia = $request->input('id_dia');
+            $disp->id_inst = $request->input('id_inst');
+            $disp->horariodisp = $request->input('horariodisp');
+            $disp->save();
         };
         //Redir
         return redirect()->route('Disponibilidades.index')->with('status', 'Disponibilidad creado correctamente');
