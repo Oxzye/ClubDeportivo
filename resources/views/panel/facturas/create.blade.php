@@ -83,7 +83,7 @@
                 </select>
             </div>   
              <button type="submit" class="btn btn-primary">Guardar</button>
-             <a href="{{ route('Detalle_fact.create') }}" class="btn btn-danger">Cancelar</a>
+             <a href="{{ route('facturas.create') }}" class="btn btn-danger">Cancelar</a>
         </form>
         
     </div>

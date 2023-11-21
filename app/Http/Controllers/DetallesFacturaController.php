@@ -26,7 +26,8 @@ class DetallesFacturaController extends Controller
         $tipodetfact = tipodetfactura::all();
         $actividad = Actividad::all();
         $facturacion = Facturacion::all();
-        return view('panel.Detalle_fact.create', compact('detallefact', 'tipodetfact', 'actividad', 'facturacion'));
+        $detalles = [];
+        return view('panel.Detalle_fact.create', compact('detallefact', 'tipodetfact', 'actividad', 'facturacion','detalles'));
     }
 
     /**
@@ -34,37 +35,30 @@ class DetallesFacturaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $factura = Facturacion::orderBy('id_caja', 'desc')->first();
+        $factura = Facturacion::latest('id_caja')->first();
         $idfact = $factura->num_fac;
-        // $detallefact = new Detalles_Factura();
-
-        // $detallefact->id_act = $request->get('id_act');
-        // $detallefact->num_fac = $idfact;
-        // $detallefact->id_tipodetallefactura = $request->get('id_tipodetfact');
-        
-        // $detallefact->save();
     
         $detallesAdicionales = $request->input('detalles');
-
+    
         foreach ($detallesAdicionales as $detalle) {
             $detallefact = new Detalles_Factura();
             $detallefact->id_act = $detalle['id_act'];
             $detallefact->num_fac = $idfact;
             $detallefact->id_tipodetallefactura = $detalle['id_tipodetfact'];
-           
             $detallefact->save();
         }
-        
-
     
-        return redirect()
-            ->route('facturas.create')
-            ->with('alert', 'Detalles agregados exitosamente.');
+        // Verifica si hay formularios registrados en la base de datos
+        $formulariosRegistrados = Detalles_Factura::where('num_fac', $idfact)->count();
+    
+        if ($formulariosRegistrados > 0) {
+            // Si hay formularios registrados, redirige a la misma vista (sin mensaje de éxito)
+            return redirect()->back();
+        } else {
+            // Si no hay formularios registrados, redirige a facturas.create con el mensaje de éxito
+            return redirect()->route('facturas.create')->with('alert', 'Detalles agregados exitosamente.');
+        }
     }
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
