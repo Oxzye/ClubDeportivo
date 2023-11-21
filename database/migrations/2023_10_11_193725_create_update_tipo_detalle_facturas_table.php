@@ -12,13 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tipos_detalle_factura', function (Blueprint $table) {
-            $table->dropTimestamps(); // Esto eliminará las columnas 'created_at' y 'updated_at'
+            $table->decimal('precio_tdf', 10,2);
         });
+        // Schema::table('tipos_detalle_factura', function (Blueprint $table) {
+        //     $table->dropTimestamps(); // Esto eliminará las columnas 'created_at' y 'updated_at'
+        // });
 
-        Schema::table('tipos_detalle_factura', function (Blueprint $table) {
+        // Schema::table('tipos_detalle_factura', function (Blueprint $table) {
 
-            $table->timestamps();
-        });
+        //     $table->timestamps();
+        // });
     }
 
     /**
