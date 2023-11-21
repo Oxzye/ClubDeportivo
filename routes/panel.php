@@ -22,7 +22,7 @@ use App\Http\Controllers\EmpleadosxActividadesController;
 use App\Http\Controllers\SociosxActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturacionController;
-
+use App\Http\Controllers\DetallesFacturaController;
 
 Route::get('/', function(){
         return view('panel.index');
@@ -85,4 +85,7 @@ Route::resource('/clientes', ClientesController::class)->names('clientes');
 
 Route::resource('/facturas', FacturacionController::class)->names('facturas');
 Route::put('/products/{id}/update-payment-status', 'ProductController@updatePaymentStatus');
+
+Route::resource('/Detalle_fact', DetallesFacturaController::class)->names('Detalle_fact');
+Route::post('/guardar-detalles', 'DetallesFacturaController@guardarDetalles')->name('guardar-detalles');
 

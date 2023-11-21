@@ -9,8 +9,10 @@ use App\Models\Socio;
 use App\Models\clientes;
 use Illuminate\Http\Request;
 
+
 class FacturacionController extends Controller
 {
+
     public function index () {
         $cajasAbierta = Cajas::where('estado_caja', true)->first();
 
@@ -26,17 +28,18 @@ class FacturacionController extends Controller
 
     public function create () {
         $cajaAbierta = Cajas::where('estado_caja', true)->first();
-
+        
         if (!$cajaAbierta) {
             return redirect()->route('facturas.index')->with('error', 'No hay cajas abiertas. No se pueden crear facturas.');
         }
-
+        
         $facturacion = Facturacion::all();
         $clientes = clientes::all();
         $cajas = Cajas::all();
         $formdp = Formas_pago::all();
         $tipofac = Tipo_factura::all();
         $socio = Socio::all();
+        // $detallefact = null;
         return view('panel.facturas.create', compact('facturacion', 'cajas','formdp', 'tipofac', 'socio', 'clientes', 'cajaAbierta'));
  
     }
@@ -67,9 +70,11 @@ class FacturacionController extends Controller
 
         $cajas->save();
         $facturacion ->save();
+
+        
         //Redir
         //echo '<script>showCajaIndicator();</script>';
-       return redirect()->route('facturas.index')->with('status', 'Factura realizada correctamente');
+       return redirect()->route('Detalle_fact.create')->with('status', 'Factura realizada correctamente');
     }
 
     public function edit($id_caja) {
