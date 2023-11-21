@@ -114,7 +114,7 @@
         }
 
         .navbar-logo img {
-            width: 50px; /* Ajusta el ancho del logo */
+            width: 90px; /* Ajusta el ancho del logo */
             height: 50px; /* Ajusta la altura del logo */
         }
     </style>
