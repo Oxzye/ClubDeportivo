@@ -17,6 +17,11 @@
                 <a href="{{ route('exportar-actividades-excel') }}" class="btn btn-warning mx-3" title="PDF" target="_blank">
                     <i class="fas fa-file-excel"></i> Excel
                 </a>
+
+                <a href="{{ route('exportar-actividades-pdf') }}" class="btn btn-warning mx-3" title="PDF"
+            target="_blank">
+                <i class="fas fa-file-pdf"></i> PDF
+        </a>
             </div>
 
             @if (session('alert'))
