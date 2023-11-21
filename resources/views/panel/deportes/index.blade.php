@@ -64,13 +64,13 @@
                                                     edit_square
                                                 </span>
                                             </a>
-                                            <button type="button" class="btn btn-outline-dark rounded-circle mx-2"
+                                            {{-- <button type="button" class="btn btn-outline-dark rounded-circle mx-2"
                                             style="width:2.5em; height:2.5em; data-toggle="modal" data-target="#deleteModal" data-id="{{ $deporte->id_dep }}" data-nombre="{{ $deporte->nombreDep }}">
                                                 <span
                                                 class="material-symbols-outlined d-flex justify-content-center">
                                                 cancel
                                             </span>
-                                            </button> 
+                                            </button>  --}}
                                         </div>
                                         </td>
                                             
