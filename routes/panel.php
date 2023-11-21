@@ -22,8 +22,6 @@ use App\Http\Controllers\EmpleadosxActividadesController;
 use App\Http\Controllers\SociosxActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturacionController;
-
-
 use App\Models\Cajas;
 
 Route::get('/', function () {
