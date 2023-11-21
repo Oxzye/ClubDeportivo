@@ -45,7 +45,7 @@
             </div>
             {{-- fin instalaciones con select --}}
             <div class="mb-3">
-                <label for="" class="form-label" name="horariodisp">Horario disponible (ejemplo: YYYY-MM-DD HH:mm:ss):</label>
+                <label for="" class="form-label" name="horariodisp">Horario disponible, formato "HH:mm a HH:mm":</label>
                 <input type="text" class="form-control" name="horariodisp" value="{{ old( 'horariodisp', $disp->horariodisp ) }}" aria-describedby="helpId" @error('horariodisp') is-invalid @enderror">
                 @error( 'horariodisp' )
                     <div class="alert alert-danger">{{ $message }}</div>

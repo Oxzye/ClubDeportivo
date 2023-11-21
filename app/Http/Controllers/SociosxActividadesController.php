@@ -133,7 +133,33 @@ class SociosxActividadesController extends Controller
         return redirect()->route('SocxAct.index')->with('status', 'Socio por Actividad eliminado correctamente');
     }
 
-        public function exportarSocxActExcel() {
+    public function exportarSocxActExcel() {
         return Excel::download(new SocxActExportExcel, 'socxact.xlsx');
+    }
+
+    public function graficosSocxAct() {
+    // Si se hace una peticion AJAX
+    if(request()->ajax()) {
+        $labels = [];
+        $counts = [];
+
+        // $socios = Socio::get();
+        // foreach ($socios as $socio) {
+        //     $labels[] = $socio->id_soc;
+        //     $counts[] = SociosxActividad::where('socio_id', $socio->id_soc)->count();
+        
+         $actividades = Actividad::get();
+         foreach ($actividades as $act) {
+            $labels[] = $act->nombre_act;
+            $counts[] = SociosxActividad::where('id_act', $act->id_act)->count();
+        }
+
+        $response = [
+        'success' => true,
+        'data' => [$labels, $counts]
+        ];
+        return json_encode($response);
+        }
+        return view('panel.SocxAct.graficos_socxact');
     }
 }

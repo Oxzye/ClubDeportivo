@@ -19,9 +19,13 @@
         <div class="row-2 bd-highlight mb-3">
         <a href="{{ route('SocxAct.create') }}" class="btn btn-primary mb-4 mt-4">Agregar</a>
 
-        <a href="{{ route('exportar-socxact-excel') }}" class="btn btn-warning mx-3" title="PDF" target="_blank">
+        <a href="{{ route('exportar-socxact-excel') }}" class="btn btn-warning mx-3" title="Excel" target="_blank">
             <i class="fas fa-file-excel"></i> Excel
         </a>
+
+        <a href="{{ route('graficos-socxact')}}" class="btn btn-warning mx-1 px-2 pt-1 pb-1" title="ChartJs">
+            <i class="fas fa-chart-pie"></i> Gráfico
+           </a>
         </div>
 
         @if ($socxact->count())
