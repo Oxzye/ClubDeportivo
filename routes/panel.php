@@ -74,7 +74,7 @@ Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('
 Route::get('/exportar-disponibilidades-excel', [DisponibilidadesController::class, 'exportarDisponibilidadesExcel'])->name('exportar-disponibilidades-excel');
 
 Route::resource('/Actividades', ActividadesController::class)->names('Actividades');
-// Route::get('/exportar-actividades-pdf', [ActividadesController::class, 'exportarActividadesPDF'])->name('exportar-actividades-pdf');
+Route::get('/exportar-actividades-pdf', [ActividadesController::class, 'exportarActividadesPDF'])->name('exportar-actividades-pdf');
 Route::get('/exportar-actividades-excel', [ActividadesController::class, 'exportarActividadesExcel'])->name('exportar-actividades-excel');
 
 Route::resource('/DiasxAct', DiasxActController::class)->names('DiasxAct');
@@ -85,7 +85,7 @@ Route::get('/exportar-socxact-excel', [SociosxActividadesController::class, 'exp
 Route::get('graficos-socxact',[SociosxActividadesController::class,'graficosSocxAct'])->name('graficos-socxact');
 
 Route::resource('/EmpxAct', EmpleadosxActividadesController::class)->names('EmpxAct');
-
+Route::get('graficos-empxact',[EmpleadosxActividadesController::class,'graficosEmpxAct'])->name('graficos-empxact');
 Route::get('/exportar-empxact-excel', [EmpleadosxActividadesController::class, 'exportarEmpxactExcel'])->name('exportar-empxact-excel');
 
 Route::resource('/clientes', ClientesController::class)->names('clientes');

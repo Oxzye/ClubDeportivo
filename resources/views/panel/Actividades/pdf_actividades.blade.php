@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Reporte PDF</title>
     <link rel="stylesheet" href="{{ public_path('vendor/adminlte/dist/css/adminlte.min.css') }}">
+    <style>@page { size:35cm landscape }</style>
 </head>
 <body>
     <h3 class="text-center">Actividades de {{ auth()->user()->name }}</h3>
