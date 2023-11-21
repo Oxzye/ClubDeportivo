@@ -22,15 +22,14 @@ use App\Http\Controllers\EmpleadosxActividadesController;
 use App\Http\Controllers\SociosxActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturacionController;
- 
+
 
 use App\Models\Cajas;
 
 Route::get('/', function () {
         $cajasAbiertas = Cajas::where('estado_caja', 1)->count();
-        $saldo_cajas = Cajas::where('estado_caja', 1)->sum('saldo_caja');
-        
-        return view('panel.index', compact('cajasAbiertas', 'saldo_cajas'));
+
+        return view('panel.index', compact('cajasAbiertas'));
 });
 
 
@@ -74,7 +73,7 @@ Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('
 Route::get('/exportar-disponibilidades-excel', [DisponibilidadesController::class, 'exportarDisponibilidadesExcel'])->name('exportar-disponibilidades-excel');
 
 Route::resource('/Actividades', ActividadesController::class)->names('Actividades');
-// Route::get('/exportar-actividades-pdf', [ActividadesController::class, 'exportarActividadesPDF'])->name('exportar-actividades-pdf');
+Route::get('/exportar-actividades-pdf', [ActividadesController::class, 'exportarActividadesPDF'])->name('exportar-actividades-pdf');
 Route::get('/exportar-actividades-excel', [ActividadesController::class, 'exportarActividadesExcel'])->name('exportar-actividades-excel');
 
 Route::resource('/DiasxAct', DiasxActController::class)->names('DiasxAct');
@@ -82,7 +81,6 @@ Route::get('/exportar-diasxact-excel', [DiasxActController::class, 'exportarDias
 
 Route::resource('/SocxAct', SociosxActividadesController::class)->names('SocxAct');
 Route::get('/exportar-socxact-excel', [SociosxActividadesController::class, 'exportarSocxActExcel'])->name('exportar-socxact-excel');
-Route::get('graficos-socxact',[SociosxActividadesController::class,'graficosSocxAct'])->name('graficos-socxact');
 
 Route::resource('/EmpxAct', EmpleadosxActividadesController::class)->names('EmpxAct');
 
