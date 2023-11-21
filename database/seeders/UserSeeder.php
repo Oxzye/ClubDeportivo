@@ -17,13 +17,12 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Buscar y eliminar registros existentes con correos electrónicos específicos
-        User::where('email', 'admin@gmail.com')->delete();
-        User::where('email', 'gerente@gmail.com')->delete();
-        User::where('email', 'recepcionista@gmail.com')->delete();
-        User::where('email', 'cajero@gmail.com')->delete();
-        User::where('email', 'canchero@gmail.com')->delete();
-        User::where('email', 'invitado@gmail.com')->delete();
-
+        User::where('email', 'admin@gmail.com')->forceDelete();
+        User::where('email', 'gerente@gmail.com')->forceDelete();
+        User::where('email', 'recepcionista@gmail.com')->forceDelete();
+        User::where('email', 'cajero@gmail.com')->forceDelete();
+        User::where('email', 'canchero@gmail.com')->forceDelete();
+        User::where('email', 'invitado@gmail.com')->forceDelete();
         // Crear nuevos registros de usuarios
         User::create([
             'name' => 'admin',

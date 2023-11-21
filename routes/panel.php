@@ -22,11 +22,17 @@ use App\Http\Controllers\EmpleadosxActividadesController;
 use App\Http\Controllers\SociosxActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturacionController;
+use App\Http\Controllers\DetallesFacturaController;
 
+use App\Models\Cajas;
 
-Route::get('/', function(){
-        return view('panel.index');
+Route::get('/', function () {
+        $cajasAbiertas = Cajas::where('estado_caja', 1)->count();
+        $saldo_cajas = Cajas::where('estado_caja', 1)->sum('saldo_caja');
+        
+        return view('panel.index', compact('cajasAbiertas', 'saldo_cajas'));
 });
+
 
 Route::get('/socios/dadosdebaja', [SociosController::class, 'dadosdebaja'])->name('socios.dadosdebaja');
 Route::get('/socios/restore/{id}', [SociosController::class, 'restore'])->name('socios.restore');
@@ -76,13 +82,17 @@ Route::get('/exportar-diasxact-excel', [DiasxActController::class, 'exportarDias
 
 Route::resource('/SocxAct', SociosxActividadesController::class)->names('SocxAct');
 Route::get('/exportar-socxact-excel', [SociosxActividadesController::class, 'exportarSocxActExcel'])->name('exportar-socxact-excel');
+Route::get('graficos-socxact',[SociosxActividadesController::class,'graficosSocxAct'])->name('graficos-socxact');
 
 Route::resource('/EmpxAct', EmpleadosxActividadesController::class)->names('EmpxAct');
-
+Route::get('graficos-empxact',[EmpleadosxActividadesController::class,'graficosEmpxAct'])->name('graficos-empxact');
 Route::get('/exportar-empxact-excel', [EmpleadosxActividadesController::class, 'exportarEmpxactExcel'])->name('exportar-empxact-excel');
 
 Route::resource('/clientes', ClientesController::class)->names('clientes');
 
 Route::resource('/facturas', FacturacionController::class)->names('facturas');
 Route::put('/products/{id}/update-payment-status', 'ProductController@updatePaymentStatus');
+
+Route::resource('/Detalle_fact', DetallesFacturaController::class)->names('Detalle_fact');
+Route::post('/guardar-detalles', 'DetallesFacturaController@guardarDetalles')->name('guardar-detalles');
 
