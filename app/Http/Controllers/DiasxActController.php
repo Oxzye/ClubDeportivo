@@ -21,7 +21,7 @@ class DiasxActController extends Controller
         $actividades = Actividad::all();
         $diasxact = DiasxAct::with('dia')->get();
         $diasxact = DiasxAct::with('actividad')->get();
-        $diasxact = DiasxAct::paginate(4);
+        $diasxact = DiasxAct::all();
         return view('panel.DiasxAct.index', compact('dias', 'actividades', 'diasxact'));
     }
 
