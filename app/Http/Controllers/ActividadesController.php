@@ -20,7 +20,7 @@ class ActividadesController extends Controller
         $instalaciones = Instalacion::all();
         $actividades =Actividad::with('instalacion')->get();
         $actividades =Actividad::with('deporte')->get();
-        $actividades = Actividad::paginate(4);
+        $actividades = Actividad::all();
         return view('panel.Actividades.index', compact('deportes', 'instalaciones', 'actividades'));
     }
 

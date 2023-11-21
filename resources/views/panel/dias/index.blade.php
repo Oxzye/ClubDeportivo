@@ -39,7 +39,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col" class="text-uppercase">Nombre</th>
-                                    <th scope="col" class="text-uppercase">Opciones</th>
+                                    <th class="d-flex flex-row-reverse bd-highlight px-5">Opciones &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,8 +47,8 @@
                                     <tr>
                                         <td>{{ $dia->id_dia }}</td>
                                         <td>{{ $dia->nombre_dia }}</td>
-                                        <td>
-                                            <div class="btn-group" role="group">
+                                        <td class="d-flex flex-row-reverse bd-highlight">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
                                                 <a href=""
                                                     class="btn btn-outline-dark rounded-circle mx-2"
                                                     style="width:2.5em; height:2.5em;">

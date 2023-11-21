@@ -20,7 +20,7 @@ class EmpleadosxActividadesController extends Controller
         $empleados = Empleado::all();
         $empxactiv = EmpleadosxActividad::with('actividad')->get();
         $empxactiv = EmpleadosxActividad::with('empleado')->get();
-        $empxactiv = EmpleadosxActividad::paginate(4);
+        $empxactiv = EmpleadosxActividad::all();
         return view('panel.EmpxAct.index', compact('empleados', 'actividades', 'empxactiv'));
     }
 

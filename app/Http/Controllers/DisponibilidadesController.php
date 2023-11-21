@@ -16,7 +16,7 @@ class DisponibilidadesController extends Controller
         $instalaciones = Instalacion::all();
         $disponibilidades = Disponibilidades::with('dia')->get();
         $disponibilidades = Disponibilidades::with('instalacion')->get();
-        $disponibilidades = Disponibilidades::paginate(4);
+        $disponibilidades = Disponibilidades::all();
         return view('panel.Disponibilidades.index', compact('dias', 'instalaciones', 'disponibilidades'));
     }
 
