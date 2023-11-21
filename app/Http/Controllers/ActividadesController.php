@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Instalacion;
 use App\Models\Deporte;
 use App\Models\Actividad;
-// use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\ActividadesExportExcel;
 use Maatwebsite\Excel\Facades\Excel;
 class ActividadesController extends Controller
@@ -20,7 +20,7 @@ class ActividadesController extends Controller
         $instalaciones = Instalacion::all();
         $actividades =Actividad::with('instalacion')->get();
         $actividades =Actividad::with('deporte')->get();
-        $actividades = Actividad::paginate(4);
+        $actividades = Actividad::all();
         return view('panel.Actividades.index', compact('deportes', 'instalaciones', 'actividades'));
     }
 
@@ -191,18 +191,20 @@ class ActividadesController extends Controller
         return Excel::download(new ActividadesExportExcel, 'actividades.xlsx');
     }
 
-    // public function exportarActividadesPDF() {
-    //     set_time_limit(6000);
-    //     // $admin_id = auth()->user()->id;
-    //         // Traemos las actividades con relaciones a instalaciones y deportes
-    //     $actividades = Actividad::with('instalacion', 'deporte')
-    //         ->where('id',auth()->user()->id)->get();
-    //     // capturamos la vista y los datos que enviaremos a la misma
-    //     $pdf = Pdf::loadView('panel.Actividades.pdf_actividades', compact('actividades'));
-    //     //Renderizamos la vista
-    //     $pdf->render();
-    //     // Visualizaremos el PDF en el navegador
-    //     return $pdf->stream('actividades.pdf');
+    public function exportarActividadesPDF() {
+        set_time_limit(6000);
+        // $admin_id = auth()->user()->id;
+            // Traemos las actividades con relaciones a instalaciones y deportes
+        // $actividades = Actividad::with('instalacion', 'deporte')
+        //     ->where('id_act',auth()->user()->id)->get();
+
+            $actividades = Actividad::all();
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = Pdf::loadView('panel.Actividades.pdf_actividades', compact('actividades'));
+        //Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('actividades.pdf');
 
 
 // otra solucion que no funciona
@@ -217,6 +219,6 @@ class ActividadesController extends Controller
         // } else {
         //     // La actividad no fue encontrada
         //     return response()->json(['error' => 'Actividad no encontrada'], 404);
-        // }
+        }
 
 }

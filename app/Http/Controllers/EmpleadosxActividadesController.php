@@ -20,7 +20,7 @@ class EmpleadosxActividadesController extends Controller
         $empleados = Empleado::all();
         $empxactiv = EmpleadosxActividad::with('actividad')->get();
         $empxactiv = EmpleadosxActividad::with('empleado')->get();
-        $empxactiv = EmpleadosxActividad::paginate(4);
+        $empxactiv = EmpleadosxActividad::all();
         return view('panel.EmpxAct.index', compact('empleados', 'actividades', 'empxactiv'));
     }
 
@@ -140,4 +140,30 @@ class EmpleadosxActividadesController extends Controller
     public function exportarEmpxactExcel() {
         return Excel::download(new EmpxActExportExcel, 'empxact.xlsx');
     }
+
+    public function graficosEmpxAct() {
+        // Si se hace una peticion AJAX
+        if(request()->ajax()) {
+            $labels = [];
+            $counts = [];
+    
+            // $socios = Socio::get();
+            // foreach ($socios as $socio) {
+            //     $labels[] = $socio->id_soc;
+            //     $counts[] = SociosxActividad::where('socio_id', $socio->id_soc)->count();
+            
+             $actividades = Actividad::get();
+             foreach ($actividades as $act) {
+                $labels[] = $act->nombre_act;
+                $counts[] = EmpleadosxActividad::where('id_act', $act->id_act)->count();
+            }
+    
+            $response = [
+            'success' => true,
+            'data' => [$labels, $counts]
+            ];
+            return json_encode($response);
+            }
+            return view('panel.EmpxAct.graficos_empxact');
+        }
 }
