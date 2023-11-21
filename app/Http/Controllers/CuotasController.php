@@ -6,7 +6,10 @@ use App\Models\Cuotas;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cajas;
+use App\Models\tipodetfactura;
 use Illuminate\Support\Facades\DB;
+use App\Models\Facturacion;
+use Carbon\Carbon;
 
 class CuotasController extends Controller
 {
@@ -71,8 +74,9 @@ class CuotasController extends Controller
 
         $socio = User::with('socio')->where('dni', $dni)->first();
         $cajasAbierta = Cajas::where('estado_caja', 1)->first();
+        $allCuotas = tipodetfactura::where('tipodetalle','Cuota Social')->get()->reverse();
 
-        return view('panel.cuota_social.cobrar', compact('socio', 'cajasAbierta'));
+        return view('panel.cuota_social.cobrar', compact('socio', 'cajasAbierta','allCuotas'));
     }
     /**
      * Store a newly created resource in storage.
@@ -80,6 +84,22 @@ class CuotasController extends Controller
     public function store(Request $request)
     {
         $caja = Cajas::findOrFail($request->get('id_caja'));
+        $fecha_hoy = Carbon::now();
+        if ($request->get('pagada_fac') == 1) {
+            $fecha_pago = Carbon::now();
+        } else {
+            $fecha_pago = null;
+        }
+
+        $factura = Facturacion::create([
+            'id_caja' => $request->input('id_caja'),
+            'id_fdp' => $request->input('id_fdp'),
+            'dni_soc' => $request->input('id_soc'),
+            'facha_fac' => $fecha_hoy,
+            'monto_fac' => '',
+            'fecha_pago_fac' => $fecha_pago,
+            'pagada_fac' => $request->input('pagada_fac'),
+        ]);
         
     }
 
