@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Instalacion extends Model
 {
     use HasFactory;
+    
     protected $table = 'instalaciones';
     protected $fillable = ['nombre_inst', 'tipo_inst', 'capacidad_inst'];
     protected $primaryKey = 'id_inst';
@@ -16,5 +17,9 @@ class Instalacion extends Model
     public function disponibilidades(): HasMany
     {
         return $this->hasMany(Disponibilidades::class);
+    }
+    public function actividades(): HasMany
+    {
+        return $this->hasMany(Actividad::class);
     }
 }
