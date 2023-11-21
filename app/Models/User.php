@@ -68,7 +68,7 @@ class User extends Authenticatable
 
     public function socio()
     {
-        return $this->hasOne(Socio::class)->withTrashed();
+        return $this->hasOne(Socio::class, 'id_user')->withTrashed();
     }
 
     public function genero()

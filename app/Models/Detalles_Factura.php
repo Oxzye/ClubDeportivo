@@ -22,4 +22,8 @@ class Detalles_Factura extends Model
     {
         return $this->belongsTo(Actividad::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

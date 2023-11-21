@@ -23,6 +23,7 @@ use App\Http\Controllers\SociosxActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturacionController;
 use App\Http\Controllers\DetallesFacturaController;
+use App\Http\Controllers\CuotasController;
 
 use App\Models\Cajas;
 
@@ -95,4 +96,9 @@ Route::put('/products/{id}/update-payment-status', 'ProductController@updatePaym
 
 Route::resource('/Detalle_fact', DetallesFacturaController::class)->names('Detalle_fact');
 Route::post('/guardar-detalles', 'DetallesFacturaController@guardarDetalles')->name('guardar-detalles');
+
+
+Route::get('/cuota_social/{dni}/cobrar', [CuotasController::class, 'cobrar'])->name('cuota_social.cobrar');
+
+Route::resource("/cuota_social", CuotasController::class)->names('cuota_social');
 

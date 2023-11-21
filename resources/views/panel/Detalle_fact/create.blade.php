@@ -18,25 +18,21 @@
             <div class="detalle mb-3">
                 <form action="{{ route('Detalle_fact.store') }}" method="post" id="form-detalle">
                     @csrf
-                    <label for="" class="form-label">* Actividades</label>
-                    <select name="id_act[]" class="form-select actividad-select">
-                        <option value=" ">--Ninguna--</option>
+                    <label for="" class="form-label">Detalle</label>
+                    <select name="id_combined[]" class="combined-select">
+                        <option value=" " selected>--Ninguna--</option>
                         @foreach ($actividad as $act)
                             <option value="{{ $act->id_act }}">
                                 {{ $act->nombre_act }}
                             </option>
                         @endforeach
-                    </select>
-
-                    <label for="" class="form-label">* Producto</label>
-                    <select name="id_tipodetfact[]" class="select-tdf producto-select">
-                        <option value="0">-nada-</option>
                         @foreach ($tipodetfact as $tdf)
                             <option value="{{ $tdf->id_tipodetallefactura }}" data-precio="{{ $tdf->precio_tdf }}">
-                                {{ $tdf->tipodetalle }}
+                                {{ $tdf->tipodetalle .' |'.$tdf->descripcion_tdf.'| $'.$tdf->precio_tdf }}
                             </option>
                         @endforeach
                     </select>
+
 
                     <input type="text" name="detalles[0][precio]" value='0' readonly>
 
@@ -49,47 +45,42 @@
 @endsection
 @push('js')
     <script>
-      $(document).ready(function () {
-    $(".detalles-container").on("change", ".select-tdf", function () {
-        var precioSeleccionado = $(this).find(':selected').data('precio');
-        $(this).closest(".detalle").find("[name$='[precio]']").val(precioSeleccionado);
-    });
-    $('.clonar').click(function() {
-  // Clona el .input-group
-  var $clone = $('#formulario .input-group').last().clone();
+        $(document).ready(function() {
+            $(".detalles-container").on("change", ".select-tdf", function() {
+                var precioSeleccionado = $(this).find(':selected').data('precio');
+                $(this).closest(".detalle").find("[name$='[precio]']").val(precioSeleccionado);
+            });
+            $('.clonar').click(function() {
+                // Clona el .input-group
+                var $clone = $('#formulario .input-group').last().clone();
 
-  // Borra los valores de los inputs clonados
-  $clone.find(':input').each(function () {
-    if ($(this).is('select')) {
-      this.selectedIndex = 0;
-    } else {
-      this.value = '';
-    }
-  });
+                // Borra los valores de los inputs clonados
+                $clone.find(':input').each(function() {
+                    if ($(this).is('select')) {
+                        this.selectedIndex = 0;
+                    } else {
+                        this.value = '';
+                    }
+                });
 
-  // Agrega lo clonado al final del #formulario
-  $clone.appendTo('#formulario');
-});
-    $("#form-detalle").on("click", ".agregar-detalle", function () {
-        var nuevoDetalle = $(".detalle:first").clone();
-        var numDetalles = $(".detalle").length;
+                // Agrega lo clonado al final del #formulario
+                $clone.appendTo('#formulario');
+            });
+            $("#form-detalle").on("click", ".agregar-detalle", function() {
+                var nuevoDetalle = $(".detalle:first").clone();
+                var numDetalles = $(".detalle").length;
 
-        nuevoDetalle.find("select, input").each(function () {
-            var originalName = $(this).attr("name");
-            if (originalName) {
-                // Modificar solo el índice numérico al final del nombre del campo
-                var newName = originalName.replace(/\[\d+\]/g, '[' + numDetalles + ']');
-                $(this).attr("name", newName);
-            }
+                nuevoDetalle.find("select, input").each(function() {
+                    var originalName = $(this).attr("name");
+                    if (originalName) {
+                        // Modificar solo el índice numérico al final del nombre del campo
+                        var newName = originalName.replace(/\[\d+\]/g, '[' + numDetalles + ']');
+                        $(this).attr("name", newName);
+                    }
+                });
+
+                $(".detalles-container").append(nuevoDetalle);
+            });
         });
-
-        $(".detalles-container").append(nuevoDetalle);
-    });
-});
-
     </script>
 @endpush
-
-
-
-
