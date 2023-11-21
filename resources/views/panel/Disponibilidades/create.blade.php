@@ -36,18 +36,17 @@
                 <label for="id_inst" class="col-sm-4 col-form-label" name="id_inst">Instalación (nombre_inst | tipo_inst | capacidad): </label>
                 <select id="id_inst" name="id_inst" class="form-control">
                     @foreach ($instalaciones as $instalacion)
-                        <option value="{{ $instalacion->id_inst, old( 'id_inst' ) }}" aria-describedby="helpId" @error('id_inst') is-invalid @enderror">
-                        @error( 'id_inst' )
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        {{ $instalacion->nombre_inst .' | '.$instalacion->tipo_inst .' | '. $instalacion->capacidad_inst}}
-                        </option>
+                        <option value="{{$instalacion->id_inst}}">
+                            {{$instalacion->nombre_inst}}|
+                            {{$instalacion->tipo_inst}}|
+                            {{$instalacion->capacidad_inst}}
+                    </option>
                     @endforeach
                 </select>
             </div>
             {{-- fin instalaciones con select --}}
             <div class="mb-3">
-                <label for="" class="form-label" name="horariodisp">Horario disponible, con formato YYYY-MM-DD HH:mm:ss:</label>
+                <label for="" class="form-label" name="horariodisp">Horario disponible, con formato "HH:mm a HH:mm":</label>
                 <input type="text" class="form-control" name="horariodisp" value="{{ old( 'horariodisp' ) }}" aria-describedby="helpId" @error('horariodisp') is-invalid @enderror">
                 @error( 'horariodisp' )
                     <div class="alert alert-danger">{{ $message }}</div>
