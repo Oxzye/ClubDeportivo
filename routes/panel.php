@@ -24,9 +24,15 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturacionController;
 
 
-Route::get('/', function(){
-        return view('panel.index');
+use App\Models\Cajas;
+
+Route::get('/', function () {
+        $cajasAbiertas = Cajas::where('estado_caja', 1)->count();
+        $saldo_cajas = Cajas::where('estado_caja', 1)->sum('saldo_caja');
+        
+        return view('panel.index', compact('cajasAbiertas', 'saldo_cajas'));
 });
+
 
 Route::get('/socios/dadosdebaja', [SociosController::class, 'dadosdebaja'])->name('socios.dadosdebaja');
 Route::get('/socios/restore/{id}', [SociosController::class, 'restore'])->name('socios.restore');

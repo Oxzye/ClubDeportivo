@@ -9,15 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('clientes', function (Blueprint $table) {
-            $table->droptimestamps();
-        });
-        Schema::create('clientes', function (Blueprint $table) {
-            $table->timestamps();
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::create('clientes', function (Blueprint $table) {
+    //         $table->droptimestamps();
+    //     });
+    //     Schema::create('clientes', function (Blueprint $table) {
+    //         $table->timestamps();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.
