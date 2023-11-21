@@ -8,6 +8,7 @@ use App\Models\Tipo_factura;
 use App\Models\Socio;
 use App\Models\clientes;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 
 class FacturacionController extends Controller
@@ -51,7 +52,11 @@ class FacturacionController extends Controller
         if (!$cajasAbierta) {
             return redirect()->route('facturas.index')->with('error', 'No hay cajas abiertas. No se pueden crear facturas.');
         }
-
+        if ($request->get('pagada_fac') == 1){
+            $fecha_pago = Carbon::now();
+        }else {
+            $fecha_pago = null;
+        }
         $idCajaAbierta = $cajasAbierta->id_caja;
         $facturacion = new Facturacion();
         //Guardado de los datos
@@ -62,6 +67,7 @@ class FacturacionController extends Controller
         $facturacion->dni_cli = $request->get('dni_cli');
         $facturacion->monto_fac = $request->get('monto_fac');
         $facturacion->pagada_fac = $request->get('pagada_fac');
+        $facturacion->fecha_pago_fac = $fecha_pago;
        
         $cajas = Cajas::findOrFail($facturacion->id_caja);
     

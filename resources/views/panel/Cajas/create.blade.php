@@ -26,11 +26,11 @@
                             @csrf
                                 <div class="mb-3">
                                   <label for="" class="form-label" name="monto_inicial_caja">Monto inicial:</label>
-                                  <input type="text" class="form-control" name="monto_inicial_caja" id="" aria-describedby="helpId" placeholder="">
+                                  <input type="text" class="form-control" name="monto_inicial_caja" id="" aria-describedby="helpId" placeholder="" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label" name="saldo_caja">Saldo:</label>
-                                    <input type="text" class="form-control" name="saldo_caja" id="" aria-describedby="helpId" placeholder="">
+                                    <input type="text" class="form-control" name="saldo_caja" id="" aria-describedby="helpId" placeholder="" required>
                                 </div>  
                                 
                                 <div class="mb-3 ">
