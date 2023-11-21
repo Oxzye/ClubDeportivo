@@ -134,10 +134,10 @@ class RolSeeder extends Seeder
        Permission::create(['name' => 'eliminar_diasxact'])->assignRole([$rol_admin, $rol_gerente]);  
        
        //Permiso para la tabla listado_sxa
-       Permission::create(['name' => 'crear_sxa'])->assignRole([$rol_admin, $rol_gerente,$rol_recepcionista]);
+       Permission::create(['name' => 'crear_sxa'])->assignRole([$rol_admin, $rol_gerente,$rol_recepcionista, $rol_cajero]);
        Permission::create(['name' => 'listado_sxa'])->assignRole([$rol_admin, $rol_gerente, $rol_recepcionista,$rol_cajero,$rol_canchero]);
        Permission::create(['name' => 'editar_sxa'])->assignRole([$rol_admin, $rol_gerente, $rol_cajero, $rol_recepcionista]);
-       Permission::create(['name' => 'eliminar_sxa'])->assignRole([$rol_admin, $rol_gerente]);   
+       Permission::create(['name' => 'eliminar_sxa'])->assignRole([$rol_admin, $rol_gerente, $rol_cajero]);   
        
         //Permiso para la tabla listado_exa
         Permission::create(['name' => 'crear_exa'])->assignRole([$rol_admin, $rol_gerente]);
@@ -146,10 +146,10 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'eliminar_exa'])->assignRole([$rol_admin, $rol_gerente]);   
 
         //Permiso para la tabla listado_actividades
-        Permission::create(['name' => 'crear_act'])->assignRole([$rol_admin, $rol_gerente]);
+        Permission::create(['name' => 'crear_act'])->assignRole([$rol_admin, $rol_gerente, $rol_cajero]);
         Permission::create(['name' => 'listado_act'])->assignRole([$rol_admin, $rol_gerente, $rol_recepcionista,$rol_cajero,$rol_canchero]);
-        Permission::create(['name' =>'editar_act' ])->assignRole([$rol_admin, $rol_gerente]);
-        Permission::create(['name' => 'eliminar_act'])->assignRole([$rol_admin, $rol_gerente]);   
+        Permission::create(['name' =>'editar_act' ])->assignRole([$rol_admin, $rol_gerente, $rol_cajero]);
+        Permission::create(['name' => 'eliminar_act'])->assignRole([$rol_admin, $rol_gerente, $rol_cajero]);   
         
     //     //Permiso para la tabla listado_detallefactura
     //     Permission::create(['name' => 'crear_detallefactura'])->assignRole([$rol_admin, $rol_gerente,$rol_recepcionista]);
