@@ -19,6 +19,9 @@
                 <a href="{{ route('exportar-empxact-excel') }}" class="btn btn-warning mx-3" title="PDF" target="_blank">
                     <i class="fas fa-file-excel"></i> Excel
                 </a>
+                <a href="{{ route('graficos-empxact')}}" class="btn btn-warning mx-1 px-2 pt-1 pb-1" title="ChartJs">
+                    <i class="fas fa-chart-pie"></i> Gráfico
+                   </a>
             </div>
 
             @if (session('alert'))

@@ -105,4 +105,8 @@ class DisponibilidadesController extends Controller
     public function exportarDisponibilidadesExcel() {
         return Excel::download(new DisponibilidadesExportExcel, 'disponibilidades.xlsx');
     }
+    
+    public function graficoInstalacionesxDisponibilidad () {
+        // $grafico = DB::table("disponibilidades");
+    }
 }
