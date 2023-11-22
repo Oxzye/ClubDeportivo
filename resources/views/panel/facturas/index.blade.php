@@ -38,6 +38,7 @@
                         <tbody>
                             @foreach ($facturacion as $fact)
                                 <tr class="">
+                                    <td>{{ $fact->num_fac }}</td>
                                     <td>{{ $fact->id_caja }}</td>
                                     <td>{{ $fact->id_fdp }}</td>
                                     <td>{{ $fact->tipo_fac }}</td>
@@ -47,7 +48,7 @@
                                     <td>{{ $fact->pagada_fac }}</td>
                                     <td>Ver</td>
                                     <td>
-                                        <a href="{{ route('facturas.edit', $fact->id_caja)  }}" class="btn btn-warning">Editar</a>
+                                        <a href="{{ route('facturas.edit', $fact->num_fac)  }}" class="btn btn-warning">Editar</a>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase me-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $fact->id_caja }}" data-nombre="{{ $fact->id_caja }}">

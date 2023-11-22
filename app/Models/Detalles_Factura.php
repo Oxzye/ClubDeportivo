@@ -11,7 +11,6 @@ class Detalles_Factura extends Model
     use HasFactory;
 
     protected $table = 'detalles_factura';
-    protected $fillable = ['precio_df'];
     protected $primaryKey = 'id_detallefactura';
 
     public function facturas()
@@ -20,6 +19,6 @@ class Detalles_Factura extends Model
     }
     public function actividad(): BelongsTo
     {
-        return $this->belongsTo(Actividad::class);
+        return $this->belongsTo(Actividad::class, 'id_act');
     }
 }
