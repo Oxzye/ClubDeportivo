@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 
-@section('title', 'Incex de cuotas sociales')
+@section('title', 'Index de cuotas sociales')
 
 @section('content')
     <div class="container-fluid">
@@ -10,16 +10,7 @@
             <div class="col-12">
                 <x-adminlte-alert theme="info" title="Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }}">
                 <div class="col-lg-3 col-12 mb-2">
-                    <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $info[0]->dni) }}">Cobrar Cuota/s</a>
-                </div>
-                </x-adminlte-alert>
-            </div>
-        @endif
-        @if ($info->count())
-            <div class="col-12">
-                <x-adminlte-alert theme="danger" title="Socio: {{ $info[0]->name . ' ' . $info[0]->apellido }}">
-                <div class="col-lg-3 col-12 mb-2">
-                    <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $info[0]->dni) }}">Cobrar Cuota/s</a>
+                    <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $info) }}">Cobrar Cuota/s</a>
                 </div>
                 </x-adminlte-alert>
             </div>
