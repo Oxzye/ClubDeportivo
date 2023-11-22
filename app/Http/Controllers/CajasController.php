@@ -36,7 +36,7 @@ class CajasController extends Controller
         $cajas->total_ventas_caja = $request->get('total_ventas_caja');
         $cajas->estado_caja = $request->get('estado_caja');
         $cajas->monto_final = $request->get('monto_final');
-       
+        //$producto->vendedor_id = auth()->user()->id;
         $cajas ->save();
         //Redir
         echo '<script>showCajaIndicator();</script>';
