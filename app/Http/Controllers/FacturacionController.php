@@ -83,14 +83,17 @@ class FacturacionController extends Controller
        return redirect()->route('Detalle_fact.create')->with('status', 'Factura realizada correctamente');
     }
 
-    public function edit($id_caja) {
-        $caja = Cajas::findOrFail($id_caja);
+    public function edit($num_fac) {
+        $facturas = Facturacion::findOrFail($num_fac);
         $clientes = clientes::all();
-        
-        if ($caja) {
-            return view('panel.Cajas.edit', compact('caja', 'clientes'));
+        $cajas = Cajas::all();
+        $formdp = Formas_pago::all();
+        $tipofac = Tipo_factura::all();
+        $socio = Socio::all();
+        if ($facturas) {
+            return view('panel.facturas.edit', compact('facturas', 'clientes', 'cajas','formdp', 'tipofac', 'socio'));
         } else {
-            return redirect()->route('Cajas.index')->with('error', 'Caja no encontrada');
+            return redirect()->route('Facturas.index')->with('error', 'Factura no encontrada');
         }
     }
 
@@ -107,40 +110,40 @@ class FacturacionController extends Controller
        
         $facturacion ->save();
         
-        echo '<script>hideCajaIndicator();</script>';
+        //echo '<script>hideCajaIndicator();</script>';
         //redireccion
-        return redirect()->route('Cajas.index')->with('status', 'Cajas Cerrada correctamente');
+        return redirect()->route('facturas.index')->with('status', 'Factura actualizada correctamente');
     }
 
     public function destroy($id) {
         //busqueda
-        $cajas = Cajas::findOrFail($id);
+        $facturas = Facturacion::findOrFail($id);
 
         //elminacion
-        $cajas->delete();
+        $facturas->delete();
 
         
-        return redirect()->route('Cajas.index')->with('status', 'Cajas eliminada correctamente');
+        return redirect()->route('facturas.index')->with('status', 'Factura eliminada correctamente');
     }
-    public function updatePaymentStatus($id)
-{
-    $facturacion = Facturacion::find($id);
+//     public function updatePaymentStatus($id)
+// {
+//     $facturacion = Facturacion::find($id);
 
-    if (!$facturacion) {
-        return response()->json(['error' => 'factura no encontrado'], 404);
-    }
+//     if (!$facturacion) {
+//         return response()->json(['error' => 'factura no encontrado'], 404);
+//     }
 
-    $facturacion->update(['pagada_fac' => request('pagada_fac')]);
+//     $facturacion->update(['pagada_fac' => request('pagada_fac')]);
 
-    return response()->json(['message' => 'Estado de pago actualizado con éxito']);
-}
-    public function show($id)
-    {
-        // Lógica para mostrar una caja específica por su ID
-        $cajas = Cajas::findOrFail($id);
-        $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
-        $cajaAbierta = $cajaso->where('estado_caja', true);
-        // Puedes pasar la caja a una vista o realizar cualquier otra lógica necesaria
-        return view('panel.Cajas.index', compact('cajas','cajaAbierta'));
-    }
+//     return response()->json(['message' => 'Estado de pago actualizado con éxito']);
+// }
+//     public function show($id)
+//     {
+//         // Lógica para mostrar una caja específica por su ID
+//         $cajas = Cajas::findOrFail($id);
+//         $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
+//         $cajaAbierta = $cajaso->where('estado_caja', true);
+//         // Puedes pasar la caja a una vista o realizar cualquier otra lógica necesaria
+//         return view('panel.Cajas.index', compact('cajas','cajaAbierta'));
+//     }
 }

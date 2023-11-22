@@ -2,30 +2,23 @@
 
 @section('plugins.Datatables', true)
 
-@section('title','Crear facturas')
+@section('title','Editar Facturas')
     
 @section('content')
     <div class="container-fluid">
-
-
-        <h1>Crear nueva Factura</h1>
-
-
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
-        
-        <form action="{{ route('facturas.store') }}" method="post">
-        @csrf
-            {{-- <div class="mb-3">
-              <label for="" class="form-label" name="monto_fac">Total a pagar:</label>
-            </div> --}}
-            <input type="hidden" class="form-control" name="monto_fac" value="0">
-            
+            <h1>Editar Factura</h1>
+            @if ($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
+        <form action="{{ route('facturas.update', $facturas->num_fac) }}" method="post">
+            @csrf @method('PUT')
+            <input type="hidden" class="" name="id_caja" value="{{ $facturas->id_caja }}">
+            <input type="number" class="form-control" name="monto_fac" value="{{ $facturas->monto_fac}}" readonly>
+                
             <div class="mb-3">
                 <label for="fdp" class="col-sm-4 col-form-label"> * Forma de pago </label>
                 <div class="col-sm-8">
@@ -51,19 +44,6 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="socio" class="col-sm-4 col-form-label"> * DNI socio </label>
-                <div class="col-sm-8">
-                <select id="dni_soc" name="dni_soc" class="form-control">
-                    <option value=" ">--Seleccionar--</option>
-                    @foreach ($socio as $soc)
-                        <option value="{{ $soc->id_soc }}"> 
-                            {{ $soc->user->dni }}, {{ $soc->user->name }}
-                        </option>
-                    @endforeach
-                </select>
-                </div>
-            </div>
-            <div class="mb-3">
                 <label for="cli" class="col-sm-4 col-form-label"> * DNI cliente </label>
                 <div class="col-sm-8">
                 <select id="dni_cli" name="dni_cli" class="form-control">
@@ -77,17 +57,28 @@
                 </div>
             </div>
             <div class="mb-3">
+                <label for="socio" class="col-sm-4 col-form-label"> * DNI socio </label>
+                <div class="col-sm-8">
+                <select id="dni_soc" name="dni_soc" class="form-control">
+                    <option value=" ">--Seleccionar--</option>
+                    @foreach ($socio as $soc)
+                        <option value="{{ $soc->id_soc }}"> 
+                            {{ $soc->user->dni }}, {{ $soc->user->name }}
+                        </option>
+                    @endforeach
+                </select>
+                </div>
+            </div>
+            <div class="mb-3">
               <label for="" class="form-label" name="estado_fac">Estado de factura</label>
                 <select class="form-select" id="pagada_fac" name="pagada_fac">
                 <option value="1">Pagada</option>
                 <option value="0">No Pagada</option>
                 </select>
-            </div>   
+            </div>  
              <button type="submit" class="btn btn-primary">Guardar</button>
-             <a href="{{ route('facturas.create') }}" class="btn btn-danger">Cancelar</a>
+             <a href="{{ route('facturas.index') }}" class="btn btn-danger">Cancelar</a>
         </form>
-        
     </div>
-
 
 @endsection

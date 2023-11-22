@@ -25,12 +25,24 @@ use App\Http\Controllers\FacturacionController;
 use App\Http\Controllers\DetallesFacturaController;
 
 use App\Models\Cajas;
+use App\Models\Deporte;
+use App\Models\Empleado;
+use App\Models\Instalacion;
+use App\Models\Socio;
+use Psy\VersionUpdater\Installer;
 
 Route::get('/', function () {
         $cajasAbiertas = Cajas::where('estado_caja', 1)->count();
         $saldo_cajas = Cajas::where('estado_caja', 1)->sum('saldo_caja');
         
-        return view('panel.index', compact('cajasAbiertas', 'saldo_cajas'));
+        $deport = Deporte::all()->count();
+        $instalation = Instalacion::all()->count();
+
+        $sociosAct = Socio::all()->count();
+
+        $empleadosAct = Empleado::all()->count();
+
+        return view('panel.index', compact('cajasAbiertas', 'saldo_cajas', 'deport', 'instalation', 'sociosAct', 'empleadosAct'));
 });
 
 
