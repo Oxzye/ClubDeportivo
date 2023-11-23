@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Actividad;
 use App\Models\EmpleadosxActividad;
 use App\Models\Empleado;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\EmpxActExportExcel;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -136,6 +137,23 @@ class EmpleadosxActividadesController extends Controller
 
         return redirect()->route('EmpxAct.index')->with('status', 'Empleado por Actividad eliminado correctamente');
     }
+
+    public function exportarEmpxActPDF() {
+        set_time_limit(6000);
+        // $admin_id = auth()->user()->id;
+            // Traemos las actividades con relaciones a instalaciones y deportes
+        // $actividades = Actividad::with('instalacion', 'deporte')
+        //     ->where('id_act',auth()->user()->id)->get();
+
+            $empxactiv = EmpleadosxActividad::all();
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = Pdf::loadView('panel.EmpxAct.pdf_empxact', compact('empxactiv'));
+        //Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('empxact.pdf');
+    }
+
 
     public function exportarEmpxactExcel() {
         return Excel::download(new EmpxActExportExcel, 'empxact.xlsx');

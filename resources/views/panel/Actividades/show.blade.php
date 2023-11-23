@@ -20,6 +20,7 @@
             <li class="list-group-item"><strong><u>Nombre de la actividad:</u></strong> {{ $act->nombre_act }}</li>
             <li class="list-group-item"><strong><u>Limite de socios por actividad:</strong></u> {{ $act->limite_soc_atc }}</li>
             <li class="list-group-item"><strong><u>Descripción de actividad:</strong></u> {{ $act->descripcion_act }}</li>
+            <li class="list-group-item"><strong><u>Precio de la actividad:</strong></u> {{ $act->precio_act }}</li>
             <li class="list-group-item"><strong><u>Actividad en curso 0(no) ó 1(si):</strong></u> {{ $act->actividad_en_curso }}</li>
             <li class="list-group-item"><strong><u>Fecha de inicio de actividad:</strong></u> {{ $act->fecha_inicio_act }}</li>
             <li class="list-group-item"><strong><u>Fecha de fin de actividad:</strong></u> {{ $act->fecha_fin_act }}</li>            
