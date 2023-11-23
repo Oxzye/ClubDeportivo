@@ -24,6 +24,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturacionController;
 use App\Http\Controllers\DetallesFacturaController;
 use App\Http\Controllers\CuotasController;
+use App\Http\Controllers\CobroActPartController;
 
 use App\Models\Cajas;
 use App\Models\Deporte;
@@ -115,6 +116,8 @@ Route::post('/guardar-detalles', 'DetallesFacturaController@guardarDetalles')->n
 
 
 Route::get('/cuota_social/{dni}/cobrar', [CuotasController::class, 'cobrar'])->name('cuota_social.cobrar');
-
 Route::resource("/cuota_social", CuotasController::class)->names('cuota_social');
+
+Route::get('/insc_act_part/{dni}/cobrar', [CobroActPartController::class, 'cobrar'])->name('insc_act_part.cobrar');
+Route::resource("/insc_act_part", CobroActPartController::class)->names('insc_act_part');
 
