@@ -2,8 +2,8 @@
 
 @section('plugins.Datatables', true)
 
-@section('title','Crear facturas')
-    
+@section('title', 'Crear facturas')
+
 @section('content')
     <div class="container-fluid">
 
@@ -16,36 +16,37 @@
                 @endforeach
             </ul>
         @endif
-        
+
         <form action="{{ route('facturas.store') }}" method="post">
-        @csrf
+            @csrf
             {{-- <div class="mb-3">
               <label for="" class="form-label" name="monto_fac">Total a pagar:</label>
             </div> --}}
             <input type="hidden" class="form-control" name="monto_fac" value="0">
-            
+
+
             <div class="mb-3">
                 <label for="fdp" class="col-sm-4 col-form-label"> * Forma de pago </label>
                 <div class="col-sm-8">
-                <select id="id_fdp" name="id_fdp" class="form-control">
-                    @foreach ($formdp as $fdp)
-                        <option value="{{ $fdp->id_fdp }}"> 
-                            {{ $fdp->forma_pago_fdp }}
-                        </option>
-                    @endforeach
-                </select>
+                    <select id="id_fdp" name="id_fdp" class="form-control">
+                        @foreach ($formdp as $fdp)
+                            <option value="{{ $fdp->id_fdp }}">
+                                {{ $fdp->forma_pago_fdp }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="tipofac" class="col-sm-4 col-form-label"> * Tipo de fac </label>
                 <div class="col-sm-8">
-                <select id="tipo_fac" name="tipo_fac" class="form-control">
-                    @foreach ($tipofac as $tfac)
-                        <option value="{{ $tfac->id_tipo_fac }}"> 
-                            {{ $tfac->tipo_fac }}
-                        </option>
-                    @endforeach
-                </select>
+                    <select id="tipo_fac" name="tipo_fac" class="form-control">
+                        @foreach ($tipofac as $tfac)
+                            <option value="{{ $tfac->id_tipo_fac }}">
+                                {{ $tfac->tipo_fac }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="mb-3">
@@ -75,16 +76,16 @@
                 </div>
             </div>
             <div class="mb-3">
-              <label for="" class="form-label" name="estado_fac">Estado de factura</label>
+                <label for="" class="form-label" name="estado_fac">Estado de factura</label>
                 <select class="form-select" id="pagada_fac" name="pagada_fac">
-                <option value="1">Pagada</option>
-                <option value="0">No Pagada</option>
+                    <option value="1">Pagada</option>
+                    <option value="0">No Pagada</option>
                 </select>
             </div>   
              <button type="submit" class="btn btn-primary">Guardar</button>
              <a href="{{ route('facturas.create') }}" class="btn btn-danger">Cancelar</a>
         </form>
-        
+
     </div>
 
 

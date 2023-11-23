@@ -12,6 +12,7 @@ class Detalles_Factura extends Model
 
     protected $table = 'detalles_factura';
     protected $primaryKey = 'id_detallefactura';
+    protected $fillable = ['id_tipodetallefactura','num_fac','id_act'];
 
     public function facturas()
     {
@@ -24,5 +25,9 @@ class Detalles_Factura extends Model
     public function tipodetfact()
     {
         return $this->belongsTo(tipodetfactura::class, 'id_tipodetallefactura');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

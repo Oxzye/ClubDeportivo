@@ -235,12 +235,52 @@ class OtrosSeeder extends Seeder
 
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
-            'descripcion_tdf' => 'Cuota social',
+            'descripcion_tdf' => 'Enero 2023',
         ]);
 
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
-            'descripcion_tdf' => 'Cuota social',
+            'descripcion_tdf' => 'Febrero 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Marzo 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Abril 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Mayo 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Junio 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Julio 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Agosto 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Septiembre 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Octubre 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Noviembre 2023',
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Diciembre 2023',
         ]);
 
         tipodetfactura::create([

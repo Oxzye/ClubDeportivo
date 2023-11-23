@@ -18,10 +18,9 @@
                     <i class="fas fa-file-excel"></i> Excel
                 </a>
 
-                <a href="{{ route('exportar-actividades-pdf') }}" class="btn btn-warning mx-3" title="PDF"
-            target="_blank">
-                <i class="fas fa-file-pdf"></i> PDF
-        </a>
+                <a href="{{ route('exportar-actividades-pdf') }}" class="btn btn-warning mx-3" title="PDF" target="_blank">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </a>
             </div>
 
             @if (session('alert'))
@@ -50,6 +49,7 @@
                                     <th class="text-center">nombre_act</th>
                                     <th class="text-center">limite_soc_atc</th>
                                     <th class="text-center">descripcion_act</th>
+                                    <th class="text-center">precio_act</th>
                                     <th class="text-center">actividad_en_curso</th>
                                     <th class="text-center">fecha_inicio_act</th>
                                     <th class="text-center">fecha_fin_act</th>
@@ -65,6 +65,7 @@
                                         <td class="text-center">{{ $act->nombre_act }}</td>
                                         <td class="text-center">{{ $act->limite_soc_atc }}</td>
                                         <td class="text-center">{{ $act->descripcion_act }}</td>
+                                        <td class="text-center">{{ $act->precio_act }}</td>
                                         <td class="text-center">{{ $act->actividad_en_curso }}</td>
                                         <td class="text-center">{{ $act->fecha_inicio_act }}</td>
                                         <td class="text-center">{{ $act->fecha_fin_act }}</td>

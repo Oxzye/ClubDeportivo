@@ -11,7 +11,7 @@ class Facturacion extends Model
     use HasFactory;
 
     protected $table = 'facturas';
-    protected $fillable = ['monto_fac', 'pagada_fac'];
+    protected $fillable = ['id_caja','monto_fac', 'pagada_fac', 'id_fdp', 'tipo_fac','dni_soc','fecha_fac','fecha_pago_fac'];
     protected $primaryKey = 'num_fac';
 
     public function cajas() 
@@ -34,4 +34,9 @@ class Facturacion extends Model
     {
         return $this->belongsTo(clientes::class, 'dni_cli');
     }
+    public function detallesFactura()
+    {
+        return $this->hasMany(Detalles_Factura::class, 'num_fac');
+    }
+
 }

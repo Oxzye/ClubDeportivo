@@ -11,6 +11,11 @@ use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\SociosExportExcel;
+use App\Exports\SociosBajaExportExcel;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class SociosController extends Controller
 {
@@ -51,7 +56,7 @@ class SociosController extends Controller
             'cod_genero' => 'required|integer',
             'domicilio' =>  'required|string|max:200',
             'telefono' =>   'required|string|max:20',
-            'fecha_asociacion' => 'required|date|after:fecha_nac',
+            // 'fecha_asociacion' => 'required|date|after:fecha_nac',
             'observaciones_soc'=> 'string|max:40',
         ];
 
@@ -63,6 +68,9 @@ class SociosController extends Controller
             'dni.*' => 'Ingrese un DNI valido',
             'cuil_soc.*' => 'Ingrese un CUIL valido',
             'email.*' =>'Ingrese un Email valido',
+            'fecha_nac' => 'Ingrese una fecha valida',
+            // 'fecha_asociacion' => 'Ingrese una fecha valida',
+
         ];
 
         // Valida los datos del formulario
@@ -97,7 +105,6 @@ class SociosController extends Controller
 
         // Redirige o realiza otras acciones según tus necesidades.
         Mail::to($user->email)->send(new WelcomeMail($user));
-
         //Redir
         return redirect()->route('socios.index')->with('status', 'Socio creado correctamente');
     }
@@ -187,7 +194,7 @@ class SociosController extends Controller
         $socio->user->delete();
 
         // Redirige a la vista de empleados o cualquier otra ruta que desees
-        return redirect()->route('socios.index')->with('status', 'Empleado eliminado correctamente');
+        return redirect()->route('socios.index')->with('status', 'Socio eliminado correctamente');
     }
 
     public function dadosdebaja()
@@ -213,4 +220,27 @@ class SociosController extends Controller
         return redirect()->route('socios.dadosdebaja')->with('status', 'Socio ' . $datos->name." ".$datos->apellido  . ' recuperado exitosamente');
     }
 
+    public function exportarSociosPDF() {
+        set_time_limit(6000);
+        // $admin_id = auth()->user()->id;
+            // Traemos las actividades con relaciones a instalaciones y deportes
+        // $actividades = Actividad::with('instalacion', 'deporte')
+        //     ->where('id_act',auth()->user()->id)->get();
+
+            $socios = Socio::all();
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = Pdf::loadView('panel.socios.pdf_socios', compact('socios'));
+        //Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('socios.pdf');
+        }
+
+    public function exportarSociosExcel() {
+        return Excel::download(new SociosExportExcel, 'socios.xlsx');
+    }
+
+    public function exportarSociosBajaExcel() {
+        return Excel::download(new SociosBajaExportExcel, 'socios_baja.xlsx');
+    }
 }

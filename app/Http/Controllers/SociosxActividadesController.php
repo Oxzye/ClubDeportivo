@@ -5,6 +5,7 @@ use App\Models\Actividad;
 use App\Models\SociosxActividad;
 use App\Models\Socio;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\SocxActExportExcel;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -132,6 +133,22 @@ class SociosxActividadesController extends Controller
 
         return redirect()->route('SocxAct.index')->with('status', 'Socio por Actividad eliminado correctamente');
     }
+
+    public function exportarSocxActPDF() {
+        set_time_limit(6000);
+        // $admin_id = auth()->user()->id;
+            // Traemos las actividades con relaciones a instalaciones y deportes
+        // $actividades = Actividad::with('instalacion', 'deporte')
+        //     ->where('id_act',auth()->user()->id)->get();
+
+            $socxact = SociosxActividad::all();
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = Pdf::loadView('panel.SocxAct.pdf_socxact', compact('socxact'));
+        //Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('socxact.pdf');
+        }
 
     public function exportarSocxActExcel() {
         return Excel::download(new SocxActExportExcel, 'socxact.xlsx');

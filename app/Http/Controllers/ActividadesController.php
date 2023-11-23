@@ -205,20 +205,5 @@ class ActividadesController extends Controller
         $pdf->render();
         // Visualizaremos el PDF en el navegador
         return $pdf->stream('actividades.pdf');
-
-
-// otra solucion que no funciona
-        // Obtener la actividad con id 191
-        // $actividad = Actividad::where('id', 191)->whereNull('deleted_at')->first();
-        // if ($act) {
-        //     $pdf = Pdf::loadView('panel.Actividades.pdf_actividades', compact('act'));
-        //     // Visualizaremos el PDF en el navegador
-        //     return $pdf->stream('actividades.pdf');
-        //     // Descargar el PDF
-        //     return $pdf->download('reporte_actividad_.pdf');
-        // } else {
-        //     // La actividad no fue encontrada
-        //     return response()->json(['error' => 'Actividad no encontrada'], 404);
         }
-
 }
