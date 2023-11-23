@@ -7,6 +7,7 @@ use App\Models\Detalles_Factura;
 use App\Models\Facturacion;
 use App\Models\Actividad;
 use App\Models\tipodetfactura;
+use App\Models\Cajas;
 class DetallesFacturaController extends Controller
 {
     /**
@@ -25,7 +26,9 @@ class DetallesFacturaController extends Controller
         $detallefact = new Detalles_Factura();
         $tipodetfact = tipodetfactura::all();
         $actividad = Actividad::all();
-        $facturacion = Facturacion::all();
+        // $facturacion =  Facturacion::all();
+        $factura = Facturacion::latest('id_caja')->first();
+        $facturacion = $factura->num_fac;
         $detalles = [];
         return view('panel.Detalle_fact.create', compact('detallefact', 'tipodetfact', 'actividad', 'facturacion','detalles'));
     }
@@ -37,7 +40,7 @@ class DetallesFacturaController extends Controller
     {
         $factura = Facturacion::latest('id_caja')->first();
         $idfact = $factura->num_fac;
-    
+        $idcaja = $factura->id_caja;
         $detallesAdicionales = $request->input('detalles');
     
         foreach ($detallesAdicionales as $detalle) {
@@ -48,6 +51,15 @@ class DetallesFacturaController extends Controller
             $detallefact->save();
         }
     
+        $montoFac = Detalles_Factura::where('num_fac', $idfact)
+        ->join('tipos_detalle_factura', 'detalles_factura.id_tipodetallefactura', '=', 'tipos_detalle_factura.id_tipodetallefactura')
+        ->sum('tipos_detalle_factura.precio_tdf');
+        // Actualiza la factura con el monto_fac
+        Facturacion::where('num_fac', $idfact)->update(['monto_fac' => $montoFac]);
+        
+         $caja = Cajas::findOrFail($idcaja);
+         $caja->monto_final += $montoFac; // Incrementar el monto recaudado
+         $caja->save();  
         // Verifica si hay formularios registrados en la base de datos
         $formulariosRegistrados = Detalles_Factura::where('num_fac', $idfact)->count();
     
@@ -58,6 +70,7 @@ class DetallesFacturaController extends Controller
             // Si no hay formularios registrados, redirige a facturas.create con el mensaje de éxito
             return redirect()->route('facturas.create')->with('alert', 'Detalles agregados exitosamente.');
         }
+        
     }
     public function show(string $id)
     {
@@ -99,6 +112,22 @@ class DetallesFacturaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function finalizarfact($num_fac)
+    {
+        
+        $facturas = Facturacion::with('formas_pago')->findOrfail($num_fac);
+        $facturas->load('dnisocio', 'client', 'Tipo_fac');
+        //dd($facturas);
+        $detalles= Detalles_Factura::with(['tipodetfact','actividad'])
+        ->where('num_fac', $num_fac)->get();
+        
+        if (!$facturas) {
+        // Manejar el caso donde no se encuentra la factura con el número dado
+        abort(404);
+        }
+        return view('panel.Detalle_fact.fin_factura', compact('facturas','detalles'));
     }
 
 }

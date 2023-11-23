@@ -7,9 +7,7 @@
 @section('content')
     <div class="container-fluid">
 
-
         <h1>Crear nueva Factura</h1>
-
 
         @if ($errors->any())
             <ul>

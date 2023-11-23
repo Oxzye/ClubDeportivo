@@ -22,6 +22,10 @@ class Detalles_Factura extends Model
     {
         return $this->belongsTo(Actividad::class, 'id_act');
     }
+    public function tipodetfact()
+    {
+        return $this->belongsTo(tipodetfactura::class, 'id_tipodetallefactura');
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
