@@ -26,7 +26,9 @@ class DetallesFacturaController extends Controller
         $detallefact = new Detalles_Factura();
         $tipodetfact = tipodetfactura::all();
         $actividad = Actividad::all();
-        $facturacion = Facturacion::all();
+        // $facturacion =  Facturacion::all();
+        $factura = Facturacion::latest('id_caja')->first();
+        $facturacion = $factura->num_fac;
         $detalles = [];
         return view('panel.Detalle_fact.create', compact('detallefact', 'tipodetfact', 'actividad', 'facturacion','detalles'));
     }
@@ -110,6 +112,22 @@ class DetallesFacturaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function finalizarfact($num_fac)
+    {
+        
+        $facturas = Facturacion::with('formas_pago')->findOrfail($num_fac);
+        $facturas->load('dnisocio', 'client', 'Tipo_fac');
+        //dd($facturas);
+        $detalles= Detalles_Factura::with(['tipodetfact','actividad'])
+        ->where('num_fac', $num_fac)->get();
+        
+        if (!$facturas) {
+        // Manejar el caso donde no se encuentra la factura con el número dado
+        abort(404);
+        }
+        return view('panel.Detalle_fact.fin_factura', compact('facturas','detalles'));
     }
 
 }

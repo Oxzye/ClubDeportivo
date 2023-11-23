@@ -49,8 +49,12 @@
             <button type="submit" class="btn btn-success text-uppercase">Guardar Detalles</button>
 
             <!-- Nuevo botón para redireccionar -->
-            <a href="{{ route('facturas.create') }}" class="btn btn-primary">Ir a Facturas</a>
+          
+            
+        <a href="{{ route('Detalle_fact.fin_factura',  $facturacion) }}" class="btn btn-primary">Ver Factura</a>
+        
         </form>
+        
     </div>
 @endsection
 

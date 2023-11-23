@@ -46,14 +46,20 @@
                                     <td>{{ $fact->dni_cli }}</td>
                                     <td>{{ $fact->monto_fac }}</td>
                                     <td>{{ $fact->pagada_fac }}</td>
-                                    <td>Ver</td>
+                                    <td>
+                                        <a href="{{ route('Detalle_fact.fin_factura',  $fact) }}" class="btn btn-primary">Ver Factura</a></td>
                                     <td>
                                         <a href="{{ route('facturas.edit', $fact->num_fac)  }}" class="btn btn-warning">Editar</a>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase me-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $fact->id_caja }}" data-nombre="{{ $fact->id_caja }}">
-                                            Eliminar
-                                        </button>   
+                                        <form action="{{ route('facturas.destroy', $fact->num_fac) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger text-uppercase">
+                                                        Eliminar
+                                                    </button>
+                                                </form>
                                     </td>
                                 </tr>  
                             @endforeach
