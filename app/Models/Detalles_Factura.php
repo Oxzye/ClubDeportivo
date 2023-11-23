@@ -12,6 +12,7 @@ class Detalles_Factura extends Model
 
     protected $table = 'detalles_factura';
     protected $primaryKey = 'id_detallefactura';
+    protected $fillable = ['id_tipodetallefactura','num_fac'];
 
     public function facturas()
     {

@@ -9,13 +9,17 @@
         @if ($resultados->count())
             <div class="col-12">
                 <x-adminlte-alert theme="info" title="Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }}">
-                <div class="col-lg-3 col-12 mb-2">
-                    <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $info) }}">Cobrar Cuota/s</a>
-                </div>
+                    <div class="col-lg-3 col-12 mb-2">
+                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $info) }}">Cobrar Cuota</a>
+                    </div>
                 </x-adminlte-alert>
             </div>
         @endif
-
+        @if (session('status'))
+            <div class="col-12 alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -39,7 +43,7 @@
                                 <tr>
                                     <th scope="col">DNI</th>
                                     <th scope="col" class="text-uppercase">Socio</th>
-                                    <th scope="col" class="text-uppercase">Coutas Pagadas</th>
+                                    <th scope="col" class="text-uppercase bg-success">Coutas Pagadas</th>
                                     <th scope="col" class="text-uppercase">Fecha de Pago</th>
                                 </tr>
                             </thead>
@@ -48,7 +52,7 @@
                                     <tr>
                                         <td>{{ $resultado->dni }}</td>
                                         <td><b>{{ $resultado->name }}</b>{{ ' ' . $resultado->apellido }}</td>
-                                        <td>{{ $resultado->tipodetalle }} <b>{{ ' ' . $resultado->descripcion_tdf }}</b>
+                                        <td><b>{{ ' ' . $resultado->descripcion_tdf }}</b>
                                         </td>
                                         <td>{{ \Carbon\Carbon::parse($resultado->fecha_pago_fac)->format('d/M/Y') }}</td>
                                     </tr>

@@ -97,7 +97,6 @@ class SociosController extends Controller
 
         // Redirige o realiza otras acciones según tus necesidades.
         Mail::to($user->email)->send(new WelcomeMail($user));
-
         //Redir
         return redirect()->route('socios.index')->with('status', 'Socio creado correctamente');
     }
