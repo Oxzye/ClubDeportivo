@@ -6,11 +6,20 @@
 @section('content')
     <div class="container-fluid">
         <h1>Cuotas Sociales</h1>
-        @if ($resultados->count())
+        @if ($resultados->count() > 0)
             <div class="col-12">
                 <x-adminlte-alert theme="info" title="Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }}">
                     <div class="col-lg-3 col-12 mb-2">
-                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $info) }}">Cobrar Cuota</a>
+                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $resultados[0]->dni) }}">Cobrar Cuota</a>
+                    </div>
+                </x-adminlte-alert>
+            </div>
+        @endif
+        @if ($info && count($info) > 0)
+            <div class="col-12">
+                <x-adminlte-alert theme="info" title="Socio: {{ $info[0]->name . ' ' . $info[0]->apellido }}">
+                    <div class="col-lg-3 col-12 mb-2">
+                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $info[0]->dni) }}">Cobrar Cuota</a>
                     </div>
                 </x-adminlte-alert>
             </div>
@@ -20,6 +29,11 @@
                 {{ session('status') }}
             </div>
         @endif
+        @if (session('alert'))
+            <div class="col-12 alert alert-danger">
+                {{ session('alert') }}
+            </div>
+        @endif
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -27,9 +41,9 @@
                         <div class="col-lg-3 col-12 mb-2">
                             <form action="" method="get" class="form-inline">
                                 <div class="form-group">
-                                    <label for="dni" class="sr-only">DNI</label>
+                                    <label for="dni" class="form-control">Ingrese el DNI del socio</label>
                                     <input type="number" class="form-control" id="dni" name="dni"
-                                        placeholder="Ingrese DNI">
+                                        placeholder="Ingrese DNI" maxlength="8">
                                     <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                                 </div>
                             </form>
@@ -37,7 +51,7 @@
                     </div>
 
 
-                    @if ($resultados->count())
+                    @if ($resultados->count() > 0)
                         <table id="tabla-cuotas" class="table table-striped table-hover w-100">
                             <thead>
                                 <tr>
@@ -59,11 +73,10 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    @endif
                 </div>
             </div>
         </div>
-        @endif
-
     </div>
 
 @endsection

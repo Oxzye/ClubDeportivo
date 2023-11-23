@@ -39,7 +39,7 @@ class CuotasController extends Controller
             JOIN tipos_detalle_factura ON detalles_factura.id_tipodetallefactura = tipos_detalle_factura.id_tipodetallefactura
             WHERE users.dni = "43439673";
         */
-        $info = $dni;
+        $info = null;
         if (!$resultados->count()) {
             $info = DB::table('users')
                 ->select('users.dni', 'users.name', 'users.apellido')
@@ -47,7 +47,6 @@ class CuotasController extends Controller
                 ->where('users.dni', '=', $dni)
                 ->get();
         }
-
         return view('panel.cuota_social.index', compact('resultados', 'info'));
     }
 

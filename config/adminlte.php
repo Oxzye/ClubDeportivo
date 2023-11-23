@@ -374,7 +374,16 @@ return [
         [
             'text' => 'Cobro de cuota social',
             'icon' => 'fas fa-receipt',
-            'submenu' => []
+            'submenu' => [
+                [
+                    'text' => 'Cobro de cuota social',
+                    'route' => 'cuota_social.index',
+                    'icon' => 'fas fa-calendar-minus', // icono de fontawesome
+                    'can' => 'admin_vista', // permiso
+                    'active' => ['panel/cuota_social/index'],
+                    'shift' => 'ml-3',
+                ],
+            ]
         ],
     //
 
