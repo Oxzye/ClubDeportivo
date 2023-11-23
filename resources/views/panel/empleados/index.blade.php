@@ -88,13 +88,6 @@
                                         </td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href=""
-                                                    class="btn btn-sm btn-info text-white text-uppercase mx-1">
-                                                    Ver
-                                                </a>
-                                                <a href="{{ route('empleados.edit', $empleado->id_emp) }}"
-                                                    class="btn btn-sm btn-warning text-white text-uppercase mx-1">
-                                                    Editar
                                         <td class="d-flex flex-row-reverse bd-highlight">
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 {{-- <a href=""
@@ -108,19 +101,14 @@
                                                             edit_square
                                                         </span>
                                                 </a>
-                                                <form action="{{ route('empleados.destroy', $empleado->id_emp) }}"
-                                                    method="POST">
+                                               
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase mx-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $empleado->id_emp }}" data-nombre="{{ $empleado->user->name }}">
-                                                        Eliminar
-                                                    </button>    
-                                                    <button type="submit" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                                    <button type="submit" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;"  data-toggle="modal" data-target="#deleteModal" data-id="{{ $empleado->id_emp }}" data-nombre="{{ $empleado->user->name }}">
                                                         <span class="material-symbols-outlined d-flex justify-content-center">
                                                             cancel
                                                         </span>
                                                     </button>
-                                                </form>
                                             </div>
                                         </td>
                                     </tr>
