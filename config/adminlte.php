@@ -391,7 +391,16 @@ return [
         [
             'text' => 'Cobro de Act. particular',
             'icon' => 'fas fa-futbol',
-            'submenu' => []
+            'submenu' => [
+                [
+                    'text' => 'Cobro de actividad particular',
+                    'route' => 'insc_act_part.index',
+                    'icon' => 'fas fa-futbol', // icono de fontawesome
+                    'can' => 'admin_vista', // permiso
+                    'active' => ['panel/insc_act_part/index'],
+                    'shift' => 'ml-3',
+                ],
+            ]
         ],
     //
         [

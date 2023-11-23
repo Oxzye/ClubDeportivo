@@ -32,7 +32,7 @@ class CobroActPartController extends Controller
             ->join('socios', 'users.id', '=', 'socios.id_user')
             ->join('sociosxactividades', 'socios.id_soc', '=', 'sociosxactividades.id_soc')
             ->join('actividades', 'sociosxactividades.id_act', '=', 'actividades.id_act')
-            ->where('users.dni', '=', '43439673')
+            ->where('users.dni', '=', $dni)
             ->get();
 
         $info = null;
@@ -111,7 +111,33 @@ class CobroActPartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fecha_hoy = Carbon::now();
+
+        $factura = new Facturacion([
+            'dni_soc' => $request->input('id_soc'),
+            'id_caja' => $request->input('id_caja'),
+            'tipo_fac' => $request->input('tipo_fac'),
+            'id_fdp' => $request->input('id_fdp'),
+            'fecha_fac' => $fecha_hoy,
+            'monto_fac' => $request->input('montoFinal'),
+            'fecha_pago_fac' => $fecha_hoy,
+            'pagada_fac' => $request->input('pagada_fac'),
+        ]);
+
+
+        $cajas = Cajas::findOrFail($request->get('id_caja'));
+        $cajas->total_ventas_caja += 1; // Incrementar la cantidad de ventas
+        $cajas->monto_final += $request->input('montoFinal'); // Incrementar el monto recaudado
+        $cajas->save();
+        $factura->save();
+
+        $num_factura = $factura->num_fac;
+        Detalles_Factura::create([
+            'id_act' => $request->input('id_act'),
+            'num_fac' => $num_factura,
+        ]);
+
+        return redirect()->route('insc_act_part.index')->with('status', 'Actividad cobrada correctamente');
     }
 
     /**

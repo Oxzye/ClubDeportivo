@@ -19,7 +19,7 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Actividad a cobrar</label>
-                        <select id="cuota" name="cuota" class="form-control">
+                        <select id="id_act" name="id_act" class="form-control">
                             <option value="" selected>Seleccione una...</option>
                             @foreach ($actividadesNoPagadas as $act)
                                 <option value="{{ $act->id_act }}" class="">
@@ -63,7 +63,7 @@
                             step="0.01">
                     </div>
                     <input type="submit" value="Guardar pago" class="btn btn-success">
-                    <a href="{{ route('cuota_social.index') }}" class="btn btn-danger">Cancelar</a>
+                    <a href="{{ route('insc_act_part.index') }}" class="btn btn-danger">Cancelar</a>
                 </form>
 
             </div>
@@ -74,13 +74,13 @@
     <script>
         $(document).ready(function() {
             // Manejar el cambio en la selección de la cuota
-            $('#cuota').change(function() {
+            $('#id_act').change(function() {
                 // Obtener el precio de la cuota seleccionada
-                var precioCuota = parseFloat($(this).find(':selected').text().match(
-                    /Precio Cuota: \$([\d.]+)/)[1]);
+                var precioAct = parseFloat($(this).find(':selected').text().match(
+                    /Precio Act: \$([\d.]+)/)[1]);
 
                 // Establecer el valor del input "montoFinal" como número
-                $('#montoFinal').val(precioCuota.toFixed(2));
+                $('#montoFinal').val(precioAct.toFixed(2));
             });
         });
     </script>
