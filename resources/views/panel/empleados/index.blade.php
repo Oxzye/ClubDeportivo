@@ -4,6 +4,9 @@
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
 
+{{-- Agregar este link para ver los iconos de opciones --}}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 {{-- Titulo en las tabulaciones del Navegador --}}
 @section('title', 'Empleados')
 
@@ -35,17 +38,21 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <div class="col-lg-1 mb-3">
+                        <div class="col-12 mb-3">
                             <a href="{{ route('empleados.create') }}" class="btn btn-success">
                                 Agregar
                             </a>
-                        </div>
-                        <div class="col-lg-3 mb-3">
-                            <a href="{{ route('empleados.dadosdebaja') }}" class="btn btn-danger">
+                            <a href="{{ route('exportar-empleados-excel') }}" class="btn btn-warning mx-3" title="PDF" target="_blank">
+                                <i class="fas fa-file-excel"></i> Excel
+                            </a>
+                            <a href="{{ route('exportar-empleados-pdf') }}" class="btn btn-warning mx-1" title="PDF" target="_blank">
+                                <i class="fas fa-file-pdf"></i> PDF
+                            </a>
+                            <a href="{{ route('empleados.dadosdebaja') }}" class="btn btn-danger mx-3">
                                 Recuperar Empleado
                             </a>
                         </div>
-                        <table id="tabla-productos" class="table table-striped table-hover w-100">
+                        <table id="tabla-empleados" class="table table-striped table-hover w-100">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -59,7 +66,7 @@
                                     <!--<th scope="col" class="text-uppercase">Domicilio</th>-->
                                     <!--<th scope="col" class="text-uppercase">Telefono</th>-->
                                     <th scope="col" class="text-uppercase">Foto</th>
-                                    <th scope="col" class="text-uppercase">Opciones</th>
+                                    <th class="d-flex flex-row-reverse bd-highlight px-5">Opciones </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,22 +86,27 @@
                                             <img src="" alt="imagen empleado" class="img-fluid"
                                                 style="width: 150px;">
                                         </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href=""
-                                                    class="btn btn-sm btn-info text-white text-uppercase me-1">
-                                                    Ver
-                                                </a>
-                                                <a href="{{ route('empleados.edit', $empleado->id_emp) }}"
-                                                    class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                                    Editar
+                                        <td class="d-flex flex-row-reverse bd-highlight">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                {{-- <a href=""
+                                                   class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                                    <span class="material-symbols-outlined d-flex justify-content-center">
+                                                    info
+                                                    </span>
+                                                </a> --}}
+                                                <a href="{{ route('empleados.edit', $empleado->id_emp) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                                        <span class="material-symbols-outlined d-flex justify-content-center">
+                                                            edit_square
+                                                        </span>
                                                 </a>
                                                 <form action="{{ route('empleados.destroy', $empleado->id_emp) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger text-uppercase">
-                                                        Eliminar
+                                                    <button type="submit" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                                        <span class="material-symbols-outlined d-flex justify-content-center">
+                                                            cancel
+                                                        </span>
                                                     </button>
                                                 </form>
                                             </div>
