@@ -68,11 +68,42 @@ class User extends Authenticatable
 
     public function socio()
     {
-        return $this->hasOne(Socio::class)->withTrashed();
+        return $this->hasOne(Socio::class, 'id_user')->withTrashed();
     }
 
     public function genero()
     {
         return $this->belongsTo(generos::class, 'cod_genero');
     }
+
+    public function scopeCuotasPagadas($query, $dni)
+    {
+        return $query->select(
+            'users.dni',
+            'users.name',
+            'users.apellido',
+            'tipos_detalle_factura.tipodetalle',
+            'tipos_detalle_factura.descripcion_tdf',
+            'facturas.fecha_pago_fac'
+        )
+            ->join('socios', 'users.id', '=', 'socios.id_user')
+            ->join('facturas', 'socios.id_soc', '=', 'facturas.dni_soc')
+            ->join('detalles_factura', 'facturas.num_fac', '=', 'detalles_factura.num_fac')
+            ->join('tipos_detalle_factura', 'detalles_factura.id_tipodetallefactura', '=', 'tipos_detalle_factura.id_tipodetallefactura')
+            ->where('users.dni', $dni)
+            ->where('tipos_detalle_factura.tipodetalle', 'Cuota Social'); // No es necesario el '=' en este contexto
+    }
+
+    public function scopeMesesPagados ($query, $dni){
+        return $query->select(
+            'tipos_detalle_factura.descripcion_tdf'
+        )
+            ->join('socios', 'users.id', '=', 'socios.id_user')
+            ->join('facturas', 'socios.id_soc', '=', 'facturas.dni_soc')
+            ->join('detalles_factura', 'facturas.num_fac', '=', 'detalles_factura.num_fac')
+            ->join('tipos_detalle_factura', 'detalles_factura.id_tipodetallefactura', '=', 'tipos_detalle_factura.id_tipodetallefactura')
+            ->where('users.dni', $dni)
+            ->where('tipos_detalle_factura.tipodetalle', 'Cuota Social');
+    }
+
 }

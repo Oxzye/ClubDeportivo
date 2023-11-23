@@ -12,6 +12,7 @@ class Detalles_Factura extends Model
 
     protected $table = 'detalles_factura';
     protected $primaryKey = 'id_detallefactura';
+    protected $fillable = ['id_tipodetallefactura','num_fac'];
 
     public function facturas()
     {
@@ -20,5 +21,9 @@ class Detalles_Factura extends Model
     public function actividad(): BelongsTo
     {
         return $this->belongsTo(Actividad::class, 'id_act');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

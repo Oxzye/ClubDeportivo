@@ -105,7 +105,6 @@ class SociosController extends Controller
 
         // Redirige o realiza otras acciones según tus necesidades.
         Mail::to($user->email)->send(new WelcomeMail($user));
-
         //Redir
         return redirect()->route('socios.index')->with('status', 'Socio creado correctamente');
     }
@@ -195,7 +194,7 @@ class SociosController extends Controller
         $socio->user->delete();
 
         // Redirige a la vista de empleados o cualquier otra ruta que desees
-        return redirect()->route('socios.index')->with('status', 'Empleado eliminado correctamente');
+        return redirect()->route('socios.index')->with('status', 'Socio eliminado correctamente');
     }
 
     public function dadosdebaja()
