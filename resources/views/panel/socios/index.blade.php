@@ -128,18 +128,17 @@
                                                         </a>
                                                     @endcan
                                                     @can('eliminar_socio')
-                                                        <form action="{{ route('socios.destroy', $socio->id_soc) }}"
-                                                            method="post">
+                                                       
                                                             @csrf @method('DELETE')
                                                             <button type="submit"
                                                                 class="btn btn-outline-dark rounded-circle mx-2"
-                                                                style="width:2.5em; height:2.5em;">
+                                                                style="width:2.5em; height:2.5em;" data-toggle="modal" data-target="#deleteModal" data-id="{{ $socio->id_soc }}" data-nombre="{{ $socio->user->name }}" >
                                                                 <span
                                                                     class="material-symbols-outlined d-flex justify-content-center">
                                                                     cancel
                                                                 </span>
                                                             </button>
-                                                        </form>
+                                                       
                                                     @endcan
                                                 </div>
                                             </td>
@@ -156,6 +155,34 @@
                 </div>
             @endif
         </div>
+          {{-- Modal de eliminacion --}}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirmar eliminación</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="formDelete" method="POST" action="#">
+            <div class="modal-body">
+                @csrf 
+                @method('DELETE')
+                <p id="message"></p>   
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger text-uppercase">
+                    Eliminar
+                </button>
+                <button type="button" class="btn btn-secondary text-uppercase" data-dismiss="modal">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
     </div>
 @stop
 
@@ -171,4 +198,21 @@
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
     <script src="{{ asset('js/socios.js') }}"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                const button = $(event.relatedTarget) // Button that triggered the modal
+                const id_soc = button.data('id') // Extract info from data-* attributes
+                const nombre_soc = button.data('nombre') // Extract info from data-* attributes
+                
+                const modal = $(this)
+                const form = $('#formDelete')
+                form.attr('action', `{{ env('APP_URL') }}/panel/socios/${id_soc}`);
+                modal.find('.modal-body #message').text(`¿Estás seguro de eliminar el cargo "${nombre_soc}"?`)
+            })
+        });
+    </script>
 @stop

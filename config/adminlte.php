@@ -561,7 +561,7 @@ return [
                     'text' => 'Lista de Clientes',
                     'route' => 'clientes.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_user', // permiso de admin
+                    //'can' => 'listado_user', // permiso de admin
                     'active' => ['panel/clientes*'],
                     'shift' => 'ml-3',
                 ],

@@ -40,7 +40,7 @@
                                 <tr class="">
                                     <td>{{ $fact->num_fac }}</td>
                                     <td>{{ $fact->id_caja }}</td>
-                                    <td>{{ $fact->id_fdp }}</td>
+                                    <td>{{ $fact->Formas_pago->forma_pago_fdp }}</td>
                                     <td>{{ $fact->tipo_fac }}</td>
                                     <td>{{ $fact->dni_soc }}</td>
                                     <td>{{ $fact->dni_cli }}</td>

@@ -82,20 +82,20 @@
                                         <td>
                                             <div class="d-flex">
                                                 <a href=""
-                                                    class="btn btn-sm btn-info text-white text-uppercase me-1">
+                                                    class="btn btn-sm btn-info text-white text-uppercase mx-1">
                                                     Ver
                                                 </a>
                                                 <a href="{{ route('empleados.edit', $empleado->id_emp) }}"
-                                                    class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                                    class="btn btn-sm btn-warning text-white text-uppercase mx-1">
                                                     Editar
                                                 </a>
                                                 <form action="{{ route('empleados.destroy', $empleado->id_emp) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger text-uppercase">
+                                                    <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase mx-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $empleado->id_emp }}" data-nombre="{{ $empleado->user->name }}">
                                                         Eliminar
-                                                    </button>
+                                                    </button>    
                                                 </form>
                                             </div>
                                         </td>
@@ -105,6 +105,34 @@
                         </table>
                     </div>
                 </div>
+                 {{-- Modal de eliminacion --}}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Confirmar eliminación</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="formDelete" method="POST" action="#">
+            <div class="modal-body">
+                @csrf 
+                @method('DELETE')
+                <p id="message"></p>   
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger text-uppercase">
+                    Eliminar
+                </button>
+                <button type="button" class="btn btn-secondary text-uppercase" data-dismiss="modal">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>
             </div>
         </div>
     @stop
@@ -118,7 +146,23 @@
 
     {{-- Importacion de Archivos JS --}}
     @section('js')
-
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
         {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
         <script src="{{ asset('js/socios.js') }}"></script>
+        <script>
+            $(document).ready(function(){
+    
+                $('#deleteModal').on('show.bs.modal', function (event) {
+                    const button = $(event.relatedTarget) // Button that triggered the modal
+                    const id_emp = button.data('id') // Extract info from data-* attributes
+                    const nombre_emp = button.data('nombre') // Extract info from data-* attributes
+                    
+                    const modal = $(this)
+                    const form = $('#formDelete')
+                    form.attr('action', `{{ env('APP_URL') }}/panel/empleados/${id_emp}`);
+                    modal.find('.modal-body #message').text(`¿Estás seguro de eliminar el cargo "${nombre_emp}"?`)
+                })
+            });
+        </script>
     @stop
