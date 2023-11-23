@@ -26,12 +26,24 @@ use App\Http\Controllers\DetallesFacturaController;
 use App\Http\Controllers\CuotasController;
 
 use App\Models\Cajas;
+use App\Models\Deporte;
+use App\Models\Empleado;
+use App\Models\Instalacion;
+use App\Models\Socio;
+use Psy\VersionUpdater\Installer;
 
 Route::get('/', function () {
         $cajasAbiertas = Cajas::where('estado_caja', 1)->count();
         $saldo_cajas = Cajas::where('estado_caja', 1)->sum('saldo_caja');
         
-        return view('panel.index', compact('cajasAbiertas', 'saldo_cajas'));
+        $deport = Deporte::all()->count();
+        $instalation = Instalacion::all()->count();
+
+        $sociosAct = Socio::all()->count();
+
+        $empleadosAct = Empleado::all()->count();
+
+        return view('panel.index', compact('cajasAbiertas', 'saldo_cajas', 'deport', 'instalation', 'sociosAct', 'empleadosAct'));
 });
 
 
@@ -39,11 +51,15 @@ Route::get('/socios/dadosdebaja', [SociosController::class, 'dadosdebaja'])->nam
 Route::get('/socios/restore/{id}', [SociosController::class, 'restore'])->name('socios.restore');
 Route::get('/socios/resetPassword', [SociosController::class, 'resetPassword'])->name('socios.resetPassword');
 Route::resource('/socios', SociosController::class)->names('socios');
+Route::get('/exportar-socios-pdf', [SociosController::class, 'exportarSociosPDF'])->name('exportar-socios-pdf');
+Route::get('/exportar-socios-excel', [SociosController::class, 'exportarSociosExcel'])->name('exportar-socios-excel');
+Route::get('/exportar-sociosBaja-excel', [SociosController::class, 'exportarSociosBajaExcel'])->name('exportar-sociosBaja-excel');
 
 Route::get('/empleados/dadosdebaja', [EmpleadosController::class, 'dadosdebaja'])->name('empleados.dadosdebaja');
 Route::get('/empleados/restore/{id}', [EmpleadosController::class, 'restore'])->name('empleados.restore');
 Route::resource('/empleados', EmpleadosController::class)->names('empleados');
-
+Route::get('/exportar-empleados-pdf', [EmpleadosController::class, 'exportarEmpleadosPDF'])->name('exportar-empleados-pdf');
+Route::get('/exportar-empleados-excel', [EmpleadosController::class, 'exportarEmpleadosExcel'])->name('exportar-empleados-excel');
 
 Route::resource('/instalaciones', InstalacionesController::class)->names('instalaciones');
 
