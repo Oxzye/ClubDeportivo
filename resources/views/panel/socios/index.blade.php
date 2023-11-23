@@ -40,13 +40,17 @@
                                     </div>
                                 @endif
                                 @can('crear_socio')
-                                    <div class="col-lg-1 mb-3">
+                                    <div class="col-12 mb-3">
                                         <a href="{{ route('socios.create') }}" class="btn btn-success">
                                             Agregar
                                         </a>
-                                    </div>
-                                    <div class="col-lg-2 mb-3">
-                                        <a href="{{ route('socios.dadosdebaja') }}" class="btn btn-danger">
+                                        <a href="{{ route('exportar-socios-excel') }}" class="btn btn-warning mx-3" title="Excel" target="_blank">
+                                            <i class="fas fa-file-excel"></i> Excel
+                                        </a>
+                                        <a href="{{ route('exportar-socios-pdf') }}" class="btn btn-warning mx-1" title="PDF" target="_blank">
+                                            <i class="fas fa-file-pdf"></i> PDF
+                                        </a>
+                                        <a href="{{ route('socios.dadosdebaja') }}" class="btn btn-danger mx-3">
                                             Recuperar Socio
                                         </a>
                                     </div>
@@ -82,7 +86,7 @@
                                         <th scope="col" class="text-uppercase">Observaciones</th> --}}
                                         <th scope="col" class="text-uppercase">Foto</th>
                                         <th scope="col" class="text-uppercase">Estado</th>
-                                        <th scope="col" class="text-uppercase">Opciones</th>
+                                        <th class="d-flex flex-row-reverse bd-highlight px-5">Opciones  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,8 +111,8 @@
                                                 <div class="d-none">{{ $socio->enabled }}</div>
                                                 {{ $socio->getStatusText() }}
                                             </td>
-                                            <td>
-                                                <div class="btn-group" role="group">
+                                            <td class="d-flex flex-row-reverse bd-highlight">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
                                                     <button href="" class="btn btn-outline-dark rounded-circle mx-2" data-toggle="modal" data-target="#exampleModal"
                                                         style="width:2.5em; height:2.5em;">
                                                         <span

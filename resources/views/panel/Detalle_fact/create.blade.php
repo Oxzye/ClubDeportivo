@@ -34,12 +34,11 @@
                         <option value="0">-nada-</option>
                         @foreach ($tipodetfact as $tdf)
                             <option value="{{ $tdf->id_tipodetallefactura }}" data-precio="{{ $tdf->precio_tdf }}">
-                                {{ $tdf->tipodetalle }}
+                                {{ $tdf->tipodetalle .' |'.$tdf->descripcion_tdf.'| $'.$tdf->precio_tdf }}
                             </option>
                         @endforeach
                     </select>
 
-                    <label for="" class="form-label">Precio</label>
                     <input type="text" name="detalles[0][precio]" value='0' readonly>
                 </div>
             </div>

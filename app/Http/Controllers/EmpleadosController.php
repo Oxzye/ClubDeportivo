@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use App\Models\Paises;
 use Illuminate\Support\Facades\Hash;
-
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\EmpleadosExportExcel;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EmpleadosController extends Controller
@@ -54,6 +56,31 @@ class EmpleadosController extends Controller
             'cod_genero' => 'required|integer',
             'email' =>      'required|string|unique:users|max:255|email',
             'fecha_alta_emp' => 'required|date|after:fecha_nac',
+        ],[
+            'cuit_emp.required' => 'El CUIT es requerido,
+            por favor ingrese el CUIT del empleado',
+            'cuit_emp.integer' => 'El CUIT debe ser un número,
+            por favor ingrese el CUIT del empleado',
+            'cuit_emp.unique' => 'El CUIT ya existe,
+            por favor ingrese un CUIT distinto',
+            'cuit_emp.min' => 'El CUIT debe ser de minimo 1000000000,
+            por favor ingrese un CUIT valido',
+            'cuit_emp.max' => 'El CUIT debe ser de maximo 9999999999,
+            por favor ingrese un CUIT valido',
+            'name.required' => 'El nombre es requerido',
+            'apellido.required' => 'El apellido es requerido',
+            'dni.required' => 'El DNI es requerido,
+            por favor ingrese el DNI del empleado',
+            'dni.integer' => 'El DNI debe ser un número,
+            por favor ingrese el DNI del empleado',
+            'fecha_nac.required' => 'Ingrese una fecha es requerido',
+            'fecha_nac.date' => 'Ingrese una fecha valida',
+            'domicilio.required' => 'El domicilio es requerido',
+            'telefono.required' => 'El telefono es requerido',
+            'cod_genero.required' => 'El cod_genero es requerido',
+            'email.required' => 'El cod_genero es requerido',
+            'fecha_alta_emp.required' => 'Ingrese una fecha es requerido',
+            'fecha_alta_emp.date' => 'Ingrese una fecha valida',
         ]);
         //Contraseña aleatoria
         $password = $request->input('dni') - 11111111;
@@ -198,5 +225,25 @@ class EmpleadosController extends Controller
 
 
         return redirect()->route('empleados.dadosdebaja')->with('status', 'Empleado: ' . $datos->name . " " . $datos->apellido  . ' recuperado exitosamente');
+    }
+
+    public function exportarEmpleadosPDF() {
+        set_time_limit(6000);
+        // $admin_id = auth()->user()->id;
+            // Traemos las actividades con relaciones a instalaciones y deportes
+        // $actividades = Actividad::with('instalacion', 'deporte')
+        //     ->where('id_act',auth()->user()->id)->get();
+
+            $empleados = Empleado::all();
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = Pdf::loadView('panel.empleados.pdf_empleados', compact('empleados'));
+        //Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('socios.pdf');
+        }
+
+    public function exportarEmpleadosExcel() {
+        return Excel::download(new EmpleadosExportExcel, 'empelados.xlsx');
     }
 }

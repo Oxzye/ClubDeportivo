@@ -23,6 +23,8 @@ use App\Http\Controllers\SociosxActividadesController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturacionController;
 use App\Http\Controllers\DetallesFacturaController;
+use App\Http\Controllers\CuotasController;
+use App\Http\Controllers\CobroActPartController;
 
 use App\Models\Cajas;
 use App\Models\Deporte;
@@ -50,11 +52,15 @@ Route::get('/socios/dadosdebaja', [SociosController::class, 'dadosdebaja'])->nam
 Route::get('/socios/restore/{id}', [SociosController::class, 'restore'])->name('socios.restore');
 Route::get('/socios/resetPassword', [SociosController::class, 'resetPassword'])->name('socios.resetPassword');
 Route::resource('/socios', SociosController::class)->names('socios');
+Route::get('/exportar-socios-pdf', [SociosController::class, 'exportarSociosPDF'])->name('exportar-socios-pdf');
+Route::get('/exportar-socios-excel', [SociosController::class, 'exportarSociosExcel'])->name('exportar-socios-excel');
+Route::get('/exportar-sociosBaja-excel', [SociosController::class, 'exportarSociosBajaExcel'])->name('exportar-sociosBaja-excel');
 
 Route::get('/empleados/dadosdebaja', [EmpleadosController::class, 'dadosdebaja'])->name('empleados.dadosdebaja');
 Route::get('/empleados/restore/{id}', [EmpleadosController::class, 'restore'])->name('empleados.restore');
 Route::resource('/empleados', EmpleadosController::class)->names('empleados');
-
+Route::get('/exportar-empleados-pdf', [EmpleadosController::class, 'exportarEmpleadosPDF'])->name('exportar-empleados-pdf');
+Route::get('/exportar-empleados-excel', [EmpleadosController::class, 'exportarEmpleadosExcel'])->name('exportar-empleados-excel');
 
 Route::resource('/instalaciones', InstalacionesController::class)->names('instalaciones');
 
@@ -107,4 +113,11 @@ Route::put('/products/{id}/update-payment-status', 'ProductController@updatePaym
 
 Route::resource('/Detalle_fact', DetallesFacturaController::class)->names('Detalle_fact');
 Route::post('/guardar-detalles', 'DetallesFacturaController@guardarDetalles')->name('guardar-detalles');
+
+
+Route::get('/cuota_social/{dni}/cobrar', [CuotasController::class, 'cobrar'])->name('cuota_social.cobrar');
+Route::resource("/cuota_social", CuotasController::class)->names('cuota_social');
+
+Route::get('/insc_act_part/{dni}/cobrar', [CobroActPartController::class, 'cobrar'])->name('insc_act_part.cobrar');
+Route::resource("/insc_act_part", CobroActPartController::class)->names('insc_act_part');
 
