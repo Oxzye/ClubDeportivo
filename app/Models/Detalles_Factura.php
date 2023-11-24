@@ -18,7 +18,7 @@ class Detalles_Factura extends Model
     {
         return $this->belongsTo(Facturacion::class, 'num_fac');
     }
-    public function actividad(): BelongsTo
+    public function actividad()
     {
         return $this->belongsTo(Actividad::class, 'id_act');
     }

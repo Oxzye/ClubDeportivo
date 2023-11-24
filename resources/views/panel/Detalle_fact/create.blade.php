@@ -55,9 +55,60 @@
         </form>
         
     </div>
-@endsection
 
+    <!-- ... Código existente ... -->
+ <br><br>
+    <div class="table-responsive">
+        @if(count($detallesf) > 0)
+        <h2>Detalles de la Factura</h2>
+        <table class="table table-primary" id="detalles-factura-table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Actividad</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Eliminar</th>
+                    <!-- Agrega más columnas según tus detalles de factura -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($detallesf as $detf)
+                <tr>
+                    @if ($detf->id_act != null)
+                    <td>{{ $detf ->id_detallefactura }}</td>
+                    <td>{{ $detf->actividad ? $detf->actividad->nombre_act : '-no asignado-'  }}</td>
+                    <td>{{ $detf->tipodetfact->tipodetalle }}</td>
+                    <td>{{ $detf->tipodetfact->precio_tdf }}</td>
+                    @else 
+                    <td>{{ $detf ->id_detallefactura }}</td>
+                    <td>{{ '-sin asignar-' }}</td>
+                    <td>{{ $detf->tipodetfact->tipodetalle }}</td>
+                    <td>{{ $detf->tipodetfact->precio_tdf }}</td>
+                    @endif
+                    <td>
+                        <form action="{{ route('Detalle_fact.destroy', $detf->id_detallefactura) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger text-uppercase">
+                                        Eliminar
+                                    </button>
+                                </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @else
+        <p>No hay detalles de factura cargados aun.</p>
+    @endif
+    </div>
+
+    
+@endsection
 @push('js')
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script><script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {
             var numDetalles = 1;
@@ -94,6 +145,11 @@
                 $("#detalles-container").append(nuevoDetalle);
                 numDetalles++;
             });
+
+            
+            // Cargar detalles de la factura al cargar la página
+            
         });
+            
     </script>
 @endpush

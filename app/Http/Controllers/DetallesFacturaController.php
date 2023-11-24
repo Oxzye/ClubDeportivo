@@ -30,7 +30,11 @@ class DetallesFacturaController extends Controller
         $factura = Facturacion::latest('id_caja')->first();
         $facturacion = $factura->num_fac;
         $detalles = [];
-        return view('panel.Detalle_fact.create', compact('detallefact', 'tipodetfact', 'actividad', 'facturacion','detalles'));
+        
+        $detallesf= Detalles_Factura::with(['tipodetfact','actividad'])
+        ->where('num_fac', $facturacion)->get();
+        // dd($detallesf);
+        return view('panel.Detalle_fact.create', compact('detallefact', 'tipodetfact', 'actividad', 'facturacion','detalles', 'detallesf'));
     }
 
     /**
@@ -109,9 +113,15 @@ class DetallesFacturaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $Detalle_fact =Detalles_Factura::findOrFail($id);
+
+        //elminacion
+        $Detalle_fact->delete();
+
+        
+        return redirect()->route('Detalle_fact.create')->with('status', 'Item eliminado correctamente');
     }
 
     public function finalizarfact($num_fac)
