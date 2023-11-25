@@ -42,8 +42,32 @@
                                     <td>{{ $fact->id_caja }}</td>
                                     <td>{{ $fact->id_fdp }}</td>
                                     <td>{{ $fact->tipo_fac }}</td>
-                                    <td>{{ $fact->dni_soc }}</td>
-                                    <td>{{ $fact->dni_cli }}</td>
+                                    {{-- <td>{{ $fact->dnisocio->user->dni }}</td> --}}
+                                    @if ($fact->dnisocio)
+                                    @if ($fact->dnisocio->user)
+                                        <td>
+                                            {{ $fact->dnisocio->user->dni }}
+                                        </td>
+                                    @else
+                                        <td> Usuario no encontrado para este socio.</td>
+                                    @endif
+                                    @else
+                                        <td>Socio no encontrado para esta factura.</td>
+                                    @endif
+
+                                    {{-- <td>{{ $fact->dni_cli }}</td> --}}
+                                    @if ($fact->client)
+                                    @if ($fact->client->user)
+                                        <td>
+                                            {{ $fact->client->user->dni }}
+                                        </td>
+                                    @else
+                                        <td> Usuario no encontrado para este cliente.</td>
+                                    @endif
+                                    @else
+                                        <td>Cliente no encontrado para esta factura.</td>
+                                    @endif
+
                                     <td>{{ $fact->monto_fac }}</td>
                                     <td>{{ $fact->pagada_fac }}</td>
                                     <td>
