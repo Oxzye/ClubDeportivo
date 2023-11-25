@@ -131,17 +131,6 @@
                                 </select>
                             </div>
                         
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Localidad</label>
-                                <select class="form-control" id="localidad" name="localidad" >
-                                <option selected>Seleccionar</option>
-                                @foreach ($localidades as $loc)
-                                <option value="{{ $loc->id_loc }}"> 
-                                    {{ $loc->nombre_loc }}
-                                </option>
-                            @endforeach
-                                </select>
-                            </div>
                         </div>
                     </div>
                 </div>
