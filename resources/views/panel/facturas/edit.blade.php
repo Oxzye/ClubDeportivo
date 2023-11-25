@@ -50,7 +50,7 @@
                     <option value=" ">--Seleccionar--</option>
                     @foreach ($clientes as $cli)
                         <option value="{{ $cli->id_cli }}"> 
-                            {{ $cli->user->dni }}, {{ $cli->user->name }}
+                            {{ $cli->dni_cli }}, {{ $cli->nombre_cli }}
                         </option>
                     @endforeach
                 </select>
