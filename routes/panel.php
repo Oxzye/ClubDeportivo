@@ -101,10 +101,12 @@ Route::get('/exportar-diasxact-excel', [DiasxActController::class, 'exportarDias
 Route::resource('/SocxAct', SociosxActividadesController::class)->names('SocxAct');
 Route::get('/exportar-socxact-excel', [SociosxActividadesController::class, 'exportarSocxActExcel'])->name('exportar-socxact-excel');
 Route::get('graficos-socxact',[SociosxActividadesController::class,'graficosSocxAct'])->name('graficos-socxact');
+Route::get('/exportar-socxact-pdf', [SociosxActividadesController::class, 'exportarSocxActPDF'])->name('exportar-socxact-pdf');
 
 Route::resource('/EmpxAct', EmpleadosxActividadesController::class)->names('EmpxAct');
 Route::get('graficos-empxact',[EmpleadosxActividadesController::class,'graficosEmpxAct'])->name('graficos-empxact');
 Route::get('/exportar-empxact-excel', [EmpleadosxActividadesController::class, 'exportarEmpxactExcel'])->name('exportar-empxact-excel');
+Route::get('/exportar-empxact-pdf', [EmpleadosxActividadesController::class, 'exportarEmpxActPDF'])->name('exportar-empxact-pdf');
 
 Route::resource('/clientes', ClientesController::class)->names('clientes');
 
@@ -112,7 +114,8 @@ Route::resource('/facturas', FacturacionController::class)->names('facturas');
 Route::put('/products/{id}/update-payment-status', 'ProductController@updatePaymentStatus');
 
 Route::resource('/Detalle_fact', DetallesFacturaController::class)->names('Detalle_fact');
-Route::post('/guardar-detalles', 'DetallesFacturaController@guardarDetalles')->name('guardar-detalles');
+// Route::get('/create', [DetallesFacturaController::class, 'create'])->name('Detalle_fact.create');
+Route::get('/finalizar-factura/{num_fac}', [DetallesFacturaController::class, 'finalizarfact'])->name('Detalle_fact.fin_factura');
 
 
 Route::get('/cuota_social/{dni}/cobrar', [CuotasController::class, 'cobrar'])->name('cuota_social.cobrar');

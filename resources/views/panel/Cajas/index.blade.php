@@ -45,9 +45,10 @@
                                 <label for="Monto_final" >Monto final:</label>
                                 <input type="number" name="monto_final" id="" class="form-control" value="{{ $caja->monto_final }}" readonly>
                             </div>
-                            
-                            <input type="" name="total_ventas_caja" id="" value="{{ $caja->total_ventas_caja }}" hidden>
-                            
+                            <div class="form-group">
+                                <label for="total_ventas_caja">Total de ventas:</label>
+                                <input type="number" name="total_ventas_caja" id="" class="form-control" value="{{ $caja->total_ventas_caja }}" readonly>
+                            </div>
                             <input type="text" name="estado_caja" id="" class="form-control" placeholder="" aria-describedby="helpId" value="0" hidden>
                             <input type="text" class="" name="saldo_caja" id="" aria-describedby="helpId" value="{{ $caja->saldo_caja }}" hidden>
                             <input type="text" class="" name="id_emp" id="" aria-describedby="helpId" value="{{ $caja->id_emp }}" hidden>

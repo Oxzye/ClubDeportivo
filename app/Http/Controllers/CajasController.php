@@ -32,6 +32,7 @@ class CajasController extends Controller
         //Guardado de los datos
         $cajas->monto_inicial_caja = $request->get('monto_inicial_caja');
         $cajas->saldo_caja = $request->get('saldo_caja');
+        // $cajas->id_emp = auth()->user()->id; sirve pero por las conexiones debe estar el id en empleados
         $cajas->id_emp = $request->get('id_emp');
         $cajas->total_ventas_caja = $request->get('total_ventas_caja');
         $cajas->estado_caja = $request->get('estado_caja');

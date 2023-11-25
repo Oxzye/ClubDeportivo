@@ -22,15 +22,15 @@ class Facturacion extends Model
     {
         return $this->belongsTo(Formas_pago::class, 'id_fdp');
     }
-    public function tipo_fac()
+    public function Tipo_fac()
     {
-        return $this->belongsTo(Tipo_factura::class, 'id_tipo_fac');
+        return $this->belongsTo(Tipo_factura::class, 'tipo_fac');
     }
     public function dnisocio()
     {
-        return $this->belongsTo(Socio::class, 'dni_socio');
+        return $this->belongsTo(Socio::class, 'dni_soc');
     }
-    public function dni_cli()
+    public function client()
     {
         return $this->belongsTo(clientes::class, 'dni_cli');
     }

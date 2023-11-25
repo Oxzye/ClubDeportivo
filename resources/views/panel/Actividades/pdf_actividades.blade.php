@@ -19,6 +19,7 @@
                 <th class="text-center">nombre_act</th>
                 <th class="text-center">limite_soc_atc</th>
                 <th class="text-center">descripcion_act</th>
+                <th class="text-center">precio_act</th>
                 <th class="text-center">actividad_en_curso</th>
                 <th class="text-center">fecha_inicio_act</th>
                 <th class="text-center">fecha_fin_act</th>
@@ -33,6 +34,7 @@
                     <td class="text-center">{{ $act->nombre_act }}</td>
                     <td class="text-center">{{ $act->limite_soc_atc }}</td>
                     <td class="text-center">{{ $act->descripcion_act }}</td>
+                    <td class="text-center">{{ $act->precio_act }}</td>
                     <td class="text-center">{{ $act->actividad_en_curso }}</td>
                     <td class="text-center">{{ $act->fecha_inicio_act }}</td>
                     <td class="text-center">{{ $act->fecha_fin_act }}</td>

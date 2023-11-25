@@ -55,10 +55,48 @@
                                     <td>{{ $fact->id_caja }}</td>
                                     <td>{{ $fact->Formas_pago->forma_pago_fdp }}</td>
                                     <td>{{ $fact->tipo_fac }}</td>
-                                    <td>{{ $fact->dni_soc }}</td>
-                                    <td>{{ $fact->dni_cli }}</td>
+                                    {{-- <td>{{ $fact->dnisocio->user->dni }}</td> --}}
+                                    @if ($fact->dnisocio)
+                                    @if ($fact->dnisocio->user)
+                                        <td>
+                                            {{ $fact->dnisocio->user->dni }}
+                                        </td>
+                                    @else
+                                        <td> Usuario no encontrado para este socio.</td>
+                                    @endif
+                                    @else
+                                        <td>Socio no encontrado para esta factura.</td>
+                                    @endif
+
+                                    {{-- <td>{{ $fact->dni_cli }}</td> --}}
+                                    @if ($fact->client)
+                                    @if ($fact->client->user)
+                                        <td>
+                                            {{ $fact->client->user->dni }}
+                                        </td>
+                                    @else
+                                        <td> Usuario no encontrado para este cliente.</td>
+                                    @endif
+                                    @else
+                                        <td>Cliente no encontrado para esta factura.</td>
+                                    @endif
+
                                     <td>{{ $fact->monto_fac }}</td>
                                     <td>{{ $fact->pagada_fac }}</td>
+                                    <td>
+                                        <a href="{{ route('Detalle_fact.fin_factura',  $fact) }}" class="btn btn-primary">Ver Factura</a></td>
+                                    <td>
+                                        <a href="{{ route('facturas.edit', $fact->num_fac)  }}" class="btn btn-warning">Editar</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('facturas.destroy', $fact->num_fac) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger text-uppercase">
+                                                        Eliminar
+                                                    </button>
+                                                </form>
                                     <td class="d-flex flex-row-reverse bd-highlight">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route( 'facturas.show', $fact->num_fac) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
