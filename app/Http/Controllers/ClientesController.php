@@ -41,21 +41,46 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        $clientes = new clientes();
-            //validacion
+         //valid
+        $validated = $request->validate(
+            [
+                'nombre_cli' => 'required|string|max:40',
+                'apellido_cli' => 'required|string|max:40',
+                'clienteDNI' => 'required|integer|unique:users|min:10000000|max:99999999',
+                'fecha_nac_cli' => 'required|date|before:tomorrow',
+                'cod_genero' => 'required|integer',
+                'domicilio_cli' => 'required|string|max:200',
+                'telefono_cli' => 'required|string|max:20',
+                'email_cli' => 'required|max:255|email',
+                'observaciones'=> 'string|max:40',
+                // 'fecha_asociacion' => 'required|date|after:fecha_nac',
+            ],[
+                'required' => 'Debe llenar el campo :attribute.',
+                'max' => 'El :attribute es demasiado largo.',
+                '*.unique' => 'Ese :attribute ya esta registrado',
+                'clienteDNI.*' => 'Ingrese un DNI valido',
+                'email_cli.*' =>'Ingrese un Email valido',
+                'fecha_nac_cli' => 'Ingrese una fecha valida',
+            ]);
+            if($validated) {
 
-            //Guardado de los datos
-                $clientes->dni_cli = $request->input('dni_cli');
-                $clientes->cod_genero = $request->input('cod_genero');
-                $clientes->id_loc = $request->input('id_loc');
-                $clientes->nombre_cli = $request->input('name');
-                $clientes->apellido_cli = $request->input('apellido');
-                $clientes->domicilio_cli = $request->input('domicilio');
-                $clientes->telefono_cli = $request->input('telefono');
-                $clientes->fecha_nac_cli = $request->input('fecha_nac');
-                $clientes->email_cli = $request->input('email');
-                $clientes->observaciones = $request->input('observaciones');
-                $clientes->save();           
+                $clientes = new clientes();
+                //Guardado de los datos
+                $clientes->nombre_cli = $request->get('nombre_cli');
+                $clientes->apellido_cli = $request->get('apellido_cli');
+        // dni
+                $clientes->fecha_nac_cli = $request->get('fecha_nac_cli');
+                $clientes->cod_genero = $request->get('cod_genero');
+                $clientes->domicilio_cli = $request->get('domicilio_cli');
+                $clientes->telefono_cli = $request->get('telefono_cli');
+                $clientes->id_loc = $request->get('id_loc');
+                $clientes->email_cli = $request->get('email_cli');
+                $clientes->observaciones = $request->get('observaciones');
+
+                $clientes->save();
+            };
+         //redireccionar
+         return redirect()->route('clientes.index')->with('status', 'Cliente creado correctamente');
 
         
                    //redireccionar
