@@ -39,9 +39,10 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col" class="text-uppercase">DNI</th>
+                            {{-- <th scope="col" class="text-uppercase">DNI</th> --}}
                             <th scope="col" class="text-uppercase">Nombre</th>
                             <th scope="col" class="text-uppercase">Apellido</th>
+                            <th scope="col" class="text-uppercase">DNI</th>
                             <th scope="col" class="text-uppercase">Domicilio</th>
                             <th scope="col" class="text-uppercase">Localidad</th>
                             <th scope="col" class="text-uppercase">Genero</th>
@@ -49,6 +50,8 @@
                             <th scope="col" class="text-uppercase">Telefono</th>
                             <th scope="col" class="text-uppercase">Email</th>
                             <th scope="col" class="text-uppercase">Observaciones</th>
+                            <th scope="col" class="text-uppercase">Imagen</th>
+                            <th scope="col" class="text-uppercase"> Acciones</th>
                            
                         </tr>
                     </thead>
@@ -58,12 +61,13 @@
                             <td>{{ $cliente->dni_cli }}</td>
                             <td>{{ $cliente->nombre_cli }}</td>
                             <td>{{ $cliente->apellido_cli }}</td>
+                            <td>{{ $cliente->clienteDNI }}</td>
                             <td>{{ $cliente->domicilio_cli }}</td>
                             <td>{{ $cliente->Localidades->id_loc}}</td>
                             <td>{{ $cliente->generos->cod_genero}}</td>
                             <td>{{ $cliente->fecha_nac_cli }}</td>
                             <td>{{ $cliente->telefono_cli }}</td>
-                            <td>{{ $cliente->user->email }}</td>
+                            <td>{{ $cliente->email_cli }}</td>
                             <td>{{ Str::limit($cliente->observaciones, 80) }}</td>
                             <td>
                                 <img src="" alt="imagen cliente" class="img-fluid" style="width: 150px;">
