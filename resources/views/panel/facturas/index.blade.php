@@ -72,7 +72,12 @@
                                                 edit_square
                                             </span></a>
 
-                                        <button type="button" data-toggle="modal" data-target="#deleteModal" data-id="{{ $fact->id_caja }}" data-nombre="{{ $fact->id_caja }}"class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                        <button type="button" data-toggle="modal" data-target="#deleteModal" 
+                                        data-id="{{$fact->num_fac}}" 
+                                        data-num="{{$fact->id_caja}}" 
+                                        data-soc="{{$fact->dni_soc}}"  
+                                        data-cli="{{$fact->dni_cli}}"  
+                                        class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
                                             <span class="material-symbols-outlined d-flex justify-content-center">
                                                 cancel
                                             </span>
@@ -85,25 +90,7 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
-@endsection
-
-{{-- Importacion de Archivos CSS --}}
-@section('css')
-
-@stop
-
-
-{{-- Importacion de Archivos JS --}}
-@section('js')
-
-    {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-    <script src="{{ asset('js/facturas.js') }}"></script>
-@stop
-                
-       
-    {{-- Modal de eliminacion 
+            {{-- Modal de eliminacion --}}
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -131,4 +118,47 @@
           </div>
         </div>
     </div>
-@endsection--}}
+        </div>
+    </div>
+
+@endsection
+    
+{{-- Importacion de Archivos CSS --}}
+@section('css')
+
+@stop
+
+
+{{-- Importacion de Archivos JS --}}
+@section('js')
+
+    {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
+    <script src="{{ asset('js/facturas.js') }}"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
+    {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
+    <script>
+        $(document).ready(function(){
+
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                const button = $(event.relatedTarget) // Button that triggered the modal
+                const num_fact = button.data('id') // Extract info from data-* attributes
+                const id_caja = button.data('num') // Extract info from data-* attributes
+                const dni_soc = button.data('soc') // Extract info from data-* attributes
+                const dni_cli = button.data('cli') // Extract info from data-* attributes
+                
+                const modal = $(this)
+                const form = $('#formDelete')
+                form.attr('action', `{{ env('APP_URL') }}/panel/facturas/${num_fact} ${id_caja}`);
+                modal.find('.modal-body #message').text(`¿Estás seguro de eliminar la\n
+                Factura N°: ${num_fact} |
+                Caja N°: ${id_caja}  |
+                Dni de Socio: ${dni_soc} |
+                Dni de Cliente: ${dni_cli}  ?`)
+            })
+        });
+    </script>
+@stop
+                
+       
+

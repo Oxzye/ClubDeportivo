@@ -28,7 +28,7 @@ class Facturacion extends Model
     }
     public function dnisocio()
     {
-        return $this->belongsTo(Socio::class, 'id_socio');
+        return $this->belongsTo(Socio::class, 'dni_socio');
     }
     public function dni_cli()
     {

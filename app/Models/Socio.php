@@ -40,4 +40,8 @@ class Socio extends Model
     {
         return $this->hasMany(SociosxActividad::class);
     }
+    public function facturas()
+    {
+        return $this->hasMany(Facturacion::class, 'num_fac');
+    }
 }
