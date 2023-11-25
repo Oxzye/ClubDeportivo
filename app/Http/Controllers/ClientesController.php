@@ -81,9 +81,6 @@ class ClientesController extends Controller
             };
          //redireccionar
          return redirect()->route('clientes.index')->with('status', 'Cliente creado correctamente');
-
-                   //redireccionar
-                    return redirect()->route('clientes.index')->with('status', 'Cliente creado correctamente');
         }
 
     public function edit(clientes $dni_cli)
