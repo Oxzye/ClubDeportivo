@@ -60,9 +60,10 @@
                             </thead>
                             <tbody>
                                 @foreach ($socxact as $sxa)
-                                    <tr class="">
+                                    <tr>
+                                        {{-- <?php dd( $sxa->actividad->nombre_act) ?> --}}
                                         <td class="text-center">{{ $sxa->id_sxa }}</td>
-                                        <td class="text-center">{{ $sxa->actividad->nombre_act }}</td>
+                                        <td class="text-center">{{ $sxa->actividad ? $sxa->actividad->nombre_act : '-no asignado-' }}</td>
                                         <td class="text-center">{{ $sxa->socio->user->name .' '. $sxa->socio->user->apellido }}</td>
                                         <td class="text-center">{{ $sxa->fecha_inscripcion }}</td>
                                         <td class="text-center">{{ $sxa->opinion_soc }}</td>

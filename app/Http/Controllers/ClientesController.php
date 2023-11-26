@@ -84,9 +84,10 @@ class ClientesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(clientes $clientes)
+    public function show(string $cli)
     {
-        //
+        $cliente = clientes::findOrFail($cli);
+        return view ('panel.clientes.show', ['cliente'=> $cliente]);
     }
 
     /**
