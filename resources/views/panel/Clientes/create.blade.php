@@ -52,14 +52,19 @@
                             <div class="form-group">
                                 <label for="apellido">Apellido</label>
                                 <input type="text" class="form-control" id="apellido_cli" name="apellido_cli" aria-describedby="apellido">
-                                <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                @error( 'apellido_cli' )
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">DNI</label>
                                 <input type="number" class="form-control" name="dni_cli" id="dni_cli" aria-describedby="dni">
-                                <small id="" class="form-text text-muted">Posible alert.</small>
+                                @error( 'dni_cli' )
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                               
                             </div>
                         </div>
                         <div class="col-5">
@@ -90,10 +95,13 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Domicilio</label>
-                                <input type="text" class="form-control" name="domicilio" id="" aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <input type="text" class="form-control" name="domicilio_cli" id="domicilio_cli" aria-describedby="emailHelp">
+                                @error( 'domicilio_cli' )
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
+
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nro de telefono</label>
@@ -108,7 +116,7 @@
                         
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Localidade|Provincia|Paises</label>
-                                <select class="form-control" id="provincia" name="provincia" >
+                                <select class="form-control" id="id_loc" name="id_loc" >
                                 <option selected>Seleccionar</option>
                                 @foreach ($localidades as $loc)
                                 <option value="{{ $loc->id_loc }}"> 

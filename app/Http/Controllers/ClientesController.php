@@ -46,7 +46,6 @@ class ClientesController extends Controller
             [
                 'nombre_cli' => 'required|string|max:40',
                 'apellido_cli' => 'required|string|max:40',
-
                 'dni_cli' => 'required|integer|unique:clientes|min:10000000|max:99999999',
                 'fecha_nac_cli' => 'required|date|before:tomorrow',
                 'cod_genero' => 'required|integer',
@@ -67,15 +66,15 @@ class ClientesController extends Controller
 
                 $clientes = new clientes();
                 //Guardado de los datos
-                $clientes->nombre_cli = $request->get('nombre_cli');
-                $clientes->apellido_cli = $request->get('apellido_cli');
-                $clientes->dni_cli = $request->get('dni_cli');
-                $clientes->fecha_nac_cli = $request->get('fecha_nac_cli');
-                $clientes->cod_genero = $request->get('cod_genero');
-                $clientes->domicilio_cli = $request->get('domicilio_cli');
-                $clientes->telefono_cli = $request->get('telefono_cli');
+                $clientes->nombre_cli = $request->input('nombre_cli');
+                $clientes->apellido_cli = $request->input('apellido_cli');
+                $clientes->dni_cli = $request->input('dni_cli');
+                $clientes->fecha_nac_cli = $request->input('fecha_nac_cli');
+                $clientes->cod_genero = $request->input('cod_genero');
+                $clientes->domicilio_cli = $request->input('domicilio_cli');
+                $clientes->telefono_cli = $request->input('telefono_cli');
                 $clientes->id_loc = $request->get('id_loc');
-                $clientes->email_cli = $request->get('email_cli');
+                $clientes->email_cli = $request->input('email_cli');
                 $clientes->observaciones = $request->get('observaciones');
 
                 $clientes->save();

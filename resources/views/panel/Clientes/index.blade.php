@@ -72,7 +72,7 @@
                             </td> --}}
                             <td>
                                 <div class="d-flex">
-                                    <a href="" class="btn btn-sm btn-info text-white text-uppercase me-1">
+                                    <a href="{{ route('clientes.show', $cliente->dni_cli) }}" class="btn btn-sm btn-info text-white text-uppercase me-1">
                                         Ver
                                     </a>
                                     <a href="{{ route('clientes.edit', $cliente->dni_cli) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
