@@ -81,7 +81,7 @@
             var mensajeError = document.getElementById("mensajeError");
 
             // Validación para el campo de localidad al cambiar
-            selectLoc.addEventListener("change", function () {
+            selectLoc.addEventListener("submit", function () {
                 var localidad = this.value;
 
                 if (localidad === "" || localidad === "Seleccionar") {
@@ -99,7 +99,7 @@
             });
 
             // Validación para el campo de género al cambiar
-            selectGenero.addEventListener("change", function () {
+            selectGenero.addEventListener("submit", function () {
                 var genero = this.value;
 
                 if (genero === "" || genero === "Seleccionar") {

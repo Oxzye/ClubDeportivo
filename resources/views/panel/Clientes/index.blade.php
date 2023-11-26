@@ -38,11 +38,10 @@
                 <table id="tabla-productos" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col" class="text-uppercase">DNI</th>
+                            <th scope="col">DNI</th>
+                            {{-- <th scope="col" class="text-uppercase">DNI</th> --}}
                             <th scope="col" class="text-uppercase">Nombre</th>
                             <th scope="col" class="text-uppercase">Apellido</th>
-                            <th scope="col" class="text-uppercase">DNI</th>
                             <th scope="col" class="text-uppercase">Domicilio</th>
                             <th scope="col" class="text-uppercase">Localidad</th>
                             <th scope="col" class="text-uppercase">Genero</th>
@@ -61,7 +60,6 @@
                             <td>{{ $cliente->dni_cli }}</td>
                             <td>{{ $cliente->nombre_cli }}</td>
                             <td>{{ $cliente->apellido_cli }}</td>
-                            <td>{{ $cliente->clienteDNI }}</td>
                             <td>{{ $cliente->domicilio_cli }}</td>
                             <td>{{ $cliente->localidades->nombre_loc}}</td>
                             <td>{{ $cliente->generos->abreviatura_genero}}</td>
