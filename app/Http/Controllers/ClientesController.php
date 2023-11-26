@@ -46,12 +46,12 @@ class ClientesController extends Controller
             [
                 'nombre_cli' => 'required|string|max:40',
                 'apellido_cli' => 'required|string|max:40',
-                'clienteDNI' => 'required|integer|unique:users|min:10000000|max:99999999',
+                'clienteDNI' => 'required|integer|unique:users|min:10000|max:99999999',
                 'fecha_nac_cli' => 'required|date|before:tomorrow',
                 'cod_genero' => 'required|integer',
                 'domicilio_cli' => 'required|string|max:200',
                 'telefono_cli' => 'required|string|max:20',
-                'email_cli' => 'required|max:255|email',
+               // 'email_cli' => 'required|max:255|email',
                 'observaciones'=> 'string|max:40',
                 // 'fecha_asociacion' => 'required|date|after:fecha_nac',
             ],[

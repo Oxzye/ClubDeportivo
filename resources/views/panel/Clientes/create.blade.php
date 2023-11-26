@@ -105,20 +105,9 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">País</label>
-                                <select class="form-control" id="pais" name="pais" >
-                                <option selected>Seleccionar</option>
-                                @foreach ($localidades as $loc)
-                                <option value="{{ $loc->id_loc }}"> 
-                                    {{ $loc->nombre_loc }}
-                                </option>
-                            @endforeach
-                                </select>
-                            </div>
                         
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Provincia</label>
+                                <label for="exampleFormControlSelect1">Localidade|Provincia|Paises</label>
                                 <select class="form-control" id="provincia" name="provincia" >
                                 <option selected>Seleccionar</option>
                                 @foreach ($localidades as $loc)
@@ -131,6 +120,7 @@
                                 </select>
                             </div>
                         
+
                         </div>
                     </div>
                 </div>

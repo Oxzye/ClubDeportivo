@@ -67,7 +67,7 @@
                             <td>{{ $cliente->generos->abreviatura_genero}}</td>
                             <td>{{ $cliente->fecha_nac_cli }}</td>
                             <td>{{ $cliente->telefono_cli }}</td>
-                            <td>{{ $cliente->user->email }}</td>
+                            <td>{{ $cliente->email }}</td>
                             <td>{{ Str::limit($cliente->observaciones, 80) }}</td>
                             {{-- <td>
                                 <img src="" alt="imagen cliente" class="img-fluid" style="width: 150px;">
