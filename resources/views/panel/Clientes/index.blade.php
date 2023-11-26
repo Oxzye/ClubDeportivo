@@ -7,6 +7,10 @@
 {{-- Titulo en las tabulaciones del Navegador --}}
 @section('title', 'Clientes')
 
+{{-- Agregar este link para ver los iconos de opciones --}}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+@section('title', 'Empleados por Actividades Index')
+
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
     <h1>Lista de Clientes</h1>
@@ -77,11 +81,30 @@
                                     </a>
                                     <a href="{{ route('clientes.edit', $cliente->dni_cli) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
+
+                            </td>
+                            <td class="d-flex flex-row-reverse bd-highlight">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="{{ route( 'clientes.show', $cliente->dni_cli) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                        <span class="material-symbols-outlined d-flex justify-content-center">
+                                        info
+                                        </span>
+                                    </button></a>
+                                    <a href="{{ route('clientes.edit', $cliente->dni_cli)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                        <span class="material-symbols-outlined d-flex justify-content-center">
+                                            edit_square
+                                        </span>
+
                                     </a>
-                                    <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase me-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $cliente->dni_cli }}" data-nombre="{{ $cliente->nombre_cli }}">
-                                        Eliminar
-                                    </button>   
-                                </div>
+                                    <form action="{{ route('clientes.destroy', $cliente->dni_cli ) }}" method="post">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                        <span class="material-symbols-outlined d-flex justify-content-center">
+                                            cancel
+                                        </span>
+                                    </button>
+                                    </form>
+                                    </div>
                             </td>
                         </tr>
                         @endforeach

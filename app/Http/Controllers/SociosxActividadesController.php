@@ -18,9 +18,11 @@ class SociosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $socios = Socio::all();
-        $socxact = SociosxActividad::with('actividad')->get();
-        $socxact = SociosxActividad::with('socio')->get();
-        $socxact = SociosxActividad::all();
+        $socxact = SociosxActividad::with([ 'actividad', 'socio'])->get();
+        // $socxact = SociosxActividad::with('socio')->get();
+        // $socxact = SociosxActividad::all();
+
+        // dd($socxact);
         return view('panel.SocxAct.index', compact('socios', 'actividades', 'socxact'));
     }
 

@@ -35,14 +35,14 @@
                                     <td>{{ $tipodetfact->tipodetalle}}</td>
                                     <td>{{ $tipodetfact->descripcion_tdf }}</td>
                                     <td>Ver</td>
-                                    <td>
+                                    {{-- <td>
                                         <a href="{{ route('tipos_detalle_factura.edit', $tipodetfact->id_tipodetallefactura)  }}" class="btn btn-warning">Editar</a>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-delete btn-sm btn-danger text-uppercase me-1" data-toggle="modal" data-target="#deleteModal" data-id="{{ $tipodetfact->id_tipodetallefactura }}" data-nombre="{{ $tipodetfact->tipodetalle }}">
                                             Eliminar
                                         </button>  
-                                    </td>
+                                    </td> --}}
                                 </tr>  
                             @endforeach
                             
