@@ -42,19 +42,19 @@ class ClientesController extends Controller
             [
                 'nombre_cli' => 'required|string|max:40',
                 'apellido_cli' => 'required|string|max:40',
-                'clienteDNI' => 'required|integer|unique:users|min:10000000|max:99999999',
+                'dni_cli' => 'required|integer|unique:clientes|min:10000000|max:99999999',
                 'fecha_nac_cli' => 'required|date|before:tomorrow',
                 'cod_genero' => 'required|integer',
                 'domicilio_cli' => 'required|string|max:200',
                 'telefono_cli' => 'required|string|max:20',
                 'email_cli' => 'required|max:255|email',
-                'observaciones'=> 'string|max:40',
+                'observaciones'=> 'nullable|string|max:40',
                 // 'fecha_asociacion' => 'required|date|after:fecha_nac',
             ],[
                 'required' => 'Debe llenar el campo :attribute.',
                 'max' => 'El :attribute es demasiado largo.',
                 '*.unique' => 'Ese :attribute ya esta registrado',
-                'clienteDNI.*' => 'Ingrese un DNI valido',
+                'dni_cli.*' => 'Ingrese un DNI valido',
                 'email_cli.*' =>'Ingrese un Email valido',
                 'fecha_nac_cli' => 'Ingrese una fecha valida',
             ]);
@@ -64,7 +64,7 @@ class ClientesController extends Controller
                 //Guardado de los datos
                 $clientes->nombre_cli = $request->get('nombre_cli');
                 $clientes->apellido_cli = $request->get('apellido_cli');
-        // dni
+                $clientes->dni_cli = $request->get('dni_cli');
                 $clientes->fecha_nac_cli = $request->get('fecha_nac_cli');
                 $clientes->cod_genero = $request->get('cod_genero');
                 $clientes->domicilio_cli = $request->get('domicilio_cli');
