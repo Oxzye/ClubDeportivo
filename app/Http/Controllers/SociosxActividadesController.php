@@ -18,9 +18,11 @@ class SociosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $socios = Socio::all();
-        $socxact = SociosxActividad::with('actividad')->get();
-        $socxact = SociosxActividad::with('socio')->get();
-        $socxact = SociosxActividad::all();
+        $socxact = SociosxActividad::with([ 'actividad', 'socio'])->get();
+        // $socxact = SociosxActividad::with('socio')->get();
+        // $socxact = SociosxActividad::all();
+
+        // dd($socxact);
         return view('panel.SocxAct.index', compact('socios', 'actividades', 'socxact'));
     }
 
@@ -32,6 +34,7 @@ class SociosxActividadesController extends Controller
         $actividades = Actividad::all();
         $socios = Socio::all();
         $sxa = SociosxActividad::all();
+        $sxad = SociosxActividad::with('actividades,socios')->get();
         return view('panel.SocxAct.create', compact('socios', 'actividades', 'sxa'));
     }
 
@@ -46,7 +49,6 @@ class SociosxActividadesController extends Controller
                 'opinion_soc' => 'nullable|string|max:250',
             ],[
                 'fecha_inscripcion.required' => 'El campo es obligatorio',
-
                 'opinion_soc.nullable' => 'El campo puede ser null',
                 'opinion_soc.string' => 'string',
                 'opinion_soc.max' => 'Solo se permiten hasta 250 caracteres',

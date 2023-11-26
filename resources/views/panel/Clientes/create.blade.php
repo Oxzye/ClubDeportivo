@@ -37,6 +37,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="row">
+
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="name">Nombre</label>
@@ -50,21 +51,20 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="apellido">Apellido</label>
-                                <input type="text" class="form-control" id="apellido_cli" name="apellido_cli" value="{{ old( 'apellido_cli' ) }}" aria-describedby="helpId" @error('apellido_cli') is-invalid @enderror">
+                                <input type="text" class="form-control" id="apellido_cli" name="apellido_cli" aria-describedby="apellido">
                                 @error( 'apellido_cli' )
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                {{-- <small id="" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">DNI</label>
-                                <input type="number" class="form-control" name="dni_cli" id="dni_cli" value="{{ old( 'dni_cli' ) }}" aria-describedby="helpId" @error('dni_cli') is-invalid @enderror">
+                                <input type="number" class="form-control" name="dni_cli" id="dni_cli" aria-describedby="dni">
                                 @error( 'dni_cli' )
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                {{-- <small id="" class="form-text text-muted">Posible alert.</small> --}}
+                               
                             </div>
                         </div>
                         <div class="col-5">
@@ -95,13 +95,13 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Domicilio</label>
-                                <input type="text" class="form-control" name="domicilio_cli" id="domicilio_cli" value="{{ old( 'domicilio_cli' ) }}" aria-describedby="helpId" @error('domicilio_cli') is-invalid @enderror">
+                                <input type="text" class="form-control" name="domicilio_cli" id="domicilio_cli" aria-describedby="emailHelp">
                                 @error( 'domicilio_cli' )
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                             </div>
                         </div>
+
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nro de telefono</label>
@@ -112,11 +112,11 @@
                                 {{-- <small id="" class="form-text text-muted">We'll never share</small> --}}
                             </div>
                         </div>
-                        <div class="col-5">
+                        <div class="col-4">
                         
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Localidad | Provincia | País</label>
-                                <select class="form-control is-invalid" id="id_loc" name="id_loc" >
+                                <label for="exampleFormControlSelect1">Localidade|Provincia|Paises</label>
+                                <select class="form-control" id="id_loc" name="id_loc" >
                                 <option selected>Seleccionar</option>
                                 @foreach ($localidades as $loc)
                                 <option value="{{ $loc->id_loc }}"> 
@@ -126,8 +126,9 @@
                                 </option>
                             @endforeach
                                 </select>
-                                <div class="invalid-feedback" id="mensajeError" style="color: red;"></div>
                             </div>
+                        
+
                         </div>
                     </div>
                 </div>
@@ -164,8 +165,8 @@
                      --}}
                         <div class="col-10">
                             <div class="form-group">
-                                <label for="observaciones">¿Hay algo a tener en cuenta sobre este Cliente?</label>
-                                <textarea class="form-control" name="observaciones" id="observaciones" aria-label="With textarea"></textarea>
+                                <label for="observaciones_soc">¿Hay algo a tener en cuenta sobre este Cliente?</label>
+                                <textarea class="form-control" name="observaciones_soc" id="observaciones" aria-label="With textarea"></textarea>
                             </div>
                         </div> 
                     </div>
@@ -173,7 +174,7 @@
 
                 <input type="hidden" name="id_user" value="9">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('clientes.index') }}" class="btn btn-danger mx-3">Cancelar</a>
+                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>

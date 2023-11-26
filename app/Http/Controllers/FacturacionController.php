@@ -20,11 +20,11 @@ class FacturacionController extends Controller
        
         //$clientes = new Cajas;
         $facturacion = Facturacion::with('dnisocio')->get();
-        // dd ($facturacion);
         $cajas = Cajas::all();
         $clientes = clientes::all();
         $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
         $cajaAbierta = $cajaso->where('estado_caja', true);
+
 
         return view('panel.facturas.index', compact('facturacion', 'cajas', 'clientes', 'cajasAbierta'));
     }
