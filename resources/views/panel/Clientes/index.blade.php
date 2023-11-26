@@ -65,14 +65,23 @@
                             <td>{{ $cliente->nombre_cli }}</td>
                             <td>{{ $cliente->apellido_cli }}</td>
                             <td>{{ $cliente->domicilio_cli }}</td>
-                            <td>{{ $cliente->Localidades->id_loc}}</td>
-                            <td>{{ $cliente->generos->cod_genero}}</td>
+                            <td>{{ $cliente->localidades->nombre_loc}}</td>
+                            <td>{{ $cliente->generos->abreviatura_genero}}</td>
                             <td>{{ $cliente->fecha_nac_cli }}</td>
                             <td>{{ $cliente->telefono_cli }}</td>
-                            <td>{{ $cliente->email_cli }}</td>
+                            <td>{{ $cliente->email }}</td>
                             <td>{{ Str::limit($cliente->observaciones, 80) }}</td>
-                            <td>
+                            {{-- <td>
                                 <img src="" alt="imagen cliente" class="img-fluid" style="width: 150px;">
+                            </td> --}}
+                            <td>
+                                <div class="d-flex">
+                                    <a href="{{ route('clientes.show', $cliente->dni_cli) }}" class="btn btn-sm btn-info text-white text-uppercase me-1">
+                                        Ver
+                                    </a>
+                                    <a href="{{ route('clientes.edit', $cliente->dni_cli) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                        Editar
+
                             </td>
                             <td class="d-flex flex-row-reverse bd-highlight">
                                 <div class="btn-group" role="group" aria-label="Basic example">
@@ -85,6 +94,7 @@
                                         <span class="material-symbols-outlined d-flex justify-content-center">
                                             edit_square
                                         </span>
+
                                     </a>
                                     <form action="{{ route('clientes.destroy', $cliente->dni_cli ) }}" method="post">
                                     @csrf @method('DELETE')
@@ -104,7 +114,7 @@
         </div>
     </div>
 @else
-            <h4>¡No hay socios cargadas!</h4>
+            <h4>¡No hay Clientes cargadas!</h4>
         @endif
 </div>
  {{-- Modal de eliminacion --}}

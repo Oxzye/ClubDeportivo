@@ -533,14 +533,16 @@ return [
                     'text' => 'Instalaciones',
                     'route' => 'instalaciones.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_user', // permiso
+                    'can' => 'listado_socios', // permiso de admin
+                    'active' => ['panel/socios*'],
                     'shift' => 'ml-3',
                 ],
                 [
                     'text' => 'Deportes',
                     'route' => 'deportes.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_user', // permiso
+                    'can' => 'listado_clientes', // permiso de admin
+                    'active' => ['panel/clientes*'],
                     'shift' => 'ml-3',
                 ]
             ],
@@ -577,7 +579,7 @@ return [
                     'text' => 'Lista de Clientes',
                     'route' => 'clientes.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_user', // permiso de admin
+                    //'can' => 'listado_user', // permiso de admin
                     'active' => ['panel/clientes*'],
                     'shift' => 'ml-3',
                 ],

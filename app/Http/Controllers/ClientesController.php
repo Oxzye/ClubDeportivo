@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\clientes;
 use Illuminate\Http\Request;
 use App\Models\Localidades;
+use App\Models\Paises;
+use App\Models\Provincias;
 use App\Models\generos;
+use Illuminate\Auth\Events\Validated;
 
 class ClientesController extends Controller
 {
@@ -14,9 +17,8 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        //
-        $generos = generos::all();
         $localidades = Localidades::all();
+        $generos = generos::all();
         $clientes = clientes::paginate(3);
         return view('panel.clientes.index', compact('generos', 'localidades', 'clientes'));
     }
@@ -28,6 +30,8 @@ class ClientesController extends Controller
     {
         $generos = generos::all();
         $localidades = Localidades::all();
+        // $paises = Paises::all();
+        // $provincias = Provincias::all();
         $clientes = clientes::paginate(3);
         return view('panel.clientes.create', compact('generos', 'localidades', 'clientes'));
     }
@@ -62,6 +66,7 @@ class ClientesController extends Controller
 
                 $clientes = new clientes();
                 //Guardado de los datos
+
                 $clientes->nombre_cli = $request->get('nombre_cli');
                 $clientes->apellido_cli = $request->get('apellido_cli');
                 $clientes->dni_cli = $request->get('dni_cli');
@@ -69,48 +74,53 @@ class ClientesController extends Controller
                 $clientes->cod_genero = $request->get('cod_genero');
                 $clientes->domicilio_cli = $request->get('domicilio_cli');
                 $clientes->telefono_cli = $request->get('telefono_cli');
+
                 $clientes->id_loc = $request->get('id_loc');
-                $clientes->email_cli = $request->get('email_cli');
+                $clientes->email_cli = $request->input('email_cli');
                 $clientes->observaciones = $request->get('observaciones');
 
                 $clientes->save();
             };
          //redireccionar
          return redirect()->route('clientes.index')->with('status', 'Cliente creado correctamente');
+        }
 
+    public function edit(clientes $dni_cli)
+    {
+        $clientes = Clientes::all();
+        if($clientes){
+            $generos = generos::all();
+            $localidades = Localidades::all();
+            return view('panel.clientes.edit', compact('generos', 'localidades', 'clientes'));
+        }
+        else{
+            return redirect()->route('clientes.index')->with('error', 'Cliente no encontrado');
+        }
 
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $cli)
     {
         $cliente = clientes::findOrFail($cli);
         return view ('panel.clientes.show', ['cliente'=> $cliente]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(clientes $clientes)
+    public function update(Request $request, $dni_cli)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, clientes $clientes)
-    {
-        //
+       $clientes = clientes::findOrFail($dni_cli);
+       return redirect()->route('clientes.index')->with('status','Cliente modificado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(clientes $clientes)
+    public function destroy($dni_cli)
     {
-        //
+        $clientes = clientes::findOrFail($dni_cli);
+
+        //Eliminicacion
+        $clientes->delete();
+
+              //redireccion
+              return redirect()->route('clientes.index')->with('status', 'eliminado correctamente');
     }
+
 }

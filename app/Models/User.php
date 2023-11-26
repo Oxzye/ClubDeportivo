@@ -50,7 +50,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+   
     /**
      * The attributes that should be cast.
      *
@@ -69,6 +69,7 @@ class User extends Authenticatable
     public function socio()
     {
         return $this->hasOne(Socio::class, 'id_user')->withTrashed();
+        
     }
 
     public function genero()
