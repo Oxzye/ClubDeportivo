@@ -34,8 +34,10 @@ class SociosxActividadesController extends Controller
         $actividades = Actividad::all();
         $socios = Socio::all();
         $sxa = SociosxActividad::all();
+        // $fAct_sxa = date('d/m/Y');
+        // dd($fAct_sxa);
+        $sxa = SociosxActividad::with(['actividad','socio'])->get();
         //$sxad = SociosxActividad::with('actividades','socios')->get();
-
         return view('panel.SocxAct.create', compact('socios', 'actividades', 'sxa'));
     }
 

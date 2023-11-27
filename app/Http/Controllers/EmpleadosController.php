@@ -10,10 +10,10 @@ use App\Models\generos;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use App\Models\Paises;
+use App\Models\Localidades;
+use App\Models\Provincias;
 use Illuminate\Support\Facades\Hash;
-use Barryvdh\DomPDF\Facade\Pdf;
-use App\Exports\EmpleadosExportExcel;
-use Maatwebsite\Excel\Facades\Excel;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EmpleadosController extends Controller
@@ -36,7 +36,9 @@ class EmpleadosController extends Controller
         $cargos = Cargos::all();
         $generos = generos::all();
         $paises = Paises::all();
-        return  view('panel.empleados.create',compact('cargos','generos','paises'));
+        $provincias = Provincias::all();
+        $localidades = Localidades::all(); // Cambié $localidad a $localidades
+        return view('panel.empleados.create', compact('cargos', 'generos', 'paises', 'localidades', 'provincias'));
     }
 
     /**
@@ -56,31 +58,67 @@ class EmpleadosController extends Controller
             'cod_genero' => 'required|integer',
             'email' =>      'required|string|unique:users|max:255|email',
             'fecha_alta_emp' => 'required|date|after:fecha_nac',
+            'fecha_baja_emp' => 'required|date|after:fecha_nac',
+            'id_pais' => 'required|exists:paises,id',
+            'id_prov' => 'required|exists:provincias,id', 
+            'id_loc' => 'required|exists:localidades,id',
+            'id_cargo' => 'required|exists:cargos,id',
+            
         ],[
-            'cuit_emp.required' => 'El CUIT es requerido,
-            por favor ingrese el CUIT del empleado',
-            'cuit_emp.integer' => 'El CUIT debe ser un número,
-            por favor ingrese el CUIT del empleado',
-            'cuit_emp.unique' => 'El CUIT ya existe,
-            por favor ingrese un CUIT distinto',
-            'cuit_emp.min' => 'El CUIT debe ser de minimo 1000000000,
-            por favor ingrese un CUIT valido',
-            'cuit_emp.max' => 'El CUIT debe ser de maximo 9999999999,
-            por favor ingrese un CUIT valido',
-            'name.required' => 'El nombre es requerido',
-            'apellido.required' => 'El apellido es requerido',
-            'dni.required' => 'El DNI es requerido,
-            por favor ingrese el DNI del empleado',
-            'dni.integer' => 'El DNI debe ser un número,
-            por favor ingrese el DNI del empleado',
-            'fecha_nac.required' => 'Ingrese una fecha es requerido',
-            'fecha_nac.date' => 'Ingrese una fecha valida',
-            'domicilio.required' => 'El domicilio es requerido',
-            'telefono.required' => 'El telefono es requerido',
-            'cod_genero.required' => 'El cod_genero es requerido',
-            'email.required' => 'El cod_genero es requerido',
-            'fecha_alta_emp.required' => 'Ingrese una fecha es requerido',
-            'fecha_alta_emp.date' => 'Ingrese una fecha valida',
+            'name.required' => 'El campo nombre es obligatorio',
+            'name.string' => 'Ingrese texto',
+            'name.max' => 'Solo se permiten hasta 40 caracteres',
+            
+            'apellido.required' => 'El campo apellido es obligatorio',
+            'apellido.string' => 'Ingrese texto',
+            'apellido.max' => 'Solo se permiten hasta 40 caracteres',
+
+            'dni.required' => 'El campo dni es obligatorio',
+            'dni.integer' => 'Ingrese valores numéricos',
+
+            'cuit_emp.required' => 'El campo cuit es obligatorio',
+            'cuit_emp.integer' => 'Ingrese valores numéricos',
+            'cuit_emp.unique' => 'El cuit ya está registrado',
+
+            'fecha_nac.required' => 'El campo fecha de nacimiento es obligatorio',
+            'fecha_nac.date' => 'Por favor indique una fecha válida',
+            'fecha_nac.string' => 'Ingrese formato fecha DD/MM/YYYY',
+            'fecha_nac.before:tomorrow' => 'Ingrese una fecha de nacimiento válida',
+
+            'cod_genero.required' => 'El campo género es obligatorio',
+            'cod_genero.integer' => 'Ingrese un valor',
+
+            'domicilio.required' => 'El campo domicilio es obligatorio',
+            'domicilio.string' => 'Ingrese un domicilio por favor',
+            'domicilio.max' => 'Solo se permiten hasta 200 caracteres',
+
+            'telefono.required' => 'El campo telefono es obligatorio',
+            'telefono.string' => 'Ingrese un teléfono valido',
+            'telefono.max' => 'Solo se permiten hasta 20 caracteres',
+
+            'id_pais.required' => 'El campo países es obligatorio',
+            'id_pais.exist:paises, id' => 'El país no existe en la base de datos',
+            
+            'id_prov.required' => 'El campo provincia es obligatorio',
+            'id_prov.exist:provincias, id' => 'La provincia no existe en la base de datos',
+            
+            'id_loc.required' => 'El campo localidades es obligatorio',
+            'id_loc.exist:localidades, id' => 'La localidad no existe en la base de datos',
+            
+            'email.required' => 'El campo email es obligatorio',
+            'email.string' => 'Ingrese un email válido',
+            'email.unique:users' => 'Este email ya existe',
+            'email.email' => 'El campo debe ser formato email',
+
+            'fecha_alta_emp.required' => 'El campo fecha de alta empleado es obligatorio',
+            'fecha_alta_emp.after:fecha_nac' => 'Ingrese una fecha válida',
+
+            'fecha_baja_emp.required' => 'El campo fecha de baja empleado es obligatorio',
+            'fecha_baja_emp.after:fecha_nac' => 'Ingrese una fecha válida',
+
+            'id_cargo.required' => 'El campo cargo es obligatorio',
+            'id_cargo.exist:localidades, id' => 'El cargo no existe en la base de datos',
+           
         ]);
         //Contraseña aleatoria
         $password = $request->input('dni') - 11111111;
@@ -110,6 +148,7 @@ class EmpleadosController extends Controller
             'cuit_emp' => $request->input('cuit_emp'),
             'fecha_alta_emp' => $request->input('fecha_alta_emp'),
             'fecha_baja_emp' => $request->input('fecha_baja_emp'),
+            
             // Otros campos de 'empleados'.
         ]);
 
@@ -137,7 +176,9 @@ class EmpleadosController extends Controller
         $generos = generos::all();
         $cargos = Cargos::all();
         $empleado = Empleado::with('user')->find($id);
-
+        $paises = Paises::all();
+        $provincias = Provincias::all();
+        $localidades = Localidades::all(); // Cambié $localidad a $localidades
         // Muestra el formulario de edición con los datos actuales del socio y el usuario
         return view('panel.empleados.edit', compact('empleado', 'generos', 'cargos'));
     }
@@ -160,6 +201,11 @@ class EmpleadosController extends Controller
             'telefono' => 'required|string|max:20',
             'cod_genero' => 'required|integer',
             'email' => 'required|string|max:255|email|unique:users,email,' . $empleado->user->id,
+        ],[
+                'name.required' => 'El campo nombre es obligatorio',
+                'name.string' => 'Ingrese texto',
+                'name.unique' => 'El nombre ya está registrado',
+                'name.max' => 'Solo se permiten hasta 40 caracteres',
         ]);
 
         // Actualiza los datos en la tabla 'users'
@@ -204,6 +250,7 @@ class EmpleadosController extends Controller
         // Redirige a la vista de empleados o cualquier otra ruta que desees
         return redirect()->route('empleados.index')->with('status', 'Empleado eliminado correctamente');
     }
+    
 
     public function dadosdebaja()
     {
@@ -225,25 +272,5 @@ class EmpleadosController extends Controller
 
 
         return redirect()->route('empleados.dadosdebaja')->with('status', 'Empleado: ' . $datos->name . " " . $datos->apellido  . ' recuperado exitosamente');
-    }
-
-    public function exportarEmpleadosPDF() {
-        set_time_limit(6000);
-        // $admin_id = auth()->user()->id;
-            // Traemos las actividades con relaciones a instalaciones y deportes
-        // $actividades = Actividad::with('instalacion', 'deporte')
-        //     ->where('id_act',auth()->user()->id)->get();
-
-            $empleados = Empleado::all();
-        // capturamos la vista y los datos que enviaremos a la misma
-        $pdf = Pdf::loadView('panel.empleados.pdf_empleados', compact('empleados'));
-        //Renderizamos la vista
-        $pdf->render();
-        // Visualizaremos el PDF en el navegador
-        return $pdf->stream('socios.pdf');
-        }
-
-    public function exportarEmpleadosExcel() {
-        return Excel::download(new EmpleadosExportExcel, 'empelados.xlsx');
     }
 }
