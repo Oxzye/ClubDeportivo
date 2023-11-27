@@ -35,6 +35,7 @@
                                 
                                 <div class="mb-3 ">
                                     <label for="Empleado" class="col-sm-4 col-form-label"> * Empleado</label>
+                                    {{-- <input type="text" class="form-control" name="" value="{{ auth()->user()->name }}" readonly> --}}
                                     <div class="col-sm-8">
                                     <select id="id_emp" name="id_emp" class="form-control">
                                         @foreach ($empleado as $emp)

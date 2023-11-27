@@ -19,7 +19,10 @@
                 <a href="{{ route('exportar-empxact-excel') }}" class="btn btn-warning mx-3" title="PDF" target="_blank">
                     <i class="fas fa-file-excel"></i> Excel
                 </a>
-                <a href="{{ route('graficos-empxact')}}" class="btn btn-warning mx-1 px-2 pt-1 pb-1" title="ChartJs">
+                <a href="{{ route('exportar-empxact-pdf') }}" class="btn btn-warning mx-1" title="PDF" target="_blank">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </a>
+                <a href="{{ route('graficos-empxact')}}" class="btn btn-warning mx-3 px-2 pt-2 pb-1" title="ChartJs">
                     <i class="fas fa-chart-pie"></i> Gráfico
                    </a>
             </div>

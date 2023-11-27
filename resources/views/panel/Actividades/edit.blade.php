@@ -22,20 +22,23 @@
             {{-- deportes con select --}}
             <div class="mb-3 row">
                 <label for="id_dep" class="col-sm-4 col-form-label" name="id_dep"> Deporte (nombreDep | M_F_Mixto | descripcionDep): </label>
-                <select id="id_dep" name="id_dep" class="form-control">
+                <select id="id_dep" name="id_dep" class="form-control is-invalid">
+                    <option value="" selected>Seleccione uno...</option>
                     @foreach ($deportes as $deporte)
                         <option value="{{ $deporte->id_dep }}" {{ $deporte->id_dep == $act->id_dep ? 'selected' : '' }}> 
                             {{$deporte->nombreDep .' | '. $deporte->M_F_Mixto .' | '. $deporte->descripcionDep }}
                         </option>
                     @endforeach
                 </select>
+                <div class="invalid-feedback" id="mensajeError" style="color: red;"></div>
             </div>
             {{-- fin deportes con select --}}
 
             {{-- instalaciones con select --}}
             <div class="mb-3 row">
                 <label for="id_inst" class="col-sm-4 col-form-label" name="id_inst"> Instalación (nombre_inst | tipo_inst | capacidad): </label>
-                <select id="id_inst" name="id_inst" class="form-control">
+                <select id="id_inst" name="id_inst" class="form-control is-invalid">
+                    <option value="" selected>Seleccione uno...</option>
                     @foreach ($instalaciones as $instalacion)
                         <option value="{{ $instalacion->id_inst }}" {{ $instalacion->id_inst == $act->id_inst ? 'selected' : '' }}> 
                             {{ $instalacion->nombre_inst .' | '.$instalacion->tipo_inst .' | '. $instalacion->capacidad_inst}}
@@ -109,3 +112,51 @@
     </div>
 
 @endsection
+
+@section('js')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var selectLoc = document.getElementById("id_dep");
+            var selectGenero = document.getElementById("id_inst");
+            var initialClassLoc = selectLoc.className;
+            var initialClassGenero = selectGenero.className;
+            var mensajeError = document.getElementById("mensajeError");
+
+            // Validación para el campo de localidad al cambiar
+            selectLoc.addEventListener("change", function () {
+                var localidad = this.value;
+
+                if (localidad === "" || localidad === "Seleccionar") {
+                    mensajeError.innerHTML = "Por favor, selecciona una localidad.";
+
+                    // Restaurar clase inicial y quitar la clase de validación
+                    selectLoc.className = initialClassLoc;
+                } else {
+                    mensajeError.innerHTML = ""; // Limpiar el mensaje de error si se ha seleccionado una localidad válida
+
+                    // Agregar clases de Bootstrap para indicar que el campo es válido
+                    selectLoc.classList.remove("is-invalid");
+                    selectLoc.classList.add("is-valid");
+                }
+            });
+
+            // Validación para el campo de género al cambiar
+            selectGenero.addEventListener("change", function () {
+                var genero = this.value;
+
+                if (genero === "" || genero === "Seleccionar") {
+                    mensajeError.innerHTML = "Por favor, selecciona un género.";
+
+                    // Restaurar clase inicial y quitar la clase de validación
+                    selectGenero.className = initialClassGenero;
+                } else {
+                    mensajeError.innerHTML = ""; // Limpiar el mensaje de error si se ha seleccionado un género válido
+
+                    // Agregar clases de Bootstrap para indicar que el campo es válido
+                    selectGenero.classList.remove("is-invalid");
+                    selectGenero.classList.add("is-valid");
+                }
+            });
+        });
+    </script>
+@stop

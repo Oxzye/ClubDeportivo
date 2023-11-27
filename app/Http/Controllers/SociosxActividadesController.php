@@ -5,6 +5,7 @@ use App\Models\Actividad;
 use App\Models\SociosxActividad;
 use App\Models\Socio;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\SocxActExportExcel;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -17,9 +18,11 @@ class SociosxActividadesController extends Controller
     {
         $actividades = Actividad::all();
         $socios = Socio::all();
-        $socxact = SociosxActividad::with('actividad')->get();
-        $socxact = SociosxActividad::with('socio')->get();
-        $socxact = SociosxActividad::all();
+        $socxact = SociosxActividad::with([ 'actividad', 'socio'])->get();
+        // $socxact = SociosxActividad::with('socio')->get();
+        // $socxact = SociosxActividad::all();
+
+        // dd($socxact);
         return view('panel.SocxAct.index', compact('socios', 'actividades', 'socxact'));
     }
 
@@ -31,6 +34,7 @@ class SociosxActividadesController extends Controller
         $actividades = Actividad::all();
         $socios = Socio::all();
         $sxa = SociosxActividad::all();
+        $sxad = SociosxActividad::with('actividades,socios')->get();
         return view('panel.SocxAct.create', compact('socios', 'actividades', 'sxa'));
     }
 
@@ -45,7 +49,6 @@ class SociosxActividadesController extends Controller
                 'opinion_soc' => 'nullable|string|max:250',
             ],[
                 'fecha_inscripcion.required' => 'El campo es obligatorio',
-
                 'opinion_soc.nullable' => 'El campo puede ser null',
                 'opinion_soc.string' => 'string',
                 'opinion_soc.max' => 'Solo se permiten hasta 250 caracteres',
@@ -132,6 +135,22 @@ class SociosxActividadesController extends Controller
 
         return redirect()->route('SocxAct.index')->with('status', 'Socio por Actividad eliminado correctamente');
     }
+
+    public function exportarSocxActPDF() {
+        set_time_limit(6000);
+        // $admin_id = auth()->user()->id;
+            // Traemos las actividades con relaciones a instalaciones y deportes
+        // $actividades = Actividad::with('instalacion', 'deporte')
+        //     ->where('id_act',auth()->user()->id)->get();
+
+            $socxact = SociosxActividad::all();
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = Pdf::loadView('panel.SocxAct.pdf_socxact', compact('socxact'));
+        //Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('socxact.pdf');
+        }
 
     public function exportarSocxActExcel() {
         return Excel::download(new SocxActExportExcel, 'socxact.xlsx');

@@ -44,6 +44,7 @@
                     @endforeach
                 </select>
             </div>
+            
             {{-- fin instalaciones con select --}}
             <div class="mb-3">
                 <label for="" class="form-label" name="horariodisp">Horario disponible, con formato "HH:mm a HH:mm":</label>

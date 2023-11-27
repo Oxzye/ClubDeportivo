@@ -19,11 +19,13 @@ class FacturacionController extends Controller
 
        
         //$clientes = new Cajas;
-        $facturacion = Facturacion::all();
+        $facturacion = Facturacion::with('dnisocio')->get();
         $cajas = Cajas::all();
         $clientes = clientes::all();
         $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
         $cajaAbierta = $cajaso->where('estado_caja', true);
+
+
         return view('panel.facturas.index', compact('facturacion', 'cajas', 'clientes', 'cajasAbierta'));
     }
 
@@ -69,13 +71,14 @@ class FacturacionController extends Controller
         $facturacion->pagada_fac = $request->get('pagada_fac');
         $facturacion->fecha_pago_fac = $fecha_pago;
        
-        $cajas = Cajas::findOrFail($facturacion->id_caja);
+        $facturacion ->save();
+        $cajas = Cajas::findOrFail($idCajaAbierta);
     
         $cajas->total_ventas_caja += 1; // Incrementar la cantidad de ventas
         $cajas->monto_final += $facturacion->monto_fac; // Incrementar el monto recaudado
 
         $cajas->save();
-        $facturacion ->save();
+        
 
         
         //Redir

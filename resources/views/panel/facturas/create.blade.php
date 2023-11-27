@@ -7,9 +7,7 @@
 @section('content')
     <div class="container-fluid">
 
-
         <h1>Crear nueva Factura</h1>
-
 
         @if ($errors->any())
             <ul>
@@ -70,8 +68,8 @@
                 <select id="dni_cli" name="dni_cli" class="form-control">
                     <option value=" ">--Seleccionar--</option>
                     @foreach ($clientes as $cli)
-                        <option value="{{ $cli->id_cli }}"> 
-                            {{ $cli->user->dni }}, {{ $cli->user->name }}
+                        <option value="{{ $cli->dni_cli }}"> 
+                            {{ $cli->dni_cli }}, {{ $cli->nombre_cli }}
                         </option>
                     @endforeach
                 </select>
