@@ -55,7 +55,7 @@
                         <table id="tabla-cuotas" class="table table-striped table-hover w-100">
                             <thead>
                                 <tr>
-                                    <th scope="col">DNI</th>
+                                    <th scope="col">Ordenar cuotas pagadas</th>
                                     <th scope="col" class="text-uppercase">Socio</th>
                                     <th scope="col" class="text-uppercase bg-success">Coutas Pagadas</th>
                                     <th scope="col" class="text-uppercase">Fecha de Pago</th>
@@ -64,7 +64,7 @@
                             <tbody>
                                 @foreach ($resultados as $resultado)
                                     <tr>
-                                        <td>{{ $resultado->dni }}</td>
+                                        <td>{{ $resultado->id_tipodetallefactura }}</td>
                                         <td><b>{{ $resultado->name }}</b>{{ ' ' . $resultado->apellido }}</td>
                                         <td><b>{{ ' ' . $resultado->descripcion_tdf }}</b>
                                         </td>

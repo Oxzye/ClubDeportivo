@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Redirect;
+
 use App\Models\Cuotas;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -66,7 +68,9 @@ class CuotasController extends Controller
 
         $cajasAbierta = Cajas::where('estado_caja', 1)->first();
 
-        $cuotastodas = tipodetfactura::where('tipodetalle', 'Cuota Social')->get();
+        $cuotastodas = Tipodetfactura::where('tipodetalle', 'Cuota Social')
+        ->where('tipos_detalle_factura.created_at', '>', $socio->socio->fecha_asociacion)
+            ->get();      
         $resultados = User::CuotasPagadas($dni)->get();
 
         
@@ -109,8 +113,13 @@ class CuotasController extends Controller
             'id_tipodetallefactura' => $request->input('cuota'),
             'num_fac' => $num_factura,
         ]);
+        $realdni = User::join('socios', 'users.id', '=', 'socios.id_user')
+            ->where('socios.id_soc', $request->input('id_soc'))
+            ->select('users.dni')
+            ->first();
+        $dni = $realdni;
 
-        return redirect()->route('cuota_social.index')->with('status', 'Factura cobrada correctamente');
+        return Redirect::route('cuota_social.index', ['dni' => $dni->dni])->with('status', 'Cobro de cuota registrado correctamente');
     }
 
     /**

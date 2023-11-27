@@ -218,81 +218,104 @@ class OtrosSeeder extends Seeder
 
         Formas_pago::create([
             'forma_pago_fdp' => 'Efectivo',
-            'descripcion_fdp' => 'plataplataplata',
-        ]);
-        Formas_pago::create([
-            'forma_pago_fdp' => 'Mercado pago',
-            'descripcion_fdp' => 'pago electrónico',
-        ]);
-        Formas_pago::create([
-            'forma_pago_fdp' => 'Tarjeta Débito',
-            'descripcion_fdp' => 'pago electrónico',
-        ]);
-        Formas_pago::create([
-            'forma_pago_fdp' => 'Tarjeta Crédito',
-            'descripcion_fdp' => 'pago electrónico',
+            'descripcion_fdp' => 'Dinero fisico',
         ]);
 
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Enero 2023',
+            'precio_tdf' => 100.00,
+            'created_at' => '2023-01-01 00:00:00'
         ]);
 
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Febrero 2023',
+            'precio_tdf' => 110.00,
+            'created_at' => '2023-02-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Marzo 2023',
+            'precio_tdf' => 120.00,
+            'created_at' => '2023-03-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Abril 2023',
+            'precio_tdf' => 130.00,
+            'created_at' => '2023-04-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Mayo 2023',
+            'precio_tdf' => 140.00,
+            'created_at' => '2023-05-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Junio 2023',
+            'precio_tdf' => 150.00,
+            'created_at' => '2023-06-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Julio 2023',
+            'precio_tdf' => 160.00,
+            'created_at' => '2023-07-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Agosto 2023',
+            'precio_tdf' => 170.00,
+            'created_at' => '2023-08-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Septiembre 2023',
+            'precio_tdf' => 180.00,
+            'created_at' => '2023-09-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Octubre 2023',
+            'precio_tdf' => 190.00,
+            'created_at' => '2023-10-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Noviembre 2023',
+            'precio_tdf' => 200.00,
+            'created_at' => '2023-11-01 00:00:00'
         ]);
         tipodetfactura::create([
             'tipodetalle' => 'Cuota Social',
             'descripcion_tdf' => 'Diciembre 2023',
+            'precio_tdf' => 210.00,
+            'created_at' => '2023-12-01 00:00:00'
         ]);
-
         tipodetfactura::create([
-            'tipodetalle' => 'Actividad Particular',
-            'descripcion_tdf' => 'Inscripción a alguna actividad dentro del club',
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Enero 2024',
+            'precio_tdf' => 220.00,
+            'created_at' => '2024-01-01 00:00:00'
         ]);
-
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Febrero 2024',
+            'precio_tdf' => 230.00,
+            'created_at' => '2024-02-01 00:00:00'
+        ]);
+        tipodetfactura::create([
+            'tipodetalle' => 'Cuota Social',
+            'descripcion_tdf' => 'Marzo 2024',
+            'precio_tdf' => 240.00,
+            'created_at' => '2024-03-01 00:00:00'
+        ]);
         tipodetfactura::create([
             'tipodetalle' => 'Venta de indumentaria',
             'descripcion_tdf' => 'Venta de indumentaria del club',
         ]);
-
         tipodetfactura::create([
             'tipodetalle' => 'Alquiler de Predio o Instalaciones',
             'descripcion_tdf' => 'Alquiler a cliente',
