@@ -15,6 +15,7 @@ use App\Models\Facturacion;
 use App\Models\Formas_pago;
 use Carbon\Carbon;
 use App\Models\Tipo_factura;
+use App\Models\Socio;
 
 class CuotasController extends Controller
 {
@@ -118,6 +119,16 @@ class CuotasController extends Controller
             ->select('users.dni')
             ->first();
         $dni = $realdni;
+
+        if ($dni) {
+            // Actualizar el estado del socio a activo
+            $socio = Socio::find($request->input('id_soc'));
+
+            if ($socio) {
+                $socio->enabled = 1; // Reemplaza '1' con el valor correcto para el estado activo
+                $socio->save();
+            }
+        }
 
         return Redirect::route('cuota_social.index', ['dni' => $dni->dni])->with('status', 'Cobro de cuota registrado correctamente');
     }
