@@ -34,12 +34,11 @@
                         <option value="0">-nada-</option>
                         @foreach ($tipodetfact as $tdf)
                             <option value="{{ $tdf->id_tipodetallefactura }}" data-precio="{{ $tdf->precio_tdf }}">
-                                {{ $tdf->tipodetalle }}
+                                {{ $tdf->tipodetalle .' |'.$tdf->descripcion_tdf.'| $'.$tdf->precio_tdf }}
                             </option>
                         @endforeach
                     </select>
 
-                    <label for="" class="form-label">Precio</label>
                     <input type="text" name="detalles[0][precio]" value='0' readonly>
                 </div>
             </div>
@@ -49,12 +48,67 @@
             <button type="submit" class="btn btn-success text-uppercase">Guardar Detalles</button>
 
             <!-- Nuevo botón para redireccionar -->
-            <a href="{{ route('facturas.create') }}" class="btn btn-primary">Ir a Facturas</a>
+          
+            
+        <a href="{{ route('Detalle_fact.fin_factura',  $facturacion) }}" class="btn btn-primary">Ver Factura</a>
+        
         </form>
+        
     </div>
-@endsection
 
+    <!-- ... Código existente ... -->
+ <br><br>
+    <div class="table-responsive">
+        @if(count($detallesf) > 0)
+        <h2>Detalles de la Factura</h2>
+        <table class="table table-primary" id="detalles-factura-table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Actividad</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Eliminar</th>
+                    <!-- Agrega más columnas según tus detalles de factura -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($detallesf as $detf)
+                <tr>
+                    @if ($detf->id_act != null)
+                    <td>{{ $detf ->id_detallefactura }}</td>
+                    <td>{{ $detf->actividad ? $detf->actividad->nombre_act : '-no asignado-'  }}</td>
+                    <td>{{ $detf->tipodetfact->tipodetalle }}</td>
+                    <td>{{ $detf->tipodetfact->precio_tdf }}</td>
+                    @else 
+                    <td>{{ $detf ->id_detallefactura }}</td>
+                    <td>{{ '-sin asignar-' }}</td>
+                    <td>{{ $detf->tipodetfact->tipodetalle }}</td>
+                    <td>{{ $detf->tipodetfact->precio_tdf }}</td>
+                    @endif
+                    <td>
+                        <form action="{{ route('Detalle_fact.destroy', $detf->id_detallefactura) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger text-uppercase">
+                                        Eliminar
+                                    </button>
+                                </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @else
+        <p>No hay detalles de factura cargados aun.</p>
+    @endif
+    </div>
+
+    
+@endsection
 @push('js')
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script><script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {
             var numDetalles = 1;
@@ -91,6 +145,11 @@
                 $("#detalles-container").append(nuevoDetalle);
                 numDetalles++;
             });
+
+            
+            // Cargar detalles de la factura al cargar la página
+            
         });
+            
     </script>
 @endpush

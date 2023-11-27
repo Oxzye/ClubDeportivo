@@ -374,7 +374,16 @@ return [
         [
             'text' => 'Cobro de cuota social',
             'icon' => 'fas fa-receipt',
-            'submenu' => []
+            'submenu' => [
+                [
+                    'text' => 'Cobro de cuota social',
+                    'route' => 'cuota_social.index',
+                    'icon' => 'fas fa-calendar-minus', // icono de fontawesome
+                    'can' => 'admin_vista', // permiso
+                    'active' => ['panel/cuota_social/index'],
+                    'shift' => 'ml-3',
+                ],
+            ]
         ],
     //
 
@@ -382,7 +391,16 @@ return [
         [
             'text' => 'Cobro de Act. particular',
             'icon' => 'fas fa-futbol',
-            'submenu' => []
+            'submenu' => [
+                [
+                    'text' => 'Cobro de actividad particular',
+                    'route' => 'insc_act_part.index',
+                    'icon' => 'fas fa-futbol', // icono de fontawesome
+                    'can' => 'admin_vista', // permiso
+                    'active' => ['panel/insc_act_part/index'],
+                    'shift' => 'ml-3',
+                ],
+            ]
         ],
     //
         [
@@ -515,14 +533,16 @@ return [
                     'text' => 'Instalaciones',
                     'route' => 'instalaciones.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_user', // permiso
+                    'can' => 'listado_socios', // permiso de admin
+                    'active' => ['panel/socios*'],
                     'shift' => 'ml-3',
                 ],
                 [
                     'text' => 'Deportes',
                     'route' => 'deportes.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_user', // permiso
+                    'can' => 'listado_clientes', // permiso de admin
+                    'active' => ['panel/clientes*'],
                     'shift' => 'ml-3',
                 ]
             ],
@@ -559,7 +579,7 @@ return [
                     'text' => 'Lista de Clientes',
                     'route' => 'clientes.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
-                    'can' => 'listado_user', // permiso de admin
+                    //'can' => 'listado_user', // permiso de admin
                     'active' => ['panel/clientes*'],
                     'shift' => 'ml-3',
                 ],

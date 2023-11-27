@@ -8,15 +8,26 @@ use App\Models\Empleado;
 
 class CajasController extends Controller
 {
-    public function index () {
+    public function index (Request $request) {
 
         //$empleado = new Cajas;
         $cajas = Cajas::all();
         $empleado = Empleado::all();
         $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
         $cajaAbierta = $cajaso->where('estado_caja', true);
-        
-        return view('panel.Cajas.index', compact('cajas', 'empleado', 'cajaAbierta',));
+        $mesActual = date('n');
+
+        $mes = $request->input('mes', $mesActual); // Si no se proporciona, toma el mes actual
+    
+    // Lógica para obtener las transacciones del mes
+    $transacciones = Cajas::whereMonth('created_at', '=', $mes)->with('empleados')->get();
+    
+    // Calcular el monto final del mes
+    $montoFinal = $transacciones->sum('monto_final');
+
+    // Otras lógicas para cargar datos necesarios en la vista index
+
+    return view('panel.Cajas.index', compact('cajas', 'empleado', 'cajaAbierta', 'mesActual', 'mes', 'montoFinal', 'transacciones'));
     }
 
     public function create () {
@@ -32,14 +43,15 @@ class CajasController extends Controller
         //Guardado de los datos
         $cajas->monto_inicial_caja = $request->get('monto_inicial_caja');
         $cajas->saldo_caja = $request->get('saldo_caja');
+        // $cajas->id_emp = auth()->user()->id; sirve pero por las conexiones debe estar el id en empleados
         $cajas->id_emp = $request->get('id_emp');
         $cajas->total_ventas_caja = $request->get('total_ventas_caja');
         $cajas->estado_caja = $request->get('estado_caja');
         $cajas->monto_final = $request->get('monto_final');
-       
+        //$producto->vendedor_id = auth()->user()->id;
         $cajas ->save();
         //Redir
-        echo '<script>showCajaIndicator();</script>';
+        
        return redirect()->route('Cajas.index')->with('status', 'Caja abierta correctamente');
     }
 
@@ -82,40 +94,15 @@ class CajasController extends Controller
         return redirect()->route('Cajas.index')->with('status', 'Cajas eliminada correctamente');
     }
 
-  /*  public function apertura(Request $request)
-    {
-        // Lógica para la apertura de caja aquí
-        $cajas = new Cajas();
-        //Guardado de los datos
-        $cajas->monto_inicial_caja = $request->get('monto_inicial_caja');
-        $cajas->saldo_caja = $request->get('saldo_caja');
-        $cajas->id_emp = $request->get('id_emp');
-        $cajas->total_ventas_caja = $request->get('total_ventas_caja');
-        $cajas->estado_caja = $request->get('estado_caja');
-        $cajas->monto_final = $request->get('monto_final');
-       
-        $cajas ->save();
-        //Redir
-        return redirect()->route('Cajas.edit')->with('status', 'Cajas abierta correctamente');
-        echo '<script>showCajaIndicator();</script>';
-        echo '<script>viewFacturacion();</script>';
-    }
-
-    public function cierre()
-    {
-        // Lógica para el cierre de caja aquí
-        echo '<script>hideCajaIndicator();</script>';
-        echo '<script>hideFacturacion();</script>';
-
-    }*/
+   
     public function show($id)
-{
+    {
     // Lógica para mostrar una caja específica por su ID
     $cajas = Cajas::findOrFail($id);
     $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
     $cajaAbierta = $cajaso->where('estado_caja', true);
     // Puedes pasar la caja a una vista o realizar cualquier otra lógica necesaria
     return view('panel.Cajas.index', compact('cajas','cajaAbierta'));
-}
+    }
 
 }

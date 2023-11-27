@@ -7,6 +7,7 @@
             <th>nombre_act</th>
             <th>limite_soc_atc</th>
             <th>descripcion_act</th>
+            <th>precio_act</th>
             <th>actividad_en_curso</th>
             <th>fecha_inicio_act</th>
             <th>fecha_fin_act</th>  
@@ -24,6 +25,7 @@
                 <td>{{ $act->nombre_act }}</td>
                 <td>{{ $act->limite_soc_atc }}</td>
                 <td>{{ $act->descripcion_act }}</td>
+                <td>{{ $act->precio_act }}</td>
                 <td>{{ $act->actividad_en_curso }}</td>
                 <td>{{ $act->fecha_inicio_act }}</td>
                 <td>{{ $act->fecha_fin_act }}</td>

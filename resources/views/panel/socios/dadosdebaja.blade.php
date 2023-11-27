@@ -44,6 +44,10 @@
                         <div class="card-body">
                             <div>
                                 <a href="{{ route('socios.index') }}" class="btn btn-info">Regresar</a>
+
+                                <a href="{{ route('exportar-sociosBaja-excel') }}" class="btn btn-warning mx-3" title="Excel" target="_blank">
+                                    <i class="fas fa-file-excel"></i> Excel
+                                </a>
                             </div>
                         </div>
                         <table id="tabla-socios" class="table table-striped table-hover w-80">

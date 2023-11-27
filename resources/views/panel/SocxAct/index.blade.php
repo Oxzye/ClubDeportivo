@@ -21,9 +21,13 @@
                     <i class="fas fa-file-excel"></i> Excel
                 </a>
         
-                <a href="{{ route('graficos-socxact')}}" class="btn btn-warning mx-1 px-2 pt-1 pb-1" title="ChartJs">
+                <a href="{{ route('exportar-socxact-pdf') }}" class="btn btn-warning mx-1" title="PDF" target="_blank">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </a>
+
+                <a href="{{ route('graficos-socxact')}}" class="btn btn-warning mx-3 px-2 pt-2 pb-1" title="ChartJs">
                     <i class="fas fa-chart-pie"></i> Gráfico
-                   </a>
+                </a>
             </div>
 
             @if (session('alert'))
@@ -56,9 +60,10 @@
                             </thead>
                             <tbody>
                                 @foreach ($socxact as $sxa)
-                                    <tr class="">
+                                    <tr>
+                                        {{-- <?php dd( $sxa->actividad->nombre_act) ?> --}}
                                         <td class="text-center">{{ $sxa->id_sxa }}</td>
-                                        <td class="text-center">{{ $sxa->actividad->nombre_act }}</td>
+                                        <td class="text-center">{{ $sxa->actividad ? $sxa->actividad->nombre_act : '-no asignado-' }}</td>
                                         <td class="text-center">{{ $sxa->socio->user->name .' '. $sxa->socio->user->apellido }}</td>
                                         <td class="text-center">{{ $sxa->fecha_inscripcion }}</td>
                                         <td class="text-center">{{ $sxa->opinion_soc }}</td>

@@ -56,13 +56,15 @@ class EmpleadosController extends Controller
             'fecha_alta_emp' => 'required|date|after:fecha_nac',
         ]
         ,[
-            'name.required' => 'El campo nombre es obligatorio',
+         
             'name.string' => 'Ingrese texto',
             'name_act.unique' => 'El nombre ya está registrado',
             'name_act.max' => 'Solo se permiten hasta 60 caracteres',
 
             'cuit_emp.required' => 'El campo cuit es obligatorio',
-            'cuit_emp.string' => 'Ingrese texto',
+            'cuit_emp.unique' => 'El nombre ya está registrado',
+
+            'cuit_emp.required' => 'El campo cuit es obligatorio',
             'cuit_emp.unique' => 'El nombre ya está registrado',
         ]);
         //Contraseña aleatoria
