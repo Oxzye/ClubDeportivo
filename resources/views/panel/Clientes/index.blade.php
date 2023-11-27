@@ -71,17 +71,8 @@
                             <td>{{ $cliente->telefono_cli }}</td>
                             <td>{{ $cliente->email }}</td>
                             <td>{{ Str::limit($cliente->observaciones, 80) }}</td>
-                            {{-- <td>
-                                <img src="" alt="imagen cliente" class="img-fluid" style="width: 150px;">
-                            </td> --}}
                             <td>
-                                <div class="d-flex">
-                                    <a href="{{ route('clientes.show', $cliente->dni_cli) }}" class="btn btn-sm btn-info text-white text-uppercase me-1">
-                                        Ver
-                                    </a>
-                                    <a href="{{ route('clientes.edit', $cliente->dni_cli) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                        Editar
-
+                                <img src="" alt="imagen cliente" class="img-fluid" style="width: 150px;">
                             </td>
                             <td class="d-flex flex-row-reverse bd-highlight">
                                 <div class="btn-group" role="group" aria-label="Basic example">

@@ -61,7 +61,7 @@
                                     <td>{{ $fact->num_fac }}</td>
                                     <td>{{ $fact->id_caja }}</td>
                                     <td>{{ $fact->Formas_pago->forma_pago_fdp }}</td>
-                                    <td>{{ $fact->tipo_fac }}</td>
+                                    <td>{{ $fact->tipo_fac}}</td>
                                     {{-- <td>{{ $fact->dnisocio->user->dni }}</td> --}}
                                     @if ($fact->dnisocio)
                                     @if ($fact->dnisocio->user)
@@ -72,7 +72,7 @@
                                         <td> Usuario no encontrado para este socio.</td>
                                     @endif
                                     @else
-                                        <td>Null</td>
+                                        <td>-</td>
                                     @endif
 
                                     {{-- <td>{{ $fact->dni_cli }}</td> --}}
@@ -85,7 +85,7 @@
                                         <td> Usuario no encontrado para este cliente.</td>
                                     @endif
                                     @else
-                                        <td>Null</td>
+                                        <td>-</td>
                                     @endif
 
                                     <td>{{ $fact->monto_fac }}</td>
