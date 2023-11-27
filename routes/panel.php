@@ -29,6 +29,7 @@ use App\Http\Controllers\CobroActPartController;
 use App\Models\Cajas;
 use App\Models\Deporte;
 use App\Models\Empleado;
+use App\Models\Facturacion;
 use App\Models\Instalacion;
 use App\Models\Socio;
 use Psy\VersionUpdater\Installer;
@@ -88,6 +89,7 @@ Route::middleware([Authenticate::class])->group(function () {
 
         Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
 
+
         Route::resource('/Cajas', CajasController::class)->names('Cajas');
         // Route::get('/Cajas/salida-tactica', [CajasController::class, 'salidaTactica'])->name('Cajas.salidaTactica');
 
@@ -114,6 +116,9 @@ Route::middleware([Authenticate::class])->group(function () {
 
         Route::resource('/clientes', ClientesController::class)->names('clientes');
 
+
+
+        Route::get('graficos-fact',[FacturacionController::class,'graficosFact'])->name('graficos-fact');
         Route::resource('/facturas', FacturacionController::class)->names('facturas');
         Route::put('/products/{id}/update-payment-status', 'ProductController@updatePaymentStatus');
 

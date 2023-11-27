@@ -45,10 +45,12 @@
                     <ul class="navbar-nav me-auto">
                         <!-- Agregar enlaces adicionales si es necesario -->
                     </ul>
+                     
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">

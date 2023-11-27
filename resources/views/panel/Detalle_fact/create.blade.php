@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('plugins.Datatables', true)
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @section('title', 'Crear facturas')
 
 @section('content')
@@ -12,6 +12,9 @@
             @endforeach
         </ul>
     @endif
+    
+        
+    
 
     <div class="container-fluid">
         <h2>Detalle de factura</h2>
@@ -46,11 +49,16 @@
             <button type="button" class="btn btn-primary" id="agregar-detalle">Agregar Detalle</button>
             <button type="button" class="btn btn-danger" id="eliminar-ultimo-duplicado">Eliminar Último Duplicado</button>
             <button type="submit" class="btn btn-success text-uppercase">Guardar Detalles</button>
-
+            
             <!-- Nuevo botón para redireccionar -->
           
             
         <a href="{{ route('Detalle_fact.fin_factura',  $facturacion) }}" class="btn btn-primary">Ver Factura</a>
+        <a href="/panel/facturas" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;" title="Volver a facturas">
+            <span class="material-symbols-outlined d-flex justify-content-center">
+                article
+                </span>
+        </a>
         
         </form>
         
@@ -108,7 +116,7 @@
     
 @endsection
 @push('js')
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script><script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function () {
             var numDetalles = 1;
@@ -150,6 +158,6 @@
             // Cargar detalles de la factura al cargar la página
             
         });
-            
+
     </script>
 @endpush
