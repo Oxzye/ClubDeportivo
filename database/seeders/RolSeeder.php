@@ -58,7 +58,7 @@ class RolSeeder extends Seeder
         //Inscripciones de socios y empleados
 
         //Permisos para la tabla "socios"
-        Permission::create(['name' => 'crear_socio'])->assignRole([$rol_admin, $rol_cajero,]);
+        Permission::create(['name' => 'crear_socio'])->assignRole([$rol_admin, $rol_cajero,]); 
         Permission::create(['name' => 'listado_socios'])->assignRole($todos_menos_inv);
         Permission::create(['name' => 'editar_socio'])->assignRole([$rol_admin, $rol_cajero]);
         Permission::create(['name' => 'eliminar_socio'])->assignRole([$rol_admin, $rol_cajero]);

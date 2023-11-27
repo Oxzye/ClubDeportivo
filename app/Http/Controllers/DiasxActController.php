@@ -43,14 +43,14 @@ class DiasxActController extends Controller
     { //Validacion de los datos
         $validated = $request->validate(
         [
-            'horario_inicio' => 'required|date',
-            'horario_fin' => 'required|date',
+            'horario_inicio' => 'required',
+            'horario_fin' => 'required',
         ],[
             'horario_inicio.required' => 'El campo es obligatorio',
-            'horario_inicio.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
+            'horario_inicio.time' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
             
             'horario_fin.required' => 'El campo es obligatorio',
-            'horario_fin.date' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
+            'horario_fin.time' => 'Formato incorrecto, por favor ingrese una hora valida, (ejemplo: 23:45 o 17:30)',
         ]);
         if($validated) {
             $dxact = new DiasxAct();
