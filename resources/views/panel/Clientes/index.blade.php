@@ -3,7 +3,7 @@
 
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 {{-- Titulo en las tabulaciones del Navegador --}}
 @section('title', 'Clientes')
 
@@ -39,7 +39,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table id="tabla-productos" class="table table-striped table-hover w-100">
+                <table id="tabla-clientes" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
                             <th scope="col">DNI</th>
@@ -53,7 +53,6 @@
                             <th scope="col" class="text-uppercase">Telefono</th>
                             <th scope="col" class="text-uppercase">Email</th>
                             <th scope="col" class="text-uppercase">Observaciones</th>
-                            <th scope="col" class="text-uppercase">Imagen</th>
                             <th scope="col" class="text-uppercase"> Acciones</th>
                            
                         </tr>
@@ -69,33 +68,27 @@
                             <td>{{ $cliente->generos->abreviatura_genero}}</td>
                             <td>{{ $cliente->fecha_nac_cli }}</td>
                             <td>{{ $cliente->telefono_cli }}</td>
-                            <td>{{ $cliente->email }}</td>
+                            <td>{{ $cliente->email_cli }}</td>
                             <td>{{ Str::limit($cliente->observaciones, 80) }}</td>
                             <td>
-                                <img src="" alt="imagen cliente" class="img-fluid" style="width: 150px;">
-                            </td>
-                            <td class="d-flex flex-row-reverse bd-highlight">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route( 'clientes.show', $cliente->dni_cli) }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
-                                        <span class="material-symbols-outlined d-flex justify-content-center">
-                                        info
-                                        </span>
-                                    </button></a>
-                                    <a href="{{ route('clientes.edit', $cliente->dni_cli)  }}" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                <div class="d-flex">
+                                    <a href="{{ route('clientes.show', $cliente->dni_cli) }}" class="btn btn-sm btn-info text-white text-uppercase me-1">
+                                        Ver
+                                    </a>
+                                    <a href="{{ route('clientes.edit',  $cliente->dni_cli) }}" class="btn btn-outline-dark rounded-circle mx-2"style="width:2.5em; height:2.5em;">
                                         <span class="material-symbols-outlined d-flex justify-content-center">
                                             edit_square
                                         </span>
-
-                                    </a>
-                                    <form action="{{ route('clientes.destroy', $cliente->dni_cli ) }}" method="post">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
-                                        <span class="material-symbols-outlined d-flex justify-content-center">
-                                            cancel
-                                        </span>
-                                    </button>
-                                    </form>
-                                    </div>
+                                    </button></a>
+                                    
+                                    <button type="button" 
+                                    data-toggle="modal" data-target="#deleteModal" data-id="{{ $cliente->dni_cli }}" data-nombre="{{ $cliente->nombre_cli }}"
+                                    class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+                                    <span class="material-symbols-outlined d-flex justify-content-center">
+                                        cancel
+                                    </span>
+                                    </button>   
+                                </div>
                             </td>
                         </tr>
                         @endforeach

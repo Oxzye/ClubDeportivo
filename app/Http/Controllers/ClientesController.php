@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\clientes;
 use Illuminate\Http\Request;
 use App\Models\Localidades;
-use App\Models\Paises;
-use App\Models\Provincias;
 use App\Models\generos;
 use Illuminate\Auth\Events\Validated;
 
@@ -85,9 +83,9 @@ class ClientesController extends Controller
          return redirect()->route('clientes.index')->with('status', 'Cliente creado correctamente');
         }
 
-    public function edit(clientes $dni_cli)
+    public function edit( $dni_cli)
     {
-        $clientes = Clientes::all();
+        $clientes = Clientes::findOrFail($dni_cli);
         if($clientes){
             $generos = generos::all();
             $localidades = Localidades::all();
@@ -104,19 +102,41 @@ class ClientesController extends Controller
         return view ('panel.clientes.show', ['cliente'=> $cliente]);
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, $dni_cli)
     {
        $clientes = clientes::findOrFail($dni_cli);
-       return redirect()->route('clientes.index')->with('status','Cliente modificado correctamente');
+ //Guardado de los datos
+                $clientes->nombre_cli = $request->input('nombre_cli');
+                $clientes->apellido_cli = $request->input('apellido_cli');
+                $clientes->dni_cli = $request->get('dni_cli');
+                $clientes->fecha_nac_cli = $request->input('fecha_nac_cli');
+                $clientes->cod_genero = $request->input('cod_genero');
+                $clientes->domicilio_cli = $request->input('domicilio_cli');
+                $clientes->telefono_cli = $request->input('telefono_cli');
+                $clientes->id_loc = $request->get('id_loc');
+                $clientes->email_cli = $request->input('email_cli');
+                $clientes->observaciones = $request->get('observaciones');
+
+                $clientes->save();
+
+       //actualizacion
+       return redirect()->route('clientes.index','dni_cli')->with('status','Cliente modificado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($dni_cli)
+    public function show($dni_cli)
+    {
+    $generos = generos::all();
+    $localidades = Localidades::all();
+    $clientes = clientes::findOrFail($dni_cli);
+    return view('panel.clientes.show', compact('generos', 'localidades', 'clientes'));
+    }
+
+    public function destroy(clientes $dni_cli)
     {
         $clientes = clientes::findOrFail($dni_cli);
-
         //Eliminicacion
         $clientes->delete();
 
