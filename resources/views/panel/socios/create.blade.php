@@ -23,7 +23,8 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            @endif --}}
+            @endif  --}}
+
 
             <div class="col-12">
                 <form action="{{ route('socios.store') }}" method="post">
@@ -111,37 +112,18 @@
                                         {{-- <small id="" class="form-text text-muted">Obligatorio</small> --}}
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">País</label>
-                                        <select class="form-control" id="pais" name="pais">
-                                            <option selected>Seleccionar</option>
-                                            <option></option>
-                                            <option></option>
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Provincia</label>
-                                        <select class="form-control" id="provincia" name="provincia">
-                                            <option selected>Seleccionar</option>
-                                            <option></option>
-                                            <option></option>
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="col-3">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Localidad</label>
-                                        <select class="form-control" id="localidad" name="localidad">
-                                            <option selected>Seleccionar</option>
-                                            <option></option>
-                                            <option></option>
-                                            <option></option>
+                                        <select class="form-control @error('id_loc') is-invalid @enderror" id="id_loc" name="id_loc">
+                                            <option value="" selected>Seleccionar</option>
+                                            @foreach ($localidades as $localidad)
+                                                <option value="{{ $localidad->id_loc }}">{{ $localidad->nombre_loc }}</option>
+                                            @endforeach
                                         </select>
+                                        @error('id_loc')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
