@@ -70,16 +70,18 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Genero</label>
-                            <select id="cod_genero" name="cod_genero" class="form-control">
+                                <select class="form-control @error('cod_genero') is-invalid @enderror" id="cod_genero" name="cod_genero">
                                 <option value="" selected>Seleccione uno...</option>
                                 @foreach ($generos as $genero)
-                                    <option {{ $socio->user->cod_genero && $socio->user->cod_genero == $genero->cod_genero ? 'selected': ''}} value="{{ $genero->cod_genero }}"> 
-                                        {{ $genero->tipo_genero }}
-                                    </option>
-                                @endforeach
-                            </select> 
+                                <option {{ $socio->user->cod_genero && $socio->user->cod_genero == $genero->cod_genero ? 'selected': ''}} value="{{ $genero->cod_genero }}"> 
+                                     @endforeach
+                        </select>
+                        @error('cod_genero')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                             </div>
                         </div>
+                        
                         <div class="col-7">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Domicilio</label>
@@ -173,7 +175,6 @@
 
 @stop
 
-{{-- Importacion de Archivos CSS --}}
 @section('css')
     
 @stop
@@ -184,4 +185,17 @@
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
     <script src="{{ asset('js/productos.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputs = document.querySelectorAll('input, select');
+    
+            inputs.forEach(function (input) {
+                input.addEventListener('input', function () {
+                    // Remover la clase de error al escribir
+                    this.classList.remove('is-invalid');
+                });
+            });
+        });
+    </script>
+    
 @stop
