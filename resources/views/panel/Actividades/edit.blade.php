@@ -8,14 +8,14 @@
     <div class="container-fluid">
 
         <h1>Editar Actividad</h1>
-
+{{-- 
         @if ($errors->any())
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        @endif
+        @endif --}}
         
         <form action="{{ route('Actividades.update', $act->id_act) }}" method="post" novalidate>
         @csrf @method('PUT')

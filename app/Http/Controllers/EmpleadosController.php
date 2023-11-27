@@ -10,6 +10,8 @@ use App\Models\generos;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use App\Models\Paises;
+use App\Models\Localidades;
+use App\Models\Provincias;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,7 +36,9 @@ class EmpleadosController extends Controller
         $cargos = Cargos::all();
         $generos = generos::all();
         $paises = Paises::all();
-        return  view('panel.empleados.create',compact('cargos','generos','paises'));
+        $provincias = Provincias::all();
+        $localidades = Localidades::all(); // Cambié $localidad a $localidades
+        return view('panel.empleados.create', compact('cargos', 'generos', 'paises', 'localidades', 'provincias'));
     }
 
     /**
@@ -144,6 +148,7 @@ class EmpleadosController extends Controller
             'cuit_emp' => $request->input('cuit_emp'),
             'fecha_alta_emp' => $request->input('fecha_alta_emp'),
             'fecha_baja_emp' => $request->input('fecha_baja_emp'),
+            
             // Otros campos de 'empleados'.
         ]);
 
@@ -171,7 +176,9 @@ class EmpleadosController extends Controller
         $generos = generos::all();
         $cargos = Cargos::all();
         $empleado = Empleado::with('user')->find($id);
-
+        $paises = Paises::all();
+        $provincias = Provincias::all();
+        $localidades = Localidades::all(); // Cambié $localidad a $localidades
         // Muestra el formulario de edición con los datos actuales del socio y el usuario
         return view('panel.empleados.edit', compact('empleado', 'generos', 'cargos'));
     }
@@ -243,6 +250,7 @@ class EmpleadosController extends Controller
         // Redirige a la vista de empleados o cualquier otra ruta que desees
         return redirect()->route('empleados.index')->with('status', 'Empleado eliminado correctamente');
     }
+    
 
     public function dadosdebaja()
     {

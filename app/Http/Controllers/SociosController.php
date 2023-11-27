@@ -56,6 +56,7 @@ class SociosController extends Controller
             'cod_genero' => 'required|integer',
             'domicilio' =>  'required|string|max:200',
             'telefono' =>   'required|string|max:20',
+            'fecha_asociacion' => 'required|date|before:tomorrow',
             // 'fecha_asociacion' => 'required|date|after:fecha_nac',
             'observaciones_soc'=> 'string|max:40',
         ];
@@ -69,6 +70,7 @@ class SociosController extends Controller
             'cuil_soc.*' => 'Ingrese un CUIL valido',
             'email.*' =>'Ingrese un Email valido',
             'fecha_nac' => 'Ingrese una fecha valida',
+            'fecha_asociacion' => 'Ingrese una fecha valida'
             // 'fecha_asociacion' => 'Ingrese una fecha valida',
 
         ];

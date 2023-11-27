@@ -2,7 +2,7 @@
 
 @section('plugins.Datatables', true)
 
-@section('title','Crear Actividades')
+@section('title', 'Crear Actividades')
     
 @section('content')
     <div class="container-fluid">
@@ -12,39 +12,47 @@
         <form action="{{ route('Actividades.store') }}" method="post" id="actividadForm">
             @csrf
 
-            {{-- deportes con select --}}
+            {{-- Deportes con select --}}
             <div class="mb-3 row">
-                <label for="id_dep" class="col-sm-4 col-form-label" name="id_dep"> Deporte (nombreDep | M_F_Mixto | descripcionDep): </label>
-                <select id="id_dep" name="id_dep" class="form-control is-invalid">
-                    <option value="" selected>Seleccione uno...</option>
-                    @foreach ($deportes as $deporte)
-                        <option value="{{ $deporte->id_dep }}">
-                            {{ $deporte->nombreDep .' | '. $deporte->M_F_Mixto .' | '. $deporte->descripcionDep }}
-                        </option>
-                    @endforeach
-                </select>
-                <div class="invalid-feedback" id="mensajeError" style="color: red;"></div>
+                <label for="id_idep" class="col-sm-4 col-form-label" name="id_dep"> Deporte (nombreDep | M_F_Mixto | descripcionDep): </label>
+               
+                    <select id="id_idep" name="id_dep" class="form-control @error('nombre_dep') is-invalid @endif @if(!$errors->has('nombre_dep') && old('nombre_dep')) is-valid @endif" aria-describedby="helpId">
+                        <option value="seleccionar">Seleccione uno...</option>
+                        @error('nombre_dep')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        <br>
+                        @foreach ($deportes as $deporte)
+                            <option value="{{ $deporte->id_dep }}" @if(old('nombre_dep') == $deporte->id_dep) selected @endif> 
+                                {{ $deporte->nombreDep .' | '.$deporte->descripcionDep }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="invalid-feedback" id="mensajeErrorDep" style="color: red;"></div>
+               
             </div>
-
-            {{-- instalaciones con select --}}
+            
+            {{-- Instalaciones con select --}}
             <div class="mb-3 row">
                 <label for="id_inst" class="col-sm-4 col-form-label" name="id_inst"> Instalación (nombre_inst | tipo_inst | capacidad): </label>
-                <select id="id_inst" name="id_inst" class="form-control" value="{{ old( 'nombre_act' ) }}" aria-describedby="helpId" @error('nombre_act') is-invalid @enderror">
-                    @error( 'nombre_act' )
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                    <br>
-                    @foreach ($instalaciones as $instalacion)
-                        <option value="{{ $instalacion->id_inst }}"> 
-                            {{ $instalacion->nombre_inst .' | '.$instalacion->tipo_inst .' | '. $instalacion->capacidad_inst}}
-                        </option>
-                    @endforeach
-                </select>
-                <div class="invalid-feedback" id="mensajeError" style="color: red;"></div>
+                
+                    <select id="id_inst" name="id_inst" class="form-control @error('nombre_inst') is-invalid @endif @if(!$errors->has('nombre_inst') && old('nombre_inst')) is-valid @endif" aria-describedby="helpId">
+                        <option value="seleccionar">Seleccione una...</option>
+                        @error('nombre_inst')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        <br>
+                        @foreach ($instalaciones as $instalacion)
+                            <option value="{{ $instalacion->id_inst }}" @if(old('nombre_inst') == $instalacion->id_inst) selected @endif> 
+                                {{ $instalacion->nombre_inst .' | '. $instalacion->tipo_inst . '| ' . $instalacion->capacidad_inst }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="invalid-feedback" id="mensajeErrorInst" style="color: red;"></div>
+                
             </div>
 
             {{-- Resto de los campos... --}}
-
             <div class="mb-3">
                 <label for="" class="form-label" name="nombre_act">Nombre de la actividad:</label>
                 <input type="text" class="form-control" name="nombre_act" value="{{ old( 'nombre_act' ) }}" aria-describedby="helpId">
@@ -95,134 +103,34 @@
 
              <div class="row mb-4">
                 <button type="submit" class="btn btn-success mx-4">Guardar</button>
-             <a href="{{ route('Actividades.index') }}" class="btn btn-danger">Cancelar</a>
+                <a href="{{ route('Actividades.index') }}" class="btn btn-danger">Cancelar</a>
              </div>
         </form>
     </div>
 
     <script>
-        function validateForm() {
-            var nombre_act = document.querySelector('[name="nombre_act"]');
-            var limite_soc_atc = document.querySelector('[name="limite_soc_atc"]');
-            var descripcion_act = document.querySelector('[name="descripcion_act"]');
-            var actividad_en_curso = document.querySelector('[name="actividad_en_curso"]');
-            var fecha_inicio_act = document.querySelector('[name="fecha_inicio_act"]');
-            var fecha_fin_act = document.querySelector('[name="fecha_fin_act"]');
-
-            clearErrors();
-
-            var isValid = true;
-
-            if (nombre_act.value.trim() === '') {
-                displayError(nombre_act, 'El nombre de la actividad es obligatorio');
-                isValid = false;
-            }
-
-            if (limite_soc_atc.value.trim() === '') {
-                displayError(limite_soc_atc, 'El límite de socios por actividad es obligatorio');
-                isValid = false;
-            }
-
-            if (descripcion_act.value.trim() === '') {
-                displayError(descripcion_act, 'La descripción de la actividad es obligatoria');
-                isValid = false;
-            }
-
-            if (actividad_en_curso.value.trim() === '') {
-                displayError(actividad_en_curso, 'Ingrese 0 (falso) o 1 (verdadero) para la actividad en curso');
-                isValid = false;
-            }
-
-            if (fecha_inicio_act.value.trim() === '') {
-                displayError(fecha_inicio_act, 'La fecha de inicio de actividad es obligatoria');
-                isValid = false;
-            }
-
-            if (fecha_fin_act.value.trim() === '') {
-                displayError(fecha_fin_act, 'La fecha de fin de actividad es obligatoria');
-                isValid = false;
-            }
-
-            if (isValid) {
-                document.getElementById('actividadForm').submit();
-            }
-        }
-
-        function displayError(input, message) {
-            var errorDiv = document.createElement('div');
-            errorDiv.className = 'alert alert-danger mt-2';
-            errorDiv.innerText = message;
-            input.parentNode.appendChild(errorDiv);
-            input.classList.add('border', 'border-danger');
-        }
-
-        function clearError(input) {
-            var parent = input.parentNode;
-            var errorDiv = parent.querySelector('.alert-danger');
-            if (errorDiv) {
-                parent.removeChild(errorDiv);
-                input.classList.remove('border', 'border-danger');
-            }
-        }
-
-        function clearErrors() {
-            var errorDivs = document.querySelectorAll('.alert-danger');
-            errorDivs.forEach(function (div) {
-                div.parentNode.removeChild(div);
-            });
-
-            var inputs = document.querySelectorAll('.form-control');
-            inputs.forEach(function (input) {
-                input.classList.remove('border', 'border-danger');
-            });
-        }
-    </script>
-@endsection
-
-@section('js')
-    <script>
         document.addEventListener("DOMContentLoaded", function () {
-            var selectLoc = document.getElementById("id_dep");
-            var selectGenero = document.getElementById("id_inst");
-            var initialClassLoc = selectLoc.className;
-            var initialClassGenero = selectGenero.className;
-            var mensajeError = document.getElementById("mensajeError");
+            var selectDep = document.getElementById("id_idep");
+            var initialClassDep = selectDep.className;
+            var mensajeErrorDep = document.getElementById("mensajeErrorDep");
 
-            // Validación para el campo de localidad al cambiar
-            selectLoc.addEventListener("change", function () {
-                var localidad = this.value;
+            // Validación para el campo de deporte al cambiar
+            selectDep.addEventListener("change", function () {
+                var deporte = this.value;
 
-                if (localidad === "" || localidad === "Seleccionar") {
-                    mensajeError.innerHTML = "Por favor, selecciona una localidad.";
+                if (deporte === "" || deporte === "Seleccione uno...") {
+                    mensajeErrorDep.innerHTML = "Por favor, selecciona un deporte.";
 
                     // Restaurar clase inicial y quitar la clase de validación
-                    selectLoc.className = initialClassLoc;
+                    selectDep.className = initialClassDep;
                 } else {
-                    mensajeError.innerHTML = ""; // Limpiar el mensaje de error si se ha seleccionado una localidad válida
+                    mensajeErrorDep.innerHTML = ""; // Limpiar el mensaje de error si se ha seleccionado un deporte válido
 
                     // Agregar clases de Bootstrap para indicar que el campo es válido
-                    selectLoc.classList.remove("is-invalid");
-                    selectLoc.classList.add("is-valid");
-                }
-            });
-
-            // Validación para el campo de género al cambiar
-            selectGenero.addEventListener("change", function () {
-                var genero = this.value;
-
-                if (genero === "" || genero === "Seleccionar") {
-                    mensajeError.innerHTML = "Por favor, selecciona un género.";
-
-                    // Restaurar clase inicial y quitar la clase de validación
-                    selectGenero.className = initialClassGenero;
-                } else {
-                    mensajeError.innerHTML = ""; // Limpiar el mensaje de error si se ha seleccionado un género válido
-
-                    // Agregar clases de Bootstrap para indicar que el campo es válido
-                    selectGenero.classList.remove("is-invalid");
-                    selectGenero.classList.add("is-valid");
+                    selectDep.classList.remove("is-invalid");
+                    selectDep.classList.add("is-valid");
                 }
             });
         });
     </script>
-@stop
+@endsection

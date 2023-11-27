@@ -17,13 +17,13 @@
     <div class="container-fluid">
         <div class="row">
 
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            @endif
+            @endif --}}
 
             <div class="col-12">
                 <form action="{{ route('socios.store') }}" method="post">
@@ -34,83 +34,80 @@
                                 <div class="col-5">
                                     <div class="form-group">
                                         <label for="name">Nombre</label>
-                                        <input type="text" class="form-control" name="name" id="name" value="{{ old( 'name' ) }}" aria-describedby="helpId" @error('name') is-invalid @enderror">
-                                        @error( 'name' )
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        {{-- <small id="" class="form-text text-muted">Obligatorio.</small> --}}
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old( 'name' ) }}" aria-describedby="helpId">
+                                        @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                     </div>
                                 </div>
                                 <div class="col-5">
                                     <div class="form-group">
                                         <label for="apellido">Apellido</label>
-                                        <input type="text" class="form-control" id="apellido" name="apellido" value="{{ old( 'apellido' ) }}" aria-describedby="helpId" @error('apellido') is-invalid @enderror">
-                                        @error( 'apellido' )
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        {{-- <small id="" class="form-text text-muted">Obligatorio.</small> --}}
+                                        <input type="text" class="form-control @error('apellido') is-invalid @enderror" id="apellido" name="apellido" value="{{ old( 'apellido' ) }}" aria-describedby="helpId">
+                                        @error('apellido')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="col-5">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">DNI</label>
-                                        <input type="number" class="form-control" name="dni" id="dni" value="{{ old( 'dni' ) }}" aria-describedby="helpId" @error('dni') is-invalid @enderror">
-                                        @error( 'dni' )
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        {{-- <small id="" class="form-text text-muted">Obligatorio.</small> --}}
+                                        <input type="number" class="form-control @error('dni') is-invalid @enderror" name="dni" id="dni" value="{{ old( 'dni' ) }}" aria-describedby="helpId">
+                                        @error('dni')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                     </div>
                                 </div>
                                 <div class="col-5">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">CUIL</label>
-                                        <input type="number" class="form-control" name="cuil_soc" id="cuil_soc" value="{{ old( 'cuil_soc' ) }}" aria-describedby="helpId" @error('cuil_soc') is-invalid @enderror">
-                                        @error( 'cuil_soc' )
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        <input type="text" class="form-control @error('cuil_soc') is-invalid @enderror" name="cuil_soc" value="{{ old('cuil_soc') }}">
+                                @error('cuil_soc')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                         {{-- <small id="" class="form-text text-muted">Obligatorio.</small> --}}
                                     </div>
                                 </div>
                                 <div class="col-5">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Fecha de Nacimiento</label>
-                                        <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" value="{{ old( 'fecha_nac' ) }}" aria-describedby="helpId" @error('fecha_nac') is-invalid @enderror">
-                                        @error( 'fecha_nac' )
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                <input type="date" class="form-control @error('fecha_nac') is-invalid @enderror" name="fecha_nac" value="{{ old('fecha_nac') }}">
+                                @error('fecha_nac')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                         {{-- <small id="" class="form-text text-muted">Obligatorio.</small> --}}
                                     </div>
                                 </div>
-                                <div class="col-5">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Genero</label>
-                                        <select id="cod_genero" name="cod_genero" class="form-control">
-                                            <option value="" selected>Seleccione uno...</option>
-                                            @foreach ($generos as $genero)
-                                                <option value="{{ $genero->cod_genero }}">
-                                                    {{ $genero->tipo_genero }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+                               <div class="col-5">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Genero</label>
+                                <select class="form-control @error('cod_genero') is-invalid @enderror" id="cod_genero" name="cod_genero">
+                                <option value="" selected>Seleccione uno...</option>
+                                @foreach ($generos as $genero)
+                                <option value="{{ $genero->cod_genero }}">{{ $genero->tipo_genero }}</option>
+                            @endforeach
+                        </select>
+                        @error('cod_genero')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                            </div>
+                        </div>
                                 <div class="col-7">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Domicilio</label>
-                                        <input type="text" class="form-control" name="domicilio" id="" value="{{ old( 'domicilio' ) }}" aria-describedby="helpId" @error('domicilio') is-invalid @enderror">
-                                        @error( 'domicilio' )
-                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        <input type="text" class="form-control @error('domicilio') is-invalid @enderror" name="domicilio" value="{{ old('domicilio') }}">
+                                        @error('domicilio')
+                                            <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
-                                        <small id="emailHelp" class="form-text text-muted">Domicilio donde reside actualmente.</small>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Nro de telefono</label>
-                                        <input type="number" class="form-control" id="telefono" name="telefono" value="{{ old( 'telefono' ) }}" aria-describedby="helpId" @error('telefono') is-invalid @enderror">
-                                        @error( 'telefono' )
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
+                                        <input type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}">
+                                @error('telefono')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                         {{-- <small id="" class="form-text text-muted">Obligatorio</small> --}}
                                     </div>
                                 </div>
@@ -155,11 +152,10 @@
                                 <div class="col-10">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Correo electronico</label>
-                                        <input type="email" class="form-control" name="email" id="email" value="{{ old( 'email' ) }}" aria-describedby="helpId" @error('email') is-invalid @enderror">
-                                        @error( 'email' )
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                        {{-- <small id="emailHelp" class="form-text text-muted">Obligatorio.</small> --}}
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old( 'email' ) }}" aria-describedby="helpId">
+                                        @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror 
                                     </div>
                                 </div>
                                 <div class="col-10">
@@ -168,18 +164,15 @@
                                         <input class="form-control" type="text"
                                             value="La contraseña autogenerada será enviada al usuario vía email" readonly>
                                         <input type="text" value="1" name="password" hidden>
-                                        <small id="" class="form-text text-muted">.</small>
                                     </div>
                                 </div>
                                 <div class="col-10">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Fecha de Asociacion</label>
-                                        <input type="date" class="form-control" id="fecha_asociacion"
-                                            name="fecha_asociacion" aria-describedby="fecha_nac" value="{{ old( 'fecha_asociacion' ) }}"  @error('fecha_asociacion') is-invalid @enderror">
-                                            @error( 'fecha_asociacion' )
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        {{-- <small id="" class="form-text text-muted">Obligatorio.</small> --}}
+                                        <input type="date" class="form-control @error('fecha_asociacion') is-invalid @enderror" name="fecha_asociacion" value="{{ old('fecha_asociacion') }}">
+                                @error('fecha_asociacion')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                                     </div>
                                 </div>
                                 <div class="col-10">
@@ -209,8 +202,22 @@
 
 
     {{-- Importacion de Archivos JS --}}
-    @section('js')
+    {{-- Importacion de Archivos JS --}}
+@section('js')
 
-        {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-        <script src="{{ asset('js/socio.js') }}"></script>
-    @stop
+{{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
+<script src="{{ asset('js/socios.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('input, select');
+
+        inputs.forEach(function (input) {
+            input.addEventListener('input', function () {
+                // Remover la clase de error al escribir
+                this.classList.remove('is-invalid');
+            });
+        });
+    });
+</script>
+
+@stop

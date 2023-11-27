@@ -14,16 +14,27 @@
 
 {{-- Contenido de la Pagina --}}
 @section('content')
+<style>
+  .form-control {
+    border: 1px solid #ced4da;
+}
+
+/* Estilo para campo de entrada con error */
+.form-control.is-invalid {
+    border-color: #dc3545;
+    background-color: #f8d7da; /* Cambia el color de fondo a rojo claro */
+}
+</style>
 <div class="container-fluid">
     <div class="row">
 
-        @if ($errors->any())
+        {{-- @if ($errors->any())
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-        @endif
+        @endif --}}
 
     <div class="col-12">
         <form action="{{ route('empleados.store') }}" method="post">
@@ -56,7 +67,6 @@
                                 @error('dni')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                {{-- <small id="" class="form-text text-muted">Obligatorio.</small> --}}
                             </div>
                         </div>
                         <div class="col-5">
@@ -82,17 +92,15 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Genero</label>
-                            <select id="cod_genero" name="cod_genero" class="form-control">
+                                <select class="form-control @error('cod_genero') is-invalid @enderror" id="cod_genero" name="cod_genero">
                                 <option value="" selected>Seleccione uno...</option>
                                 @foreach ($generos as $genero)
-                                    <option value="{{ $genero->cod_genero }}"> 
-                                        {{ $genero->tipo_genero }}
-                                    </option>
-                                @endforeach
-                            </select> 
-                                @error( 'cod_genero' )
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <option value="{{ $genero->cod_genero }}">{{ $genero->tipo_genero }}</option>
+                            @endforeach
+                        </select>
+                        @error('cod_genero')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                             </div>
                         </div>
 
@@ -133,35 +141,29 @@
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect2">Provincias</label>
-                                <select class="form-control" id="provincia" name="provincia">
-                                    <option selected>Seleccionar</option>
+                                <select class="form-control @error('id_prov') is-invalid @enderror" id="id_prov" name="id_prov">
+                                    <option value="" selected>Seleccionar</option>
                                     @foreach ($provincias as $provincia)
-                                        <option value="{{ $provincias->id_prov }}"> 
-                                            {{ $provincias->nombre_prov }}
-                                        </option>
+                                        <option value="{{ $provincia->id_prov }}">{{ $provincia->nombre_prov }}</option>
                                     @endforeach
                                 </select>
-                                @error('provincia')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @error('id_prov')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div>
-                        </div>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Localidad</label>
-                                <select class="form-control" id="localidad" name="localidad" >
-                                <option selected>Seleccionar</option>
-                                 @foreach ($paises as $pais)
-                                <option value="{{ $pais->id_pais }}"> 
-                                    {{ $pais->nombre_pais }}
-                                </option>
-                            @endforeach
+                                <select class="form-control @error('id_loc') is-invalid @enderror" id="id_loc" name="id_loc">
+                                    <option value="" selected>Seleccionar</option>
+                                    @foreach ($localidades as $localidad)
+                                        <option value="{{ $localidad->id_loc }}">{{ $localidad->nombre_loc }}</option>
+                                    @endforeach
                                 </select>
-                                @error( 'id_loc' )
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                                @error('id_loc')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -189,25 +191,23 @@
                         </div>
                         <div class="col-10">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Cargo de empleado</label>
-                                <select id="id_cargo" name="id_cargo" class="form-control">
-                                    <option value="" selected>Seleccione uno...</option>
+                                <label for="exampleFormControlSelect1">Cargos de empleados</label>
+                                <select class="form-control @error('id_cargo') is-invalid @enderror" id="id_cargo" name="id_cargo">
+                                    <option value="" selected>Seleccionar</option>
                                     @foreach ($cargos as $cargo)
-                                        <option value="{{ $cargo->id_cargo }}"> 
-                                            {{ $cargo->nombre_cargo }}
-                                        </option>
+                                        <option value="{{ $cargo->id_cargo }}">{{ $cargo->nombre_cargo }}</option>
                                     @endforeach
-                                </select> 
-                                @error( 'id_cargo' )
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                                </select>
+                                @error('id_cargo')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInput">Fecha de alta de empleado</label>
-                                <input type="text" class="form-control @error('fecha_alt_emp') is-invalid @enderror" name="fecha_Alt_emp" value="{{ old('fecha_alt__emp') }}">
-                                @error('fecha_alt_emp')
+                                <input type="text" class="form-control @error('fecha_alta_emp') is-invalid @enderror" name="fecha_alta_emp" value="{{ old('fecha_alta_emp') }}">
+                                @error('fecha_alta_emp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                               </div>
@@ -253,4 +253,17 @@
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
     <script src="{{ asset('js/productos.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputs = document.querySelectorAll('input, select');
+    
+            inputs.forEach(function (input) {
+                input.addEventListener('input', function () {
+                    // Remover la clase de error al escribir
+                    this.classList.remove('is-invalid');
+                });
+            });
+        });
+    </script>
+    
 @stop
