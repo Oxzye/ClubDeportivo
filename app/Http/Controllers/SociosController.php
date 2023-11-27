@@ -66,7 +66,7 @@ class SociosController extends Controller
             'telefono' =>   'required|string|max:20',
             'fecha_asociacion' => 'required|date|before:tomorrow',
             // 'fecha_asociacion' => 'required|date|after:fecha_nac',
-            'observaciones_soc'=> 'string|max:40',
+            'observaciones_soc'=> 'nullable|string|max:40',
         ];
 
         // Define los mensajes de error personalizados (opcional)

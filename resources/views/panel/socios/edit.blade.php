@@ -98,62 +98,39 @@
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">País</label>
-                                <select class="form-control @error('id_pais') is-invalid @enderror" id="id_pais" name="id_pais">
-                                    <option value="" selected>Seleccionar</option>
-                                    @foreach ($paises as $pais)
-                                        <option value="{{ $pais->id_pais }}">{{ $pais->nombre_pais }}</option>
-                                    @endforeach
+                                <label for="exampleFormControlSelect1">País</label>
+                                <select class="form-control" id="pais" name="pais" >
+                                <option selected>Seleccionar</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
                                 </select>
-                                @error('id_pais')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
                             </div>
                         </div>
-
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">Provincias</label>
-                                <select class="form-control @error('id_prov') is-invalid @enderror" id="id_prov" name="id_prov">
-                                    <option value="" selected>Seleccionar</option>
-                                    @foreach ($provincias as $provincia)
-                                        <option value="{{ $provincia->id_prov }}">{{ $provincia->nombre_prov }}</option>
-                                    @endforeach
+                                <label for="exampleFormControlSelect1">Provincia</label>
+                                <select class="form-control" id="provincia" name="provincia" >
+                                <option selected>Seleccionar</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
                                 </select>
-                                @error('id_prov')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Localidad</label>
-                                <select class="form-control @error('id_loc') is-invalid @enderror" id="id_loc" name="id_loc">
-                                    <option value="" selected>Seleccionar</option>
-                                    @foreach ($localidades as $localidad)
-                                        <option value="{{ $localidad->id_loc }}">{{ $localidad->nombre_loc }}</option>
-                                    @endforeach
+                                <select class="form-control" id="localidad" name="localidad" >
+                                <option selected>Seleccionar</option>
+                                <option></option>
+                                <option></option>
+                                <option></option>
                                 </select>
-                                @error('id_loc')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col-10">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Correo electronico</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                                {{-- <small id="emailHelp" class="form-text text-muted">Obligatorio.</small> --}}
-                            </div>
-                        </div>
                 
                 <div class="col-6">
                     <div class="row">

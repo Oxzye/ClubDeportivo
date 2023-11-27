@@ -23,7 +23,7 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            @endif --}}
+            @endif  --}}
 
             <div class="col-12">
                 <form action="{{ route('socios.store') }}" method="post">
@@ -111,35 +111,6 @@
                                         {{-- <small id="" class="form-text text-muted">Obligatorio</small> --}}
                                     </div>
                                 </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect2">País</label>
-                                        <select class="form-control @error('id_pais') is-invalid @enderror" id="id_pais" name="id_pais">
-                                            <option value="" selected>Seleccionar</option>
-                                            @foreach ($paises as $pais)
-                                                <option value="{{ $pais->id_pais }}">{{ $pais->nombre_pais }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('id_pais')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-        
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect2">Provincias</label>
-                                        <select class="form-control @error('id_prov') is-invalid @enderror" id="id_prov" name="id_prov">
-                                            <option value="" selected>Seleccionar</option>
-                                            @foreach ($provincias as $provincia)
-                                                <option value="{{ $provincia->id_prov }}">{{ $provincia->nombre_prov }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('id_prov')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
                                 <div class="col-3">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Localidad</label>
@@ -155,7 +126,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
 
                         <div class="col-6">
