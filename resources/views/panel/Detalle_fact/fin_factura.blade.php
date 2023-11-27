@@ -50,9 +50,8 @@
                                 <td>
                                         Actividad: {{ $detalle->actividad->nombre_act }}
                                         <br>
-                                        Item: {{ $detalle->tipodetfact->tipodetalle }}
                                         <ul>
-                                            <li>Precio: {{ $detalle->tipodetfact->precio_tdf }}</li>
+                                            <li>Precio: {{ $detalle->actividad->precio_act }}</li>
                                         </ul>
                                 </td>
                                     @else

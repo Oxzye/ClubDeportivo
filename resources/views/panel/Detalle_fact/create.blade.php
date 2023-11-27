@@ -12,9 +12,6 @@
             @endforeach
         </ul>
     @endif
-    
-        
-    
 
     <div class="container-fluid">
         <h2>Detalle de factura</h2>
@@ -22,21 +19,16 @@
             @csrf
             <div id="detalles-container">
                 <div class="detalle mb-3">
-                    <label for="" class="form-label">* Actividades</label>
-                    <select name="detalles[0][id_act]" class="form-select actividad-select">
+                    <label for="" class="form-label">* Actividades y Producto</label>
+                    <select name="detalles[0][id_act]" class="form-select actividad-producto-select">
                         <option value=" ">--Ninguna--</option>
                         @foreach ($actividad as $act)
-                            <option value="{{ $act->id_act }}">
-                                {{ $act->nombre_act }}
+                            <option value="act_{{ $act->id_act }}" data-precio="{{ $act->precio_act }}">
+                                {{ $act->nombre_act .' |'.$act->precio_act}}
                             </option>
                         @endforeach
-                    </select>
-
-                    <label for="" class="form-label">* Producto</label>
-                    <select name="detalles[0][id_tipodetfact]" class="select-tdf producto-select">
-                        <option value="0">-nada-</option>
                         @foreach ($tipodetfact as $tdf)
-                            <option value="{{ $tdf->id_tipodetallefactura }}" data-precio="{{ $tdf->precio_tdf }}">
+                            <option value="tdf_{{ $tdf->id_tipodetallefactura }}" data-precio="{{ $tdf->precio_tdf }}">
                                 {{ $tdf->tipodetalle .' |'.$tdf->descripcion_tdf.'| $'.$tdf->precio_tdf }}
                             </option>
                         @endforeach
@@ -86,11 +78,11 @@
                     @if ($detf->id_act != null)
                     <td>{{ $detf ->id_detallefactura }}</td>
                     <td>{{ $detf->actividad ? $detf->actividad->nombre_act : '-no asignado-'  }}</td>
-                    <td>{{ $detf->tipodetfact->tipodetalle }}</td>
-                    <td>{{ $detf->tipodetfact->precio_tdf }}</td>
+                    <td>{{ $detf->tipodetfact ? $detf->tipodetfact->tipodetalle : '-no asignado-' }}</td>
+                    <td>{{ $detf->actividad ? $detf->actividad->precio_act : '-no asignado-' }}</td>
                     @else 
                     <td>{{ $detf ->id_detallefactura }}</td>
-                    <td>{{ '-sin asignar-' }}</td>
+                    <td>{{ '-no asignado-' }}</td>
                     <td>{{ $detf->tipodetfact->tipodetalle }}</td>
                     <td>{{ $detf->tipodetfact->precio_tdf }}</td>
                     @endif
@@ -118,46 +110,55 @@
 @push('js')
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        $(document).ready(function () {
-            var numDetalles = 1;
+      $(document).ready(function () {
+    var numDetalles = 1;
 
-            $(".actividad-select").change(function () {
-                actualizarPrecio($(this));
-            });
+    $(".actividad-producto-select").change(function () {
+        actualizarPrecio($(this));
+    });
 
-            $("#detalles-container").on("change", ".select-tdf", function () {
-                actualizarPrecio($(this));
-            });
+    $("#detalles-container").on("change", ".actividad-producto-select", function () {
+        actualizarPrecio($(this));
+    });
 
-            function actualizarPrecio(elemento) {
-                var precioSeleccionado = elemento.find(':selected').data('precio');
-                elemento.closest(".detalle").find("[name$='[precio]']").val(precioSeleccionado);
-            }
+    function actualizarPrecio(elemento) {
+        var precioSeleccionado = elemento.find(':selected').data('precio');
+        var detalle = elemento.closest(".detalle");
 
-            $("#eliminar-ultimo-duplicado").on("click", function () {
-                if (numDetalles > 1) {
-                    $("#detalles-container .detalle:last").remove();
-                    numDetalles--;
-                }
-            });
+        // Buscar el elemento de precio dentro del mismo contenedor
+        var precioInput = detalle.find("[name$='[precio]']");
 
-            $("#agregar-detalle").on("click", function () {
-                var nuevoDetalle = $("#detalles-container .detalle:first").clone();
-                nuevoDetalle.find("select, input").each(function () {
-                    var originalName = $(this).attr("name");
-                    var newName = originalName.replace(/\[\d+\]/g, '[' + numDetalles + ']');
-                    $(this).attr("name", newName);
-                    $(this).val('');
-                });
+        // Si no se encuentra, intentar buscar en las actividades
+        if (precioInput.length === 0) {
+            precioInput = detalle.find("[name$='[precio_act]']");
+        }
 
-                $("#detalles-container").append(nuevoDetalle);
-                numDetalles++;
-            });
+        precioInput.val(precioSeleccionado);
+    }
 
-            
-            // Cargar detalles de la factura al cargar la página
-            
+    $("#eliminar-ultimo-duplicado").on("click", function () {
+        if (numDetalles > 1) {
+            $("#detalles-container .detalle:last").remove();
+            numDetalles--;
+        }
+    });
+
+    $("#agregar-detalle").on("click", function () {
+        var nuevoDetalle = $("#detalles-container .detalle:first").clone();
+        nuevoDetalle.find("select, input").each(function () {
+            var originalName = $(this).attr("name");
+            var newName = originalName.replace(/\[\d+\]/g, '[' + numDetalles + ']');
+            $(this).attr("name", newName);
+            $(this).val('');
         });
+
+        $("#detalles-container").append(nuevoDetalle);
+        numDetalles++;
+    });
+
+    // Cargar detalles de la factura al cargar la página
+});
+
 
     </script>
 @endpush
