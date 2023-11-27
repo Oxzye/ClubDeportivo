@@ -54,6 +54,16 @@ class EmpleadosController extends Controller
             'cod_genero' => 'required|integer',
             'email' =>      'required|string|unique:users|max:255|email',
             'fecha_alta_emp' => 'required|date|after:fecha_nac',
+        ]
+        ,[
+            'name.required' => 'El campo nombre es obligatorio',
+            'name.string' => 'Ingrese texto',
+            'name_act.unique' => 'El nombre ya está registrado',
+            'name_act.max' => 'Solo se permiten hasta 60 caracteres',
+
+            'cuit_emp.required' => 'El campo cuit es obligatorio',
+            'cuit_emp.string' => 'Ingrese texto',
+            'cuit_emp.unique' => 'El nombre ya está registrado',
         ]);
         //Contraseña aleatoria
         $password = $request->input('dni') - 11111111;
@@ -133,7 +143,8 @@ class EmpleadosController extends Controller
             'telefono' => 'required|string|max:20',
             'cod_genero' => 'required|integer',
             'email' => 'required|string|max:255|email|unique:users,email,' . $empleado->user->id,
-        ]);
+        ]
+    );
 
         // Actualiza los datos en la tabla 'users'
         $empleado->user->update([

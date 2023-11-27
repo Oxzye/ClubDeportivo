@@ -48,7 +48,7 @@ class ActividadesController extends Controller
                 'descripcion_act' => 'required|string|max:200',
                 'actividad_en_curso' => 'required|boolean',
                 'fecha_inicio_act' => 'required|date',
-                'fecha_fin_act' => 'nullable|date',
+                'fecha_fin_act' => 'required|date|after_or_equal:fecha_inicio_act',
             ],[
                 'nombre_act.required' => 'El campo nombre de la actividad es obligatorio',
                 'nombre_act.string' => 'Ingrese texto',
@@ -68,6 +68,7 @@ class ActividadesController extends Controller
                 'fecha_inicio_act.required' => 'El campo fecha de inicio de actividad es obligatorio',
                 'fecha_inicio_act.string' => 'Ingrese formato de fecha (YYYY-MM-DD)',
                 
+                'fecha_fin_act.required' => 'El campo fecha de fin de actividad es obligatorio',
                 'fecha_fin_act.string' => 'Ingrese formato de fecha (YYYY-MM-DD)',
             ]);
             if($validated) {
@@ -133,7 +134,7 @@ class ActividadesController extends Controller
                 'descripcion_act' => 'required|string|max:200',
                 'actividad_en_curso' => 'required|boolean',
                 'fecha_inicio_act' => 'required|date',
-                'fecha_fin_act' => 'nullable|date',
+                'fecha_fin_act' => 'required|date',
             ],[
                 'nombre_act.required' => 'El campo nombre de la actividad es obligatorio',
                 'nombre_act.string' => 'Ingrese texto',
@@ -153,6 +154,7 @@ class ActividadesController extends Controller
                 'fecha_inicio_act.required' => 'El campo fecha de inicio de actividad es obligatorio',
                 'fecha_inicio_act.string' => 'Ingrese formato de fecha (YYYY-MM-DD)',
                 
+                'fecha_fin_act.required' => 'El campo fecha de fin de actividad es obligatorio',
                 'fecha_fin_act.string' => 'Ingrese formato de fecha (YYYY-MM-DD)',
             ]);
             if($validated) {

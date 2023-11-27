@@ -36,6 +36,9 @@
                                 <label for="name">Nombre</label>
                                 <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
                                 <small id="" class="form-text text-muted">Obligatorio.</small>
+                                @error( 'name' )
+                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
                         <div class="col-5">
@@ -57,6 +60,9 @@
                                 <label for="exampleInputEmail1">CUIT</label>
                                 <input type="number" class="form-control" name="cuit_emp" id="cuit_emp" value="{{ old('cuit_emp') }}">
                                 <small id="" class="form-text text-muted">Posible alert.</small>
+                                @error( 'cuit_emp' )
+                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                @enderror
                             </div>
                         </div>
                         <div class="col-5">
