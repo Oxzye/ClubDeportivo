@@ -54,18 +54,67 @@ class EmpleadosController extends Controller
             'cod_genero' => 'required|integer',
             'email' =>      'required|string|unique:users|max:255|email',
             'fecha_alta_emp' => 'required|date|after:fecha_nac',
-        ]
-        ,[
-         
+            'fecha_baja_emp' => 'required|date|after:fecha_nac',
+            'id_pais' => 'required|exists:paises,id',
+            'id_prov' => 'required|exists:provincias,id', 
+            'id_loc' => 'required|exists:localidades,id',
+            'id_cargo' => 'required|exists:cargos,id',
+            
+        ],[
+            'name.required' => 'El campo nombre es obligatorio',
             'name.string' => 'Ingrese texto',
-            'name_act.unique' => 'El nombre ya está registrado',
-            'name_act.max' => 'Solo se permiten hasta 60 caracteres',
+            'name.max' => 'Solo se permiten hasta 40 caracteres',
+            
+            'apellido.required' => 'El campo apellido es obligatorio',
+            'apellido.string' => 'Ingrese texto',
+            'apellido.max' => 'Solo se permiten hasta 40 caracteres',
+
+            'dni.required' => 'El campo dni es obligatorio',
+            'dni.integer' => 'Ingrese valores numéricos',
 
             'cuit_emp.required' => 'El campo cuit es obligatorio',
-            'cuit_emp.unique' => 'El nombre ya está registrado',
+            'cuit_emp.integer' => 'Ingrese valores numéricos',
+            'cuit_emp.unique' => 'El cuit ya está registrado',
 
-            'cuit_emp.required' => 'El campo cuit es obligatorio',
-            'cuit_emp.unique' => 'El nombre ya está registrado',
+            'fecha_nac.required' => 'El campo fecha de nacimiento es obligatorio',
+            'fecha_nac.date' => 'Por favor indique una fecha válida',
+            'fecha_nac.string' => 'Ingrese formato fecha DD/MM/YYYY',
+            'fecha_nac.before:tomorrow' => 'Ingrese una fecha de nacimiento válida',
+
+            'cod_genero.required' => 'El campo género es obligatorio',
+            'cod_genero.integer' => 'Ingrese un valor',
+
+            'domicilio.required' => 'El campo domicilio es obligatorio',
+            'domicilio.string' => 'Ingrese un domicilio por favor',
+            'domicilio.max' => 'Solo se permiten hasta 200 caracteres',
+
+            'telefono.required' => 'El campo telefono es obligatorio',
+            'telefono.string' => 'Ingrese un teléfono valido',
+            'telefono.max' => 'Solo se permiten hasta 20 caracteres',
+
+            'id_pais.required' => 'El campo países es obligatorio',
+            'id_pais.exist:paises, id' => 'El país no existe en la base de datos',
+            
+            'id_prov.required' => 'El campo provincia es obligatorio',
+            'id_prov.exist:provincias, id' => 'La provincia no existe en la base de datos',
+            
+            'id_loc.required' => 'El campo localidades es obligatorio',
+            'id_loc.exist:localidades, id' => 'La localidad no existe en la base de datos',
+            
+            'email.required' => 'El campo email es obligatorio',
+            'email.string' => 'Ingrese un email válido',
+            'email.unique:users' => 'Este email ya existe',
+            'email.email' => 'El campo debe ser formato email',
+
+            'fecha_alta_emp.required' => 'El campo fecha de alta empleado es obligatorio',
+            'fecha_alta_emp.after:fecha_nac' => 'Ingrese una fecha válida',
+
+            'fecha_baja_emp.required' => 'El campo fecha de baja empleado es obligatorio',
+            'fecha_baja_emp.after:fecha_nac' => 'Ingrese una fecha válida',
+
+            'id_cargo.required' => 'El campo cargo es obligatorio',
+            'id_cargo.exist:localidades, id' => 'El cargo no existe en la base de datos',
+           
         ]);
         //Contraseña aleatoria
         $password = $request->input('dni') - 11111111;
@@ -145,8 +194,12 @@ class EmpleadosController extends Controller
             'telefono' => 'required|string|max:20',
             'cod_genero' => 'required|integer',
             'email' => 'required|string|max:255|email|unique:users,email,' . $empleado->user->id,
-        ]
-    );
+        ],[
+                'name.required' => 'El campo nombre es obligatorio',
+                'name.string' => 'Ingrese texto',
+                'name.unique' => 'El nombre ya está registrado',
+                'name.max' => 'Solo se permiten hasta 40 caracteres',
+        ]);
 
         // Actualiza los datos en la tabla 'users'
         $empleado->user->update([
