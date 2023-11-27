@@ -44,8 +44,8 @@
             </div>
             {{-- fin actividades con select --}}
             <div class="mb-3">
-              <label for="" class="form-label" name="horario_inicio">Horario de inicio, con formato YYYY-MM-DD HH:mm:ss:</label>
-              <input type="text" class="form-control" name="horario_inicio" value="{{ old( 'horario_inicio' ) }}" aria-describedby="helpId" @error('horario_inicio') is-invalid @enderror">
+              <label for="" class="form-label" name="horario_inicio">Horario de inicio, con formato HH:mm:ss:</label>
+              <input type="time" class="form-control" name="horario_inicio" value="{{ old( 'horario_inicio' ) }}" aria-describedby="helpId" @error('horario_inicio') is-invalid @enderror">
               @error( 'horario_inicio' )
                   <div class="alert alert-danger">{{ $message }}</div>
               @enderror
@@ -53,8 +53,8 @@
             </div>   
 
             <div class="mb-3">
-                <label for="" class="form-label" name="horario_fin">Horario de fin, con formato YYYY-MM-DD HH:mm:ss:</label>
-                <input type="text" class="form-control" name="horario_fin" value="{{ old( 'horario_fin' ) }}" aria-describedby="helpId" @error('horario_fin') is-invalid @enderror">
+                <label for="" class="form-label" name="horario_fin">Horario de fin, con formato HH:mm:ss:</label>
+                <input type="time" class="form-control" name="horario_fin" value="{{ old( 'horario_fin' ) }}" aria-describedby="helpId" @error('horario_fin') is-invalid @enderror">
                 @error( 'horario_fin' )
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror

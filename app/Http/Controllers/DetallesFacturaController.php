@@ -49,9 +49,17 @@ class DetallesFacturaController extends Controller
     
         foreach ($detallesAdicionales as $detalle) {
             $detallefact = new Detalles_Factura();
-            $detallefact->id_act = $detalle['id_act'];
+        
+            // Obtener el tipo (act o tdf) y el ID correspondiente
+            list($tipo, $id) = explode('_', $detalle['id_act']);
+        
+            if ($tipo == 'act') {
+                $detallefact->id_act = $id;
+            } elseif ($tipo == 'tdf') {
+                $detallefact->id_tipodetallefactura = $id;
+            }
+        
             $detallefact->num_fac = $idfact;
-            $detallefact->id_tipodetallefactura = $detalle['id_tipodetfact'];
             $detallefact->save();
         }
     
@@ -99,7 +107,7 @@ class DetallesFacturaController extends Controller
         $detallefact->id_act = $request->get('id_act');
         $detallefact->num_fac = $request->get('num_fac');
         $detallefact->id_tipodetallefactura = $request->get('tipodetfact');
-        $detallefact->precio = $request->get('precio_df');
+        
         
         //$detallefact->vendedor_id = auth()->user()->id;
         // Almacena la info del producto en la BD

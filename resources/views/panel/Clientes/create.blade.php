@@ -112,11 +112,11 @@
                                 {{-- <small id="" class="form-text text-muted">We'll never share</small> --}}
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-5">
                         
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Localidade|Provincia|Paises</label>
-                                <select class="form-control" id="id_loc" name="id_loc" >
+                                <label for="exampleFormControlSelect1">Localidad|Provincia|Paises</label>
+                                <select class="form-control is-invalid" id="id_loc" name="id_loc" >
                                 <option selected>Seleccionar</option>
                                 @foreach ($localidades as $loc)
                                 <option value="{{ $loc->id_loc }}"> 
@@ -126,8 +126,8 @@
                                 </option>
                             @endforeach
                                 </select>
+                                <div class="invalid-feedback" id="mensajeError" style="color: red;"></div>
                             </div>
-                        
 
                         </div>
                     </div>
@@ -174,7 +174,7 @@
 
                 <input type="hidden" name="id_user" value="9">
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('socios.index') }}" class="btn btn-danger">Cancelar</a>
+                <a href="{{ route('socios.index') }}" class="btn btn-danger mx-3">Cancelar</a>
             </div>
         </form>
     </div>
@@ -239,32 +239,4 @@
             });
         });
     </script>
-    {{-- esteunciona --}}
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Guardar el estado inicial del campo select
-            var selectLoc = document.getElementById("id_loc");
-            var initialClass = selectLoc.className;
-    
-            // Evento para detectar cambios en el select
-            selectLoc.addEventListener("change", function () {
-                var localidad = this.value;
-                var mensajeError = document.getElementById("mensajeError");
-    
-                if (localidad === "" || localidad === "Seleccionar") {
-                    mensajeError.innerHTML = "Por favor, selecciona una localidad.";
-    
-                    // Restaurar clase inicial y quitar la clase de validación
-                    selectLoc.className = initialClass;
-                } else {
-                    mensajeError.innerHTML = ""; // Limpiar el mensaje de error si se ha seleccionado una localidad válida
-    
-                    // Agregar clases de Bootstrap para indicar que el campo es válido
-                    selectLoc.classList.remove("is-invalid");
-                    selectLoc.classList.add("is-valid");
-                }
-            });
-        });
-    </script> --}}
-
 @stop

@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('plugins.Datatables', true)
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @section('title', 'Finalizar factura')
 
 @section('content')
@@ -13,7 +13,13 @@
         @endforeach
     </ul>
 @endif
-
+<div class="container">
+    <a href="/panel/facturas" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;">
+        <span class="material-symbols-outlined d-flex justify-content-center">
+            article
+            </span>
+    </a>
+</div>
 <div class="container">
     <h1>Factura</h1>
 
@@ -44,9 +50,8 @@
                                 <td>
                                         Actividad: {{ $detalle->actividad->nombre_act }}
                                         <br>
-                                        Item: {{ $detalle->tipodetfact->tipodetalle }}
                                         <ul>
-                                            <li>Precio: {{ $detalle->tipodetfact->precio_tdf }}</li>
+                                            <li>Precio: {{ $detalle->actividad->precio_act }}</li>
                                         </ul>
                                 </td>
                                     @else
@@ -72,3 +77,6 @@
 </div>
 
 @endsection
+@section('css')
+
+@stop

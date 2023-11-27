@@ -93,7 +93,13 @@ class ClientesController extends Controller
         }
         else{
             return redirect()->route('clientes.index')->with('error', 'Cliente no encontrado');
-        }
+        };
+    }
+
+    public function show(string $cli)
+    {
+        $cliente = clientes::findOrFail($cli);
+        return view ('panel.clientes.show', ['cliente'=> $cliente]);
     }
 
     /**
