@@ -82,17 +82,10 @@ class ClientesController extends Controller
          //redireccionar
          return redirect()->route('clientes.index')->with('status', 'Cliente creado correctamente');
         }
-        public function show($dni_cli)
-        {
-        $generos = generos::all();
-        $localidades = Localidades::all();
-        $clientes = clientes::all();
-        return view('panel.clientes.edit', compact('generos', 'localidades', 'clientes'));
-        }
-    public function edit($dni_cli)
+
+    public function edit(clientes $dni_cli)
     {
-        $clientes = Clientes::findOrFail($dni_cli);
-        
+        $clientes = Clientes::all();
         if($clientes){
             $generos = generos::all();
             $localidades = Localidades::all();
@@ -102,6 +95,7 @@ class ClientesController extends Controller
             return redirect()->route('clientes.index')->with('error', 'Cliente no encontrado');
         }
     }
+
     /**
      * Update the specified resource in storage.
      */
@@ -126,13 +120,17 @@ class ClientesController extends Controller
        return redirect()->route('clientes.index','dni_cli')->with('status','Cliente modificado correctamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($dni_cli)
+    public function show($dni_cli)
+    {
+    $generos = generos::all();
+    $localidades = Localidades::all();
+    $clientes = clientes::findOrFail($dni_cli);
+    return view('panel.clientes.show', compact('generos', 'localidades', 'clientes'));
+    }
+
+    public function destroy(clientes $dni_cli)
     {
         $clientes = clientes::findOrFail($dni_cli);
-
         //Eliminicacion
         $clientes->delete();
 
