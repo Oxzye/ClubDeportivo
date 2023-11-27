@@ -49,7 +49,7 @@
             {{-- fin actividades con select --}}
             <div class="mb-3">
               <label for="" class="form-label" name="fecha_inscripcion">Fecha de inscripción:</label>
-              <input type="date" class="form-control" name="fecha_inscripcion" value="{{ old( 'fecha_inscripcion' ) }}" aria-describedby="helpId" @error('fecha_inscripcion') is-invalid @enderror">
+              <input type="datetime" class="form-control" name="fecha_inscripcion" value="<?php echo date('Y-m-d\TH:i'); ?>" aria-describedby="helpId" @error('fecha_inscripcion') is-invalid @enderror">
               @error( 'fecha_inscripcion' )
                   <div class="alert alert-danger">{{ $message }}</div>
               @enderror
