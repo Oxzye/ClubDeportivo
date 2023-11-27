@@ -50,30 +50,6 @@
 
                             </div>
 
-                            <div class="col-md-6 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Uploads</span>
-                                        <span class="info-box-number">13,648</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-6 col-sm-6 col-12">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Likes</span>
-                                        <span class="info-box-number">93,139</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
                         </div>
                     </div>
 
