@@ -15,6 +15,10 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\SociosExportExcel;
 use App\Exports\SociosBajaExportExcel;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Paises;
+use App\Models\Localidades;
+use App\Models\Provincias;
+
 
 
 class SociosController extends Controller
@@ -36,7 +40,11 @@ class SociosController extends Controller
     public function create()
     {
         $generos = generos::all();
-        return  view('panel.socios.create',compact('generos'));
+        $paises = Paises::all();
+        $provincias = Provincias::all();
+        $localidades = Localidades::all(); // Cambié $localidad a $localidades
+        
+        return  view('panel.socios.create',compact('generos', 'paises', 'localidades', 'provincias'));
     }
 
     /**
