@@ -85,7 +85,7 @@ Route::resource('/Provincias', ProvinciasController::class)->names('Provincias')
 Route::resource('/Localidades', LocalidadesController::class)->names('Localidades');
 
 Route::resource('/Cajas', CajasController::class)->names('Cajas');
-//Route::get('/Cajas/cierre/{id}', 'CajasController@cierre')->name('Cajas.cierre');
+// Route::get('/Cajas/salida-tactica', [CajasController::class, 'salidaTactica'])->name('Cajas.salidaTactica');
 
 Route::resource('/Disponibilidades', DisponibilidadesController::class)->names('Disponibilidades');
 
