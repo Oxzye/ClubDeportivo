@@ -49,9 +49,17 @@ class DetallesFacturaController extends Controller
     
         foreach ($detallesAdicionales as $detalle) {
             $detallefact = new Detalles_Factura();
-            $detallefact->id_act = $detalle['id_act'];
+        
+            // Obtener el tipo (act o tdf) y el ID correspondiente
+            list($tipo, $id) = explode('_', $detalle['id_act']);
+        
+            if ($tipo == 'act') {
+                $detallefact->id_act = $id;
+            } elseif ($tipo == 'tdf') {
+                $detallefact->id_tipodetallefactura = $id;
+            }
+        
             $detallefact->num_fac = $idfact;
-            $detallefact->id_tipodetallefactura = $detalle['id_tipodetfact'];
             $detallefact->save();
         }
     
