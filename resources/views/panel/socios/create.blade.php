@@ -25,6 +25,7 @@
                 </ul>
             @endif  --}}
 
+
             <div class="col-12">
                 <form action="{{ route('socios.store') }}" method="post">
                     @csrf

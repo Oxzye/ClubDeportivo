@@ -51,7 +51,7 @@
                     </div>
 
 
-                    @if ($resultados->count() > 0)
+                    @if ($resultados->count() > 0) 
                         <table id="tabla-insc_act_part" class="table table-striped table-hover w-100">
                             <thead>
                                 <tr>
