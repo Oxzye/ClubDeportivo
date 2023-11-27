@@ -12,6 +12,9 @@ use App\Models\Facturacion;
 use App\Models\Formas_pago;
 use Carbon\Carbon;
 use App\Models\Tipo_factura;
+use App\Models\Socio;
+
+use Illuminate\Support\Facades\Redirect;
 
 class CobroActPartController extends Controller
 {
@@ -67,7 +70,7 @@ class CobroActPartController extends Controller
             ->join('facturas', 'socios.id_soc', '=', 'facturas.dni_soc')
             ->join('detalles_factura', 'facturas.num_fac', '=', 'detalles_factura.num_fac')
             ->join('actividades', 'detalles_factura.id_act', '=', 'actividades.id_act')
-            ->where('users.dni', '=', '43439673')
+            ->where('users.dni', '=', $dni)
             ->get();
 
         $resultados = User::select(
@@ -83,7 +86,7 @@ class CobroActPartController extends Controller
             ->join('socios', 'users.id', '=', 'socios.id_user')
             ->join('sociosxactividades', 'socios.id_soc', '=', 'sociosxactividades.id_soc')
             ->join('actividades', 'sociosxactividades.id_act', '=', 'actividades.id_act')
-            ->where('users.dni', '=', '43439673')
+            ->where('users.dni', '=', $dni)
             ->get();
 
 
@@ -137,7 +140,15 @@ class CobroActPartController extends Controller
             'num_fac' => $num_factura,
         ]);
 
-        return redirect()->route('insc_act_part.index')->with('status', 'Actividad cobrada correctamente');
+        $realdni = User::join('socios', 'users.id', '=', 'socios.id_user')
+        ->where('socios.id_soc', $request->input('id_soc'))
+        ->select('users.dni')
+        ->first();
+        $dni = $realdni;
+
+        return Redirect::route('insc_act_part.index', ['dni' => $dni->dni])->with('status', 'Cobro de Actividad particular registrado correctamente');
+
+
     }
 
     /**

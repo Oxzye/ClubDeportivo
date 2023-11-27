@@ -37,6 +37,7 @@ class SociosxActividadesController extends Controller
         // $fAct_sxa = date('d/m/Y');
         // dd($fAct_sxa);
         $sxa = SociosxActividad::with(['actividad','socio'])->get();
+        //$sxad = SociosxActividad::with('actividades','socios')->get();
         return view('panel.SocxAct.create', compact('socios', 'actividades', 'sxa'));
     }
 
@@ -66,7 +67,7 @@ class SociosxActividadesController extends Controller
                 // SociosxActividad::create($request->all());
             };
             //Redireccion con un mensaje flash de sesion
-            return redirect()->route('SocxAct.index')->with('status', 'Socio por Actividad creado correctamente');
+            return redirect()->route('SocxAct.index')->with('status', 'Socio inscrito a actividad creado correctamente');
     }
 
     /**
