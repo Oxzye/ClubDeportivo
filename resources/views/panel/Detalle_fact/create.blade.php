@@ -20,7 +20,7 @@
             @csrf
             <div id="detalles-container">
                 <div class="detalle mb-3">
-                    <label for="" class="form-label">* Actividades y Producto</label>
+                    <label for="" class="form-label">Actividad o Cuota Social</label>
                     <select name="detalles[0][id_act]" class="form-select actividad-producto-select" style="width: 50%;">
                         <option value=" ">--Ninguna--</option>
                         @foreach ($actividad as $act)
