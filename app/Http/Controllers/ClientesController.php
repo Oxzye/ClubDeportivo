@@ -83,9 +83,9 @@ class ClientesController extends Controller
          return redirect()->route('clientes.index')->with('status', 'Cliente creado correctamente');
         }
 
-    public function edit(clientes $dni_cli)
+    public function edit( $dni_cli)
     {
-        $clientes = Clientes::all();
+        $clientes = Clientes::findOrFail($dni_cli);
         if($clientes){
             $generos = generos::all();
             $localidades = Localidades::all();
