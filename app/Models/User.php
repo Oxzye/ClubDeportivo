@@ -85,6 +85,7 @@ class User extends Authenticatable
             'users.apellido',
             'tipos_detalle_factura.tipodetalle',
             'tipos_detalle_factura.descripcion_tdf',
+            'tipos_detalle_factura.id_tipodetallefactura',
             'facturas.fecha_pago_fac'
         )
             ->join('socios', 'users.id', '=', 'socios.id_user')

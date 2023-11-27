@@ -1,7 +1,8 @@
 @extends('adminlte::page')
 
 @section('plugins.Datatables', true)
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @section('title', 'Crear facturas')
 
 @section('content')
@@ -19,25 +20,21 @@
             @csrf
             <div id="detalles-container">
                 <div class="detalle mb-3">
-                    <label for="" class="form-label">* Actividades</label>
-                    <select name="detalles[0][id_act]" class="form-select actividad-select">
+                    <label for="" class="form-label">Actividad o Cuota Social</label>
+                    <select name="detalles[0][id_act]" class="form-select actividad-producto-select" style="width: 50%;">
                         <option value=" ">--Ninguna--</option>
                         @foreach ($actividad as $act)
-                            <option value="{{ $act->id_act }}">
-                                {{ $act->nombre_act }}
+                            <option value="act_{{ $act->id_act }}" data-precio="{{ $act->precio_act }}">
+                                {{ $act->nombre_act .' |'.$act->precio_act}}
                             </option>
                         @endforeach
-                    </select>
-
-                    <label for="" class="form-label">* Producto</label>
-                    <select name="detalles[0][id_tipodetfact]" class="select-tdf producto-select">
-                        <option value="0">-nada-</option>
                         @foreach ($tipodetfact as $tdf)
-                            <option value="{{ $tdf->id_tipodetallefactura }}" data-precio="{{ $tdf->precio_tdf }}">
+                            <option value="tdf_{{ $tdf->id_tipodetallefactura }}" data-precio="{{ $tdf->precio_tdf }}">
                                 {{ $tdf->tipodetalle .' |'.$tdf->descripcion_tdf.'| $'.$tdf->precio_tdf }}
                             </option>
                         @endforeach
                     </select>
+                    
 
                     <input type="text" name="detalles[0][precio]" value='0' readonly>
                 </div>
@@ -46,11 +43,16 @@
             <button type="button" class="btn btn-primary" id="agregar-detalle">Agregar Detalle</button>
             <button type="button" class="btn btn-danger" id="eliminar-ultimo-duplicado">Eliminar Último Duplicado</button>
             <button type="submit" class="btn btn-success text-uppercase">Guardar Detalles</button>
-
+            
             <!-- Nuevo botón para redireccionar -->
           
             
         <a href="{{ route('Detalle_fact.fin_factura',  $facturacion) }}" class="btn btn-primary">Ver Factura</a>
+        <a href="/panel/facturas" class="btn btn-outline-dark rounded-circle mx-2" style="width:2.5em; height:2.5em;" title="Volver a facturas">
+            <span class="material-symbols-outlined d-flex justify-content-center">
+                article
+                </span>
+        </a>
         
         </form>
         
@@ -78,11 +80,11 @@
                     @if ($detf->id_act != null)
                     <td>{{ $detf ->id_detallefactura }}</td>
                     <td>{{ $detf->actividad ? $detf->actividad->nombre_act : '-no asignado-'  }}</td>
-                    <td>{{ $detf->tipodetfact->tipodetalle }}</td>
-                    <td>{{ $detf->tipodetfact->precio_tdf }}</td>
+                    <td>{{ $detf->tipodetfact ? $detf->tipodetfact->tipodetalle : '-no asignado-' }}</td>
+                    <td>{{ $detf->actividad ? $detf->actividad->precio_act : '-no asignado-' }}</td>
                     @else 
                     <td>{{ $detf ->id_detallefactura }}</td>
-                    <td>{{ '-sin asignar-' }}</td>
+                    <td>{{ '-no asignado-' }}</td>
                     <td>{{ $detf->tipodetfact->tipodetalle }}</td>
                     <td>{{ $detf->tipodetfact->precio_tdf }}</td>
                     @endif
@@ -108,48 +110,74 @@
     
 @endsection
 @push('js')
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script><script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        $(document).ready(function () {
-            var numDetalles = 1;
+      $(document).ready(function () {
+    var numDetalles = 1;
 
-            $(".actividad-select").change(function () {
-                actualizarPrecio($(this));
-            });
+    function inicializarSelect2() {
+        $(".actividad-producto-select").select2();
+    }
 
-            $("#detalles-container").on("change", ".select-tdf", function () {
-                actualizarPrecio($(this));
-            });
+    inicializarSelect2();
 
-            function actualizarPrecio(elemento) {
-                var precioSeleccionado = elemento.find(':selected').data('precio');
-                elemento.closest(".detalle").find("[name$='[precio]']").val(precioSeleccionado);
-            }
+    $(".actividad-producto-select").change(function () {
+        actualizarPrecio($(this));
+    });
 
-            $("#eliminar-ultimo-duplicado").on("click", function () {
-                if (numDetalles > 1) {
-                    $("#detalles-container .detalle:last").remove();
-                    numDetalles--;
-                }
-            });
+    $("#detalles-container").on("change", ".actividad-producto-select", function () {
+        actualizarPrecio($(this));
+    });
 
-            $("#agregar-detalle").on("click", function () {
-                var nuevoDetalle = $("#detalles-container .detalle:first").clone();
-                nuevoDetalle.find("select, input").each(function () {
-                    var originalName = $(this).attr("name");
-                    var newName = originalName.replace(/\[\d+\]/g, '[' + numDetalles + ']');
-                    $(this).attr("name", newName);
-                    $(this).val('');
-                });
+    function actualizarPrecio(elemento) {
+        var precioSeleccionado = elemento.find(':selected').data('precio');
+        var detalle = elemento.closest(".detalle");
+        var precioInput = detalle.find("[name$='[precio]']");
 
-                $("#detalles-container").append(nuevoDetalle);
-                numDetalles++;
-            });
+        if (precioInput.length === 0) {
+            precioInput = detalle.find("[name$='[precio_act]']");
+        }
 
-            
-            // Cargar detalles de la factura al cargar la página
-            
+        precioInput.val(precioSeleccionado);
+    }
+
+    $("#eliminar-ultimo-duplicado").on("click", function () {
+        if (numDetalles > 1) {
+            var ultimoDetalle = $("#detalles-container .detalle:last");
+            ultimoDetalle.find(".actividad-producto-select").select2("destroy");
+            ultimoDetalle.remove();
+            numDetalles--;
+
+            // Reinicializar Select2 después de eliminar un detalle
+            inicializarSelect2();
+        }
+    });
+
+    $("#agregar-detalle").on("click", function () {
+    // Validar si ya existe un detalle con el mismo índice
+    if ($("#detalles-container .detalle[data-indice='" + numDetalles + "']").length === 0) {
+        var nuevoDetalle = $("#detalles-container .detalle:first").clone();
+        nuevoDetalle.attr("data-indice", numDetalles);
+
+        nuevoDetalle.find("select, input").each(function () {
+            var originalName = $(this).attr("name");
+            var newName = originalName.replace(/\[\d+\]/g, '[' + numDetalles + ']');
+            $(this).attr("name", newName);
+            $(this).val('');
         });
-            
+
+        // Eliminar clases y estilos que puedan interferir con Select2
+        nuevoDetalle.find(".select2, .select2-container, .select2-selection").remove();
+
+        nuevoDetalle.find(".actividad-producto-select").select2();
+        $("#detalles-container").append(nuevoDetalle);
+        numDetalles++;
+
+        // Reinicializar Select2 después de agregar un detalle
+        inicializarSelect2();
+    }
+    });
+});
     </script>
 @endpush

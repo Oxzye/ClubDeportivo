@@ -14,7 +14,7 @@
             <div class="col-12 mb-3">
 
                 <a href="{{ route('Actividades.create') }}" class="btn btn-primary mb-4 mt-4">Agregar</a>
-                <a href="{{ route('exportar-actividades-excel') }}" class="btn btn-warning mx-3" title="PDF" target="_blank">
+                <a href="{{ route('exportar-actividades-excel') }}" class="btn btn-warning mx-3" title="Excel" target="_blank">
                     <i class="fas fa-file-excel"></i> Excel
                 </a>
 
