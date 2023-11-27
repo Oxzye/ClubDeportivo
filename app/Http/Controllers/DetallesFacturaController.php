@@ -99,7 +99,7 @@ class DetallesFacturaController extends Controller
         $detallefact->id_act = $request->get('id_act');
         $detallefact->num_fac = $request->get('num_fac');
         $detallefact->id_tipodetallefactura = $request->get('tipodetfact');
-        $detallefact->precio = $request->get('precio_df');
+        
         
         //$detallefact->vendedor_id = auth()->user()->id;
         // Almacena la info del producto en la BD

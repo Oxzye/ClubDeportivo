@@ -16,6 +16,9 @@
         <div class="row">
             <h1>Facturas</h1>
         </div>
+        <div class="row">
+            
+        </div>
         @if(session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -24,7 +27,11 @@
         <div class="row">
             <div class="col-12 mb-3">
                 <a href="{{ route('facturas.create') }}" class="btn btn-primary">Agregar</a>
+                <a href="{{ route('graficos-fact')}}" class="btn btn-warning mx-3 px-2 pt-2 pb-1" title="ChartJs">
+                    <i class="fas fa-chart-pie"></i> Gráfico
+                </a>
             </div>
+            
             @if ($facturacion->count())
            @endif
             <div class="col-12">

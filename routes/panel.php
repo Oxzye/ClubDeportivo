@@ -29,6 +29,7 @@ use App\Http\Controllers\CobroActPartController;
 use App\Models\Cajas;
 use App\Models\Deporte;
 use App\Models\Empleado;
+use App\Models\Facturacion;
 use App\Models\Instalacion;
 use App\Models\Socio;
 use Psy\VersionUpdater\Installer;
@@ -111,7 +112,7 @@ Route::get('/exportar-empxact-pdf', [EmpleadosxActividadesController::class, 'ex
 Route::resource('/clientes', ClientesController::class)->names('clientes');
 
 Route::resource('/facturas', FacturacionController::class)->names('facturas');
-Route::put('/products/{id}/update-payment-status', 'ProductController@updatePaymentStatus');
+Route::get('graficos-fact',[FacturacionController::class,'graficosFact'])->name('graficos-fact');
 
 Route::resource('/Detalle_fact', DetallesFacturaController::class)->names('Detalle_fact');
 // Route::get('/create', [DetallesFacturaController::class, 'create'])->name('Detalle_fact.create');

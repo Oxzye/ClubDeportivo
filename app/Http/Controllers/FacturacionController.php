@@ -24,8 +24,7 @@ class FacturacionController extends Controller
         $clientes = clientes::all();
         $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
         $cajaAbierta = $cajaso->where('estado_caja', true);
-
-
+        
         return view('panel.facturas.index', compact('facturacion', 'cajas', 'clientes', 'cajasAbierta'));
     }
 
@@ -128,25 +127,25 @@ class FacturacionController extends Controller
         
         return redirect()->route('facturas.index')->with('status', 'Factura eliminada correctamente');
     }
-//     public function updatePaymentStatus($id)
-// {
-//     $facturacion = Facturacion::find($id);
-
-//     if (!$facturacion) {
-//         return response()->json(['error' => 'factura no encontrado'], 404);
-//     }
-
-//     $facturacion->update(['pagada_fac' => request('pagada_fac')]);
-
-//     return response()->json(['message' => 'Estado de pago actualizado con éxito']);
-// }
-//     public function show($id)
-//     {
-//         // Lógica para mostrar una caja específica por su ID
-//         $cajas = Cajas::findOrFail($id);
-//         $cajaso = Cajas::orderBy('id_caja', 'desc')->get();
-//         $cajaAbierta = $cajaso->where('estado_caja', true);
-//         // Puedes pasar la caja a una vista o realizar cualquier otra lógica necesaria
-//         return view('panel.Cajas.index', compact('cajas','cajaAbierta'));
-//     }
+    public function graficosFact() {
+        
+        // Si se hace una peticion AJAX
+        if(request()->ajax()) {
+            $labels = [];
+            $counts = [];
+            
+             $facturas = Facturacion::get();
+             
+             foreach ($facturas as $fact) {
+                $counts[] = $fact->monto_fac;
+                $labels[] = Cajas::where('id_caja', $fact->id_caja)->count();   
+            }
+            $response = [
+            'success' => true,
+            'data' => [$labels, $counts]
+            ];
+            return json_encode($response);
+            }
+            return view('panel.facturas.grafico_factura');
+        }
 }
