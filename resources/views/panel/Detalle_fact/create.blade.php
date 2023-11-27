@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('plugins.Datatables', true)
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @section('title', 'Crear facturas')
 
@@ -20,7 +21,7 @@
             <div id="detalles-container">
                 <div class="detalle mb-3">
                     <label for="" class="form-label">* Actividades y Producto</label>
-                    <select name="detalles[0][id_act]" class="form-select actividad-producto-select">
+                    <select name="detalles[0][id_act]" class="form-select actividad-producto-select" style="width: 50%;">
                         <option value=" ">--Ninguna--</option>
                         @foreach ($actividad as $act)
                             <option value="act_{{ $act->id_act }}" data-precio="{{ $act->precio_act }}">
@@ -33,6 +34,7 @@
                             </option>
                         @endforeach
                     </select>
+                    
 
                     <input type="text" name="detalles[0][precio]" value='0' readonly>
                 </div>
@@ -109,9 +111,16 @@
 @endsection
 @push('js')
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
       $(document).ready(function () {
     var numDetalles = 1;
+
+    function inicializarSelect2() {
+        $(".actividad-producto-select").select2();
+    }
+
+    inicializarSelect2();
 
     $(".actividad-producto-select").change(function () {
         actualizarPrecio($(this));
@@ -124,11 +133,8 @@
     function actualizarPrecio(elemento) {
         var precioSeleccionado = elemento.find(':selected').data('precio');
         var detalle = elemento.closest(".detalle");
-
-        // Buscar el elemento de precio dentro del mismo contenedor
         var precioInput = detalle.find("[name$='[precio]']");
 
-        // Si no se encuentra, intentar buscar en las actividades
         if (precioInput.length === 0) {
             precioInput = detalle.find("[name$='[precio_act]']");
         }
@@ -138,13 +144,22 @@
 
     $("#eliminar-ultimo-duplicado").on("click", function () {
         if (numDetalles > 1) {
-            $("#detalles-container .detalle:last").remove();
+            var ultimoDetalle = $("#detalles-container .detalle:last");
+            ultimoDetalle.find(".actividad-producto-select").select2("destroy");
+            ultimoDetalle.remove();
             numDetalles--;
+
+            // Reinicializar Select2 después de eliminar un detalle
+            inicializarSelect2();
         }
     });
 
     $("#agregar-detalle").on("click", function () {
+    // Validar si ya existe un detalle con el mismo índice
+    if ($("#detalles-container .detalle[data-indice='" + numDetalles + "']").length === 0) {
         var nuevoDetalle = $("#detalles-container .detalle:first").clone();
+        nuevoDetalle.attr("data-indice", numDetalles);
+
         nuevoDetalle.find("select, input").each(function () {
             var originalName = $(this).attr("name");
             var newName = originalName.replace(/\[\d+\]/g, '[' + numDetalles + ']');
@@ -152,13 +167,17 @@
             $(this).val('');
         });
 
+        // Eliminar clases y estilos que puedan interferir con Select2
+        nuevoDetalle.find(".select2, .select2-container, .select2-selection").remove();
+
+        nuevoDetalle.find(".actividad-producto-select").select2();
         $("#detalles-container").append(nuevoDetalle);
         numDetalles++;
+
+        // Reinicializar Select2 después de agregar un detalle
+        inicializarSelect2();
+    }
     });
-
-    // Cargar detalles de la factura al cargar la página
 });
-
-
     </script>
 @endpush
