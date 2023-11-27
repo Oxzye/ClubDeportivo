@@ -427,14 +427,14 @@ return [
                     'active' => ['panel/socios/dadosdebaja'],
                     'shift' => 'ml-3',
                 ],
-                [
+                /*[
                     'text' => 'Recuperar Contraseña',
                     'route' => 'socios.resetPassword',
                     'icon' => 'fas fa-key', // icono de fontawesome
                     'can' => 'reset_password', // permiso de admin
                     'active' => ['panel/socios/resetPassword'],
                     'shift' => 'ml-3',
-                ],
+                ],*/
 
             ]
         ],
@@ -466,7 +466,7 @@ return [
                     'shift' => 'ml-3',
                 ],
                 [
-                    'text' => 'Empleados dados de Baja',
+                    'text' => 'Emp dados de Baja',
                     'route' => 'empleados.dadosdebaja',
                     'icon' => 'fas fa-user-times', // icono de fontawesome
                     'can' => 'crear_empleados', // permiso de admin
@@ -485,8 +485,7 @@ return [
         ],
         //
         [
-            'header' => 'Gest
-            ión de Actividades',
+            'header' => 'Gestión de Actividades',
             'can' => ['admin_vista', 'gerente_vista', 'recepcionista_vista'],
         ],
         //Gestión de actividades
@@ -535,7 +534,7 @@ return [
                     'route' => 'instalaciones.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
                     'can' => 'listado_socios', // permiso de admin
-                    'active' => ['panel/socios*'],
+                    'active' => ['panel/instalaciones*'],
                     'shift' => 'ml-3',
                 ],
                 [
@@ -648,7 +647,7 @@ return [
             'route' => 'Disponibilidades.index',
             //'url' => 'panel/socios',
             'icon' => 'fas fa-users', // icono de fontawesome
-            'can' => 'lista_usuarios' // permiso de admin
+            'can' => 'listado_disponibilidades' // permiso de admin
         ],
 
     ],
