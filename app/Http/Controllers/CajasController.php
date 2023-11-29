@@ -57,7 +57,7 @@ class CajasController extends Controller
         $cajas ->save();
         //Redir
         
-       return redirect()->route('Cajas.index')->with('status', 'Caja abierta correctamente');
+       return redirect()->route('home')->with('status', 'Caja abierta correctamente');
     }
 
     public function edit($id_caja) {
