@@ -10,7 +10,8 @@
             <div class="col-12">
                 <x-adminlte-alert theme="info" title="Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }}">
                     <div class="col-lg-3 col-12 mb-2">
-                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $resultados[0]->dni) }}">Cobrar Cuota</a>
+                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $resultados[0]->dni) }}">Cobrar
+                            Cuota</a>
                     </div>
                 </x-adminlte-alert>
             </div>
@@ -32,6 +33,11 @@
         @if (session('alert'))
             <div class="col-12 alert alert-danger">
                 {{ session('alert') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
         @endif
         <div class="col-12">

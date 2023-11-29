@@ -346,14 +346,14 @@ return [
                     'active' => ['panel/cajas/index'],
                     'shift' => 'ml-3',
                 ],
-                [
+                /*[
                     'text' => 'Abrir Caja',
                     'route' => 'Cajas.create',
                     'icon' => 'fas fa-lock-open', // icono de fontawesome
                     'can' => 'abrir_caja', // permiso
                     'active' => ['panel/cajas/create'],
                     'shift' => 'ml-3',
-                ],
+                ],*/
 
                 /*[
                     'text' => 'Cerrar Caja',
