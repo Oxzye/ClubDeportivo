@@ -12,6 +12,10 @@ use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\EmpleadosExportExcel;
+use Maatwebsite\Excel\Facades\Excel;
+
 class EmpleadosController extends Controller
 {
     /**
@@ -191,5 +195,27 @@ class EmpleadosController extends Controller
 
 
         return redirect()->route('empleados.dadosdebaja')->with('status', 'Empleado: ' . $datos->name . " " . $datos->apellido  . ' recuperado exitosamente');
+    }
+
+    public function exportarEmpleadosPDF()
+    {
+        set_time_limit(6000);
+        // $admin_id = auth()->user()->id;
+        // Traemos las actividades con relaciones a instalaciones y deportes
+        // $actividades = Actividad::with('instalacion', 'deporte')
+        //     ->where('id_act',auth()->user()->id)->get();
+
+        $empleados = Empleado::all();
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = Pdf::loadView('panel.empleados.pdf_empleados', compact('empleados'));
+        //Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('socios.pdf');
+    }
+
+    public function exportarEmpleadosExcel()
+    {
+        return Excel::download(new EmpleadosExportExcel, 'empelados.xlsx');
     }
 }

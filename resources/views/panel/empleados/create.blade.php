@@ -29,7 +29,7 @@
         <form action="{{ route('empleados.store') }}" method="post">
         @csrf
             <div class="row">
-                <div class="col-6 border border-dark">
+                <div class="col-6">
                     <div class="row">
                         <div class="col-5">
                             <div class="form-group">

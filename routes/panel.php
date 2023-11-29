@@ -63,9 +63,9 @@ Route::middleware([Authenticate::class])->group(function () {
 
         Route::get('/empleados/dadosdebaja', [EmpleadosController::class, 'dadosdebaja'])->name('empleados.dadosdebaja');
         Route::get('/empleados/restore/{id}', [EmpleadosController::class, 'restore'])->name('empleados.restore');
-        Route::resource('/empleados', EmpleadosController::class)->names('empleados');
         Route::get('/exportar-empleados-pdf', [EmpleadosController::class, 'exportarEmpleadosPDF'])->name('exportar-empleados-pdf');
         Route::get('/exportar-empleados-excel', [EmpleadosController::class, 'exportarEmpleadosExcel'])->name('exportar-empleados-excel');
+        Route::resource('/empleados', EmpleadosController::class)->names('empleados');
 
         Route::resource('/instalaciones', InstalacionesController::class)->names('instalaciones');
 

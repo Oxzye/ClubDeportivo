@@ -394,6 +394,12 @@ return [
             'can' => ['admin_vista', 'cajero_vista', 'gerente_vista'], // permiso
         ],
         [
+            'text' => 'facturacion',
+            'route' => 'facturas.create',
+            'icon' => 'fas fa-lock-open', // icono de fontawesome
+            'can' => ['admin_vista', 'cajero_vista', 'gerente_vista'], // permiso
+        ],
+        [
             'header' => 'Inscripción de socios',
             'can' => ['admin_vista', 'gerente_vista', 'recepcionista_vista'],
         ],
@@ -549,10 +555,15 @@ return [
         ],
         //
 
+        [
+            'header' => 'Otros',
+            'can' => ['admin_vista', 'gerente_vista', 'recepcionista_vista'],
+        ],
         //Otros
         [
             'text' => 'Otros',
             'icon' => 'fas fa-link',
+            'can' => ['admin_vista', 'gerente_vista', 'recepcionista_vista'],
             'submenu' => [
                 // [
                 //     'text' => 'Detalles de Facturas',
@@ -561,13 +572,6 @@ return [
                 //     'can' => 'listado_detallefactura', // permiso 
                 //     'shift' => 'ml-3',
                 // ],
-                [
-                    'text' => 'facturacion',
-                    'route' => 'facturas.create',
-                    'icon' => 'fas fa-lock-open', // icono de fontawesome
-                    'can' => 'listado_user', // permiso
-                    'shift' => 'ml-3',
-                ],
                 [
                     'text' => 'Lista de Clientes',
                     'route' => 'clientes.index',
