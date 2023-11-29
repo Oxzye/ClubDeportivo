@@ -6,24 +6,34 @@
 @section('content')
     <div class="container-fluid">
         <h1>Cuotas Sociales</h1>
-        @if ($resultados->count() > 0)
-            <div class="col-12">
-                <x-adminlte-alert theme="info" title="Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }}">
-                    <div class="col-lg-3 col-12 mb-2">
-                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $resultados[0]->dni) }}">Cobrar Cuota</a>
-                    </div>
-                </x-adminlte-alert>
-            </div>
+        @if ($caja !== null && $caja->estado_caja > 0) 
+            @if ($resultados->count() > 0)
+                <div class="col-12">
+                    <x-adminlte-alert theme="info" title="Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }}">
+                        <div class="col-lg-3 col-12 mb-2">
+                            <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $resultados[0]->dni) }}">Cobrar Cuota</a>
+                        </div>
+                    </x-adminlte-alert>
+                </div>
+            @endif
+            @if ($info && count($info) > 0)
+                <div class="col-12">
+                    <x-adminlte-alert theme="info" title="Socio: {{ $info[0]->name . ' ' . $info[0]->apellido }}">
+                        <div class="col-lg-3 col-12 mb-2">
+                            <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $info[0]->dni) }}">Cobrar Cuota</a>
+                        </div>
+                    </x-adminlte-alert>
+                </div>
+            @endif
         @endif
-        @if ($info && count($info) > 0)
-            <div class="col-12">
-                <x-adminlte-alert theme="info" title="Socio: {{ $info[0]->name . ' ' . $info[0]->apellido }}">
+
+        @if ($caja === null || $caja->estado_caja  == 0) 
                     <div class="col-lg-3 col-12 mb-2">
-                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $info[0]->dni) }}">Cobrar Cuota</a>
+                        <a class="btn btn-success" href="{{ route('Cajas.index') }}">Abrir caja</a>
                     </div>
-                </x-adminlte-alert>
-            </div>
         @endif
+
+        {{-- codigo andando --}}
         @if (session('status'))
             <div class="col-12 alert alert-success">
                 {{ session('status') }}

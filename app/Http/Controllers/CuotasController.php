@@ -24,6 +24,11 @@ class CuotasController extends Controller
      */
     public function index(Request $request)
     {
+        $fechaActual = Carbon::now()->format('Y-m-d');
+        $caja = Cajas::where('created_at', '>', $fechaActual)->first();
+
+        // $cajas = Cajas::where('created_at' )->first();
+        // dd($caja);
         $dni = $request->get('dni');
         $resultados = User::CuotasPagadas($dni)->get();
 
@@ -50,7 +55,7 @@ class CuotasController extends Controller
                 ->where('users.dni', '=', $dni)
                 ->get();
         }
-        return view('panel.cuota_social.index', compact('resultados', 'info'));
+        return view('panel.cuota_social.index', compact('resultados', 'info', 'caja'));
     }
 
     /**
