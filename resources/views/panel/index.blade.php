@@ -12,51 +12,22 @@
                 <x-adminlte-card title="Apertura y cierre de cajas" theme="light" icon="fas fa-cash-register" collapsible
                     maximizable>
                     <div class="row">
-                        <div class="col-lg-3 col-12">
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <h3>Apertura</h3>
-                                    <h4>Caja</h4>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock-open"></i>
-                                </div>
-                                <a href="{{ route('Cajas.create') }}" class="small-box-footer">
-                                    Abrir caja <i class="fas fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        @can('listado_cajas')
-                            <div class="col-lg-6 col-12">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-info"><i class="">Ir</i></span>
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Cajas activas</span>
-                                                <span class="info-box-number">{{ $cajasAbiertas }}</span>
-                                            </div>
-
-                                        </div>
-
+                        @if ($cajasAbiertas === 0)
+                            <div class="col-lg-3 col-12">
+                                <div class="small-box bg-success">
+                                    <div class="inner">
+                                        <h3>Apertura</h3>
+                                        <h4>Caja</h4>
                                     </div>
-
-                                    <div class="col-md-6 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Saldo de cajas</span>
-                                                <span class="info-box-number">{{ $saldo_cajas }}</span>
-                                            </div>
-
-                                        </div>
-
+                                    <div class="icon">
+                                        <i class="fas fa-lock-open"></i>
                                     </div>
-
+                                    <a href="{{ route('Cajas.create') }}" class="small-box-footer">
+                                        Abrir caja <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
                                 </div>
                             </div>
-                        @endcan
+                        @endif
 
                         <div class="col-lg-3 col-12">
 
@@ -81,8 +52,7 @@
 
         <div class="container-fluid">
             <div class="col-12">
-                <x-adminlte-card title="Venta y Facturacion" theme="light" icon="fas fa-cash-register" collapsible
-                    maximizable>
+                <x-adminlte-card title="Venta y Facturacion" theme="light" icon="fas fa-cash-register" collapsible maximizable>
                     <div class="row">
                         <div class="col-lg-3 col-12">
                             <div class="small-box bg-info">
@@ -136,7 +106,7 @@
             </div>
         </div>
 
-        
+
     @endrole
 
     @role(['admin', 'recepcionista', 'gerente'])

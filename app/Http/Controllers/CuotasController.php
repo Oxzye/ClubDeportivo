@@ -65,16 +65,22 @@ class CuotasController extends Controller
     public function cobrar(string $dni)
     {
 
+        $cajaAbierta = Cajas::where('estado_caja', true)->first();
+
+        if (!$cajaAbierta) {
+            return redirect()->route('cuota_social.index')->with('error', 'No hay cajas abiertas. No se puede cobrar una cuota social.');
+        }
+
         $socio = User::with('socio')->where('dni', $dni)->first();
 
         $cajasAbierta = Cajas::where('estado_caja', 1)->first();
 
         $cuotastodas = Tipodetfactura::where('tipodetalle', 'Cuota Social')
-        ->where('tipos_detalle_factura.created_at', '>', $socio->socio->fecha_asociacion)
-            ->get();      
+            ->where('tipos_detalle_factura.created_at', '>', $socio->socio->fecha_asociacion)
+            ->get();
         $resultados = User::CuotasPagadas($dni)->get();
 
-        
+
         $cuotas = $cuotastodas->reject(function ($cuota) use ($resultados) {
             return $resultados->contains('descripcion_tdf', $cuota->descripcion_tdf);
         });
@@ -82,7 +88,7 @@ class CuotasController extends Controller
         $formdp = Formas_pago::all();
         $tipofac = Tipo_factura::all();
 
-        return view('panel.cuota_social.cobrar', compact('socio', 'cajasAbierta', 'cuotas','formdp', 'tipofac'));
+        return view('panel.cuota_social.cobrar', compact('socio', 'cajasAbierta', 'cuotas', 'formdp', 'tipofac'));
     }
     /**
      * Store a newly created resource in storage.
@@ -101,14 +107,14 @@ class CuotasController extends Controller
             'fecha_pago_fac' => $fecha_hoy,
             'pagada_fac' => $request->input('pagada_fac'),
         ]);
-        
-        
+
+
         $cajas = Cajas::findOrFail($request->get('id_caja'));
         $cajas->total_ventas_caja += 1; // Incrementar la cantidad de ventas
         $cajas->monto_final += $request->input('montoFinal'); // Incrementar el monto recaudado
         $cajas->save();
         $factura->save();
-        
+
         $num_factura = $factura->num_fac;
         Detalles_Factura::create([
             'id_tipodetallefactura' => $request->input('cuota'),

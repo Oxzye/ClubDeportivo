@@ -10,7 +10,8 @@
             <div class="col-12">
                 <x-adminlte-alert theme="info" title="Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }}">
                     <div class="col-lg-3 col-12 mb-2">
-                        <a class="btn btn-success" href="{{ route('insc_act_part.cobrar', $resultados[0]->dni) }}">Cobrar insc act part</a>
+                        <a class="btn btn-success" href="{{ route('insc_act_part.cobrar', $resultados[0]->dni) }}">Cobrar insc
+                            act part</a>
                     </div>
                 </x-adminlte-alert>
             </div>
@@ -19,7 +20,8 @@
             <div class="col-12">
                 <x-adminlte-alert theme="info" title="Socio: {{ $info[0]->name . ' ' . $info[0]->apellido }}">
                     <div class="col-lg-3 col-12 mb-2">
-                        <a class="btn btn-success" href="{{ route('insc_act_part.cobrar', $info[0]->dni) }}">Cobrar insc act part</a>
+                        <a class="btn btn-success" href="{{ route('insc_act_part.cobrar', $info[0]->dni) }}">Cobrar insc act
+                            part</a>
                     </div>
                 </x-adminlte-alert>
             </div>
@@ -32,6 +34,11 @@
         @if (session('alert'))
             <div class="col-12 alert alert-danger">
                 {{ session('alert') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
         @endif
         <div class="col-12">
@@ -51,7 +58,7 @@
                     </div>
 
 
-                    @if ($resultados->count() > 0) 
+                    @if ($resultados->count() > 0)
                         <table id="tabla-insc_act_part" class="table table-striped table-hover w-100">
                             <thead>
                                 <tr>
@@ -68,7 +75,8 @@
                                         <td><b>{{ $resultado->name }}</b>{{ ' ' . $resultado->apellido }}</td>
                                         <td><b>{{ $resultado->nombre_act }}{{ ' ' . $resultado->descripcion_act }}</b>
                                         </td>
-                                        <td>{{ \Carbon\Carbon::parse($resultado->fecha_inscripcion)->format('d/M/Y') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($resultado->fecha_inscripcion)->format('d/M/Y') }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
