@@ -205,22 +205,6 @@
 
                             <div class="small-box bg-success">
                                 <div class="inner">
-                                    <h3>EmpxAct</h3>
-                                    <p>Incluir empleado/s en actividad/es</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                                <a href="{{ route('EmpxAct.index') }}" class="small-box-footer">
-                                    Ir <i class="fas fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-12">
-
-                            <div class="small-box bg-success">
-                                <div class="inner">
                                     <h3>DíasxAct</h3>
                                     <p>Gestiónar que dias se hace una actividad</p>
                                 </div>

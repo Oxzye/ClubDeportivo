@@ -473,14 +473,14 @@ return [
                     'active' => ['panel/empleados/dadosdebaja'],
                     'shift' => 'ml-3',
                 ],
-                [
+                /*[
                     'text' => 'Cargos',
                     'route' => 'cargos.index',
                     'icon' => 'fas fa-tasks', // icono de fontawesome
                     'can' => 'listado_cargos', // permiso de admin
                     'active' => ['panel/cargos*'],
                     'shift' => 'ml-3',
-                ],
+                ],*/
             ],
         ],
         //
@@ -522,13 +522,13 @@ return [
                     'can' => 'listado_sxa', // permiso 
                     'shift' => 'ml-3',
                 ],
-                [
+                /*[
                     'text' => 'Gestionar empleados por actividad',
                     'route' => 'EmpxAct.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
                     'can' => 'listado_exa', // permiso 
                     'shift' => 'ml-3',
-                ],
+                ],*/
                 [
                     'text' => 'Instalaciones',
                     'route' => 'instalaciones.index',

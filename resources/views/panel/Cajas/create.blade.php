@@ -28,15 +28,15 @@
                                   <label for="" class="form-label" name="monto_inicial_caja">Monto inicial:</label>
                                   <input type="text" class="form-control" name="monto_inicial_caja" id="" aria-describedby="helpId" placeholder="" required>
                                 </div>
-                                <div class="mb-3">
+                                {{-- -<div class="mb-3">
                                     <label for="" class="form-label" name="saldo_caja">Saldo:</label>
-                                    <input type="text" class="form-control" name="saldo_caja" id="" aria-describedby="helpId" placeholder="" required>
-                                </div>  
+                                </div>   --}}
+                                <input  type="hidden" class="form-control" value="0" name="saldo_caja" id="" aria-describedby="helpId" placeholder="" >
                                 
                                 <div class="mb-3 ">
                                     <label for="Empleado" class="col-sm-4 col-form-label"> * Empleado</label>
-                                    {{-- <input type="text" class="form-control" name="" value="{{ auth()->user()->name }}" readonly> --}}
-                                    <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="" value="{{ auth()->user()->name }}" readonly>
+                                    {{-- <div class="col-sm-8">
                                     <select id="id_emp" name="id_emp" class="form-control">
                                         @foreach ($empleado as $emp)
                                             <option value="{{ $emp->id_emp }}"> 
@@ -44,7 +44,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <input type="" name="estado_caja" id="" value="1" hidden>
                                 <input type="" name="total_ventas_caja" id="" value="0" hidden>

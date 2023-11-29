@@ -81,7 +81,7 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Fecha de Nacimiento</label>
-                                <input type="text" class="form-control @error('fecha_nac') is-invalid @enderror" name="fecha_nac" value="{{ old('fecha_nac') }}">
+                                <input type="date" class="form-control @error('fecha_nac') is-invalid @enderror" name="fecha_nac" value="{{ old('fecha_nac') }}">
                                 @error('fecha_nac')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -206,7 +206,7 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInput">Fecha de alta de empleado</label>
-                                <input type="text" class="form-control @error('fecha_alta_emp') is-invalid @enderror" name="fecha_alta_emp" value="{{ old('fecha_alta_emp') }}">
+                                <input type="date" class="form-control @error('fecha_alta_emp') is-invalid @enderror" name="fecha_alta_emp" value="{{ old('fecha_alta_emp') }}">
                                 @error('fecha_alta_emp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -215,7 +215,7 @@
                         <div class="col-5">
                             <div class="form-group">
                                 <label for="exampleInput">Fecha de baja de empleado</label>
-                                <input type="text" class="form-control @error('fecha_baja_emp') is-invalid @enderror" name="fecha_baja_emp" value="{{ old('fecha_baja_emp') }}">
+                                <input type="date" class="form-control @error('fecha_baja_emp') is-invalid @enderror" name="fecha_baja_emp" value="{{ old('fecha_baja_emp') }}">
                                 @error('fecha_baja_emp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

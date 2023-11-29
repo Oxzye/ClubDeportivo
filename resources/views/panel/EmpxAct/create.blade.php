@@ -25,7 +25,7 @@
                 <select id="id_act" name="id_act" class="form-control">
                     @foreach ($actividades as $act)
                         <option value="{{ $act->id_act }}"> 
-                            {{ $act->nombre_act . ' | '. $act->descripcion_act }}
+                            {{ $act->nombre_act . ' | '. $act->descripcion_act  }}
                         </option>
                     @endforeach
                 </select>
@@ -39,7 +39,7 @@
                 <select id="id_emp" name="id_emp" class="form-control">
                     @foreach ($empleados as $empleado)
                         <option value="{{ $empleado->id_emp }}"> 
-                            {{ $empleado->user->name .' '. $empleado->user->apellido .' | '. $empleado->user->dni }}
+                            {{ $empleado->user->name .' '. $empleado->user->apellido .' | '. $empleado->user->dni .'| '. $empleado->cargo->nombre_cargo}}
                         </option>
                     @endforeach
                 </select>
