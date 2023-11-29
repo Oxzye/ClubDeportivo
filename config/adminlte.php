@@ -301,13 +301,6 @@ return [
 
         //Header x rol
         [
-            'text' => 'Inicio',
-            'icon' => 'fas fa-home',
-            'classes' => '',
-            'url' => 'panel',
-
-        ],
-        [
             'header' => 'Sesión de Administrador',
             'can' => 'admin_vista',
         ],
@@ -329,6 +322,13 @@ return [
         ],
         //
         [
+            'text' => 'Inicio',
+            'icon' => 'fas fa-home',
+            'classes' => '',
+            'url' => 'panel',
+
+        ],
+        [
             'header' => 'Apertura y cierre de cajas',
             'can' => 'admin_vista',
         ],
@@ -341,7 +341,7 @@ return [
                 [
                     'text' => 'Cajas',
                     'route' => 'Cajas.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'icon' => 'fas fa-cash-register', // icono de fontawesome
                     'can' => 'listado_cajas', // permiso
                     'active' => ['panel/cajas/index'],
                     'shift' => 'ml-3',
@@ -390,13 +390,13 @@ return [
         [
             'text' => 'Facturas',
             'route' => 'facturas.index',
-            'icon' => 'fas fa-lock-open', // icono de fontawesome
+            'icon' => 'fas fa-file-invoice', // icono de fontawesome<i class="fas fa-file-invoice"></i>
             'can' => ['admin_vista', 'cajero_vista', 'gerente_vista'], // permiso
         ],
         [
             'text' => 'facturacion',
             'route' => 'facturas.create',
-            'icon' => 'fas fa-lock-open', // icono de fontawesome
+            'icon' => 'fas fa-file-alt', // icono de fontawesome
             'can' => ['admin_vista', 'cajero_vista', 'gerente_vista'], // permiso
         ],
         [
@@ -503,21 +503,21 @@ return [
                 [
                     'text' => 'Actividades',
                     'route' => 'Actividades.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'icon' => 'fas fa-walking', // icono de fontawesome
                     'can' => 'listado_act', // permiso 
                     'shift' => 'ml-3',
                 ],
                 [
                     'text' => 'Disponibilidades',
                     'route' => 'Disponibilidades.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'icon' => 'fas fa-check-double', // icono de fontawesome<i class="fas fa-check-double"></i>
                     'can' => 'listado_disponibilidades', // permiso 
                     'shift' => 'ml-3',
                 ],
                 [
                     'text' => 'Dias por Actividad',
                     'route' => 'DiasxAct.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'icon' => 'fas fa-calendar-alt', // icono de fontawesome
                     'can' => 'listado_diasxact', // permiso 
                     'shift' => 'ml-3',
                 ],
@@ -528,17 +528,17 @@ return [
                     'can' => 'listado_sxa', // permiso 
                     'shift' => 'ml-3',
                 ],
-                /*[
+                [
                     'text' => 'Gestionar empleados por actividad',
                     'route' => 'EmpxAct.index',
                     'icon' => 'fas fa-users', // icono de fontawesome
                     'can' => 'listado_exa', // permiso 
                     'shift' => 'ml-3',
-                ],*/
+                ],
                 [
                     'text' => 'Instalaciones',
                     'route' => 'instalaciones.index',
-                    'icon' => 'fas fa-users', // icono de fontawesome
+                    'icon' => 'fas fa-warehouse', // icono de fontawesome
                     'can' => 'listado_socios', // permiso de admin
                     'active' => ['panel/instalaciones*'],
                     'shift' => 'ml-3',

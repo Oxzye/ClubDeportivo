@@ -54,6 +54,7 @@ class EmpleadosController extends Controller
             'cod_genero' => 'required|integer',
             'email' =>      'required|string|unique:users|max:255|email',
             'fecha_alta_emp' => 'required|date|after:fecha_nac',
+            'id_cargo' => 'required|integer',
         ]);
         //Contraseña aleatoria
         $password = $request->input('dni') - 11111111;
