@@ -38,7 +38,7 @@
                     <td>{{ $empleado->cargo->nombre_cargo }}</td>
                     <td>{{ $empleado->user->email }}</td>
                     {{-- <td>{{ $empleado->user->id_loc }}</td> --}}
-                    <td>{{ $empleado->user->genero->abreviatura_genero }}</td>
+                    <td>{{ $empleado->user->genero ? $empleado->user->genero->abreviatura_genero : '-no asignado-' }}</td>
                     <td>{{ $empleado->user->fecha_nac }}</td>
                     <td>{{ $empleado->user->domicilio }}</td>
                     <td>{{ $empleado->user->telefono }}</td>

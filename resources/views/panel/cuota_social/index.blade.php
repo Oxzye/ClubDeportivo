@@ -10,7 +10,8 @@
             <div class="col-12">
                 <x-adminlte-alert theme="info" title="Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }}">
                     <div class="col-lg-3 col-12 mb-2">
-                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $resultados[0]->dni) }}">Cobrar Cuota</a>
+                        <a class="btn btn-success" href="{{ route('cuota_social.cobrar', $resultados[0]->dni) }}">Cobrar
+                            Cuota</a>
                     </div>
                 </x-adminlte-alert>
             </div>
@@ -34,6 +35,11 @@
                 {{ session('alert') }}
             </div>
         @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -52,23 +58,44 @@
 
 
                     @if ($resultados->count() > 0)
-                        <table id="tabla-cuotas" class="table table-striped table-hover w-100">
+                        <table id="tabla-cuotas" class="table table-striped table-hover w-50">
                             <thead>
                                 <tr>
-                                    <th scope="col">Ordenar cuotas pagadas</th>
-                                    <th scope="col" class="text-uppercase">Socio</th>
-                                    <th scope="col" class="text-uppercase bg-success">Coutas Pagadas</th>
+                                    <th scope="col">#</th>
+                                    <th scope="col" class="text-uppercase">Coutas Pagadas</th>
                                     <th scope="col" class="text-uppercase">Fecha de Pago</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($resultados as $resultado)
+                                @foreach ($resultados as $indice => $resultado)
                                     <tr>
-                                        <td>{{ $resultado->id_tipodetallefactura }}</td>
-                                        <td><b>{{ $resultado->name }}</b>{{ ' ' . $resultado->apellido }}</td>
+                                        <td>{{ $indice + 1 }}</td> {{-- Sumamos 1 porque los índices generalmente comienzan desde 0 --}}
                                         <td><b>{{ ' ' . $resultado->descripcion_tdf }}</b>
                                         </td>
                                         <td>{{ \Carbon\Carbon::parse($resultado->fecha_pago_fac)->format('d/M/Y') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                    @if ($info2 && count($info2) > 0)
+                        <table id="tabla-cuotas" class="table table-striped table-hover w-50">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col" class="text-uppercase">Coutas Sin pagar</th>
+                                    <th scope="col" class="text-uppercase">Fecha de Pago</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($info2 as $indice => $infor)
+                                    <tr>
+                                        <td>{{ $indice + 1 }}</td> {{-- Sumamos 1 porque los índices generalmente comienzan desde 0 --}}
+                                        <td><b>{{ ' ' . $infor->descripcion_tdf }}</b>
+                                        </td>
+                                        <td>
+                                            <p>Hola</p>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

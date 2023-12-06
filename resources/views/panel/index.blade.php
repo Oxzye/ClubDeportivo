@@ -12,61 +12,30 @@
                 <x-adminlte-card title="Apertura y cierre de cajas" theme="light" icon="fas fa-cash-register" collapsible
                     maximizable>
                     <div class="row">
-                        <div class="col-lg-3 col-12">
+                        <div class="col-lg-6 col-12">
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3>Apertura</h3>
                                     <h4>Caja</h4>
                                 </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock-open"></i>
-                                </div>
-                                <a href="{{ route('Cajas.create') }}" class="small-box-footer">
-                                    Abrir caja <i class="fas fa-arrow-circle-right"></i>
-                                </a>
+                                @if ($cajasAbiertas === 0)
+                                    <a href="{{ route('Cajas.create') }}" class="small-box-footer">
+                                        Abrir caja <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                @else
+                                    <a  class="small-box-footer">
+                                        <i class="fas fa-info"></i> Ya hay una caja abierta!
+                                    </a>
+                                @endif
                             </div>
                         </div>
 
-                        @can('listado_cajas')
-                            <div class="col-lg-6 col-12">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-info"><i class="">Ir</i></span>
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Cajas activas</span>
-                                                <span class="info-box-number">{{ $cajasAbiertas }}</span>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-6 col-12">
-                                        <div class="info-box">
-                                            <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-                                            <div class="info-box-content">
-                                                <span class="info-box-text">Saldo de cajas</span>
-                                                <span class="info-box-number">{{ $saldo_cajas }}</span>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        @endcan
-
-                        <div class="col-lg-3 col-12">
+                        <div class="col-lg-6 col-12">
 
                             <div class="small-box bg-danger">
                                 <div class="inner">
                                     <h3>Cierre</h3>
                                     <h4>Caja</h4>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
                                 </div>
                                 <a href="{{ route('Cajas.index') }}" class="small-box-footer">
                                     Cerrar caja <i class="fas fa-arrow-circle-right"></i>
@@ -79,64 +48,86 @@
             </div>
         </div>
 
-        <div class="container-fluid">
-            <div class="col-12">
-                <x-adminlte-card title="Venta y Facturacion" theme="light" icon="fas fa-cash-register" collapsible
-                    maximizable>
-                    <div class="row">
-                        <div class="col-lg-3 col-12">
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3>Cuota Social</h3>
-                                    <h4>Cobro</h4>
+        @if ($cajasAbiertas === 1)
+            <div class="container-fluid">
+                <div class="col-12">
+                    <x-adminlte-card title="Venta y Facturación" theme="light" icon="fas fa-cash-register" collapsible
+                        maximizable>
+                        <div class="row">
+                            <div class="col-lg-3 col-12">
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Cuota Social</h3>
+                                        <h4>Cobro</h4>
+                                    </div>
+                                    <a href="{{ route('cuota_social.index') }}" class="small-box-footer">
+                                        Ir a cobrar <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
                                 </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock-open"></i>
-                                </div>
-                                <a href="{{ route('cuota_social.index') }}" class="small-box-footer">
-                                    Ir a cobrar <i class="fas fa-arrow-circle-right"></i>
-                                </a>
                             </div>
-                        </div>
 
-                        <div class="col-lg-3 col-12">
+                            <div class="col-lg-3 col-12">
 
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3>Actividad Part</h3>
-                                    <h4>Cobro</h4>
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Actividad Part</h3>
+                                        <h4>Cobro</h4>
+                                    </div>
+                                    <a href="{{ route('insc_act_part.index') }}" class="small-box-footer">
+                                        Ir a cobrar <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
                                 </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                                <a href="{{ route('insc_act_part.index') }}" class="small-box-footer">
-                                    Ir a cobrar <i class="fas fa-arrow-circle-right"></i>
-                                </a>
                             </div>
-                        </div>
 
-                        <div class="col-lg-3 col-12">
+                            <div class="col-lg-3 col-12">
 
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3>Facturas</h3>
-                                    <p>Ver facturas</p>
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Facturas</h3>
+                                        <p>Ver facturas</p>
+                                    </div>
+                                    <a href="{{ route('facturas.index') }}" class="small-box-footer">
+                                        Ir a ver <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
                                 </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                                <a href="{{ route('facturas.index') }}" class="small-box-footer">
-                                    Ir a ver <i class="fas fa-arrow-circle-right"></i>
-                                </a>
                             </div>
-                        </div>
+                            <div class="col-lg-3 col-12">
 
-                    </div>
-                </x-adminlte-card>
+                                <div class="small-box bg-info">
+                                    <div class="inner">
+                                        <h3>Facturación</h3>
+                                        <p>Cobro multiples cuotas o act.</p>
+                                    </div>
+                                    <a href="{{ route('facturas.create') }}" class="small-box-footer">
+                                        Ir a cobrar <i class="fas fa-arrow-circle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </x-adminlte-card>
+                </div>
             </div>
-        </div>
+        @else
+            <div class="container-fluid">
+                <div class="col-12">
+                    <x-adminlte-card title="Venta y Facturación" theme="light" icon="fas fa-cash-register" collapsible
+                        maximizable>
+                        <div class="row">
+                            <div class="col-12">
+                                <x-adminlte-alert theme="dark" title="Para ver facturación">
+                                    Tienes que abrir una caja primero.
+                                </x-adminlte-alert>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            </x-adminlte-card>
+            </div>
+            </div>
+        @endif
 
-        
+
     @endrole
 
     @role(['admin', 'recepcionista', 'gerente'])
@@ -147,13 +138,10 @@
                     maximizable>
                     <div class="row">
                         <div class="col-lg-3 col-12">
-                            <div class="small-box bg-success">
+                            <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3>Actividades</h3>
                                     <h4>Gestión de actividades</h4>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock-open"></i>
                                 </div>
                                 <a href="{{ route('Actividades.index') }}" class="small-box-footer">
                                     Ir a actividades <i class="fas fa-arrow-circle-right"></i>
@@ -165,7 +153,7 @@
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-12">
                                     <div class="info-box">
-                                        <span class="info-box-icon bg-info"><i class="fas fa-running"></i></span>
+                                        <span class="info-box-icon bg-warning"><i class="fas fa-running"></i></span>
                                         <div class="info-box-content">
                                             <span class="info-box-text">Deportes</span>
                                             <span class="info-box-number">{{ $deport }}</span>
@@ -175,7 +163,7 @@
 
                                 <div class="col-md-6 col-sm-6 col-12">
                                     <div class="info-box">
-                                        <span class="info-box-icon bg-success"><i class="fas fa-building"></i></span>
+                                        <span class="info-box-icon bg-warning"><i class="fas fa-building"></i></span>
                                         <div class="info-box-content">
                                             <span class="info-box-text">Instalaciones</span>
                                             <span class="info-box-number">{{ $instalation }}</span>
@@ -187,13 +175,10 @@
 
                         <div class="col-lg-3 col-12">
 
-                            <div class="small-box bg-success">
+                            <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3>SocxAct</h3>
                                     <p>Inscribir un socio a una actividad</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
                                 </div>
                                 <a href="{{ route('SocxAct.index') }}" class="small-box-footer">
                                     Ir <i class="fas fa-arrow-circle-right"></i>
@@ -201,31 +186,12 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-12">
+                        <div class="col-lg-6 col-12">
 
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <h3>EmpxAct</h3>
-                                    <p>Incluir empleado/s en actividad/es</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                                <a href="{{ route('EmpxAct.index') }}" class="small-box-footer">
-                                    Ir <i class="fas fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-12">
-
-                            <div class="small-box bg-success">
+                            <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3>DíasxAct</h3>
                                     <p>Gestiónar que dias se hace una actividad</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
                                 </div>
                                 <a href="{{ route('DiasxAct.index') }}" class="small-box-footer">
                                     Ir <i class="fas fa-arrow-circle-right"></i>
@@ -233,15 +199,12 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-12">
+                        <div class="col-lg-6 col-12">
 
-                            <div class="small-box bg-success">
+                            <div class="small-box bg-warning">
                                 <div class="inner">
                                     <h3>Disponibilidades</h3>
                                     <p>Ver Disponibilidad de instalaciones</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
                                 </div>
                                 <a href="{{ route('Disponibilidades.index') }}" class="small-box-footer">
                                     Ir <i class="fas fa-arrow-circle-right"></i>
@@ -261,14 +224,11 @@
                 <x-adminlte-card title="Gestión de Socios" theme="light" icon="fas fa-cash-register" collapsible
                     maximizable>
                     <div class="row">
-                        <div class="col-lg-3 col-12">
+                        <div class="col-lg-4 col-12">
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3>Listado de socios</h3>
                                     <h4>Gestión de socios</h4>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock-open"></i>
                                 </div>
                                 <a href="{{ route('socios.index') }}" class="small-box-footer">
                                     Ir <i class="fas fa-arrow-circle-right"></i>
@@ -276,7 +236,7 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-12">
+                        <div class="col-lg-4 col-12">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-12">
                                     <div class="info-box">
@@ -290,38 +250,18 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-12">
+                        <div class="col-lg-4 col-12">
 
                             <div class="small-box bg-success">
                                 <div class="inner">
                                     <h3>Crear socio</h3>
                                     <h4>Gestión de socios</h4>
                                 </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
                                 <a href="{{ route('socios.create') }}" class="small-box-footer">
                                     Ir a ver <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div>
-
-                        <div class="col-lg-3 col-12">
-
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <h3>Recuperar Contraseña</h3>
-                                    <h4>Gestión de socios</h4>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                                <a href="{{ route('socios.resetPassword') }}" class="small-box-footer">
-                                    Ir a ver <i class="fas fa-arrow-circle-right"></i>
-                                </a>
-                            </div>
-                        </div>
-
                     </div>
                 </x-adminlte-card>
             </div>
@@ -339,9 +279,6 @@
                                 <div class="inner">
                                     <h3>Listado de empleados</h3>
                                     <h4>Gestión de empleados</h4>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock-open"></i>
                                 </div>
                                 <a href="{{ route('empleados.index') }}" class="small-box-footer">
                                     Ir <i class="fas fa-arrow-circle-right"></i>
@@ -409,9 +346,6 @@
                                     <h3>Crear empleado</h3>
                                     <h4>Gestión de empleados</h4>
                                 </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
                                 <a href="{{ route('empleados.create') }}" class="small-box-footer">
                                     Ir a ver <i class="fas fa-arrow-circle-right"></i>
                                 </a>
@@ -424,9 +358,6 @@
                                 <div class="inner">
                                     <h3>Cargos</h3>
                                     <h4>Gestión de empleados</h4>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-lock"></i>
                                 </div>
                                 <a href="{{ route('cargos.index') }}" class="small-box-footer">
                                     Ir a ver <i class="fas fa-arrow-circle-right"></i>

@@ -51,6 +51,11 @@ class CobroActPartController extends Controller
 
     public function cobrar(string $dni)
     {
+        $cajaAbierta = Cajas::where('estado_caja', true)->first();
+
+        if (!$cajaAbierta) {
+            return redirect()->route('insc_act_part.index')->with('error', 'No hay cajas abiertas. No se pueden cobrar actividades particulares.');
+        }
 
         $socio = User::with('socio')->where('dni', $dni)->first();
 

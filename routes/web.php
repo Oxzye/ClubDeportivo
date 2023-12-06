@@ -20,7 +20,10 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function () {
+    return redirect('/panel');
+})->name('home');
+
 
 
 /*Rutas de Tipo de detalle de facturas
