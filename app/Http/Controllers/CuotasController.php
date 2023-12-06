@@ -26,7 +26,6 @@ class CuotasController extends Controller
     {
         $dni = $request->get('dni');
         $resultados = User::CuotasPagadas($dni)->get();
-
         /*RAW SQL : 
         SELECT 
             users.dni,
@@ -50,7 +49,22 @@ class CuotasController extends Controller
                 ->where('users.dni', '=', $dni)
                 ->get();
         }
-        return view('panel.cuota_social.index', compact('resultados', 'info'));
+
+        //Rescatar cuotas sin pagar del socio
+        $info2 = null;
+        if ($info != null || $resultados->count()) {
+            $socio = User::with('socio')->where('dni', $dni)->first();
+            $pagadas = $resultados;
+            $cuotastodas = Tipodetfactura::where('tipodetalle', 'Cuota Social')
+            ->where('tipos_detalle_factura.created_at', '>', $socio->socio->fecha_asociacion)
+                ->get();
+
+            $info2 = $cuotastodas->reject(function ($cuota) use ($pagadas) {
+                return $pagadas->contains('descripcion_tdf', $cuota->descripcion_tdf);
+            });
+        }
+
+        return view('panel.cuota_social.index', compact('resultados', 'info', 'info2'));
     }
 
     /**
