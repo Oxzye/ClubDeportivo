@@ -60,15 +60,16 @@ class CuotasController extends Controller
             if ($socio != null) {
                 $pagadas = $resultados;
                 $cuotastodas = Tipodetfactura::where('tipodetalle', 'Cuota Social')
-                    ->where('tipos_detalle_factura.created_at', '>', $socio->socio->fecha_asociacion)
-                    ->get();
+                ->where('tipos_detalle_factura.created_at', '>', $socio->socio->fecha_asociacion)
+                ->whereDate('tipos_detalle_factura.created_at', '<', now())
+                ->get();
 
                 $info2 = $cuotastodas->reject(function ($cuota) use ($pagadas) {
                     return $pagadas->contains('descripcion_tdf', $cuota->descripcion_tdf);
                 });
             }
         }
-
+        //dd($info2);
         return view('panel.cuota_social.index', compact('resultados', 'info', 'info2'));
     }
 
