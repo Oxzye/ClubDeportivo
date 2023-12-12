@@ -100,9 +100,14 @@ class CuotasController extends Controller
 
         $cajasAbierta = Cajas::where('estado_caja', 1)->first();
 
+        $fechaAsociacion = Carbon::parse($socio->socio->fecha_asociacion);
+        $primerDiaDelMes = $fechaAsociacion->startOfMonth();
+
         $cuotastodas = Tipodetfactura::where('tipodetalle', 'Cuota Social')
-            ->where('tipos_detalle_factura.created_at', '>', $socio->socio->fecha_asociacion)
+        ->where('tipos_detalle_factura.created_at', '>=', $primerDiaDelMes)
+            ->whereDate('tipos_detalle_factura.created_at', '<', now())
             ->get();
+            
         $resultados = User::CuotasPagadas($dni)->get();
 
 
