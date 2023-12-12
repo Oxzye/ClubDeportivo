@@ -1,5 +1,8 @@
 @extends('adminlte::page')
 
+@section('plugins.Datatables', true)
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 @section('title', 'Index de cuotas sociales')
 
@@ -42,10 +45,20 @@
                                 <div class="card-body mb-2 d-flex justify-content-center">
                                     <form action="" method="get" class="form-inline">
                                         <div class="form-group">
-                                            <label for="dni" class="form-control">Ingrese el número de documento del socio</label>
-                                            <input type="number" class="form-control" id="dni" name="dni"
-                                                placeholder="Ingrese DNI" maxlength="8">
-                                            <button type="submit" class="btn btn-primary"><i
+
+                                            <label for="dni" class="form-control">Ingrese el número de documento del
+                                                socio </label>
+
+                                            <select id="dni" name="dni" class="form-control select2">
+                                                    <option value="">Ingrese un DNI...</option>
+                                                @foreach ($socio as $soc)
+                                                    <option value="{{ $soc->user->dni }}">
+                                                        {{ $soc->user->dni }}, {{ $soc->user->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+                                            <button type="submit" class="btn btn-primary form-control"><i
                                                     class="fas fa-search"></i></button>
                                         </div>
                                     </form>
@@ -103,9 +116,9 @@
                                                     <td><b>{{ ' ' . $infor->descripcion_tdf }}</b></td>
                                                     <td class="">
                                                         @if ($info && count($info) > 0)
-                                                            <a class=""
+                                                            <a class="text-bold"
                                                                 href="{{ route('cuota_social.cobrar', $info[0]->dni) }}">Cobrar
-                                                                Cuota</a>
+                                                                Cuota <i class="fas fa-hand-holding-usd"></i></a>
                                                         @elseif ($resultados->count() > 0)
                                                             <a class="text-bold"
                                                                 href="{{ route('cuota_social.cobrar', $resultados[0]->dni) }}">Cobrar
@@ -136,5 +149,7 @@
 @section('js')
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script src="{{ asset('js/cuotas.js') }}"></script>
 @stop

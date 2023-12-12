@@ -59,8 +59,12 @@ class CuotasController extends Controller
 
             if ($socio != null) {
                 $pagadas = $resultados;
+
+                $fechaAsociacion = Carbon::parse($socio->socio->fecha_asociacion);
+                $primerDiaDelMes = $fechaAsociacion->startOfMonth();
+                
                 $cuotastodas = Tipodetfactura::where('tipodetalle', 'Cuota Social')
-                ->where('tipos_detalle_factura.created_at', '>', $socio->socio->fecha_asociacion)
+                ->where('tipos_detalle_factura.created_at', '>=', $primerDiaDelMes)
                 ->whereDate('tipos_detalle_factura.created_at', '<', now())
                 ->get();
 
@@ -69,8 +73,9 @@ class CuotasController extends Controller
                 });
             }
         }
+        $socio = Socio::all();
         //dd($info2);
-        return view('panel.cuota_social.index', compact('resultados', 'info', 'info2'));
+        return view('panel.cuota_social.index', compact('resultados', 'info', 'info2','socio'));
     }
 
     /**

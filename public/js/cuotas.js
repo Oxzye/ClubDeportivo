@@ -90,3 +90,5 @@ let configurationDataTable2 = {
 $(function() {
     table = $('#tabla-cuotas-2').DataTable(configurationDataTable2);
 });
+
+$('.select2').select2();

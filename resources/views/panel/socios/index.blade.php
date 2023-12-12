@@ -83,8 +83,8 @@
                                         <th scope="col" class="text-uppercase">Fecha de nac/edad</th>
                                         <th scope="col" class="text-uppercase">Domicilio</th>
                                         <th scope="col" class="text-uppercase">Telefono</th>
-                                        <th scope="col" class="text-uppercase">Observaciones</th> --}}
-                                        <th scope="col" class="text-uppercase">Foto</th>
+                                        <th scope="col" class="text-uppercase">Observaciones</th> 
+                                        <th scope="col" class="text-uppercase">Foto</th>--}}
                                         <th scope="col" class="text-uppercase">Estado</th>
                                         <th class="d-flex flex-row-reverse bd-highlight px-5">Opciones  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                     </tr>
@@ -102,11 +102,11 @@
                                             <td>{{ $socio->user->domicilio }}</td>
                                             <td>{{ $socio->user->telefono }}</td>
 
-                                            <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td> --}}
+                                            <td>{{ Str::limit($socio->observaciones_soc, 80) }}</td>
                                             <td>
                                                 <img src="{{ $socio->user->imagen }}" alt="imagen_socio" class="img-fluid"
                                                     style="width: 100px;">
-                                            </td>
+                                            </td> --}}
                                             <td>
                                                 <div class="d-none">{{ $socio->enabled }}</div>
                                                 {{ $socio->getStatusText() }}
