@@ -24,19 +24,49 @@ class CobroActPartController extends Controller
     public function index(Request $request)
     {
         $dni = $request->get('dni');
+
+        $actpagadas = User::select(
+            'users.dni',
+            'users.name',
+            'users.apellido',
+            'actividades.id_dep',
+            'actividades.id_act',
+            'deportes.nombreDep',
+            'actividades.nombre_act',
+            'actividades.descripcion_act',
+            'actividades.precio_act',
+            'facturas.fecha_pago_fac'
+        )
+            ->join('socios', 'users.id', '=', 'socios.id_user')
+            ->join('facturas', 'socios.id_soc', '=', 'facturas.dni_soc')
+            ->join('detalles_factura', 'facturas.num_fac', '=', 'detalles_factura.num_fac')
+            ->join('actividades', 'detalles_factura.id_act', '=', 'actividades.id_act')
+            ->join('deportes', 'actividades.id_dep', '=', 'deportes.id_dep')  // Nuevo join con la tabla deportes
+            ->where('users.dni', '=', $dni)
+            ->get();
+
         $resultados = User::select(
             'users.dni',
             'users.name',
             'users.apellido',
+            'socios.enabled',
             'actividades.nombre_act',
+            'actividades.id_dep',
+            'actividades.id_act',
+            'deportes.nombreDep',
             'actividades.descripcion_act',
             'sociosxactividades.fecha_inscripcion'
         )
             ->join('socios', 'users.id', '=', 'socios.id_user')
             ->join('sociosxactividades', 'socios.id_soc', '=', 'sociosxactividades.id_soc')
             ->join('actividades', 'sociosxactividades.id_act', '=', 'actividades.id_act')
+            ->join('deportes', 'actividades.id_dep', '=', 'deportes.id_dep')  // Nuevo join con la tabla deportes
             ->where('users.dni', '=', $dni)
             ->get();
+
+        $actividadesNoPagadas = $resultados->reject(function ($actividad) use ($actpagadas) {
+            return $actpagadas->contains('id_act', $actividad->id_act);
+        });
 
         $info = null;
         if (!$resultados->count()) {
@@ -46,7 +76,10 @@ class CobroActPartController extends Controller
                 ->where('users.dni', '=', $dni)
                 ->get();
         }
-        return view('panel.insc_act_part.index', compact('resultados', 'info'));
+
+        $socio = Socio::all();
+
+        return view('panel.insc_act_part.index', compact('resultados','info', 'socio', 'actpagadas', 'actividadesNoPagadas'));
     }
 
     public function cobrar(string $dni)
@@ -146,14 +179,12 @@ class CobroActPartController extends Controller
         ]);
 
         $realdni = User::join('socios', 'users.id', '=', 'socios.id_user')
-        ->where('socios.id_soc', $request->input('id_soc'))
-        ->select('users.dni')
-        ->first();
+            ->where('socios.id_soc', $request->input('id_soc'))
+            ->select('users.dni')
+            ->first();
         $dni = $realdni;
 
         return Redirect::route('insc_act_part.index', ['dni' => $dni->dni])->with('status', 'Cobro de Actividad particular registrado correctamente');
-
-
     }
 
     /**

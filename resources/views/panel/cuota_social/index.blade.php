@@ -9,18 +9,6 @@
 @section('content')
     <div class="container-fluid">
         <h1>Cuotas Sociales</h1>
-        @if ($resultados->count() > 0)
-            <div class="col-12">
-                <x-adminlte-alert theme="info" title="Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }}">
-                </x-adminlte-alert>
-            </div>
-        @endif
-        @if ($info && count($info) > 0)
-            <div class="col-12">
-                <x-adminlte-alert theme="info" title="Socio: {{ $info[0]->name . ' ' . $info[0]->apellido }}">
-                </x-adminlte-alert>
-            </div>
-        @endif
         @if (session('status'))
             <div class="col-12 alert alert-success">
                 {{ session('status') }}
@@ -50,7 +38,7 @@
                                                 socio </label>
 
                                             <select id="dni" name="dni" class="form-control select2">
-                                                    <option value="">Ingrese un DNI...</option>
+                                                <option value="">Ingrese un DNI...</option>
                                                 @foreach ($socio as $soc)
                                                     <option value="{{ $soc->user->dni }}">
                                                         {{ $soc->user->dni }}, {{ $soc->user->name }}
@@ -66,7 +54,25 @@
                             </div>
                         </div>
 
+                        @if ($resultados->count() > 0)
+                            <div class="col-12">
+                               <x-adminlte-callout theme="info" title="Informacion del socio">
+                                    Socio: {{ $resultados[0]->name . ' ' . $resultados[0]->apellido }} <br>
+                                    DNI: {{ $resultados[0]->dni }} <br>
+                                </x-adminlte-callout>
+                            </div>
+                        @endif
+                        @if ($info && count($info) > 0)
+                            <div class="col-12">
+                                <x-adminlte-callout theme="info" title="Informacion del socio">
+                                    Socio: {{ $info[0]->name . ' ' . $info[0]->apellido }} <br>
+                                    DNI: {{ $info[0]->dni }} <br>                        
+                                </x-adminlte-callout>
+                            </div>
+                        @endif
+
                         @php
+                            //dd($info);
                             $i = 1;
                         @endphp
 
@@ -106,6 +112,7 @@
                                             <tr>
                                                 <th scope="col" class="text-uppercase">#</th>
                                                 <th scope="col" class="text-uppercase">Coutas Sin pagar</th>
+                                                <th scope="col" class="text-uppercase">Precio</th>
                                                 <th scope="col" class="text-uppercase">Accion</th>
                                             </tr>
                                         </thead>
@@ -114,6 +121,7 @@
                                                 <tr>
                                                     <th>{{ $i++ }}</th>
                                                     <td><b>{{ ' ' . $infor->descripcion_tdf }}</b></td>
+                                                    <td><b>{{ '$' . $infor->precio_tdf }}</b></td>
                                                     <td class="">
                                                         @if ($info && count($info) > 0)
                                                             <a class="text-bold"

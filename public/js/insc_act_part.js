@@ -1,10 +1,11 @@
 let configurationDataTable = {
+	info: false,
     responsive: true,
 	autoWidth: false,
 	paging: true,
 	destroy: true,
 	deferRender: false,
-	bLengthChange: true,
+	bLengthChange: false,
 	select: false,
     searching: true,
 	pageLength: 5,
@@ -40,3 +41,9 @@ let configurationDataTable = {
 $(function() {
 	table = $('#tabla-insc_act_part').DataTable(configurationDataTable);
 });
+
+$(function() {
+	table = $('#tabla-insc_act_part-2').DataTable(configurationDataTable);
+});
+
+$('.select2').select2();
